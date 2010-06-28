@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<TextView android:text="Time after which phone should be plugged in"
+		android:id="@+id/TextMsg" android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></TextView>
+	<Button android:text="HH:MM" android:id="@+id/ButtonTime"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:textSize="30sp" android:minWidth="150sp"></Button>
+	<CheckBox android:text="Enable Alarm" android:id="@+id/CheckEnable"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+	<Button android:text="Choose Ringtone" android:id="@+id/ButtonRingtone"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></TextView>
+	<Button android:text="Exit" android:id="@+id/ButtonExit"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
+</LinearLayout>
