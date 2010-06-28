@@ -16,6 +16,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TimePicker;
 
+// CURRENT TASK
+// create a service to get plugged in status for AlertReceiver so AlertActivity
+// doesn't have to be called if the device is plugged in already
+
+// fix ringer selection
+// smooth out unlocking for phones before API 5
 // setup for other languages 
 // make sure it works as expected if user changes timezones
 // pressing volume keys should silence alarm
