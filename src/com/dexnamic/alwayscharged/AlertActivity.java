@@ -3,10 +3,9 @@ package com.dexnamic.alwayscharged;
 import java.lang.reflect.Field;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -17,20 +16,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class AlertActivity extends Activity {
 
-	private boolean useKeyguardManger;
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
-	private AlertDialog mAlert;
+	// private AlertDialog mAlert;
 	private PowerManager.WakeLock wakeLock;
-	private boolean keylockDisabled;
 
 	SharedPreferences settings;
 	private String chosenRingtone;
 	private MediaPlayer mMediaPlayer;
+
+	private Button mButtonDismiss;
+	private Button mButtonSnooze;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +49,6 @@ public class AlertActivity extends Activity {
 			wakeLock.acquire();
 		}
 
-		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
-		// Android 2.0 and newer
-		// reflection used for backward compatibility
-		try {
-			Field f = WindowManager.LayoutParams.class
-					.getField("FLAG_SHOW_WHEN_LOCKED");
-			// does not work if window is translucent
-			getWindow().addFlags(f.getInt(null));
-			useKeyguardManger = false;
-		} catch (Exception e) {
-			useKeyguardManger = true;
-			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-			mKeyguardLock = km
-					.newKeyguardLock("com.dexnamic.nighttimechargecheck");
-		}
-
 		IntentFilter intentFilter = new IntentFilter(
 				Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(null, intentFilter);
@@ -70,31 +58,58 @@ public class AlertActivity extends Activity {
 			finish();
 		}
 
+		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
+		// Android 2.0 and newer
+		// reflection used for backward compatibility
+		try {
+			Field f = WindowManager.LayoutParams.class
+					.getField("FLAG_SHOW_WHEN_LOCKED");
+			// does not work if window is translucent
+			getWindow().addFlags(f.getInt(null));
+			mKeyguardLock = null;
+		} catch (Exception e) {
+			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+			mKeyguardLock = km
+					.newKeyguardLock("com.dexnamic.nighttimechargecheck");
+		}
 		setContentView(R.layout.alert);
 
-		keylockDisabled = false;
+		mButtonDismiss = (Button) findViewById(R.id.ButtonDismiss);
+		mButtonDismiss.setOnClickListener(mOnClickListener);
+		mButtonSnooze = (Button) findViewById(R.id.ButtonSnooze);
+		mButtonSnooze.setOnClickListener(mOnClickListener);
 
 		settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
 		chosenRingtone = settings.getString(MainActivity.PREF_RINGTONE, null);
 
 		mMediaPlayer = new MediaPlayer();
+		try {
+			Uri uri = Uri.parse(chosenRingtone);
+			mMediaPlayer.setDataSource(this, uri);
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+			final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
+				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+				mMediaPlayer.setLooping(true);
+				mMediaPlayer.prepare();
+			}
+		} catch (Exception e) {
+			return;
+		}
+		playRingtone();
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Time to plug in your phone!").setCancelable(false)
-				.setPositiveButton("Dismiss",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								AlertActivity.this.finish();
-							}
-						}).setNeutralButton("Snooze 30 min",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								AlarmScheduler.snoozeAlarm(AlertActivity.this,
-										30);
-								AlertActivity.this.finish();
-							}
-						});
-		mAlert = builder.create();
+		// stop alarm if user plugs in device
+		try {
+			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+			intentFilter = new IntentFilter(action);
+			registerReceiver(new BroadcastReceiver() {
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					AlertActivity.this.finish();
+				}
+			}, new IntentFilter(action));
+		} catch (Exception e) {
+		}
 
 	}
 
@@ -110,12 +125,24 @@ public class AlertActivity extends Activity {
 		}
 	};
 
+	private OnClickListener mOnClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			if (v == mButtonDismiss)
+				AlertActivity.this.finish();
+			else if (v == mButtonSnooze) {
+				AlarmScheduler.snoozeAlarm(AlertActivity.this, 30);
+				AlertActivity.this.finish();
+			}
+		}
+	};
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 
-		playRingtone();
-		mAlert.show();
+		// mAlert.show();
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
 		long delay_ms = 30 * 1000; // 30 seconds in milliseconds
 		mHandler.sendMessageDelayed(msg, delay_ms);
@@ -124,48 +151,53 @@ public class AlertActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (useKeyguardManger && !keylockDisabled) {
+		if (mKeyguardLock != null) {
 			mKeyguardLock.disableKeyguard();
-			keylockDisabled = true;
 		}
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		stopRingtone();
-		if (useKeyguardManger && keylockDisabled) {
+		if (mKeyguardLock != null) {
 			mKeyguardLock.reenableKeyguard();
-			keylockDisabled = false;
 		}
 		if (wakeLock.isHeld())
 			wakeLock.release();
+
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		stopRingtone();
+		try {
+			mMediaPlayer.release();
+		} catch (Exception e) {
+		}
 	}
 
 	void playRingtone() {
 		try {
-			Uri uri = Uri.parse(chosenRingtone);
-			mMediaPlayer.setDataSource(this, uri);
-			final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
-				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-				mMediaPlayer.setLooping(true);
-				mMediaPlayer.prepare();
-				mMediaPlayer.start();
-			}
+			mMediaPlayer.start();
+		} catch (Exception e) {
+		}
+	}
+
+	void stopRingtone() {
+		try {
+			mMediaPlayer.stop();
 		} catch (Exception e) {
 			return;
 		}
 	}
 
-	void stopRingtone() {
-		if (mMediaPlayer != null) {
-			try {
-				mMediaPlayer.stop();
-				mMediaPlayer.release();
-			} catch (Exception e) {
-				return;
-			}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (mMediaPlayer.isPlaying()) {
+			stopRingtone();
 		}
+		return super.onKeyDown(keyCode, event);
 	}
+
 }

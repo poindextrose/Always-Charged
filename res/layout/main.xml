@@ -3,7 +3,7 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<TextView android:text="Time after which phone should be plugged in"
+	<TextView android:text="If device is not plugged in, remind me at"
 		android:id="@+id/TextMsg" android:layout_width="wrap_content"
 		android:layout_height="wrap_content"></TextView>
 	<Button android:text="HH:MM" android:id="@+id/ButtonTime"

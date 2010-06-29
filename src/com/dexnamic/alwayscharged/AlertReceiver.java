@@ -1,6 +1,5 @@
 package com.dexnamic.alwayscharged;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import android.content.BroadcastReceiver;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class AlertReceiver extends BroadcastReceiver {
 
@@ -19,40 +17,44 @@ public class AlertReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		Log.d("dexnamic", "AlertReceiver.onReceive(), intent.getAction() = " + intent.getAction());
-		Toast.makeText(context, "action: " + intent.getAction(), Toast.LENGTH_SHORT).show();
+		Log.d("dexnamic", "action = " + intent.getAction());
 
+		SharedPreferences settings = context.getSharedPreferences(
+				MainActivity.PREFS_NAME, 0);
+		boolean alarmEnabled = settings.getBoolean(MainActivity.PREF_ENABLE,
+				false);
 		String action = intent.getAction();
 		if (action != null) {
 			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-				SharedPreferences settings = context.getSharedPreferences(
-						MainActivity.PREFS_NAME, 0);
-				boolean alarmEnabled = settings.getBoolean(
-						MainActivity.PREF_ENABLE, false);
 				if (alarmEnabled) {
 					int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
 					int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				}
 				return;
+			} else if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+				/********************
+				 * adjust time zone
+				 */
 			}
 			try {
-				Field f_connected    = Intent.class.getField("ACTION_POWER_CONNECTED");
-				Field f_disconnected = Intent.class.getField("ACTION_POWER_DISCONNECTED");
-				if (action.equals((String)f_connected.get(null))) {
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+				if (action.equals((String) Intent.class.getField(
+						"ACTION_POWER_CONNECTED").get(null))) {
+					AlarmScheduler.cancelAlarm(context,
+							AlarmScheduler.TYPE_ALARM);
+					AlarmScheduler.cancelAlarm(context,
+							AlarmScheduler.TYPE_SNOOZE);
 					return;
-				} else if (action.equals((String)f_disconnected.get(null))) {
-					SharedPreferences settings = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+				}
+				if (alarmEnabled
+						&& action.equals((String) Intent.class.getField(
+								"ACTION_POWER_DISCONNECTED").get(null))) {
 					int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
 					int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 					return;
 				}
 			} catch (Exception e) {
-				Log.d("dexnamic", e.getMessage());
-				//Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG);
 			}
 		}
 
@@ -64,12 +66,9 @@ public class AlertReceiver extends BroadcastReceiver {
 		 */
 		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
 				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-				// | PowerManager.ON_AFTER_RELEASE
 						| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
 		mWakeLock.acquire();
 
-		// if (intent.hasCategory("alarm") && screenOff())
-		// if (intent.hasCategory("alarm"))
 		doAlarm(context);
 
 	}
@@ -77,9 +76,9 @@ public class AlertReceiver extends BroadcastReceiver {
 	public void doAlarm(Context context) {
 		Intent intent = new Intent(context, AlertActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-		// intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
 				| Intent.FLAG_FROM_BACKGROUND);
 		context.startActivity(intent);
+		// context.startService(new Intent(context, AlertService.class));
 	}
 
 	private boolean screenOn() {
@@ -93,5 +92,4 @@ public class AlertReceiver extends BroadcastReceiver {
 			return false;
 		}
 	}
-
 }

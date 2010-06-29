@@ -29,14 +29,14 @@ public class AlarmScheduler {
 
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
-		PendingIntent pi = getPendingIntent(context, TYPE_ALARM);
+		PendingIntent pi = getPendingIntentCancelCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms,
 				interval_ms, pi);
 	}
 
 	public static void cancelAlarm(Context context, String category) {
 
-		PendingIntent pi = getPendingIntent(context, category);
+		PendingIntent pi = getPendingIntentCancelCurrent(context, category);
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
@@ -45,13 +45,13 @@ public class AlarmScheduler {
 	public static void snoozeAlarm(Context context,
 			int minutes) {
 		final long time_ms = System.currentTimeMillis() + minutes*60*1000;
-		PendingIntent pi = getPendingIntent(context, TYPE_SNOOZE);
+		PendingIntent pi = getPendingIntentCancelCurrent(context, TYPE_SNOOZE);
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 	}
 
-	private static PendingIntent getPendingIntent(Context context,
+	private static PendingIntent getPendingIntentCancelCurrent(Context context,
 			String category) {
 		Intent intent = new Intent(context, AlertReceiver.class);
 		intent.addCategory(category);
@@ -60,4 +60,15 @@ public class AlarmScheduler {
 				PendingIntent.FLAG_CANCEL_CURRENT);
 
 	}
+	
+	private static PendingIntent getPendingIntentNoCreate(Context context,
+			String category) {
+		Intent intent = new Intent(context, AlertReceiver.class);
+		intent.addCategory(category);
+
+		return PendingIntent.getBroadcast(context, 0, intent,
+				PendingIntent.FLAG_NO_CREATE);
+
+	}
+	
 }
