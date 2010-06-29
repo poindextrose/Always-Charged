@@ -22,14 +22,13 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// repeat if not dismissed
+//if screen was off, turn it off after dismiss/snooze
 // shake or move to dismiss/snooze alarm
 // setup for other languages 
 // make sure it works as expected if user changes timezones
 // do not activate alarm for a few minutes after last use
 // optionally raise volume to maximum level
 // optionally play any mp3 from phone
-// if screen was off, turn it off after dismiss/snooze
 // android.app.backup
 // smooth out unlocking for phones before API 5
 // optionally vibrate only if face covered

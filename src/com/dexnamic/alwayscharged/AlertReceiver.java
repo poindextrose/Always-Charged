@@ -62,7 +62,7 @@ public class AlertReceiver extends BroadcastReceiver {
 				.getSystemService(Context.POWER_SERVICE);
 
 		if (screenOn()) {
-			AlarmScheduler.snoozeAlarm(context, 1);
+			AlarmScheduler.snoozeAlarm(context, 10); // snooze alarm for 10 minutes if screen on
 			return;
 		}
 

@@ -119,6 +119,7 @@ public class AlertActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
+				AlarmScheduler.snoozeAlarm(AlertActivity.this, 30); // snooze alarm 30 minutes if not dismissed
 				AlertActivity.this.finish();
 				break;
 			}
@@ -164,12 +165,12 @@ public class AlertActivity extends Activity {
 		}
 		if (wakeLock.isHeld())
 			wakeLock.release();
-
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
+		mHandler.removeMessages(MSG_TIMEOUT);
 		stopRingtone();
 		try {
 			mMediaPlayer.release();
