@@ -22,7 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// autosnooze if screen on
+// repeat if not dismissed
 // shake or move to dismiss/snooze alarm
 // setup for other languages 
 // make sure it works as expected if user changes timezones

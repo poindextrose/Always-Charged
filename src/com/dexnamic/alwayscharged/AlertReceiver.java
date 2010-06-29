@@ -60,10 +60,12 @@ public class AlertReceiver extends BroadcastReceiver {
 
 		mPowerManager = (PowerManager) context
 				.getSystemService(Context.POWER_SERVICE);
-		/*
-		 * cycles endlessly right now if(screenOn()) { // only works if API 7 or
-		 * higher AlarmScheduler.snoozeAlarm(context, 10); return; }
-		 */
+
+		if (screenOn()) {
+			AlarmScheduler.snoozeAlarm(context, 1);
+			return;
+		}
+
 		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
 				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 						| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
