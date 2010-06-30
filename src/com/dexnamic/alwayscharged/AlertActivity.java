@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +29,7 @@ public class AlertActivity extends Activity {
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
 	// private AlertDialog mAlert;
+	private PowerManager mPowerManager;
 	private PowerManager.WakeLock wakeLock;
 
 	SharedPreferences settings;
@@ -36,16 +39,20 @@ public class AlertActivity extends Activity {
 	private Button mButtonDismiss;
 	private Button mButtonSnooze;
 
+	private Vibrator mVibrator;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = AlertReceiver.mWakeLock;
 		if (wakeLock == null) {
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-					| PowerManager.ON_AFTER_RELEASE
-					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
+			wakeLock = mPowerManager.newWakeLock(
+					PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+							| PowerManager.ON_AFTER_RELEASE
+							| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
 			wakeLock.acquire();
 		}
 
@@ -54,10 +61,12 @@ public class AlertActivity extends Activity {
 		Intent intentBattery = registerReceiver(null, intentFilter);
 		int plugged = intentBattery.getIntExtra("plugged", 0);
 		if (plugged > 0) { // skip alarm since device plugged in
+			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 			wakeLock.release();
 			finish();
 		}
 
+		setContentView(R.layout.alert);
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
 		// Android 2.0 and newer
 		// reflection used for backward compatibility
@@ -72,12 +81,14 @@ public class AlertActivity extends Activity {
 			mKeyguardLock = km
 					.newKeyguardLock("com.dexnamic.nighttimechargecheck");
 		}
-		setContentView(R.layout.alert);
 
 		mButtonDismiss = (Button) findViewById(R.id.ButtonDismiss);
 		mButtonDismiss.setOnClickListener(mOnClickListener);
 		mButtonSnooze = (Button) findViewById(R.id.ButtonSnooze);
 		mButtonSnooze.setOnClickListener(mOnClickListener);
+		// fix below for other languages
+		mButtonSnooze.setText("Snooze " + AlarmScheduler.SNOOZE_TIME_MIN
+				+ " min");
 
 		settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
 		chosenRingtone = settings.getString(MainActivity.PREF_RINGTONE, null);
@@ -93,14 +104,18 @@ public class AlertActivity extends Activity {
 				mMediaPlayer.setLooping(true);
 				mMediaPlayer.prepare();
 			}
+			mMediaPlayer.start();
+			if (audioManager
+					.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER) == AudioManager.VIBRATE_SETTING_ON)
+				mVibrator.vibrate(3000);
 		} catch (Exception e) {
-			return;
+			Log.e("dexnamic", e.getMessage());
 		}
-		playRingtone();
 
 		// stop alarm if user plugs in device
 		try {
-			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+			String action = (String) Intent.class.getField(
+					"ACTION_POWER_CONNECTED").get(null);
 			intentFilter = new IntentFilter(action);
 			registerReceiver(new BroadcastReceiver() {
 				@Override
@@ -119,7 +134,8 @@ public class AlertActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
-				AlarmScheduler.snoozeAlarm(AlertActivity.this, 30); // snooze alarm 30 minutes if not dismissed
+				AlarmScheduler.snoozeAlarm(AlertActivity.this,
+						AlarmScheduler.SNOOZE_TIME_MIN);
 				AlertActivity.this.finish();
 				break;
 			}
@@ -178,25 +194,25 @@ public class AlertActivity extends Activity {
 		}
 	}
 
-	void playRingtone() {
-		try {
-			mMediaPlayer.start();
-		} catch (Exception e) {
-		}
-	}
-
 	void stopRingtone() {
 		try {
 			mMediaPlayer.stop();
 		} catch (Exception e) {
 			return;
 		}
+		try {
+			mVibrator.cancel();
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (mMediaPlayer.isPlaying()) {
-			stopRingtone();
+		try {
+			if (mMediaPlayer.isPlaying()) {
+				stopRingtone();
+			}
+		} catch (Exception e) {
 		}
 		return super.onKeyDown(keyCode, event);
 	}

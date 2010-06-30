@@ -22,8 +22,11 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-//if screen was off, turn it off after dismiss/snooze
+// notification and service process if snoozed
 // shake or move to dismiss/snooze alarm
+// snooze alarm if phone call received
+// setup for difference screen orientations
+// beautify
 // setup for other languages 
 // make sure it works as expected if user changes timezones
 // do not activate alarm for a few minutes after last use
@@ -35,6 +38,12 @@ import android.widget.Toast;
 // visually format for large screen tablets
 
 // test: plugged/unplugged, reboot, time zone change, snooze features
+
+/**
+ * Features: user notified with alarm if device not plugged it by a certain time
+ * at night
+ * 
+ */
 
 public class MainActivity extends Activity {
 
@@ -88,23 +97,8 @@ public class MainActivity extends Activity {
 		mCheckEnable.setChecked(alarmEnabled);
 		if (alarmEnabled) {
 			enableAlaram();
-			checkVolume();
 		}
-		mCheckEnable
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						editor.putBoolean(PREF_ENABLE, isChecked);
-						editor.commit();
-						if (isChecked) {
-							enableAlaram();
-							checkVolume();
-						} else {
-							disableAlarm();
-						}
-					}
-				});
+		mCheckEnable.setOnCheckedChangeListener(mOnCheckChangeListener);
 
 		chosenRingtone = settings.getString(PREF_RINGTONE, null);
 		mButtonRingtone = (Button) findViewById(R.id.ButtonRingtone);
@@ -113,6 +107,23 @@ public class MainActivity extends Activity {
 		mButtonExit = (Button) findViewById(R.id.ButtonExit);
 		mButtonExit.setOnClickListener(mOnClickListener);
 	}
+
+	CompoundButton.OnCheckedChangeListener mOnCheckChangeListener = new CompoundButton.OnCheckedChangeListener() {
+
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView,
+				boolean isChecked) {
+			if (buttonView == mCheckEnable) {
+				editor.putBoolean(PREF_ENABLE, isChecked);
+				editor.commit();
+				if (isChecked) {
+					enableAlaram();
+				} else {
+					disableAlarm();
+				}
+			}
+		}
+	};
 
 	private OnClickListener mOnClickListener = new OnClickListener() {
 
@@ -217,6 +228,7 @@ public class MainActivity extends Activity {
 
 	private void enableAlaram() {
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
+		checkVolume();
 
 		try {
 			Intent.class.getField("ACTION_POWER_DISCONNECTED"); // check for
@@ -252,7 +264,8 @@ public class MainActivity extends Activity {
 		}
 		Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
-				RingtoneManager.TYPE_ALARM); // | RingtoneManager.TYPE_RINGTONE);
+				RingtoneManager.TYPE_ALARM); // |
+												// RingtoneManager.TYPE_RINGTONE);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Alarm");
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_INCLUDE_DRM, true);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) uri);
@@ -279,10 +292,10 @@ public class MainActivity extends Activity {
 	private void checkVolume() {
 		if (chosenRingtone != null
 				&& mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
-			Toast.makeText(
-							MainActivity.this,
-							"Alarm volume is set to zero, press volume keys to adjust",
-							Toast.LENGTH_LONG).show();
-		}		
+			Toast.makeText(MainActivity.this,
+					"Alarm volume is set to zero, press volume keys to adjust",
+					Toast.LENGTH_LONG).show();
+		}
 	}
+
 }

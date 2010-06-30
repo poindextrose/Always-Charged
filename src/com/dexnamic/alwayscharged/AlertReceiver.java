@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.util.Log;
@@ -13,7 +14,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	private PowerManager mPowerManager;
 	static public PowerManager.WakeLock mWakeLock;
-
+	
+	/* (non-Javadoc)
+	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
@@ -62,7 +66,7 @@ public class AlertReceiver extends BroadcastReceiver {
 				.getSystemService(Context.POWER_SERVICE);
 
 		if (screenOn()) {
-			AlarmScheduler.snoozeAlarm(context, 10); // snooze alarm for 10 minutes if screen on
+			AlarmScheduler.snoozeAlarm(context, AlarmScheduler.SNOOZE_TIME_MIN); // snooze alarm for 10 minutes if screen on
 			return;
 		}
 

@@ -3,19 +3,20 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	<TextView android:text="If device is not plugged in, remind me at"
-		android:id="@+id/TextMsg" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></TextView>
+	<TextView android:id="@+id/TextMsg" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textSize="20sp" android:text="If unplugged, alarm at"></TextView>
 	<Button android:text="HH:MM" android:id="@+id/ButtonTime"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="30sp" android:minWidth="150sp"></Button>
+		android:textSize="30sp" android:minWidth="200sp"></Button>
 	<CheckBox android:text="Enable Alarm" android:id="@+id/CheckEnable"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/CheckRepeat" android:text="Repeat until pluged in"></CheckBox><TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></TextView>
 	<Button android:text="Choose Ringtone" android:id="@+id/ButtonRingtone"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-	<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></TextView>
 	<Button android:text="Exit" android:id="@+id/ButtonExit"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
+
 
 </LinearLayout>

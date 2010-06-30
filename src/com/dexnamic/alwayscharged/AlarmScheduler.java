@@ -3,6 +3,7 @@ package com.dexnamic.alwayscharged;
 import java.util.Calendar;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ public class AlarmScheduler {
 
 	public static final String TYPE_ALARM = "alarm";
 	public static final String TYPE_SNOOZE = "snooze";
+	
+    public static final int SNOOZE_TIME_MIN = 1;
 
 	public static void setDailyAlarm(Context context, int hourOfDay,
 			int minute) {
@@ -49,6 +52,7 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
+		
 	}
 
 	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
