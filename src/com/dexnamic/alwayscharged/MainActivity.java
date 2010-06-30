@@ -22,7 +22,6 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// notification and service process if snoozed
 // shake or move to dismiss/snooze alarm
 // snooze alarm if phone call received
 // setup for difference screen orientations
@@ -36,6 +35,7 @@ import android.widget.Toast;
 // smooth out unlocking for phones before API 5
 // optionally vibrate only if face covered
 // visually format for large screen tablets
+// advanced settings: snooze time, set alarm volume to max
 
 // test: plugged/unplugged, reboot, time zone change, snooze features
 

@@ -3,20 +3,24 @@ package com.dexnamic.alwayscharged;
 import java.util.Calendar;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class AlarmScheduler {
 
 	public static final String TYPE_ALARM = "alarm";
 	public static final String TYPE_SNOOZE = "snooze";
-	
-    public static final int SNOOZE_TIME_MIN = 1;
+	public static final String TYPE_NOTIFY = "notify";
 
-	public static void setDailyAlarm(Context context, int hourOfDay,
-			int minute) {
+	public static final int SNOOZE_TIME_MIN = 1;
+
+	public static final int NOTIFY_SNOOZE = 1;
+
+	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
 
 		Calendar calNow = Calendar.getInstance();
 		Calendar calAlarm = Calendar.getInstance();
@@ -28,7 +32,8 @@ public class AlarmScheduler {
 			addDay = true;
 		long time_ms = calAlarm.getTimeInMillis();
 		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in
-		if(addDay) time_ms += interval_ms;
+		if (addDay)
+			time_ms += interval_ms;
 
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
@@ -45,34 +50,45 @@ public class AlarmScheduler {
 		alarmManager.cancel(pi);
 	}
 
-	public static void snoozeAlarm(Context context,
-			int minutes) {
-		final long time_ms = System.currentTimeMillis() + minutes*60*1000;
+	public static void snoozeAlarm(Context context, int minutes) {
+		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
-		
+
+		try {
+			NotificationManager nm = (NotificationManager) context
+					.getSystemService(Context.NOTIFICATION_SERVICE);
+
+			String text = "Click to cancel snooze";
+			// Set the icon, scrolling text and timestamp
+			Notification notification = new Notification(R.drawable.clock,
+					text, System.currentTimeMillis());
+			// The PendingIntent to launch our activity if the user selects this
+			// notification
+			PendingIntent npi = getPendingIntentUpdateCurrent(context,
+					TYPE_NOTIFY);
+			// Set the info for the views that show in the notification panel.
+			notification.setLatestEventInfo(context, "Always Charged", text, npi);
+			// set notification to appear in "Ongoing" category
+			notification.flags = notification.flags
+					| Notification.FLAG_AUTO_CANCEL | Notification.FLAG_NO_CLEAR;
+			nm.notify(NOTIFY_SNOOZE, notification);
+		} catch (Exception e) {
+			Log.e("dexnamic", e.getMessage());
+		}
 	}
 
 	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
 			String category) {
 		Intent intent = new Intent(context, AlertReceiver.class);
-		intent.addCategory(category);
+		// intent.addCategory(category);
+		intent.setAction(category);
 
 		return PendingIntent.getBroadcast(context, 0, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}
-	
-	private static PendingIntent getPendingIntentNoCreate(Context context,
-			String category) {
-		Intent intent = new Intent(context, AlertReceiver.class);
-		intent.addCategory(category);
 
-		return PendingIntent.getBroadcast(context, 0, intent,
-				PendingIntent.FLAG_NO_CREATE);
-
-	}
-	
 }

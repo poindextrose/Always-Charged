@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.util.Log;
@@ -40,6 +39,9 @@ public class AlertReceiver extends BroadcastReceiver {
 				/********************
 				 * adjust time zone
 				 */
+			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
+				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+				return;
 			}
 			try {
 				if (action.equals((String) Intent.class.getField(
@@ -61,7 +63,7 @@ public class AlertReceiver extends BroadcastReceiver {
 			} catch (Exception e) {
 			}
 		}
-
+		
 		mPowerManager = (PowerManager) context
 				.getSystemService(Context.POWER_SERVICE);
 
