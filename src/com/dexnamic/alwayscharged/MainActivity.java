@@ -25,6 +25,11 @@ import android.widget.Toast;
 // vibrate checkbox option
 //snooze alarm if phone call received
 
+// from clock alarm:
+// on/off vibrate pattern
+// toast indicating how long until alarm
+// floating window like clock alarm: background image if locked
+
 // menu: settings, feedback
 
 // shake or move to dismiss/snooze alarm
@@ -39,6 +44,8 @@ import android.widget.Toast;
 // advanced settings: snooze time, set alarm volume to max
 // background of Android robot sleeping on bed with cord plugged into wall
 //visually format for large screen tablets
+
+// estimate time to charge
 
 // test: plugged/unplugged, reboot, time zone change, snooze features
 
@@ -55,6 +62,7 @@ public class MainActivity extends Activity {
 	public static final String PREF_HOUR = "hour";
 	public static final String PREF_MINUTE = "minute";
 	public static final String PREF_RINGTONE = "ringtone";
+	public static final String PREF_RINGTONE_TEXT = "ringtone_text";
 	public static final String PREF_REPEAT = "repeat";
 
 	private static final int ACTIVITY_RESULT_RINGTONE = 1;
@@ -104,7 +112,7 @@ public class MainActivity extends Activity {
 			enableAlaram();
 		}
 		mCheckEnable.setOnCheckedChangeListener(mOnCheckChangeListener);
-		
+
 		mCheckRepeat = (CheckBox) findViewById(R.id.CheckRepeat);
 		boolean alarmRepeat = settings.getBoolean(PREF_REPEAT, false);
 		mCheckRepeat.setChecked(alarmRepeat);
@@ -112,6 +120,8 @@ public class MainActivity extends Activity {
 
 		chosenRingtone = settings.getString(PREF_RINGTONE, null);
 		mButtonRingtone = (Button) findViewById(R.id.ButtonRingtone);
+		mButtonRingtone.setText(settings
+				.getString(PREF_RINGTONE_TEXT, "Choose"));
 		mButtonRingtone.setOnClickListener(mOnClickListener);
 
 		mButtonExit = (Button) findViewById(R.id.ButtonExit);
@@ -126,7 +136,6 @@ public class MainActivity extends Activity {
 				boolean isChecked) {
 			if (buttonView == mCheckEnable) {
 				editor.putBoolean(PREF_ENABLE, isChecked);
-				editor.commit();
 				if (isChecked) {
 					enableAlaram();
 				} else {
@@ -134,7 +143,6 @@ public class MainActivity extends Activity {
 				}
 			} else if (buttonView == mCheckRepeat) {
 				editor.putBoolean(PREF_REPEAT, isChecked);
-				editor.commit();
 			}
 		}
 	};
@@ -161,13 +169,18 @@ public class MainActivity extends Activity {
 				&& requestCode == ACTIVITY_RESULT_RINGTONE) {
 			Uri uri = intent
 					.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+			String chosenRingtoneText;
 			if (uri != null) {
 				chosenRingtone = uri.toString();
+				chosenRingtoneText = RingtoneManager.getRingtone(
+						MainActivity.this, uri).getTitle(MainActivity.this);
 			} else {
 				chosenRingtone = null;
+				chosenRingtoneText = "Silent";
 			}
 			editor.putString(PREF_RINGTONE, chosenRingtone);
-			editor.commit();
+			mButtonRingtone.setText(chosenRingtoneText);
+			editor.putString(PREF_RINGTONE_TEXT, chosenRingtoneText);
 			checkVolume();
 		}
 	}
@@ -201,7 +214,6 @@ public class MainActivity extends Activity {
 		mMinute = minute;
 		editor.putInt(PREF_HOUR, hourOfDay);
 		editor.putInt(PREF_MINUTE, minute);
-		editor.commit();
 		mCheckEnable.setChecked(true);
 		mButtonTime.setText(formatTime(hourOfDay, minute));
 		AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
@@ -280,6 +292,7 @@ public class MainActivity extends Activity {
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
 				RingtoneManager.TYPE_ALARM); // |
 		// RingtoneManager.TYPE_RINGTONE);
+		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Alarm");
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_INCLUDE_DRM, true);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) uri);

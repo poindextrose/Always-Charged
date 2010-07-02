@@ -16,11 +16,9 @@
 		android:text="Repeat unanswered alarm"></CheckBox>
 	<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
 		android:layout_height="wrap_content"></TextView>
-	<Button android:text="Choose Ringtone" android:id="@+id/ButtonRingtone"
+	<Button android:text="Ringtone" android:id="@+id/ButtonRingtone"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 	<Button android:text="Exit" android:id="@+id/ButtonExit"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-
-
 
 </LinearLayout>
