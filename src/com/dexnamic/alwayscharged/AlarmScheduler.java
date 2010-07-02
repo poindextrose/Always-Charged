@@ -9,15 +9,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 public class AlarmScheduler {
+
+	public static final int SNOOZE_TIME_MIN = 10;
 
 	public static final String TYPE_ALARM = "alarm";
 	public static final String TYPE_SNOOZE = "snooze";
 	public static final String TYPE_NOTIFY = "notify";
-
-	public static final int SNOOZE_TIME_MIN = 1;
 
 	public static final int NOTIFY_SNOOZE = 1;
 	

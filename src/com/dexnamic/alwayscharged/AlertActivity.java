@@ -39,6 +39,8 @@ public class AlertActivity extends Activity {
 	private Button mButtonDismiss;
 	private Button mButtonSnooze;
 
+	private SharedPreferences mSettings;
+
 	// received
 	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 		@Override
@@ -102,9 +104,8 @@ public class AlertActivity extends Activity {
 		mButtonSnooze.setText("Snooze " + AlarmScheduler.SNOOZE_TIME_MIN
 				+ " min");
 
-		SharedPreferences settings = getSharedPreferences(
-				MainActivity.PREFS_NAME, 0);
-		String chosenRingtone = settings.getString(MainActivity.PREF_RINGTONE,
+		mSettings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		String chosenRingtone = mSettings.getString(MainActivity.PREF_RINGTONE,
 				null);
 
 		mMediaPlayer = new MediaPlayer();
@@ -148,8 +149,12 @@ public class AlertActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
-				AlarmScheduler.snoozeAlarm(AlertActivity.this,
-						AlarmScheduler.SNOOZE_TIME_MIN);
+				boolean repeat = AlertActivity.this.mSettings.getBoolean(
+						MainActivity.PREF_REPEAT, false);
+				if (repeat) {
+					AlarmScheduler.snoozeAlarm(AlertActivity.this,
+							AlarmScheduler.SNOOZE_TIME_MIN);
+				}
 				AlertActivity.this.finish();
 				break;
 			}

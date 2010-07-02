@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
 	public static final String PREF_HOUR = "hour";
 	public static final String PREF_MINUTE = "minute";
 	public static final String PREF_RINGTONE = "ringtone";
+	public static final String PREF_REPEAT = "repeat";
 
 	private static final int ACTIVITY_RESULT_RINGTONE = 1;
 
@@ -70,6 +71,7 @@ public class MainActivity extends Activity {
 	private Button mButtonExit;
 
 	private CheckBox mCheckEnable;
+	private CheckBox mCheckRepeat;
 
 	SharedPreferences.Editor editor;
 	SharedPreferences settings;
@@ -102,6 +104,11 @@ public class MainActivity extends Activity {
 			enableAlaram();
 		}
 		mCheckEnable.setOnCheckedChangeListener(mOnCheckChangeListener);
+		
+		mCheckRepeat = (CheckBox) findViewById(R.id.CheckRepeat);
+		boolean alarmRepeat = settings.getBoolean(PREF_REPEAT, false);
+		mCheckRepeat.setChecked(alarmRepeat);
+		mCheckRepeat.setOnCheckedChangeListener(mOnCheckChangeListener);
 
 		chosenRingtone = settings.getString(PREF_RINGTONE, null);
 		mButtonRingtone = (Button) findViewById(R.id.ButtonRingtone);
@@ -125,6 +132,9 @@ public class MainActivity extends Activity {
 				} else {
 					disableAlarm();
 				}
+			} else if (buttonView == mCheckRepeat) {
+				editor.putBoolean(PREF_REPEAT, isChecked);
+				editor.commit();
 			}
 		}
 	};
