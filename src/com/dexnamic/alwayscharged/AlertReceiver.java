@@ -12,11 +12,7 @@ import android.util.Log;
 public class AlertReceiver extends BroadcastReceiver {
 
 	private PowerManager mPowerManager;
-	static public PowerManager.WakeLock mWakeLock;
-	
-	/* (non-Javadoc)
-	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
-	 */
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
@@ -36,12 +32,18 @@ public class AlertReceiver extends BroadcastReceiver {
 				}
 				return;
 			} else if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-				/********************
-				 * adjust time zone
-				 */
+				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
+				int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
+				int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
+				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
+				return;
 			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 				return;
+			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
+				doAlarm(context);
+			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
+				doAlarm(context);
 			}
 			try {
 				if (action.equals((String) Intent.class.getField(
@@ -63,25 +65,29 @@ public class AlertReceiver extends BroadcastReceiver {
 			} catch (Exception e) {
 			}
 		}
-		
-		mPowerManager = (PowerManager) context
-				.getSystemService(Context.POWER_SERVICE);
-
-		if (screenOn()) {
-			AlarmScheduler.snoozeAlarm(context, AlarmScheduler.SNOOZE_TIME_MIN); // snooze alarm for 10 minutes if screen on
-			return;
-		}
-
-		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
-				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-						| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
-		mWakeLock.acquire();
-
-		doAlarm(context);
 
 	}
 
 	public void doAlarm(Context context) {
+		if (screenOn()) {
+			AlarmScheduler.snoozeAlarm(context, AlarmScheduler.SNOOZE_TIME_MIN);
+			return;
+		}
+
+		mPowerManager = (PowerManager) context
+				.getSystemService(Context.POWER_SERVICE);
+		 PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
+		 PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+//		 PowerManager.SCREEN_DIM_WAKE_LOCK
+		 //| PowerManager.ACQUIRE_CAUSES_WAKEUP
+		 , "My Tag");
+//		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
+//				PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
+		final long time_ms = AlertActivity.ALARM_TIMEOUT_MS + 10*1000; // add 10 seconds
+		mWakeLock.acquire(time_ms);
+
+		AlarmScheduler.cancelNotification(context);
+
 		Intent intent = new Intent(context, AlertActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 				| Intent.FLAG_FROM_BACKGROUND);

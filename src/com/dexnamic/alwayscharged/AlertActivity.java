@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,35 +27,37 @@ import android.widget.Button;
 
 public class AlertActivity extends Activity {
 
+	public static final long ALARM_TIMEOUT_MS = 30 * 1000; // 30 seconds
+
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
-	// private AlertDialog mAlert;
-	private PowerManager mPowerManager;
 	private PowerManager.WakeLock wakeLock;
 
-	SharedPreferences settings;
-	private String chosenRingtone;
 	private MediaPlayer mMediaPlayer;
+	private Vibrator mVibrator;
 
 	private Button mButtonDismiss;
 	private Button mButtonSnooze;
 
-	private Vibrator mVibrator;
+	// received
+	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			try {
+				int plugged = intent.getIntExtra("plugged", 0);
+				if (plugged > 0) { // skip alarm since device plugged in
+					AlarmScheduler.cancelAlarm(context,
+							AlarmScheduler.TYPE_SNOOZE);
+					finish();
+				}
+			} catch (Exception e) {
+			}
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wakeLock = AlertReceiver.mWakeLock;
-		if (wakeLock == null) {
-			wakeLock = mPowerManager.newWakeLock(
-					PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-							| PowerManager.ON_AFTER_RELEASE
-							| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
-			wakeLock.acquire();
-		}
 
 		IntentFilter intentFilter = new IntentFilter(
 				Intent.ACTION_BATTERY_CHANGED);
@@ -62,9 +65,18 @@ public class AlertActivity extends Activity {
 		int plugged = intentBattery.getIntExtra("plugged", 0);
 		if (plugged > 0) { // skip alarm since device plugged in
 			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
-			wakeLock.release();
 			finish();
+			return;
 		}
+
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
+		wakeLock = mPowerManager.newWakeLock(
+				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+						| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
+		wakeLock.acquire();
+		mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
 
 		setContentView(R.layout.alert);
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
@@ -90,8 +102,10 @@ public class AlertActivity extends Activity {
 		mButtonSnooze.setText("Snooze " + AlarmScheduler.SNOOZE_TIME_MIN
 				+ " min");
 
-		settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
-		chosenRingtone = settings.getString(MainActivity.PREF_RINGTONE, null);
+		SharedPreferences settings = getSharedPreferences(
+				MainActivity.PREFS_NAME, 0);
+		String chosenRingtone = settings.getString(MainActivity.PREF_RINGTONE,
+				null);
 
 		mMediaPlayer = new MediaPlayer();
 		try {
@@ -149,7 +163,8 @@ public class AlertActivity extends Activity {
 			if (v == mButtonDismiss)
 				AlertActivity.this.finish();
 			else if (v == mButtonSnooze) {
-				AlarmScheduler.snoozeAlarm(AlertActivity.this, 30);
+				AlarmScheduler.snoozeAlarm(AlertActivity.this,
+						AlarmScheduler.SNOOZE_TIME_MIN);
 				AlertActivity.this.finish();
 			}
 		}
@@ -159,10 +174,8 @@ public class AlertActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-		// mAlert.show();
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
-		long delay_ms = 30 * 1000; // 30 seconds in milliseconds
-		mHandler.sendMessageDelayed(msg, delay_ms);
+		mHandler.sendMessageDelayed(msg, ALARM_TIMEOUT_MS);
 	}
 
 	@Override

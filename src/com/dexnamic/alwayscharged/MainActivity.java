@@ -22,20 +22,23 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// vibrate checkbox option
+//snooze alarm if phone call received
+
+// menu: settings, feedback
+
 // shake or move to dismiss/snooze alarm
-// snooze alarm if phone call received
 // setup for difference screen orientations
 // beautify
 // setup for other languages 
-// make sure it works as expected if user changes timezones
+// make sure it works as expected if user changes time zones
 // do not activate alarm for a few minutes after last use
 // optionally raise volume to maximum level
-// optionally play any mp3 from phone
+// optionally play any sound file from phone
 // android.app.backup
-// smooth out unlocking for phones before API 5
-// optionally vibrate only if face covered
-// visually format for large screen tablets
 // advanced settings: snooze time, set alarm volume to max
+// background of Android robot sleeping on bed with cord plugged into wall
+//visually format for large screen tablets
 
 // test: plugged/unplugged, reboot, time zone change, snooze features
 
@@ -106,6 +109,7 @@ public class MainActivity extends Activity {
 
 		mButtonExit = (Button) findViewById(R.id.ButtonExit);
 		mButtonExit.setOnClickListener(mOnClickListener);
+
 	}
 
 	CompoundButton.OnCheckedChangeListener mOnCheckChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -265,7 +269,7 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
 				RingtoneManager.TYPE_ALARM); // |
-												// RingtoneManager.TYPE_RINGTONE);
+		// RingtoneManager.TYPE_RINGTONE);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Alarm");
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_INCLUDE_DRM, true);
 		intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, (Uri) uri);

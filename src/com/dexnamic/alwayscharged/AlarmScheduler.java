@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AlarmScheduler {
 
@@ -19,7 +20,7 @@ public class AlarmScheduler {
 	public static final int SNOOZE_TIME_MIN = 1;
 
 	public static final int NOTIFY_SNOOZE = 1;
-
+	
 	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
 
 		Calendar calNow = Calendar.getInstance();
@@ -32,6 +33,7 @@ public class AlarmScheduler {
 			addDay = true;
 		long time_ms = calAlarm.getTimeInMillis();
 		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in
+														// milliseconds
 		if (addDay)
 			time_ms += interval_ms;
 
@@ -40,6 +42,9 @@ public class AlarmScheduler {
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms,
 				interval_ms, pi);
+
+//		Toast.makeText(context, "daily alarm " + hourOfDay + ":" + minute,
+//				Toast.LENGTH_SHORT).show();
 	}
 
 	public static void cancelAlarm(Context context, String category) {
@@ -48,6 +53,14 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
+
+		cancelNotification(context);
+	}
+
+	public static void cancelNotification(Context context) {
+		NotificationManager nm = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
 	public static void snoozeAlarm(Context context, int minutes) {
@@ -70,21 +83,25 @@ public class AlarmScheduler {
 			PendingIntent npi = getPendingIntentUpdateCurrent(context,
 					TYPE_NOTIFY);
 			// Set the info for the views that show in the notification panel.
-			notification.setLatestEventInfo(context, "Always Charged", text, npi);
+			notification.setLatestEventInfo(context, "Always Charged", text,
+					npi);
 			// set notification to appear in "Ongoing" category
 			notification.flags = notification.flags
-					| Notification.FLAG_AUTO_CANCEL | Notification.FLAG_NO_CLEAR;
+					| Notification.FLAG_AUTO_CANCEL
+					| Notification.FLAG_NO_CLEAR;
+
 			nm.notify(NOTIFY_SNOOZE, notification);
 		} catch (Exception e) {
 			Log.e("dexnamic", e.getMessage());
 		}
+//		Toast.makeText(context, "snooze alarm " + minutes,
+//				Toast.LENGTH_SHORT).show;
 	}
 
 	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
-			String category) {
+			String action) {
 		Intent intent = new Intent(context, AlertReceiver.class);
-		// intent.addCategory(category);
-		intent.setAction(category);
+		intent.setAction(action);
 
 		return PendingIntent.getBroadcast(context, 0, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);

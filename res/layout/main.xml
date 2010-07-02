@@ -4,7 +4,7 @@
 	android:layout_height="fill_parent">
 
 	<TextView android:id="@+id/TextMsg" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="20sp" android:text="If unplugged, alarm at"></TextView>
+		android:layout_height="wrap_content" android:textSize="20sp" android:text="If unplugged, sound alarm at"></TextView>
 	<Button android:text="HH:MM" android:id="@+id/ButtonTime"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:textSize="30sp" android:minWidth="200sp"></Button>
