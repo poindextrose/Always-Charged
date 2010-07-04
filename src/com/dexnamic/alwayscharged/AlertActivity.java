@@ -18,6 +18,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -104,8 +105,10 @@ public class AlertActivity extends Activity {
 		mButtonSnooze.setText("Snooze " + AlarmScheduler.SNOOZE_TIME_MIN
 				+ " min");
 
-		mSettings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
-		String chosenRingtone = mSettings.getString(MainActivity.PREF_RINGTONE,
+        mSettings = 
+        	PreferenceManager.getDefaultSharedPreferences(this);
+
+		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE,
 				null);
 
 		mMediaPlayer = new MediaPlayer();
@@ -150,7 +153,7 @@ public class AlertActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				boolean repeat = AlertActivity.this.mSettings.getBoolean(
-						MainActivity.PREF_REPEAT, false);
+						MainActivity.KEY_REPEAT, false);
 				if (repeat) {
 					AlarmScheduler.snoozeAlarm(AlertActivity.this,
 							AlarmScheduler.SNOOZE_TIME_MIN);

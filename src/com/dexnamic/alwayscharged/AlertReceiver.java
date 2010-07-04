@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class AlertReceiver extends BroadcastReceiver {
@@ -18,23 +19,22 @@ public class AlertReceiver extends BroadcastReceiver {
 
 		Log.d("dexnamic", "action = " + intent.getAction());
 
-		SharedPreferences settings = context.getSharedPreferences(
-				MainActivity.PREFS_NAME, 0);
-		boolean alarmEnabled = settings.getBoolean(MainActivity.PREF_ENABLE,
+        // Get the app's shared preferences
+        SharedPreferences settings = 
+        	PreferenceManager.getDefaultSharedPreferences(context);
+		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED,
 				false);
+		int hourOfDay = settings.getInt(MainActivity.KEY_HOUR, 22);
+		int minute = settings.getInt(MainActivity.KEY_MINUTE, 0);
 		String action = intent.getAction();
 		if (action != null) {
 			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
 				if (alarmEnabled) {
-					int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
-					int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				}
 				return;
 			} else if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
-				int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
-				int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
 				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
@@ -57,8 +57,6 @@ public class AlertReceiver extends BroadcastReceiver {
 				if (alarmEnabled
 						&& action.equals((String) Intent.class.getField(
 								"ACTION_POWER_DISCONNECTED").get(null))) {
-					int hourOfDay = settings.getInt(MainActivity.PREF_HOUR, 22);
-					int minute = settings.getInt(MainActivity.PREF_MINUTE, 0);
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 					return;
 				}
