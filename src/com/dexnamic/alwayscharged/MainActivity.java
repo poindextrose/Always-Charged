@@ -27,19 +27,21 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// progressive alarm volume
+
 // make application icon
 // make snooze icon
-//bring up explanation on first use with prompts for each feature
+// bring up explanation on first use with prompts for each feature
 // more short explanations on main screen
 
-//prevent alarm from going off during phone call
-//snooze alarm if phone call received
+// test: prevent alarm from going off during phone call
+// test: snooze alarm if phone call received
 
 //bring up explanation on first use with prompts for each feature
 
+// feedback button
+
 //from clock alarm:
-//on/off vibrate pattern
-//toast indicating how long until alarm
 //floating window like clock alarm: background image if locked
 
 //menu: settings, feedback
@@ -89,6 +91,9 @@ public class MainActivity extends PreferenceActivity implements
 	public final static String KEY_REPEAT = "key_repeat";
 	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_SNOOZE = "key_snooze";
+	
+	public final static int TIMES_TO_REPEAT = 2;
+	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 
 	private int mTimeFormat; // 12 or 24
 
@@ -109,7 +114,7 @@ public class MainActivity extends PreferenceActivity implements
 
 		// Load the XML preferences file
 		addPreferencesFromResource(R.xml.preferences);
-		setContentView(R.layout.buttons);
+		setContentView(R.layout.main);
 		
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
@@ -132,8 +137,8 @@ public class MainActivity extends PreferenceActivity implements
 		String uriString = settings.getString(KEY_RINGTONE, null);
 		setRingtoneSummary(uriString);
 
-		// mPreferenceRepeat = (CheckBoxPreference)
-		// ps.findPreference(KEY_REPEAT);
+		//CheckBoxPreference repeat = (CheckBoxPreference) ps.findPreference(KEY_REPEAT);
+		// repeat.setSum
 		
 		mListPreferenceSnooze = (ListPreference) ps.findPreference(KEY_SNOOZE);
 		mListPreferenceSnooze.setSummary(settings.getString(KEY_SNOOZE, "***") + " " + getString(R.string.minutes));
@@ -338,4 +343,5 @@ public class MainActivity extends PreferenceActivity implements
 	}
 
 }
+
 

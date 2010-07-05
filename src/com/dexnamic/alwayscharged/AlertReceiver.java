@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class AlertReceiver extends BroadcastReceiver {
@@ -19,11 +20,11 @@ public class AlertReceiver extends BroadcastReceiver {
 
 		Log.d("dexnamic", "action = " + intent.getAction());
 
-        // Get the app's shared preferences
-        SharedPreferences settings = 
-        	PreferenceManager.getDefaultSharedPreferences(context);
-		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED,
-				false);
+		// Get the app's shared preferences
+		SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		boolean alarmEnabled = settings.getBoolean(
+				MainActivity.KEY_ALARM_ENABLED, false);
 		int hourOfDay = settings.getInt(MainActivity.KEY_HOUR, 22);
 		int minute = settings.getInt(MainActivity.KEY_MINUTE, 0);
 		String action = intent.getAction();
@@ -41,9 +42,10 @@ public class AlertReceiver extends BroadcastReceiver {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
-				doAlarm(context);
+				doAlarm(context, action);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
-				doAlarm(context);
+				AlarmScheduler.resetRepeatCount(context);
+				doAlarm(context, action);
 			}
 			try {
 				if (action.equals((String) Intent.class.getField(
@@ -66,22 +68,28 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	}
 
-	public void doAlarm(Context context) {
-		if (screenOn()) {
-			AlarmScheduler.snoozeAlarm(context, AlarmScheduler.SNOOZE_TIME_MIN);
+	public void doAlarm(Context context, String action) {
+		TelephonyManager tm = (TelephonyManager) context
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		int callState = tm.getCallState();
+		if (screenOn() && callState != TelephonyManager.CALL_STATE_OFFHOOK
+				&& callState != TelephonyManager.CALL_STATE_RINGING) {
+			AlarmScheduler.snoozeAlarm(context);
 			return;
 		}
 
 		mPowerManager = (PowerManager) context
 				.getSystemService(Context.POWER_SERVICE);
-		 PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
-		 PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-//		 PowerManager.SCREEN_DIM_WAKE_LOCK
-		 //| PowerManager.ACQUIRE_CAUSES_WAKEUP
-		 , "My Tag");
-//		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
-//				PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
-		final long time_ms = AlertActivity.ALARM_TIMEOUT_MS + 10*1000; // add 10 seconds
+		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
+				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+				// PowerManager.SCREEN_DIM_WAKE_LOCK
+				// | PowerManager.ACQUIRE_CAUSES_WAKEUP
+				, "My Tag");
+		// PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
+		// PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
+		final long time_ms = AlertActivity.ALARM_TIMEOUT_MS + 10 * 1000; // add
+																			// 10
+																			// seconds
 		mWakeLock.acquire(time_ms);
 
 		AlarmScheduler.cancelNotification(context);
@@ -89,6 +97,7 @@ public class AlertReceiver extends BroadcastReceiver {
 		Intent intent = new Intent(context, AlertActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 				| Intent.FLAG_FROM_BACKGROUND);
+		intent.setAction(action);
 		context.startActivity(intent);
 		// context.startService(new Intent(context, AlertService.class));
 	}

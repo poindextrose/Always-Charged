@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="wrap_content"
 	android:layout_height="fill_parent">
 
-	<TextView android:id="@+id/TextMsg" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="20sp"
-		android:text="If unplugged, sound alarm at"></TextView>
-	<Button android:text="HH:MM" android:id="@+id/ButtonTime"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="30sp" android:minWidth="200sp"></Button>
-	<CheckBox android:text="Enable Alarm" android:id="@+id/CheckEnable"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
-	<CheckBox android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:id="@+id/CheckRepeat"
-		android:text="Repeat unanswered alarm"></CheckBox>
-	<TextView android:id="@+id/TextView01" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></TextView>
-	<Button android:text="Ringtone" android:id="@+id/ButtonRingtone"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-	<Button android:text="Exit" android:id="@+id/ButtonExit"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="Done" android:id="@+id/ButtonDone"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:textSize="20sp" android:maxHeight="50sp"
+		android:layout_alignParentBottom="true" />
 
-</LinearLayout>
+	<ListView android:id="@android:id/list" android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:layout_above="@id/ButtonDone" />
+
+
+</RelativeLayout>
