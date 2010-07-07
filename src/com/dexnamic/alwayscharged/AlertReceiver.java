@@ -37,7 +37,8 @@ public class AlertReceiver extends BroadcastReceiver {
 				return;
 			} else if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
-				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
+				if (alarmEnabled)
+					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
@@ -62,9 +63,11 @@ public class AlertReceiver extends BroadcastReceiver {
 						&& action.equals((String) Intent.class
 								.getField("ACTION_POWER_DISCONNECTED").get(null))) {
 					// if in power_snooze mode, doAlarm, but have activity only alarm if not fully charged
-					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
-					if (settings.getBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false))
-						doAlarm(context, ACTION_DISCONNECTED, true);
+					if (alarmEnabled) {
+						AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
+						if (settings.getBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false))
+							doAlarm(context, ACTION_DISCONNECTED, true);
+					}
 					return;
 				}
 			} catch (Exception e) {
@@ -114,13 +117,11 @@ public class AlertReceiver extends BroadcastReceiver {
 			return false;
 		}
 	}
-	
+
 	static public void resetRepeatCount(Context context) {
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(MainActivity.KEY_REPEAT_COUNT,
-				MainActivity.TIMES_TO_REPEAT);
+		editor.putInt(MainActivity.KEY_REPEAT_COUNT, MainActivity.TIMES_TO_REPEAT);
 		editor.commit();
 	}
 }
