@@ -274,6 +274,7 @@ public class AlertActivity extends Activity {
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
+		unregisterReceiver(mBroadcastReceiver);
 	}
 
 	void stopRingtone() {

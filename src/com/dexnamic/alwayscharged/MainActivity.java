@@ -2,10 +2,12 @@ package com.dexnamic.alwayscharged;
 
 import java.lang.reflect.Method;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -24,33 +26,42 @@ import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// bring up explanation on first use with prompts for each feature
+// don't go off if phone is moving (accelerometers)
+//    do this buy silently checking movement in AlertReceiver before doing anything
+
+// aggressive alarm
+
+// use reflection for BatteryManager constants from API 5
 
 // make application icon
 // make snooze icon
+// setup for other languages
+// end-user license agreement
+
+// check for task killers and warn user
+
+// motion detection, just need to hold off on vibrate for a few seconds
+
+//android.app.backup
 
 // progressive alarm volume
 // test: prevent alarm from going off during phone call
 // test: snooze alarm if phone call received
 
-// consider using ring tones in addition to alarm tones
-
 // shake or move to dismiss/snooze alarm
 // setup for difference screen orientations
-// beautify
-// setup for other languages
 // make sure it works as expected if user changes time zones
 // do not activate alarm for a few minutes after last use
 // optionally raise volume to maximum level
 // optionally play any sound file from phone
-// android.app.backup
-// advanced settings: snooze time, set alarm volume to max
 // visually format for large screen tablets
 
 // estimate time to charge
@@ -66,11 +77,13 @@ import android.widget.Toast;
 public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
 	static final int TIME_DIALOG_ID = 0;
+	static final int FIRST_TIME_DIALOG_ID = 1;
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
 	// private CheckBoxPreference mPreferenceRepeat;
 	private ListPreference mListPreferenceSnooze;
+	private Preference mPreferenceAbout;
 
 	SharedPreferences settings;
 	SharedPreferences.Editor editor;
@@ -83,6 +96,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_REPEAT = "key_repeat";
 	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_SNOOZE = "key_snooze";
+	public final static String KEY_FIRST_TIME = "key_first_time";
+	public final static String KEY_ABOUT = "key_about";
 
 	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
@@ -93,9 +108,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	private AudioManager mAudioManager;
 
+	private boolean mFirstInstance = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		addPreferencesFromResource(R.xml.preferences);
 
 		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -134,29 +152,35 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				MainActivity.this.finish();
 			}
 		});
-		
+
+		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
+		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
+
 		Button buttonFeedback = (Button) findViewById(R.id.ButtonFeedback);
 		buttonFeedback.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Context context = MainActivity.this;
-				Intent i= new Intent(Intent.ACTION_SEND);
+				Intent i = new Intent(Intent.ACTION_SEND);
 				i.setType("text/plain");
 				String appName2 = context.getString(R.string.app_name_no_spaces);
-				i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"dexnamic+"+appName2+"@gmail.com"});
+				i.putExtra(Intent.EXTRA_EMAIL,
+						new String[] { "dexnamic+" + appName2 + "@gmail.com" });
 				String feedback = context.getString(R.string.feedback);
 				String appName = context.getString(R.string.app_name);
-				i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")" );
+				i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
 //				i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-				ComponentName cn = new ComponentName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+				ComponentName cn = new ComponentName("com.google.android.gm",
+						"com.google.android.gm.ComposeActivityGmail");
 				i.setComponent(cn);
 				try {
-				    startActivity(i);
+					startActivity(i);
 				} catch (android.content.ActivityNotFoundException ex1) {
 					try {
-				    startActivity(Intent.createChooser(i, context.getString(R.string.sendmail)));
+						startActivity(Intent.createChooser(i, context.getString(R.string.sendmail)));
 					} catch (android.content.ActivityNotFoundException ex2) {
-					    Toast.makeText(context, context.getString(R.string.noemail), Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, context.getString(R.string.noemail),
+								Toast.LENGTH_SHORT).show();
 					}
 				}
 			}
@@ -175,8 +199,28 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		} catch (Exception e) {
 			Log.e("dexnamic", e.getMessage());
 		}
-		
+
 		setVolumeControlStream(AudioManager.STREAM_RING);
+
+		if (savedInstanceState == null)
+			mFirstInstance = true;
+		else
+			mFirstInstance = false;
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+//		outState.putBoolean(KEY_INSTANCE_FIRST, false);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+
+		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
+			showDialog(FIRST_TIME_DIALOG_ID);
 	}
 
 	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
@@ -216,6 +260,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		public boolean onPreferenceClick(Preference preference) {
 			if (preference == mPreferenceTime) {
 				MainActivity.this.showDialog(TIME_DIALOG_ID);
+			} else if (preference == mPreferenceAbout) {
+				showDialog(FIRST_TIME_DIALOG_ID);
 			}
 			return false;
 		}
@@ -259,6 +305,36 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			int hourOfDay = settings.getInt(KEY_HOUR, 22);
 			int minute = settings.getInt(KEY_MINUTE, 0);
 			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay, minute, false);
+		case FIRST_TIME_DIALOG_ID:
+			AlertDialog.Builder builder;
+			AlertDialog alertDialog;
+
+			LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+			View layout = inflater.inflate(R.layout.first_time_dialog,
+					(ViewGroup) findViewById(R.id.first_time_layout_root));
+//			TextView text = (TextView) layout.findViewById(R.id.text);
+//			text.setText("Hello, this is a custom dialog!");
+//			ImageView image = (ImageView) layout.findViewById(R.id.image);
+//			image.setImageResource(R.drawable.android);
+			builder = new AlertDialog.Builder(this);
+			builder.setView(layout);
+			builder.setMessage(getString(R.string.welcome));
+			builder.setPositiveButton(getString(R.string.close),
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+			builder.setNegativeButton(getString(R.string.dontshowagain),
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							editor.putBoolean(KEY_FIRST_TIME, false);
+							editor.commit();
+							dialog.dismiss();
+						}
+					});
+			alertDialog = builder.create();
+			return alertDialog;
 		}
 		return null;
 	}

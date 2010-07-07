@@ -24,5 +24,6 @@
 		android:summary="" android:entries="@array/entries_snooze"
 		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/dialog_title_snooze"
 		android:defaultValue="10" />
+	<Preference android:key="key_about" android:title="@string/about"></Preference>
 
 </PreferenceScreen>

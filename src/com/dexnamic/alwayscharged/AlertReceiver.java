@@ -5,11 +5,14 @@ import java.lang.reflect.Method;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AlertReceiver extends BroadcastReceiver {
 
@@ -20,11 +23,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
 		Log.d("dexnamic", "action = " + intent.getAction());
 
+
 		// Get the app's shared preferences
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		boolean alarmEnabled = settings.getBoolean(
-				MainActivity.KEY_ALARM_ENABLED, false);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 		int hourOfDay = settings.getInt(MainActivity.KEY_HOUR, 22);
 		int minute = settings.getInt(MainActivity.KEY_MINUTE, 0);
 		String action = intent.getAction();
@@ -48,17 +50,15 @@ public class AlertReceiver extends BroadcastReceiver {
 				doAlarm(context, action);
 			}
 			try {
-				if (action.equals((String) Intent.class.getField(
-						"ACTION_POWER_CONNECTED").get(null))) {
-					AlarmScheduler.cancelAlarm(context,
-							AlarmScheduler.TYPE_ALARM);
-					AlarmScheduler.cancelAlarm(context,
-							AlarmScheduler.TYPE_SNOOZE);
+				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
+						.get(null))) {
+					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
+					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 					return;
 				}
 				if (alarmEnabled
-						&& action.equals((String) Intent.class.getField(
-								"ACTION_POWER_DISCONNECTED").get(null))) {
+						&& action.equals((String) Intent.class
+								.getField("ACTION_POWER_DISCONNECTED").get(null))) {
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 					return;
 				}
@@ -82,8 +82,7 @@ public class AlertReceiver extends BroadcastReceiver {
 			return;
 		}
 
-		mPowerManager = (PowerManager) context
-				.getSystemService(Context.POWER_SERVICE);
+		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
 				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 				// PowerManager.SCREEN_DIM_WAKE_LOCK
@@ -99,8 +98,7 @@ public class AlertReceiver extends BroadcastReceiver {
 		AlarmScheduler.cancelNotification(context);
 
 		Intent intent = new Intent(context, AlertActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				| Intent.FLAG_FROM_BACKGROUND);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FROM_BACKGROUND);
 		intent.setAction(action);
 		context.startActivity(intent);
 		// context.startService(new Intent(context, AlertService.class));
@@ -108,8 +106,7 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	private boolean screenOn() {
 		try { // reflection to get PowerManager.isScreenOn() method if available
-			Method m = PowerManager.class.getMethod("isScreenOn",
-					(Class[]) null);
+			Method m = PowerManager.class.getMethod("isScreenOn", (Class[]) null);
 			boolean on = (Boolean) m.invoke(mPowerManager, (Object[]) null);
 			return on;
 		} catch (Exception e) {
