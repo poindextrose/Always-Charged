@@ -1,12 +1,16 @@
 package com.dexnamic.alwayscharged;
 
+import java.lang.reflect.Method;
+
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -18,60 +22,48 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// progressive alarm volume
+// bring up explanation on first use with prompts for each feature
 
 // make application icon
 // make snooze icon
-// bring up explanation on first use with prompts for each feature
-// more short explanations on main screen
 
+// progressive alarm volume
 // test: prevent alarm from going off during phone call
 // test: snooze alarm if phone call received
 
-//bring up explanation on first use with prompts for each feature
+// consider using ring tones in addition to alarm tones
 
-// feedback button
+// shake or move to dismiss/snooze alarm
+// setup for difference screen orientations
+// beautify
+// setup for other languages
+// make sure it works as expected if user changes time zones
+// do not activate alarm for a few minutes after last use
+// optionally raise volume to maximum level
+// optionally play any sound file from phone
+// android.app.backup
+// advanced settings: snooze time, set alarm volume to max
+// visually format for large screen tablets
 
-//from clock alarm:
-//floating window like clock alarm: background image if locked
+// estimate time to charge
 
-//menu: settings, feedback
-
-//shake or move to dismiss/snooze alarm
-//setup for difference screen orientations
-//beautify
-//setup for other languages 
-//make sure it works as expected if user changes time zones
-//do not activate alarm for a few minutes after last use
-//optionally raise volume to maximum level
-//optionally play any sound file from phone
-//android.app.backup
-//advanced settings: snooze time, set alarm volume to max
-//background of Android robot sleeping on bed with cord plugged into wall
-//visually format for large screen tablets
-
-//estimate time to charge
-
-//test: plugged/unplugged, reboot, time zone change, snooze features
+// test: plugged/unplugged, reboot, time zone change, snooze features
 
 /**
-* Features: user notified with alarm if device not plugged it by a certain time
-* at night
-* 
-*/
+ * Features: user notified with alarm if device not plugged it by a certain time
+ * at night
+ * 
+ */
 
-
-public class MainActivity extends PreferenceActivity implements
-		OnSharedPreferenceChangeListener {
+public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
 	static final int TIME_DIALOG_ID = 0;
 
@@ -91,98 +83,132 @@ public class MainActivity extends PreferenceActivity implements
 	public final static String KEY_REPEAT = "key_repeat";
 	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_SNOOZE = "key_snooze";
-	
+
 	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 
 	private int mTimeFormat; // 12 or 24
 
-	private Button mButtonDone;
+	private RingtonePreference mRingtonePreference;
 
-	private RingtonePreference mPreferenceRingtone;
-	
 	private AudioManager mAudioManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		addPreferencesFromResource(R.xml.preferences);
+
 		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-		mTimeFormat = Settings.System.getInt(getContentResolver(),
-				Settings.System.TIME_12_24, 12);
+		mTimeFormat = Settings.System.getInt(getContentResolver(), Settings.System.TIME_12_24, 12);
 
 		// Load the XML preferences file
-		addPreferencesFromResource(R.xml.preferences);
 		setContentView(R.layout.main);
-		
+
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		PreferenceScreen ps = getPreferenceScreen();
 		settings = ps.getSharedPreferences();
 		editor = settings.edit();
 
-		mCheckBoxEnable = (CheckBoxPreference) ps
-				.findPreference(KEY_ALARM_ENABLED);
+		mCheckBoxEnable = (CheckBoxPreference) ps.findPreference(KEY_ALARM_ENABLED);
 
 		mPreferenceTime = (Preference) ps.findPreference(KEY_TIME);
-		mPreferenceTime
-				.setOnPreferenceClickListener(mOnPreferenceClickListener);
+		mPreferenceTime.setOnPreferenceClickListener(mOnPreferenceClickListener);
 		setTime();
 
-		mPreferenceRingtone = (RingtonePreference) ps
-				.findPreference(KEY_RINGTONE);
-		mPreferenceRingtone
-				.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
+		mRingtonePreference.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 		String uriString = settings.getString(KEY_RINGTONE, null);
 		setRingtoneSummary(uriString);
 
-		//CheckBoxPreference repeat = (CheckBoxPreference) ps.findPreference(KEY_REPEAT);
-		// repeat.setSum
-		
 		mListPreferenceSnooze = (ListPreference) ps.findPreference(KEY_SNOOZE);
-		mListPreferenceSnooze.setSummary(settings.getString(KEY_SNOOZE, "***") + " " + getString(R.string.minutes));
+		mListPreferenceSnooze.setSummary(settings.getString(KEY_SNOOZE, "***") + " "
+				+ getString(R.string.minutes));
 		mListPreferenceSnooze.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 
-		mButtonDone = (Button) findViewById(R.id.ButtonDone);
-		mButtonDone.setOnClickListener(new OnClickListener() {
+		Button buttonDone = (Button) findViewById(R.id.ButtonDone);
+		buttonDone.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MainActivity.this.finish();
 			}
 		});
+		
+		Button buttonFeedback = (Button) findViewById(R.id.ButtonFeedback);
+		buttonFeedback.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Context context = MainActivity.this;
+				Intent i= new Intent(Intent.ACTION_SEND);
+				i.setType("text/plain");
+				String appName2 = context.getString(R.string.app_name_no_spaces);
+				i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"dexnamic+"+appName2+"@gmail.com"});
+				String feedback = context.getString(R.string.feedback);
+				String appName = context.getString(R.string.app_name);
+				i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")" );
+//				i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+				ComponentName cn = new ComponentName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+				i.setComponent(cn);
+				try {
+				    startActivity(i);
+				} catch (android.content.ActivityNotFoundException ex1) {
+					try {
+				    startActivity(Intent.createChooser(i, context.getString(R.string.sendmail)));
+					} catch (android.content.ActivityNotFoundException ex2) {
+					    Toast.makeText(context, context.getString(R.string.noemail), Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
+
+		// set wallpaper as background
+		try {
+			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
+			Class<?>[] parameterTypes = { Context.class };
+			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
+			Object[] args = { this };
+			Object wm = _WM_getinstance.invoke(null, args);
+			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
+			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
+			getWindow().setBackgroundDrawable(drawable);
+		} catch (Exception e) {
+			Log.e("dexnamic", e.getMessage());
+		}
+		
+		setVolumeControlStream(AudioManager.STREAM_RING);
 	}
-	
+
+	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
+		@Override
+		public boolean onPreferenceChange(Preference preference, Object newValue) {
+//			Toast.makeText(MainActivity.this, (String) newValue, Toast.LENGTH_LONG).show();
+//			Log.d("dexnamic", "newValue=" + (String)newValue);
+			if (preference == mRingtonePreference) {
+				setRingtoneSummary((String) newValue);
+			} else if (preference == mListPreferenceSnooze) {
+				String minutes = MainActivity.this.getString(R.string.minutes);
+				mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
+			}
+			return true;
+		}
+	};
+
 	private void setRingtoneSummary(String uriString) {
 		String ringerName = "Silent";
 		try {
 			Uri uri = Uri.parse(uriString);
 			if (uriString.length() > 0) {
-				ringerName = RingtoneManager.getRingtone(
-						MainActivity.this, uri).getTitle(
+				ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
 						MainActivity.this);
 			}
 		} catch (Exception e) {
 			ringerName = "unknown";
 		} finally {
-			mPreferenceRingtone.setSummary(ringerName);
+			mRingtonePreference.setSummary(ringerName);
 			checkVolume();
 		}
 	}
-	
-	OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
-		@Override
-		public boolean onPreferenceChange(Preference preference, Object newValue) {
-			//Toast.makeText(MainPreferenceActivity.this, (String)newValue, Toast.LENGTH_LONG).show();
-			if (preference == mPreferenceRingtone) {
-				setRingtoneSummary((String)newValue);
-			} else if (preference == mListPreferenceSnooze) {
-				String minutes = MainActivity.this.getString(R.string.minutes);
-				mListPreferenceSnooze.setSummary((String)newValue + " " + minutes);
-			}
-			return true;
-		}
-	};
 
 	Preference.OnPreferenceClickListener mOnPreferenceClickListener = new Preference.OnPreferenceClickListener() {
 
@@ -200,24 +226,23 @@ public class MainActivity extends PreferenceActivity implements
 		super.onResume();
 
 		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences()
-				.registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 
-		// Unregister the listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences()
-				.unregisterOnSharedPreferenceChangeListener(this);
+//		Unregister the listener whenever a key changes
+		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
+				this);
 
 		editor.commit();
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//		Toast.makeText(MainActivity.this, key, Toast.LENGTH_SHORT).show();
 		if (key.equals(KEY_ALARM_ENABLED)) {
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
 				enableAlaram();
@@ -233,8 +258,7 @@ public class MainActivity extends PreferenceActivity implements
 		case TIME_DIALOG_ID:
 			int hourOfDay = settings.getInt(KEY_HOUR, 22);
 			int minute = settings.getInt(KEY_MINUTE, 0);
-			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay,
-					minute, false);
+			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay, minute, false);
 		}
 		return null;
 	}
@@ -282,8 +306,7 @@ public class MainActivity extends PreferenceActivity implements
 				suffix = " am";
 			}
 		}
-		return String.format("%d", hourOfDay) + ":"
-				+ String.format("%02d", minute) + suffix;
+		return String.format("%d", hourOfDay) + ":" + String.format("%02d", minute) + suffix;
 	}
 
 	private void enableAlaram() {
@@ -294,8 +317,7 @@ public class MainActivity extends PreferenceActivity implements
 			Intent.class.getField("ACTION_POWER_DISCONNECTED"); // check for
 			// functionality
 			// on this API
-			IntentFilter intentFilter = new IntentFilter(
-					Intent.ACTION_BATTERY_CHANGED);
+			IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 			Intent intentBattery = registerReceiver(null, intentFilter);
 			int plugged = intentBattery.getIntExtra("plugged", 0);
 			if (plugged == 0) { // do not set alarm now since device not plugged
@@ -320,28 +342,9 @@ public class MainActivity extends PreferenceActivity implements
 		if (chosenRingtone.length() > 0
 				&& mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
 			Toast.makeText(MainActivity.this,
-					"Alarm volume is set to zero, press volume keys to adjust",
-					Toast.LENGTH_LONG).show();
+					"Alarm volume is set to zero, press volume keys to adjust", Toast.LENGTH_LONG)
+					.show();
 		}
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-			mAudioManager.adjustStreamVolume(AudioManager.STREAM_ALARM,
-					AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND
-							| AudioManager.FLAG_SHOW_UI);
-			return true;
-		}
-		if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-			mAudioManager.adjustStreamVolume(AudioManager.STREAM_ALARM,
-					AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND
-							| AudioManager.FLAG_SHOW_UI);
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 }
-
-

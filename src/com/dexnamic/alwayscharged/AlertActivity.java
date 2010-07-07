@@ -1,14 +1,20 @@
 package com.dexnamic.alwayscharged;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Stack;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -16,16 +22,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 public class AlertActivity extends Activity {
 
@@ -38,11 +40,8 @@ public class AlertActivity extends Activity {
 	private MediaPlayer mMediaPlayer;
 	private Vibrator mVibrator;
 
-	private Button mButtonDismiss;
-	private Button mButtonSnooze;
-
 	private SharedPreferences mSettings;
-	
+
 	public static final long[] vibratePattern = { 500, 500 };
 
 	// received
@@ -55,14 +54,12 @@ public class AlertActivity extends Activity {
 					try {
 						int plugged = intent.getIntExtra("plugged", 0);
 						if (plugged > 0) { // skip alarm since device plugged in
-							AlarmScheduler.cancelAlarm(context,
-									AlarmScheduler.TYPE_SNOOZE);
+							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 							finish();
 						}
 					} catch (Exception e) {
 					}
-				} else if (action
-						.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
 					AlarmScheduler.snoozeAlarm(AlertActivity.this);
 					AlertActivity.this.finish();
 				}
@@ -74,10 +71,8 @@ public class AlertActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		IntentFilter intentBatteryChanged = new IntentFilter(
-				Intent.ACTION_BATTERY_CHANGED);
-		Intent intentBattery = registerReceiver(mBroadcastReceiver,
-				intentBatteryChanged);
+		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+		Intent intentBattery = registerReceiver(mBroadcastReceiver, intentBatteryChanged);
 		int plugged = intentBattery.getIntExtra("plugged", 0);
 		if (plugged > 0) { // skip alarm since device plugged in
 			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
@@ -92,45 +87,33 @@ public class AlertActivity extends Activity {
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-		wakeLock = mPowerManager.newWakeLock(
-				PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-						| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
+		wakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+				| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
 		wakeLock.acquire();
 		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
 
 		setContentView(R.layout.alert);
-		
+
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
 		// Android 2.0 and newer
 		// reflection used for backward compatibility
 		try {
-			Field f = WindowManager.LayoutParams.class
-					.getField("FLAG_SHOW_WHEN_LOCKED");
+			Field f = WindowManager.LayoutParams.class.getField("FLAG_SHOW_WHEN_LOCKED");
 			// does not work if window is translucent
 			getWindow().addFlags(f.getInt(null));
 			mKeyguardLock = null;
 		} catch (Exception e) {
 			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-			mKeyguardLock = km
-					.newKeyguardLock(getString(R.string.app_name));
+			mKeyguardLock = km.newKeyguardLock(getString(R.string.app_name));
 		}
-
-		mButtonDismiss = (Button) findViewById(R.id.ButtonDismiss);
-		mButtonDismiss.setOnClickListener(mOnClickListener);
-		mButtonSnooze = (Button) findViewById(R.id.ButtonSnooze);
-		mButtonSnooze.setOnClickListener(mOnClickListener);
-		// fix below for other languages
-		mButtonSnooze.setText("Snooze " + AlarmScheduler.SNOOZE_TIME_MIN
-				+ " min");
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		mMediaPlayer = new MediaPlayer();
-		
+
 		// stop alarm if user plugs in device
 		try {
-			String action = (String) Intent.class.getField(
-					"ACTION_POWER_CONNECTED").get(null);
+			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
 			intentBatteryChanged = new IntentFilter(action);
 			registerReceiver(new BroadcastReceiver() {
 				@Override
@@ -141,9 +124,23 @@ public class AlertActivity extends Activity {
 		} catch (Exception e) {
 		}
 
+		// set wallpaper as background
+		try {
+			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
+			Class<?>[] parameterTypes = { Context.class };
+			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
+			Object[] args = { this };
+			Object wm = _WM_getinstance.invoke(null, args);
+			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
+			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
+			getWindow().setBackgroundDrawable(drawable);
+		} catch (Exception e) {
+			Log.e("dexnamic", e.getMessage());
+		}
 	}
 
 	private static final int MSG_TIMEOUT = 1;
+	private static final int MSG_UP_VOLUME = 2;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -152,50 +149,101 @@ public class AlertActivity extends Activity {
 				if (repeatAlarm()) {
 					AlarmScheduler.snoozeAlarm(AlertActivity.this);
 				}
+				removeMessages(MSG_UP_VOLUME);
 				AlertActivity.this.finish();
+				break;
+			case MSG_UP_VOLUME:
+				try {
+					Float volume = mVolume.pop();
+					if (volume != null) {
+						mMediaPlayer.pause();
+						mMediaPlayer.setVolume(volume, volume);
+						mMediaPlayer.start();
+						mHandler.sendMessageDelayed(msg, 1000);
+					}
+				} catch (Exception e) {
+				}
 				break;
 			}
 		}
 	};
 
-	private OnClickListener mOnClickListener = new OnClickListener() {
+	static final int DIALOG_ALERT_ID = 0;
 
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog;
+		switch (id) {
+		case DIALOG_ALERT_ID:
+			String snoozeText = "Snooze " + AlarmScheduler.SNOOZE_TIME_MIN + " "
+					+ getString(R.string.minutes);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("Don't forget to charge your phone!").setCancelable(false)
+					.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							AlertActivity.this.finish();
+						}
+					}).setNegativeButton(snoozeText, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							AlarmScheduler.snoozeAlarm(AlertActivity.this);
+							AlertActivity.this.finish();
+						}
+					});
+			AlertDialog alert = builder.create();
+			dialog = alert;
+			dialog.setOnKeyListener(mOnKeyListener);
+			break;
+		default:
+			dialog = null;
+		}
+		return dialog;
+	}
+
+	private DialogInterface.OnKeyListener mOnKeyListener = new DialogInterface.OnKeyListener() {
+	
 		@Override
-		public void onClick(View v) {
-			if (v == mButtonDismiss)
-				AlertActivity.this.finish();
-			else if (v == mButtonSnooze) {
-				AlarmScheduler.snoozeAlarm(AlertActivity.this);
-				AlertActivity.this.finish();
+		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {		
+			if (mMediaPlayer.isPlaying()) {
+				stopRingtone();
 			}
+			return false;
 		}
 	};
+
+	private Stack<Float> mVolume = new Stack<Float>();
+//	private int mVolumeLevels;
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 
-		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE,
-				null);
+		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE, null);
+		int maxVolume = 0;
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
 			mMediaPlayer.setDataSource(this, uri);
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-			final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
-				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-				mMediaPlayer.setLooping(true);
-				mMediaPlayer.prepare();
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);
+			for (int i = 1; i <= 8; i *= 2) {
+				mVolume.push(1 / (float) i);
 			}
+//			mVolumeLevels = mVolume.size();
+//			float volume = mVolume.pop();
+//			mMediaPlayer.setVolume(volume, volume);
+//			Message msg = Message.obtain(mHandler, MSG_UP_VOLUME);
+//			mHandler.sendMessageDelayed(msg, 1000);
+			mMediaPlayer.setLooping(true);
+			mMediaPlayer.prepare();
 			mMediaPlayer.start();
-			if(mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
+			if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
 				mVibrator.vibrate(vibratePattern, 0);
 		} catch (Exception e) {
+			Log.d("dexnamic", "max Volume = " + maxVolume);
 			Log.e("dexnamic", e.getMessage());
 		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
 		mHandler.sendMessageDelayed(msg, ALARM_TIMEOUT_MS);
+
+		showDialog(DIALOG_ALERT_ID);
 	}
 
 	@Override
@@ -222,6 +270,7 @@ public class AlertActivity extends Activity {
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopRingtone();
 		try {
+//			mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mSaveVolume, 0);
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
@@ -237,17 +286,6 @@ public class AlertActivity extends Activity {
 			mVibrator.cancel();
 		} catch (Exception e) {
 		}
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		try {
-			if (mMediaPlayer.isPlaying()) {
-				stopRingtone();
-			}
-		} catch (Exception e) {
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 
 	public boolean repeatAlarm() {

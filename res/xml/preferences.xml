@@ -7,10 +7,13 @@
 
 	<Preference android:key="key_time" android:title="@string/time"
 		android:summary="" />
+
 	<RingtonePreference android:key="key_ringtone"
 		android:title="@string/ringtone" android:summary="choose a ringtone"
-		android:ringtoneType="alarm" android:showDefault="false"
-		android:showSilent="true" />
+		android:ringtoneType="ringtone|alarm" android:showDefault="false"
+		android:showSilent="true"
+		android:defaultValue="content://media/internal/audio/media/83" />
+
 	<CheckBoxPreference android:key="key_vibrate"
 		android:title="@string/vibrate"
 		android:defaultValue="true" />

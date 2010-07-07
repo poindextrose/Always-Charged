@@ -69,9 +69,13 @@ public class AlertReceiver extends BroadcastReceiver {
 	}
 
 	public void doAlarm(Context context, String action) {
-		TelephonyManager tm = (TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		int callState = tm.getCallState();
+		int callState = TelephonyManager.CALL_STATE_IDLE;
+		try {
+			TelephonyManager tm = (TelephonyManager) context
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			callState = tm.getCallState();
+		} catch (Exception e) {
+		}
 		if (screenOn() && callState != TelephonyManager.CALL_STATE_OFFHOOK
 				&& callState != TelephonyManager.CALL_STATE_RINGING) {
 			AlarmScheduler.snoozeAlarm(context);
@@ -88,8 +92,8 @@ public class AlertReceiver extends BroadcastReceiver {
 		// PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
 		// PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
 		final long time_ms = AlertActivity.ALARM_TIMEOUT_MS + 10 * 1000; // add
-																			// 10
-																			// seconds
+		// 10
+		// seconds
 		mWakeLock.acquire(time_ms);
 
 		AlarmScheduler.cancelNotification(context);

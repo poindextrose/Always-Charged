@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Always Charged</string>
+    <string name="app_name_no_spaces">AlwaysCharged</string>
+    
     <string name="enable_alarm">Enable Alarm</string>
     <string name="enable_alarm_summary">Only sounds if not charging</string>    
     <string name="time">Time</string>
     <string name="ringtone">Ringtone</string>
-    <string name="repeat">Repeat Alarm Two Times</string>
+    <string name="repeat">Repeat 2x</string>
     <string name="repeat_summary">Only if alarm is unanswered</string>
     <string name="vibrate">Vibrate</string>
     <string name="snooze">Snooze Time</string>
     <string name="dialog_title_snooze">Snooze Time</string>    
     <string name="minutes">minutes</string>   
+    
+    <string name="feedback">Feedback</string>
+    <string name="sendmail">Send mail...</string>
+    <string name="noemail">There are no email clients installed.</string>
 </resources>
