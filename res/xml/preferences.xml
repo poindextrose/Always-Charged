@@ -20,7 +20,7 @@
 	<CheckBoxPreference android:key="key_repeat"
 		android:title="@string/repeat" android:summary="@string/repeat_summary"
 		android:defaultValue="false" />
-	<ListPreference android:key="key_snooze" android:title="@string/snooze"
+	<ListPreference android:key="key_snooze" android:title="@string/snooze_time"
 		android:summary="" android:entries="@array/entries_snooze"
 		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/dialog_title_snooze"
 		android:defaultValue="10" />

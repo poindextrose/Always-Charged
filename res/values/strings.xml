@@ -10,7 +10,7 @@
     <string name="repeat">Repeat 2x</string>
     <string name="repeat_summary">Only if alarm is unanswered</string>
     <string name="vibrate">Vibrate</string>
-    <string name="snooze">Snooze Time</string>
+    <string name="snooze_time">Snooze Time</string>
     <string name="dialog_title_snooze">Snooze Time</string>    
     <string name="minutes">minutes</string>   
     <string name="about">About</string>
@@ -18,6 +18,12 @@
     <string name="feedback">Feedback</string>
     <string name="sendmail">Send mail...</string>
     <string name="noemail">There are no email clients installed.</string>
+    
+    <string name="alarm_message">Time to charge your phone!</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="snooze">Snooze</string>
+    
+    <string name="notify_text">Click to disable alarm for tonight</string>
     
     <string name="first_time_text">Have you ever forgotten to plug in your phone at night to find your
     phone battery dead the next day?  If so, this app is for you.  Just set the alarm to sometime around 

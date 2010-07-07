@@ -35,9 +35,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 // don't go off if phone is moving (accelerometers)
+//    replace screenOn() function with movement (if accelerometers are on device)
 //    do this buy silently checking movement in AlertReceiver before doing anything
 
-// aggressive alarm
+// make alarm duration shorter, something around 10 seconds
+
+//aggressive alarm:
+// replace "repeat 2x" option with "snooze until fully charged" 
+
+// advanced preference screen:
+//   alarm duration
 
 // use reflection for BatteryManager constants from API 5
 
@@ -45,12 +52,17 @@ import android.widget.Toast;
 // make snooze icon
 // setup for other languages
 // end-user license agreement
+// remove Logs
 
 // check for task killers and warn user
 
 // motion detection, just need to hold off on vibrate for a few seconds
 
 //android.app.backup
+
+// annotate code
+
+// menu: reset to defaults
 
 // progressive alarm volume
 // test: prevent alarm from going off during phone call
@@ -98,7 +110,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_SNOOZE = "key_snooze";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
-
+	
 	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 

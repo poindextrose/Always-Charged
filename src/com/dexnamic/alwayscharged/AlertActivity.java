@@ -73,18 +73,36 @@ public class AlertActivity extends Activity {
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(mBroadcastReceiver, intentBatteryChanged);
-		int plugged = intentBattery.getIntExtra("plugged", 0);
-		if (plugged > 0) { // skip alarm since device plugged in
+		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
+		if (batteryPlugged > 0) { // skip alarm since device plugged in
 			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 			finish();
 			return;
+		}
+		String action = getIntent().getAction();
+		if (action != null && action.equals(AlertReceiver.ACTION_DISCONNECTED)) {
+			int batteryScale = intentBattery.getIntExtra("scale", 0);
+			if (batteryScale == 0) {
+				finish();
+				return;
+			}
+			int batteryLevel = intentBattery.getIntExtra("level",
+					batteryScale); // default full
+			float batteryPercent = (float)batteryLevel / (float) batteryScale;
+			if (batteryPercent >= 0.90) {
+				finish();
+				return;
+			} else {
+				AlarmScheduler.snoozeAlarm(this);
+				finish();
+				return;
+			}
 		}
 
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
 
-		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
 		wakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
@@ -113,7 +131,7 @@ public class AlertActivity extends Activity {
 
 		// stop alarm if user plugs in device
 		try {
-			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+			action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
 			intentBatteryChanged = new IntentFilter(action);
 			registerReceiver(new BroadcastReceiver() {
 				@Override
@@ -137,6 +155,8 @@ public class AlertActivity extends Activity {
 		} catch (Exception e) {
 			Log.e("dexnamic", e.getMessage());
 		}
+
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 	}
 
 	private static final int MSG_TIMEOUT = 1;
@@ -174,20 +194,26 @@ public class AlertActivity extends Activity {
 		Dialog dialog;
 		switch (id) {
 		case DIALOG_ALERT_ID:
-			String snoozeText = "Snooze " + AlarmScheduler.SNOOZE_TIME_MIN + " "
-					+ getString(R.string.minutes);
+			String snoozeText = getString(R.string.snooze) + " " + AlarmScheduler.SNOOZE_TIME_MIN
+					+ " " + getString(R.string.minutes);
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Don't forget to charge your phone!").setCancelable(false)
-					.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							AlertActivity.this.finish();
-						}
-					}).setNegativeButton(snoozeText, new DialogInterface.OnClickListener() {
+			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
+					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							AlarmScheduler.snoozeAlarm(AlertActivity.this);
+//							Toast.makeText(AlertActivity.this, getString(R.string.click_notify), Toast.LENGTH_LONG).show();
 							AlertActivity.this.finish();
 						}
 					});
+//					.setNegativeButton(getString(R.string.dismiss),
+//							new DialogInterface.OnClickListener() {
+//								public void onClick(DialogInterface dialog, int id) {
+//									SharedPreferences.Editor editor = mSettings.edit();
+//									editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, true);
+//									editor.commit();
+//									AlertActivity.this.finish();
+//								}
+//							});
 			AlertDialog alert = builder.create();
 			dialog = alert;
 			dialog.setOnKeyListener(mOnKeyListener);
@@ -199,9 +225,9 @@ public class AlertActivity extends Activity {
 	}
 
 	private DialogInterface.OnKeyListener mOnKeyListener = new DialogInterface.OnKeyListener() {
-	
+
 		@Override
-		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {		
+		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
 			if (mMediaPlayer.isPlaying()) {
 				stopRingtone();
 			}
@@ -210,6 +236,7 @@ public class AlertActivity extends Activity {
 	};
 
 	private Stack<Float> mVolume = new Stack<Float>();
+
 //	private int mVolumeLevels;
 
 	@Override

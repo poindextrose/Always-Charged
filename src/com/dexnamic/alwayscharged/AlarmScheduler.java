@@ -20,6 +20,12 @@ public class AlarmScheduler {
 	public static final String TYPE_SNOOZE = "snooze";
 	public static final String TYPE_NOTIFY = "notify";
 
+	/**
+	 * SharedPreference key to indicate if alarm should snooze and
+	 * alarm if device unplugged before it is fully charged
+	 */
+	public final static String KEY_POWER_SNOOZE = "key_power_snooze";
+	
 	public static final int NOTIFY_SNOOZE = 1;
 
 	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
@@ -69,6 +75,11 @@ public class AlarmScheduler {
 				.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
 		int minutes = Integer.parseInt(strMinutes);
+		
+		SharedPreferences.Editor editor = settings.edit();
+		// if "Power Snooze" enabled
+		editor.putBoolean(KEY_POWER_SNOOZE, true);
+		editor.commit();
 
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
@@ -80,7 +91,7 @@ public class AlarmScheduler {
 			NotificationManager nm = (NotificationManager) context
 					.getSystemService(Context.NOTIFICATION_SERVICE);
 
-			String text = "Click to cancel snooze";
+			String text = context.getString(R.string.notify_text);
 			// Set the icon, scrolling text and timestamp
 			Notification notification = new Notification(R.drawable.clock,
 					text, System.currentTimeMillis());
@@ -89,7 +100,7 @@ public class AlarmScheduler {
 			PendingIntent npi = getPendingIntentUpdateCurrent(context,
 					TYPE_NOTIFY);
 			// Set the info for the views that show in the notification panel.
-			notification.setLatestEventInfo(context, "Always Charged", text,
+			notification.setLatestEventInfo(context, context.getString(R.string.app_name), text,
 					npi);
 			// set notification to appear in "Ongoing" category
 			notification.flags = notification.flags
@@ -100,8 +111,6 @@ public class AlarmScheduler {
 		} catch (Exception e) {
 			Log.e("dexnamic", e.getMessage());
 		}
-		// Toast.makeText(context, "snooze alarm " + minutes,
-		// Toast.LENGTH_SHORT).show;
 	}
 
 	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
@@ -112,15 +121,6 @@ public class AlarmScheduler {
 		return PendingIntent.getBroadcast(context, 0, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
-	}
-
-	static public void resetRepeatCount(Context context) {
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(context);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(MainActivity.KEY_REPEAT_COUNT,
-				MainActivity.TIMES_TO_REPEAT);
-		editor.commit();
 	}
 
 }
