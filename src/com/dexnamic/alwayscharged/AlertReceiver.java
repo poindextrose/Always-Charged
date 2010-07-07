@@ -41,6 +41,9 @@ public class AlertReceiver extends BroadcastReceiver {
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false);
+				editor.commit();
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
 				doAlarm(context, action, false);

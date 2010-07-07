@@ -52,7 +52,7 @@ import android.widget.Toast;
 // make snooze icon
 // setup for other languages
 // end-user license agreement
-// remove Logs
+// create logging system for bug reports
 
 // check for task killers and warn user
 

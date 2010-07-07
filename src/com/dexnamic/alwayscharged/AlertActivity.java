@@ -79,6 +79,8 @@ public class AlertActivity extends Activity {
 			finish();
 			return;
 		}
+		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = mSettings.edit();
 		String action = getIntent().getAction();
 		if (action != null && action.equals(AlertReceiver.ACTION_DISCONNECTED)) {
 			int batteryScale = intentBattery.getIntExtra("scale", 0);
@@ -90,6 +92,8 @@ public class AlertActivity extends Activity {
 					batteryScale); // default full
 			float batteryPercent = (float)batteryLevel / (float) batteryScale;
 			if (batteryPercent >= 0.90) {
+				editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false);
+				editor.commit();
 				finish();
 				return;
 			} else {
@@ -124,8 +128,6 @@ public class AlertActivity extends Activity {
 			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 			mKeyguardLock = km.newKeyguardLock(getString(R.string.app_name));
 		}
-
-		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		mMediaPlayer = new MediaPlayer();
 
