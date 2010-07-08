@@ -93,6 +93,8 @@ import android.widget.Toast;
  * at night
  * 
  * PowerSnooze (Android 1.6+)
+ * 	 reactivates snooze if user unplugs device before battery level gets above 90%
+ *   can only be deactivated manually with notification button
  * 
  */
 
@@ -103,7 +105,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
-	// private CheckBoxPreference mPreferenceRepeat;
 	private ListPreference mListPreferenceSnooze;
 	private Preference mPreferenceAbout;
 

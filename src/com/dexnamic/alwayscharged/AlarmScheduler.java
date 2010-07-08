@@ -59,11 +59,6 @@ public class AlarmScheduler {
 	}
 
 	public static void cancelAlarm(Context context, String category) {
-
-		if(category == TYPE_ALARM) {
-			disablePowerSnooze(context);
-		}
-		
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, category);
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
@@ -75,9 +70,7 @@ public class AlarmScheduler {
 	public static void cancelNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
-		
-		disablePowerSnooze(context);
+		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);		
 	}
 
 	public static void snoozeAlarm(Context context) {

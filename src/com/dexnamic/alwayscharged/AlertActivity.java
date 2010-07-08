@@ -35,7 +35,7 @@ public class AlertActivity extends Activity {
 
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
-	private PowerManager.WakeLock wakeLock;
+	private PowerManager.WakeLock mWakeLock;
 
 	private MediaPlayer mMediaPlayer;
 	private Vibrator mVibrator;
@@ -84,9 +84,9 @@ public class AlertActivity extends Activity {
 
 		PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-		wakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+		mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 				| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
-		wakeLock.acquire();
+		mWakeLock.acquire();
 		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
 
 		setContentView(R.layout.alert);
@@ -287,8 +287,8 @@ public class AlertActivity extends Activity {
 		if (mKeyguardLock != null) {
 			mKeyguardLock.reenableKeyguard();
 		}
-		if (wakeLock.isHeld())
-			wakeLock.release();
+		if (mWakeLock != null && mWakeLock.isHeld())
+			mWakeLock.release();
 	}
 
 	@Override
@@ -301,7 +301,6 @@ public class AlertActivity extends Activity {
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
-		unregisterReceiver(mBroadcastReceiver);
 	}
 
 	void stopRingtone() {

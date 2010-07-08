@@ -50,7 +50,7 @@ public class AlertReceiver extends BroadcastReceiver {
 				resetRepeatCount(context);
 				startAlertActivity(context, action, false);
 			}
-			try {
+			try { // Two fields below require API 5
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
 						.get(null))) {
 					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
