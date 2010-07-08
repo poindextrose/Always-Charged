@@ -44,43 +44,13 @@ public class AlertActivity extends Activity {
 
 	public static final long[] vibratePattern = { 500, 500 };
 
-	// received
-	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			String action = intent.getAction();
-			if (action != null) {
-				if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-					try {
-						int plugged = intent.getIntExtra("plugged", 0);
-						if (plugged > 0) { // skip alarm since device plugged in
-							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-							finish();
-						}
-					} catch (Exception e) {
-					}
-				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlertActivity.this);
-					AlertActivity.this.finish();
-				}
-			}
-		}
-	};
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(mBroadcastReceiver, intentBatteryChanged);
-		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
-		if (batteryPlugged > 0) { // skip alarm since device plugged in
-			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
-			finish();
-			return;
-		}
-		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor editor = mSettings.edit();
+
 		String action = getIntent().getAction();
 		if (action != null && action.equals(AlertReceiver.ACTION_DISCONNECTED)) {
 			int batteryScale = intentBattery.getIntExtra("scale", 0);
@@ -92,8 +62,7 @@ public class AlertActivity extends Activity {
 					batteryScale); // default full
 			float batteryPercent = (float)batteryLevel / (float) batteryScale;
 			if (batteryPercent >= 0.90) {
-				editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false);
-				editor.commit();
+				AlarmScheduler.disablePowerSnooze(this);
 				finish();
 				return;
 			} else {
@@ -102,7 +71,13 @@ public class AlertActivity extends Activity {
 				return;
 			}
 		}
-
+		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
+		if (batteryPlugged > 0) { // skip alarm since device plugged in
+			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
+			finish();
+			return;
+		}
+		
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
@@ -115,6 +90,8 @@ public class AlertActivity extends Activity {
 		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
 
 		setContentView(R.layout.alert);
+		
+		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
 		// Android 2.0 and newer
@@ -160,6 +137,29 @@ public class AlertActivity extends Activity {
 
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 	}
+
+	// received
+	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action != null) {
+				if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+					try {
+						int plugged = intent.getIntExtra("plugged", 0);
+						if (plugged > 0) { // skip alarm since device plugged in
+							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+							finish();
+						}
+					} catch (Exception e) {
+					}
+				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+					AlarmScheduler.snoozeAlarm(AlertActivity.this);
+					AlertActivity.this.finish();
+				}
+			}
+		}
+	};
 
 	private static final int MSG_TIMEOUT = 1;
 	private static final int MSG_UP_VOLUME = 2;
@@ -210,9 +210,7 @@ public class AlertActivity extends Activity {
 //					.setNegativeButton(getString(R.string.dismiss),
 //							new DialogInterface.OnClickListener() {
 //								public void onClick(DialogInterface dialog, int id) {
-//									SharedPreferences.Editor editor = mSettings.edit();
-//									editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, true);
-//									editor.commit();
+//									AlarmScheduler.disablePowerSnooze(AlertActivity.this);
 //									AlertActivity.this.finish();
 //								}
 //							});

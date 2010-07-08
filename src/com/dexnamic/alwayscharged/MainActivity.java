@@ -34,17 +34,25 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// Long Title: "Always Charged Intelligent Alarm"
+// or "Night(time) Charge Intelligent Reminder"
+// or "Night(time) Charge Intelligent Alarm"
+// or "IntelliCharge (Alarm)"
+
+// test "power snooze"
+
 // don't go off if phone is moving (accelerometers)
-//    replace screenOn() function with movement (if accelerometers are on device)
-//    do this buy silently checking movement in AlertReceiver before doing anything
+// replace screenOn() function with movement (if accelerometers are on device)
+// do this buy silently checking movement in AlertReceiver before doing anything
+// this will prevent "power snooze" to alarm if house loses power
 
 // make alarm duration shorter, something around 10 seconds
 
-//aggressive alarm:
-// replace "repeat 2x" option with "snooze until fully charged" 
+// aggressive alarm:
+// replace "repeat 2x" option with "snooze until fully charged"
 
 // advanced preference screen:
-//   alarm duration
+// alarm duration
 
 // use reflection for BatteryManager constants from API 5
 
@@ -58,7 +66,7 @@ import android.widget.Toast;
 
 // motion detection, just need to hold off on vibrate for a few seconds
 
-//android.app.backup
+// android.app.backup
 
 // annotate code
 
@@ -83,6 +91,8 @@ import android.widget.Toast;
 /**
  * Features: user notified with alarm if device not plugged it by a certain time
  * at night
+ * 
+ * PowerSnooze (Android 1.6+)
  * 
  */
 
@@ -110,7 +120,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_SNOOZE = "key_snooze";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
-	
+
 	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 
@@ -214,17 +224,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		setVolumeControlStream(AudioManager.STREAM_RING);
 
-		if (savedInstanceState == null)
+		if (savedInstanceState == null) // savedInstanceState is null during first instantiation of class
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-
-//		outState.putBoolean(KEY_INSTANCE_FIRST, false);
 	}
 
 	@Override
@@ -305,7 +308,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
 				enableAlaram();
 			} else {
-				disableAlarm();
+				disableAlarms();
 			}
 		}
 	}
@@ -402,14 +405,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		checkVolume();
 
 		try {
-			Intent.class.getField("ACTION_POWER_DISCONNECTED"); // check for
-			// functionality
-			// on this API
+			Intent.class.getField("ACTION_POWER_DISCONNECTED"); // check for functionality on this API
 			IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 			Intent intentBattery = registerReceiver(null, intentFilter);
 			int plugged = intentBattery.getIntExtra("plugged", 0);
-			if (plugged == 0) { // do not set alarm now since device not plugged
-				// in
+			if (plugged == 0) { // do not set alarm now since device not plugged in
 				return;
 			}
 		} catch (Exception e) {
@@ -420,7 +420,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
 	}
 
-	private void disableAlarm() {
+	private void disableAlarms() {
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_ALARM);
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 	}

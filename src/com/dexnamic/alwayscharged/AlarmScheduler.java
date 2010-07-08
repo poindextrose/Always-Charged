@@ -30,6 +30,10 @@ public class AlarmScheduler {
 
 	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
 
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
+		if(!alarmEnabled) return;
+
 		Calendar calNow = Calendar.getInstance();
 		Calendar calAlarm = Calendar.getInstance();
 		calAlarm.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -56,6 +60,10 @@ public class AlarmScheduler {
 
 	public static void cancelAlarm(Context context, String category) {
 
+		if(category == TYPE_ALARM) {
+			disablePowerSnooze(context);
+		}
+		
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, category);
 		AlarmManager alarmManager = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
@@ -68,6 +76,8 @@ public class AlarmScheduler {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
+		
+		disablePowerSnooze(context);
 	}
 
 	public static void snoozeAlarm(Context context) {
@@ -76,10 +86,7 @@ public class AlarmScheduler {
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
 		int minutes = Integer.parseInt(strMinutes);
 		
-		SharedPreferences.Editor editor = settings.edit();
-		// if "Power Snooze" enabled
-		editor.putBoolean(KEY_POWER_SNOOZE, true);
-		editor.commit();
+		enablePowerSnooze(context);
 
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
@@ -122,5 +129,23 @@ public class AlarmScheduler {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}
+	
+	public static void enablePowerSnooze(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean(KEY_POWER_SNOOZE, true);
+		editor.commit();
+	}
 
+	public static void disablePowerSnooze(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean(KEY_POWER_SNOOZE, false);
+		editor.commit();		
+	}
+	
+	public static boolean isPowerSnooze(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		return settings.getBoolean(KEY_POWER_SNOOZE, false);
+	}
 }

@@ -15,6 +15,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	private PowerManager mPowerManager;
 
+	/**
+	 * Intent action passed to {@link AlertActivity} during ACTION_DISCONNECTED to signal that
+	 * activity should check battery level and snooze alarm if power snooze enabled
+	 */
 	public final static String ACTION_DISCONNECTED = "action_disconnected";
 
 	@Override
@@ -30,27 +34,21 @@ public class AlertReceiver extends BroadcastReceiver {
 		String action = intent.getAction();
 		if (action != null) {
 			if (action.equals(Intent.ACTION_BOOT_COMPLETED)) {
-				if (alarmEnabled) {
-					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
-					// reset power_snooze flag
-				}
+				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				return;
 			} else if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
-				if (alarmEnabled)
-					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
+				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-				SharedPreferences.Editor editor = settings.edit();
-				editor.putBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false);
-				editor.commit();
+				AlarmScheduler.disablePowerSnooze(context);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
-				doAlarm(context, action, false);
+				startAlertActivity(context, action, false);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
 				resetRepeatCount(context);
-				doAlarm(context, action, false);
+				startAlertActivity(context, action, false);
 			}
 			try {
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
@@ -59,15 +57,12 @@ public class AlertReceiver extends BroadcastReceiver {
 					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 					return;
 				}
-				if (alarmEnabled
-						&& action.equals((String) Intent.class
-								.getField("ACTION_POWER_DISCONNECTED").get(null))) {
+				if (action.equals((String) Intent.class.getField("ACTION_POWER_DISCONNECTED").get(
+						null))) {
+					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 					// if in power_snooze mode, doAlarm, but have activity only alarm if not fully charged
-					if (alarmEnabled) {
-						AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
-						if (settings.getBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false))
-							doAlarm(context, ACTION_DISCONNECTED, true);
-					}
+					if (alarmEnabled && AlarmScheduler.isPowerSnooze(context))
+						startAlertActivity(context, ACTION_DISCONNECTED, true);
 					return;
 				}
 			} catch (Exception e) {
@@ -76,21 +71,15 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	}
 
-	public void doAlarm(Context context, String action, boolean forceStart) {
+	public void startAlertActivity(Context context, String action, boolean forceStart) {
 		if (!forceStart) {
-			int callState = TelephonyManager.CALL_STATE_IDLE;
-			try {
-				TelephonyManager tm = (TelephonyManager) context
-						.getSystemService(Context.TELEPHONY_SERVICE);
-				callState = tm.getCallState();
-			} catch (Exception e) {
-			}
-			if (screenOn() && callState != TelephonyManager.CALL_STATE_OFFHOOK
-					&& callState != TelephonyManager.CALL_STATE_RINGING) {
+			if (screenOn() || deviceMoving() || telephoneInUse(context)) {
 				AlarmScheduler.snoozeAlarm(context);
 				return;
 			}
 		}
+
+		AlarmScheduler.enablePowerSnooze(context);
 
 		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
@@ -107,6 +96,23 @@ public class AlertReceiver extends BroadcastReceiver {
 		// context.startService(new Intent(context, AlertService.class));
 	}
 
+	private boolean deviceMoving() {
+		return false;
+	}
+
+	private boolean telephoneInUse(Context context) {
+		try {
+			TelephonyManager tm = (TelephonyManager) context
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			int callState = tm.getCallState();
+			if (callState == TelephonyManager.CALL_STATE_OFFHOOK
+					|| callState == TelephonyManager.CALL_STATE_RINGING)
+				return true;
+		} catch (Exception e) {
+		}
+		return false;
+	}
+
 	private boolean screenOn() {
 		try { // reflection to get PowerManager.isScreenOn() method if available
 			Method m = PowerManager.class.getMethod("isScreenOn", (Class[]) null);
@@ -118,7 +124,7 @@ public class AlertReceiver extends BroadcastReceiver {
 		}
 	}
 
-	static public void resetRepeatCount(Context context) {
+	private void resetRepeatCount(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(MainActivity.KEY_REPEAT_COUNT, MainActivity.TIMES_TO_REPEAT);

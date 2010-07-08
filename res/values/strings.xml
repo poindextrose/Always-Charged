@@ -23,7 +23,7 @@
     <string name="dismiss">Dismiss</string>
     <string name="snooze">Snooze</string>
     
-    <string name="notify_text">Click to disable alarm for tonight</string>
+    <string name="notify_text">Click to disable alarm for tonight (not recommended)</string>
     
     <string name="first_time_text">Have you ever forgotten to plug in your phone at night to find your
     phone battery dead the next day?  If so, then Always Charged is for you.  Just set the alarm to sometime around 
