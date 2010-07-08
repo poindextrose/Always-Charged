@@ -110,7 +110,7 @@ public class AlarmScheduler {
 
 	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
 			String action) {
-		Intent intent = new Intent(context, AlertReceiver.class);
+		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(action);
 
 		return PendingIntent.getBroadcast(context, 0, intent,

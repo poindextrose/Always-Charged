@@ -29,7 +29,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 
-public class AlertActivity extends Activity {
+public class AlarmActivity extends Activity {
 
 	public static final long ALARM_TIMEOUT_MS = 30 * 1000; // 30 seconds
 
@@ -48,47 +48,17 @@ public class AlertActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-		Intent intentBattery = registerReceiver(mBroadcastReceiver, intentBatteryChanged);
-
-		String action = getIntent().getAction();
-		if (action != null && action.equals(AlertReceiver.ACTION_DISCONNECTED)) {
-			int batteryScale = intentBattery.getIntExtra("scale", 0);
-			if (batteryScale == 0) {
-				finish();
-				return;
-			}
-			int batteryLevel = intentBattery.getIntExtra("level", batteryScale); // default full
-			float batteryPercent = (float) batteryLevel / (float) batteryScale;
-			if (batteryPercent >= 0.90) {
-				AlarmScheduler.disablePowerSnooze(this);
-				finish();
-				return;
-			} else {
-				AlarmScheduler.snoozeAlarm(this);
-				finish();
-				return;
-			}
-		}
-		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
-		if (batteryPlugged > 0) { // skip alarm since device plugged in
-			AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
-			finish();
-			return;
-		}
+		setContentView(R.layout.alert);
 
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
 
-		PowerManager mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-
-		mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+		PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		mWakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
 				| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
 		mWakeLock.acquire();
 		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
-
-		setContentView(R.layout.alert);
 
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -109,14 +79,14 @@ public class AlertActivity extends Activity {
 
 		// stop alarm if user plugs in device
 		try {
-			action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
-			intentBatteryChanged = new IntentFilter(action);
+			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+			IntentFilter intentPowerConnected = new IntentFilter(action);
 			registerReceiver(new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
-					AlertActivity.this.finish();
+					AlarmActivity.this.finish();
 				}
-			}, new IntentFilter(action));
+			}, intentPowerConnected);
 		} catch (Exception e) {
 		}
 
@@ -153,8 +123,8 @@ public class AlertActivity extends Activity {
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlertActivity.this);
-					AlertActivity.this.finish();
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
+					AlarmActivity.this.finish();
 				}
 			}
 		}
@@ -168,10 +138,10 @@ public class AlertActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlertActivity.this);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
 				}
 				removeMessages(MSG_UP_VOLUME);
-				AlertActivity.this.finish();
+				AlarmActivity.this.finish();
 				break;
 			case MSG_UP_VOLUME:
 				try {
@@ -201,9 +171,9 @@ public class AlertActivity extends Activity {
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-							AlarmScheduler.snoozeAlarm(AlertActivity.this);
+							AlarmScheduler.snoozeAlarm(AlarmActivity.this);
 //							Toast.makeText(AlertActivity.this, getString(R.string.click_notify), Toast.LENGTH_LONG).show();
-							AlertActivity.this.finish();
+							AlarmActivity.this.finish();
 						}
 					});
 //					.setNegativeButton(getString(R.string.dismiss),

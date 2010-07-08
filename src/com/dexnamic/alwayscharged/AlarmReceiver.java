@@ -1,22 +1,16 @@
 package com.dexnamic.alwayscharged;
 
-import java.lang.reflect.Method;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
-public class AlertReceiver extends BroadcastReceiver {
-
-	private PowerManager mPowerManager;
+public class AlarmReceiver extends BroadcastReceiver {
 
 	/**
-	 * Intent action passed to {@link AlertActivity} during ACTION_DISCONNECTED to signal that
+	 * Intent action passed to {@link AlarmActivity} during ACTION_DISCONNECTED to signal that
 	 * activity should check battery level and snooze alarm if power snooze enabled
 	 */
 	public final static String ACTION_DISCONNECTED = "action_disconnected";
@@ -45,10 +39,10 @@ public class AlertReceiver extends BroadcastReceiver {
 				AlarmScheduler.disablePowerSnooze(context);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
-				startAlertActivity(context, action, false);
+				startAlarmService(context, AlarmScheduler.TYPE_SNOOZE);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
 				resetRepeatCount(context);
-				startAlertActivity(context, action, false);
+				startAlarmService(context, AlarmScheduler.TYPE_ALARM);
 			}
 			try { // Two fields below require API 5
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
@@ -62,7 +56,7 @@ public class AlertReceiver extends BroadcastReceiver {
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
 					// if in power_snooze mode, doAlarm, but have activity only alarm if not fully charged
 					if (alarmEnabled && AlarmScheduler.isPowerSnooze(context))
-						startAlertActivity(context, ACTION_DISCONNECTED, true);
+						startAlarmService(context, ACTION_DISCONNECTED);
 					return;
 				}
 			} catch (Exception e) {
@@ -71,57 +65,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
 	}
 
-	public void startAlertActivity(Context context, String action, boolean forceStart) {
-		if (!forceStart) {
-			if (screenOn() || deviceMoving() || telephoneInUse(context)) {
-				AlarmScheduler.snoozeAlarm(context);
-				return;
-			}
-		}
-
-		AlarmScheduler.enablePowerSnooze(context);
-
-		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
-				PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "My Tag");
-		final long time_ms = AlertActivity.ALARM_TIMEOUT_MS + 10 * 1000; // add 10 seconds
-		mWakeLock.acquire(time_ms);
-
-		AlarmScheduler.cancelNotification(context);
-
-		Intent intent = new Intent(context, AlertActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FROM_BACKGROUND);
+	public void startAlarmService(Context context, String action) {
+		Intent intent = new Intent(context, AlarmService.class);
 		intent.setAction(action);
-		context.startActivity(intent);
-		// context.startService(new Intent(context, AlertService.class));
-	}
-
-	private boolean deviceMoving() {
-		return false;
-	}
-
-	private boolean telephoneInUse(Context context) {
-		try {
-			TelephonyManager tm = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-			int callState = tm.getCallState();
-			if (callState == TelephonyManager.CALL_STATE_OFFHOOK
-					|| callState == TelephonyManager.CALL_STATE_RINGING)
-				return true;
-		} catch (Exception e) {
-		}
-		return false;
-	}
-
-	private boolean screenOn() {
-		try { // reflection to get PowerManager.isScreenOn() method if available
-			Method m = PowerManager.class.getMethod("isScreenOn", (Class[]) null);
-			boolean on = (Boolean) m.invoke(mPowerManager, (Object[]) null);
-			return on;
-		} catch (Exception e) {
-			// hack: read logs to determine screen state
-			return false;
-		}
+		context.startService(intent);
 	}
 
 	private void resetRepeatCount(Context context) {

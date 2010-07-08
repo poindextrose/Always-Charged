@@ -18,11 +18,11 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".AlertActivity" android:label="plugin alert"
+		<activity android:name=".AlarmActivity" android:label="plugin alert"
 			android:noHistory="true" android:excludeFromRecents="true"
 			android:screenOrientation="nosensor">
 		</activity>
-		<receiver android:name=".AlertReceiver">
+		<receiver android:name=".AlarmReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
@@ -36,6 +36,7 @@
 				<action android:name="android.intent.action.TIMEZONE_CHANGED" />
 			</intent-filter>
 		</receiver>
+		<service android:name=".AlarmService" />
 	</application>
 
 </manifest> 
