@@ -43,8 +43,7 @@ public class AlarmScheduler {
 		if (calAlarm.compareTo(calNow) <= 0) // if alarm is now or earlier
 			addDay = true;
 		long time_ms = calAlarm.getTimeInMillis();
-		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in
-		// milliseconds
+		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 		if (addDay)
 			time_ms += interval_ms;
 
@@ -54,8 +53,6 @@ public class AlarmScheduler {
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms,
 				interval_ms, pi);
 
-		// Toast.makeText(context, "daily alarm " + hourOfDay + ":" + minute,
-		// Toast.LENGTH_SHORT).show();
 	}
 
 	public static void cancelAlarm(Context context, String category) {
@@ -79,8 +76,6 @@ public class AlarmScheduler {
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
 		int minutes = Integer.parseInt(strMinutes);
 		
-		enablePowerSnooze(context);
-
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
 		AlarmManager alarmManager = (AlarmManager) context

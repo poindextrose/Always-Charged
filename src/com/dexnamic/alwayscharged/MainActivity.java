@@ -39,7 +39,12 @@ import android.widget.Toast;
 // or "Night(time) Charge Intelligent Alarm"
 // or "IntelliCharge (Alarm)"
 
-// test "power snooze"
+// if alarm comes up over main activity, welcome screen is re-shown
+
+// welcome screen doesn't look good on emulator
+// so probably need a custom dialog
+
+// if user sets alarm time for some morning time, ask them if they are sure for "am"
 
 // don't go off if phone is moving (accelerometers)
 // replace screenOn() function with movement (if accelerometers are on device)
@@ -52,7 +57,8 @@ import android.widget.Toast;
 // replace "repeat 2x" option with "snooze until fully charged"
 
 // advanced preference screen:
-// alarm duration
+// 		alarm duration
+//  	movement sensitivity
 
 // use reflection for BatteryManager constants from API 5
 
@@ -93,8 +99,8 @@ import android.widget.Toast;
  * at night
  * 
  * PowerSnooze (Android 1.6+)
- * 	 reactivates snooze if user unplugs device before battery level gets above 90%
- *   can only be deactivated manually with notification button
+ * reactivates snooze if user unplugs device before battery level gets above 90%
+ * can only be deactivated manually with notification button
  * 
  */
 
@@ -193,14 +199,16 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				String appName = context.getString(R.string.app_name);
 				i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
 //				i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-				ComponentName cn = new ComponentName("com.google.android.gm",
-						"com.google.android.gm.ComposeActivityGmail");
-				i.setComponent(cn);
+				Intent i2 = (Intent) i.clone();
 				try {
+					ComponentName cn = new ComponentName("com.google.android.gm",
+							"com.google.android.gm.ComposeActivityGmail");
+					i.setComponent(cn);
 					startActivity(i);
 				} catch (android.content.ActivityNotFoundException ex1) {
 					try {
-						startActivity(Intent.createChooser(i, context.getString(R.string.sendmail)));
+						startActivity(Intent
+								.createChooser(i2, context.getString(R.string.sendmail)));
 					} catch (android.content.ActivityNotFoundException ex2) {
 						Toast.makeText(context, context.getString(R.string.noemail),
 								Toast.LENGTH_SHORT).show();

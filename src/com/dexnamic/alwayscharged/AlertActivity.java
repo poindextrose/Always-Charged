@@ -58,9 +58,8 @@ public class AlertActivity extends Activity {
 				finish();
 				return;
 			}
-			int batteryLevel = intentBattery.getIntExtra("level",
-					batteryScale); // default full
-			float batteryPercent = (float)batteryLevel / (float) batteryScale;
+			int batteryLevel = intentBattery.getIntExtra("level", batteryScale); // default full
+			float batteryPercent = (float) batteryLevel / (float) batteryScale;
 			if (batteryPercent >= 0.90) {
 				AlarmScheduler.disablePowerSnooze(this);
 				finish();
@@ -77,7 +76,7 @@ public class AlertActivity extends Activity {
 			finish();
 			return;
 		}
-		
+
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
@@ -90,7 +89,7 @@ public class AlertActivity extends Activity {
 		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
 
 		setContentView(R.layout.alert);
-		
+
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
