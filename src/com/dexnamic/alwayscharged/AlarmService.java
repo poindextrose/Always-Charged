@@ -12,8 +12,10 @@ import android.telephony.TelephonyManager;
 
 public class AlarmService extends Service {
 
+	public static PowerManager.WakeLock mWakeLock;
+
 	private PowerManager mPowerManager;
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -25,55 +27,45 @@ public class AlarmService extends Service {
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
 
-		// if user just disconnected phone, then check battery level
-		String action = intent.getAction();
+		AlarmScheduler.enablePowerSnooze(this);
+
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(null, intentBatteryChanged);
-		if (action != null && action.equals(AlarmReceiver.ACTION_DISCONNECTED)) {
-			int batteryScale = intentBattery.getIntExtra("scale", 0);
-			if (batteryScale == 0) {
-				stopSelf();
-				return;
-			}
-			int batteryLevel = intentBattery.getIntExtra("level", batteryScale); // default full
-			float batteryPercent = (float) batteryLevel / (float) batteryScale;
-			if (batteryPercent >= 0.80) {
-				AlarmScheduler.disablePowerSnooze(this);
-				stopSelf();
-				return;
-			} else {
-				AlarmScheduler.snoozeAlarm(this);
-				stopSelf();
-				return;
-			}
-		}
-		
-		AlarmScheduler.enablePowerSnooze(this);
-		
+
 		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
 		if (batteryPlugged > 0) { // skip alarm since device plugged in
 			stopSelf();
+			AlarmScheduler.releasePartialWakeLock();
 			return;
 		}
-//		
-//		// if screen is on, snooze alarm
-//		// if phone call is progress, snooze alarm
-		if(screenOn() || telephoneInUse(this)) {
+
+		// if screen is on, snooze alarm
+		// if phone call is progress, snooze alarm
+		if (screenOn() || telephoneInUse(this))
+		{
 			AlarmScheduler.snoozeAlarm(this);
 			stopSelf();
+			AlarmScheduler.releasePartialWakeLock();
 			return;
 		}
 		
-		PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(
-				PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "My Tag");
-		final long time_ms = AlarmActivity.ALARM_TIMEOUT_MS + 10 * 1000; // add 10 seconds
-		mWakeLock.acquire(time_ms);
+		PowerManager.WakeLock newWakeLock = mPowerManager.newWakeLock(
+//				PowerManager.FULL_WAKE_LOCK
+				PowerManager.SCREEN_DIM_WAKE_LOCK
+				| PowerManager.ACQUIRE_CAUSES_WAKEUP, this
+				.getClass().getName());
+		newWakeLock.setReferenceCounted(false);
+		newWakeLock.acquire(AlarmActivity.ALARM_TIMEOUT_MS);
+		AlarmScheduler.releasePartialWakeLock(); // remove original wake lock
+		mWakeLock = newWakeLock;  // save new wake lock
 
 		AlarmScheduler.cancelNotification(this);
 
 		Intent intentActivity = new Intent(this, AlarmActivity.class);
-		intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FROM_BACKGROUND);
-		startActivity(intentActivity);		
+		intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intentActivity);
+				
+		stopSelf();
 	}
 
 	private boolean screenOn() {
@@ -86,7 +78,7 @@ public class AlarmService extends Service {
 			return false;
 		}
 	}
-	
+
 	private boolean telephoneInUse(Context context) {
 		try {
 			TelephonyManager tm = (TelephonyManager) context
@@ -100,7 +92,6 @@ public class AlarmService extends Service {
 		return false;
 	}
 
-	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;

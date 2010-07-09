@@ -21,7 +21,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
@@ -31,11 +30,9 @@ import android.view.WindowManager;
 
 public class AlarmActivity extends Activity {
 
-	public static final long ALARM_TIMEOUT_MS = 30 * 1000; // 30 seconds
+	public static final long ALARM_TIMEOUT_MS = 10 * 1000; // 30 seconds
 
 	private KeyguardManager.KeyguardLock mKeyguardLock;
-
-	private PowerManager.WakeLock mWakeLock;
 
 	private MediaPlayer mMediaPlayer;
 	private Vibrator mVibrator;
@@ -47,20 +44,6 @@ public class AlarmActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.alert);
-
-		IntentFilter intentPhoneStateChanged = new IntentFilter(
-				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
-		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
-
-		PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		mWakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
-				| PowerManager.ACQUIRE_CAUSES_WAKEUP, "My Tag");
-		mWakeLock.acquire();
-		//mPowerManager.userActivity(SystemClock.uptimeMillis(), true);
-
-		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// FLAG_SHOW_WHEN_LOCKED keeps window above lock screen but only for
 		// Android 2.0 and newer
@@ -75,18 +58,14 @@ public class AlarmActivity extends Activity {
 			mKeyguardLock = km.newKeyguardLock(getString(R.string.app_name));
 		}
 
-		mMediaPlayer = new MediaPlayer();
-
+		setContentView(R.layout.alert);
+	
+		
 		// stop alarm if user plugs in device
 		try {
 			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
 			IntentFilter intentPowerConnected = new IntentFilter(action);
-			registerReceiver(new BroadcastReceiver() {
-				@Override
-				public void onReceive(Context context, Intent intent) {
-					AlarmActivity.this.finish();
-				}
-			}, intentPowerConnected);
+			registerReceiver(mBroadcastReceiver, intentPowerConnected);
 		} catch (Exception e) {
 		}
 
@@ -103,8 +82,17 @@ public class AlarmActivity extends Activity {
 		} catch (Exception e) {
 			Log.e("dexnamic", e.getMessage());
 		}
+		
+		IntentFilter intentPhoneStateChanged = new IntentFilter(
+				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
+		IntentFilter intentActionBatteryChanged = new IntentFilter(
+				Intent.ACTION_BATTERY_CHANGED);
+		registerReceiver(mBroadcastReceiver, intentActionBatteryChanged);
 
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+		mMediaPlayer = new MediaPlayer();
 	}
 
 	// received
@@ -116,20 +104,27 @@ public class AlarmActivity extends Activity {
 				if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
 					try {
 						int plugged = intent.getIntExtra("plugged", 0);
-						if (plugged > 0) { // skip alarm since device plugged in
+						if (plugged > 0) {
 							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-							finish();
+							alarmFinished();
 						}
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
 					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
-					AlarmActivity.this.finish();
+					alarmFinished();
+				}
+				try {
+					String actionPowerConnected = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+					if(action.equals(actionPowerConnected)) {
+						alarmFinished();
+					}
+				} catch (Exception e) {
 				}
 			}
 		}
 	};
-
+	
 	private static final int MSG_TIMEOUT = 1;
 	private static final int MSG_UP_VOLUME = 2;
 
@@ -141,7 +136,7 @@ public class AlarmActivity extends Activity {
 					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
 				}
 				removeMessages(MSG_UP_VOLUME);
-				AlarmActivity.this.finish();
+				alarmFinished();
 				break;
 			case MSG_UP_VOLUME:
 				try {
@@ -173,14 +168,14 @@ public class AlarmActivity extends Activity {
 						public void onClick(DialogInterface dialog, int id) {
 							AlarmScheduler.snoozeAlarm(AlarmActivity.this);
 //							Toast.makeText(AlertActivity.this, getString(R.string.click_notify), Toast.LENGTH_LONG).show();
-							AlarmActivity.this.finish();
+							alarmFinished();
 						}
 					});
 //					.setNegativeButton(getString(R.string.dismiss),
 //							new DialogInterface.OnClickListener() {
 //								public void onClick(DialogInterface dialog, int id) {
 //									AlarmScheduler.disablePowerSnooze(AlertActivity.this);
-//									AlertActivity.this.finish();
+//									alarmFinished();
 //								}
 //							});
 			AlertDialog alert = builder.create();
@@ -253,23 +248,29 @@ public class AlarmActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		stopRingtone();
 		if (mKeyguardLock != null) {
 			mKeyguardLock.reenableKeyguard();
 		}
-		if (mWakeLock != null && mWakeLock.isHeld())
-			mWakeLock.release();
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 		mHandler.removeMessages(MSG_TIMEOUT);
-		stopRingtone();
 		try {
 //			mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mSaveVolume, 0);
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		unregisterReceiver(mBroadcastReceiver);
 	}
 
 	void stopRingtone() {
@@ -297,6 +298,11 @@ public class AlarmActivity extends Activity {
 			return true;
 		}
 		return false;
+	}
+
+	private void alarmFinished() {
+		finish();
+//		AlarmService.releaseWakeLock();
 	}
 
 }

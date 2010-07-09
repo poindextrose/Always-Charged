@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -15,10 +16,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 */
 	public final static String ACTION_DISCONNECTED = "action_disconnected";
 
+	private PowerManager mPowerManager;
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
 		Log.d("dexnamic", "action = " + intent.getAction());
+
+		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
 		// Get the app's shared preferences
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
@@ -39,10 +44,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 				AlarmScheduler.disablePowerSnooze(context);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
-				startAlarmService(context, AlarmScheduler.TYPE_SNOOZE);
+				startAlarmService(context);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
 				resetRepeatCount(context);
-				startAlarmService(context, AlarmScheduler.TYPE_ALARM);
+				startAlarmService(context);
 			}
 			try { // Two fields below require API 5
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
@@ -54,9 +59,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_DISCONNECTED").get(
 						null))) {
 					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
-					// if in power_snooze mode, doAlarm, but have activity only alarm if not fully charged
-					if (alarmEnabled && AlarmScheduler.isPowerSnooze(context))
-						startAlarmService(context, ACTION_DISCONNECTED);
+					if (alarmEnabled && AlarmScheduler.isPowerSnoozeSet(context))
+						startPowerSnoozeService(context);
 					return;
 				}
 			} catch (Exception e) {
@@ -65,10 +69,18 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	}
 
-	public void startAlarmService(Context context, String action) {
+	public void startAlarmService(Context context) {
 		Intent intent = new Intent(context, AlarmService.class);
-		intent.setAction(action);
 		context.startService(intent);
+
+		AlarmScheduler.setPartialWakeLock(mPowerManager);
+	}
+
+	public void startPowerSnoozeService(Context context) {
+		Intent intent = new Intent(context, PowerSnoozeService.class);
+		context.startService(intent);
+
+		AlarmScheduler.setPartialWakeLock(mPowerManager);
 	}
 
 	private void resetRepeatCount(Context context) {

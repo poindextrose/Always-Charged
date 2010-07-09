@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -25,14 +26,17 @@ public class AlarmScheduler {
 	 * alarm if device unplugged before it is fully charged
 	 */
 	public final static String KEY_POWER_SNOOZE = "key_power_snooze";
-	
+
 	public static final int NOTIFY_SNOOZE = 1;
 
 	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
 
+		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
-		if(!alarmEnabled) return;
+		if (!alarmEnabled)
+			return;
 
 		Calendar calNow = Calendar.getInstance();
 		Calendar calAlarm = Calendar.getInstance();
@@ -47,18 +51,15 @@ public class AlarmScheduler {
 		if (addDay)
 			time_ms += interval_ms;
 
-		AlarmManager alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms,
-				interval_ms, pi);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms, interval_ms, pi);
 
 	}
 
 	public static void cancelAlarm(Context context, String category) {
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, category);
-		AlarmManager alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
 
 		cancelNotification(context);
@@ -67,19 +68,17 @@ public class AlarmScheduler {
 	public static void cancelNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);		
+		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
 	public static void snoozeAlarm(Context context) {
-		SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
 		int minutes = Integer.parseInt(strMinutes);
-		
+
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
-		AlarmManager alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 
 		try {
@@ -88,18 +87,16 @@ public class AlarmScheduler {
 
 			String text = context.getString(R.string.notify_text);
 			// Set the icon, scrolling text and timestamp
-			Notification notification = new Notification(R.drawable.clock,
-					text, System.currentTimeMillis());
+			Notification notification = new Notification(R.drawable.clock, text, System
+					.currentTimeMillis());
 			// The PendingIntent to launch our activity if the user selects this
 			// notification
-			PendingIntent npi = getPendingIntentUpdateCurrent(context,
-					TYPE_NOTIFY);
+			PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY);
 			// Set the info for the views that show in the notification panel.
 			notification.setLatestEventInfo(context, context.getString(R.string.app_name), text,
 					npi);
 			// set notification to appear in "Ongoing" category
-			notification.flags = notification.flags
-					| Notification.FLAG_AUTO_CANCEL
+			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL
 					| Notification.FLAG_NO_CLEAR;
 
 			nm.notify(NOTIFY_SNOOZE, notification);
@@ -108,16 +105,14 @@ public class AlarmScheduler {
 		}
 	}
 
-	private static PendingIntent getPendingIntentUpdateCurrent(Context context,
-			String action) {
+	private static PendingIntent getPendingIntentUpdateCurrent(Context context, String action) {
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(action);
 
-		return PendingIntent.getBroadcast(context, 0, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}
-	
+
 	public static void enablePowerSnooze(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
@@ -129,11 +124,31 @@ public class AlarmScheduler {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putBoolean(KEY_POWER_SNOOZE, false);
-		editor.commit();		
+		editor.commit();
 	}
-	
-	public static boolean isPowerSnooze(Context context) {
+
+	public static boolean isPowerSnoozeSet(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		return settings.getBoolean(KEY_POWER_SNOOZE, false);
+
 	}
+
+	public static PowerManager.WakeLock mWakeLock;
+
+	public static void setPartialWakeLock(PowerManager pm) {
+		mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.dexnamic");
+		mWakeLock.setReferenceCounted(false);
+		mWakeLock.acquire();
+	}
+
+	public static void releasePartialWakeLock() {
+		if (mWakeLock != null) {
+			try {
+				mWakeLock.release();
+			} catch (Exception e) {
+			}
+			mWakeLock = null;
+		}
+	}
+
 }

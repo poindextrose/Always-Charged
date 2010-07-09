@@ -34,6 +34,25 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+//make sure wake locks are proper with new service
+
+// repeat indefinitely if unanswered?
+// repeat in a pattern like: 1,2,4,8,16,32,64,... minutes if unanswered
+// maybe another strategy if snoozed do to phone movement or telephone usage
+
+// test power snooze with new wake lock procedure
+
+// test new AlarmService
+
+// optionally set volume to max during ring
+// progressive alarm volume
+
+// alertdialog should have multiple choice on snooze time
+// custom ringtone selection dialog that has vibrate option permanently shown at bottom of screen
+// combine enable check with time setting preference
+
+//don't go off if phone is moving (accelerometers)
+
 // Long Title: "Always Charged Intelligent Alarm"
 // or "Night(time) Charge Intelligent Reminder"
 // or "Night(time) Charge Intelligent Alarm"
@@ -46,7 +65,6 @@ import android.widget.Toast;
 
 // if user sets alarm time for some morning time, ask them if they are sure for "am"
 
-// don't go off if phone is moving (accelerometers)
 // replace screenOn() function with movement (if accelerometers are on device)
 // do this buy silently checking movement in AlertReceiver before doing anything
 // this will prevent "power snooze" to alarm if house loses power

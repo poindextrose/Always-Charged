@@ -37,6 +37,7 @@
 			</intent-filter>
 		</receiver>
 		<service android:name=".AlarmService" />
+		<service android:name=".PowerSnoozeService" />
 	</application>
 
 </manifest> 
