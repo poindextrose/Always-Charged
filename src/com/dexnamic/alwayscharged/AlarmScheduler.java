@@ -141,7 +141,7 @@ public class AlarmScheduler {
 		mWakeLock.acquire();
 	}
 
-	public static void releasePartialWakeLock() {
+	public static void releaseWakeLock() {
 		if (mWakeLock != null) {
 			try {
 				mWakeLock.release();

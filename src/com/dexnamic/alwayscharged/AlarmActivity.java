@@ -248,7 +248,6 @@ public class AlarmActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		stopRingtone();
 		if (mKeyguardLock != null) {
 			mKeyguardLock.reenableKeyguard();
 		}
@@ -257,13 +256,13 @@ public class AlarmActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
+		stopRingtone();
 		mHandler.removeMessages(MSG_TIMEOUT);
 		try {
 //			mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mSaveVolume, 0);
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
-
 	}
 
 	@Override

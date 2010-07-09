@@ -34,7 +34,7 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-//make sure wake locks are proper with new service
+// check orientation (acceleration and magnetic) since last launch of AlarmService
 
 // repeat indefinitely if unanswered?
 // repeat in a pattern like: 1,2,4,8,16,32,64,... minutes if unanswered
@@ -51,12 +51,13 @@ import android.widget.Toast;
 // custom ringtone selection dialog that has vibrate option permanently shown at bottom of screen
 // combine enable check with time setting preference
 
-//don't go off if phone is moving (accelerometers)
-
 // Long Title: "Always Charged Intelligent Alarm"
-// or "Night(time) Charge Intelligent Reminder"
-// or "Night(time) Charge Intelligent Alarm"
-// or "IntelliCharge (Alarm)"
+// "Night(time) Charge Intelligent Reminder"
+// "Night(time) Charge Intelligent Alarm"
+// "IntelliCharge (Alarm)"
+// "Never Dead (Intelligent Reminder)"
+// "Fresh Start"
+// "Topped Off"
 
 // if alarm comes up over main activity, welcome screen is re-shown
 

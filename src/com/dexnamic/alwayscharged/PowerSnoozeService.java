@@ -29,7 +29,7 @@ public class PowerSnoozeService extends Service {
 		}
 
 		stopSelf();
-		AlarmScheduler.releasePartialWakeLock();
+		AlarmScheduler.releaseWakeLock();
 	}
 
 	@Override
