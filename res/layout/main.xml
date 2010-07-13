@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-<LinearLayout android:id="@+id/Buttons" android:orientation="horizontal" android:layout_width="fill_parent"
-	android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-	android:background="#99000000" >
-	<Button android:text="Done" android:id="@+id/ButtonDone"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:textSize="20sp" android:maxHeight="50sp"
-		android:layout_weight="1" />
-	<Button android:text="@string/feedback" android:id="@+id/ButtonFeedback"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:textSize="20sp" android:maxHeight="50sp"
-		android:layout_weight="1" />
-</LinearLayout>
+	<LinearLayout android:id="@+id/Buttons"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+		android:background="#99000000">
+		<Button android:text="Done" android:id="@+id/ButtonDone"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1" />
+		<Button android:text="@string/advanced" android:id="@+id/ButtonAdvanced"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1" />
+		<Button android:text="@string/feedback" android:id="@+id/ButtonFeedback"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1" />
+	</LinearLayout>
 
 	<ListView android:id="@android:id/list" android:layout_height="fill_parent"
 		android:layout_width="fill_parent" android:layout_above="@id/Buttons"
-		android:background="#99000000" android:cacheColorHint="#00000000" 
+		android:background="#99000000" android:cacheColorHint="#00000000"
 		android:dividerHeight="2px" />
 
 

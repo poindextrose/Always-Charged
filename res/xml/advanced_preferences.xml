@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+	<!--	<CheckBoxPreference android:key="key_repeat"-->
+	<!--
+		android:title="@string/repeat"
+		android:summary="@string/repeat_summary"
+	-->
+	<!--		android:defaultValue="false" />-->
+	<ListPreference android:key="key_snooze" android:title="@string/snooze_time"
+		android:summary="" android:entries="@array/entries_snooze"
+		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/dialog_title_snooze"
+		android:defaultValue="10" />
+	<ListPreference android:key="key_alarm_duration"
+		android:title="@string/alarm_duration" android:summary=""
+		android:entries="@array/entries_duration" android:entryValues="@array/entryvalues_duration"
+		android:dialogTitle="@string/dialog_title_duration"
+		android:defaultValue="30" />
+	<ListPreference android:key="key_motion_tolerance"
+		android:title="@string/motion_tolerance" android:summary=""
+		android:entries="@array/entries_motion_tolerance" android:entryValues="@array/entryvalues_motion_tolerance"
+		android:dialogTitle="@string/dialog_title_motion_tolerance"
+		android:defaultValue="4" />
+
+</PreferenceScreen>

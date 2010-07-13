@@ -44,10 +44,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 				AlarmScheduler.disablePowerSnooze(context);
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
-				startAlarmService(context);
+				startAlarmService(context, action);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
 				resetRepeatCount(context);
-				startAlarmService(context);
+				startAlarmService(context, action);
 			}
 			try { // Two fields below require API 5
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
@@ -69,8 +69,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	}
 
-	public void startAlarmService(Context context) {
+	public void startAlarmService(Context context, String action) {
 		Intent intent = new Intent(context, AlarmService.class);
+		intent.setAction(action);
 		context.startService(intent);
 
 		AlarmScheduler.setPartialWakeLock(mPowerManager);

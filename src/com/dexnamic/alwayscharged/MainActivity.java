@@ -18,7 +18,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -34,17 +33,13 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// check orientation (acceleration and magnetic) since last launch of AlarmService
+// skip alarm for the night if battery level over a certain amount?
 
-// repeat indefinitely if unanswered?
-// repeat in a pattern like: 1,2,4,8,16,32,64,... minutes if unanswered
+// have snooze time get shorter as it gets later at night
 // maybe another strategy if snoozed do to phone movement or telephone usage
 
-// test power snooze with new wake lock procedure
+// optionally turn on phone ringer and use max volume
 
-// test new AlarmService
-
-// optionally set volume to max during ring
 // progressive alarm volume
 
 // alertdialog should have multiple choice on snooze time
@@ -58,6 +53,7 @@ import android.widget.Toast;
 // "Never Dead (Intelligent Reminder)"
 // "Fresh Start"
 // "Topped Off"
+// "Not Annoying Reminder"
 
 // if alarm comes up over main activity, welcome screen is re-shown
 
@@ -70,14 +66,13 @@ import android.widget.Toast;
 // do this buy silently checking movement in AlertReceiver before doing anything
 // this will prevent "power snooze" to alarm if house loses power
 
-// make alarm duration shorter, something around 10 seconds
-
-// aggressive alarm:
-// replace "repeat 2x" option with "snooze until fully charged"
+// lengthen alarm duration after testing complete
 
 // advanced preference screen:
 // 		alarm duration
+//      auto snooze time
 //  	movement sensitivity
+//      always max volume
 
 // use reflection for BatteryManager constants from API 5
 
@@ -130,7 +125,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
-	private ListPreference mListPreferenceSnooze;
 	private Preference mPreferenceAbout;
 
 	SharedPreferences settings;
@@ -143,9 +137,12 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_RINGTONE = "key_ringtone";
 	public final static String KEY_REPEAT = "key_repeat";
 	public final static String KEY_VIBRATE = "key_vibrate";
-	public final static String KEY_SNOOZE = "key_snooze";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
+
+	public final static String KEY_SNOOZE = "key_snooze";
+	public final static String KEY_DURATION = "key_alarm_duration";
+	public final static String KEY_MOTION_TOLERANCE = "key_motion_tolerance";
 
 	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
@@ -188,10 +185,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		String uriString = settings.getString(KEY_RINGTONE, null);
 		setRingtoneSummary(uriString);
 
-		mListPreferenceSnooze = (ListPreference) ps.findPreference(KEY_SNOOZE);
-		mListPreferenceSnooze.setSummary(settings.getString(KEY_SNOOZE, "***") + " "
-				+ getString(R.string.minutes));
-		mListPreferenceSnooze.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
+		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
 
 		Button buttonDone = (Button) findViewById(R.id.ButtonDone);
 		buttonDone.setOnClickListener(new OnClickListener() {
@@ -200,9 +195,15 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				MainActivity.this.finish();
 			}
 		});
-
-		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
-		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
+		
+		Button buttonAdvanced = (Button) findViewById(R.id.ButtonAdvanced);
+		buttonAdvanced.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, AdvancedPreferences.class);
+				startActivity(i);
+			}
+		});
 
 		Button buttonFeedback = (Button) findViewById(R.id.ButtonFeedback);
 		buttonFeedback.setOnClickListener(new OnClickListener() {
@@ -273,9 +274,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //			Log.d("dexnamic", "newValue=" + (String)newValue);
 			if (preference == mRingtonePreference) {
 				setRingtoneSummary((String) newValue);
-			} else if (preference == mListPreferenceSnooze) {
-				String minutes = MainActivity.this.getString(R.string.minutes);
-				mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
 			}
 			return true;
 		}

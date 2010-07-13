@@ -8,7 +8,6 @@
         <item>30 minutes</item>  
         <item>60 minutes</item>
     </string-array>
-
     <string-array name="entryvalues_snooze">
         <item>1</item>
         <item>10</item>
@@ -17,4 +16,28 @@
         <item>60</item>  
     </string-array>
     
+    <string-array name="entries_duration">
+        <item>10 seconds</item>
+        <item>30 seconds</item>  
+        <item>60 seconds</item>
+    </string-array>
+    <string-array name="entryvalues_duration">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+    
+    <string-array name="entries_motion_tolerance">
+        <item>2 degrees</item>
+        <item>4 degrees</item>  
+        <item>8 degrees</item>
+        <item>Disable Motion Detection</item>
+    </string-array>
+    <string-array name="entryvalues_motion_tolerance">
+        <item>2</item>
+        <item>4</item>
+        <item>8</item>
+        <item>0</item>
+    </string-array>
+        
 </resources>

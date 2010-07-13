@@ -30,8 +30,6 @@ import android.view.WindowManager;
 
 public class AlarmActivity extends Activity {
 
-	public static final long ALARM_TIMEOUT_MS = 10 * 1000; // 30 seconds
-
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
 	private MediaPlayer mMediaPlayer;
@@ -160,7 +158,7 @@ public class AlarmActivity extends Activity {
 		Dialog dialog;
 		switch (id) {
 		case DIALOG_ALERT_ID:
-			String snoozeText = getString(R.string.snooze) + " " + AlarmScheduler.SNOOZE_TIME_MIN
+			String snoozeText = getString(R.string.snooze) + " " + "???"
 					+ " " + getString(R.string.minutes);
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
@@ -232,7 +230,9 @@ public class AlarmActivity extends Activity {
 		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
-		mHandler.sendMessageDelayed(msg, ALARM_TIMEOUT_MS);
+		String stringAlarmDuration = mSettings.getString(MainActivity.KEY_DURATION, "30");
+		long alarmDuration_ms = Long.parseLong(stringAlarmDuration)*1000;
+		mHandler.sendMessageDelayed(msg, alarmDuration_ms);
 
 		showDialog(DIALOG_ALERT_ID);
 	}
@@ -285,18 +285,19 @@ public class AlarmActivity extends Activity {
 	}
 
 	public boolean repeatAlarm() {
-		boolean repeat = mSettings.getBoolean(MainActivity.KEY_REPEAT, false);
-		if (repeat == false)
-			return false;
-		String keyCount = MainActivity.KEY_REPEAT_COUNT;
-		int count = mSettings.getInt(keyCount, MainActivity.TIMES_TO_REPEAT);
-		SharedPreferences.Editor editor = mSettings.edit();
-		if (count > 0) {
-			editor.putInt(keyCount, count - 1);
-			editor.commit();
-			return true;
-		}
-		return false;
+//		boolean repeat = mSettings.getBoolean(MainActivity.KEY_REPEAT, false);
+//		if (repeat == false)
+//			return false;
+//		String keyCount = MainActivity.KEY_REPEAT_COUNT;
+//		int count = mSettings.getInt(keyCount, MainActivity.TIMES_TO_REPEAT);
+//		SharedPreferences.Editor editor = mSettings.edit();
+//		if (count > 0) {
+//			editor.putInt(keyCount, count - 1);
+//			editor.commit();
+//			return true;
+//		}
+//		return false;
+		return true;
 	}
 
 	private void alarmFinished() {

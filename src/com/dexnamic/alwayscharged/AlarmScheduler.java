@@ -15,8 +15,6 @@ import android.util.Log;
 
 public class AlarmScheduler {
 
-	public static final int SNOOZE_TIME_MIN = 10;
-
 	public static final String TYPE_ALARM = "alarm";
 	public static final String TYPE_SNOOZE = "snooze";
 	public static final String TYPE_NOTIFY = "notify";
@@ -54,7 +52,6 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms, interval_ms, pi);
-
 	}
 
 	public static void cancelAlarm(Context context, String category) {
@@ -72,6 +69,8 @@ public class AlarmScheduler {
 	}
 
 	public static void snoozeAlarm(Context context) {
+		Log.i("dexnamic", "alarm is snoozing");
+		
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
 		int minutes = Integer.parseInt(strMinutes);
