@@ -17,7 +17,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 public class AlarmService extends Service {
 
@@ -221,7 +220,7 @@ public class AlarmService extends Service {
 		float[] orientation = new float[3];
 		boolean hasMatrix = getCurrentOrientation(orientation);
 		if (!hasMatrix) {
-			Log.d("dexnamic", "getCurrentOrientation failed");
+//			Log.d("dexnamic", "getCurrentOrientation failed");
 			doSnooze();
 		}
 		if (isSnooze) {
@@ -273,8 +272,8 @@ public class AlarmService extends Service {
 		editor.putFloat(KEY_PITCH, orientation[1]);
 		editor.putFloat(KEY_ROLL, orientation[2]);
 		editor.commit();
-		Log.i("dexnamic", "orientation = (" + orientation[0] * 180.0 / Math.PI + ","
-				+ orientation[1] * 180.0 / Math.PI + "," + orientation[2] * 180.0 / Math.PI + ")");
+//		Log.i("dexnamic", "orientation = (" + orientation[0] * 180.0 / Math.PI + ","
+//				+ orientation[1] * 180.0 / Math.PI + "," + orientation[2] * 180.0 / Math.PI + ")");
 	}
 
 	private void readDeviceOrientation(float[] orientation) {

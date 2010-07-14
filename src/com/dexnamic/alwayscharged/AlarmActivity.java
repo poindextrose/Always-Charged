@@ -24,7 +24,6 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -79,7 +78,7 @@ public class AlarmActivity extends Activity {
 			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
 			getWindow().setBackgroundDrawable(drawable);
 		} catch (Exception e) {
-			Log.e("dexnamic", e.getMessage());
+//			Log.e("dexnamic", e.getMessage());
 		}
 		
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
@@ -223,8 +222,8 @@ public class AlarmActivity extends Activity {
 			if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
 				mVibrator.vibrate(vibratePattern, 0);
 		} catch (Exception e) {
-			Log.d("dexnamic", "max Volume = " + maxVolume);
-			Log.e("dexnamic", e.getMessage());
+//			Log.d("dexnamic", "max Volume = " + maxVolume);
+//			Log.e("dexnamic", e.getMessage());
 		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);

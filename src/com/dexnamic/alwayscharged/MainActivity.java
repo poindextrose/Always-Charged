@@ -24,7 +24,6 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,12 +62,7 @@ import android.widget.Toast;
 
 // if alarm comes up over main activity, welcome screen is re-shown
 
-// welcome screen doesn't look good on emulator
-// so probably need a custom dialog
-
 // if user sets alarm time for some morning time, ask them if they are sure for "am"
-
-// lengthen alarm duration after testing complete
 
 // advanced preference screen:
 // alarm duration
@@ -249,7 +243,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
 			getWindow().setBackgroundDrawable(drawable);
 		} catch (Exception e) {
-			Log.e("dexnamic", e.getMessage());
+//			Log.e("dexnamic", e.getMessage());
 		}
 
 		setVolumeControlStream(AudioManager.STREAM_RING);

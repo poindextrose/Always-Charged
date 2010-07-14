@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class AlarmScheduler {
 
@@ -71,7 +70,7 @@ public class AlarmScheduler {
 	}
 
 	public static void snoozeAlarm(Context context, int snoozeTime_min) {
-		Log.i("dexnamic", "alarm is snoozing");
+//		Log.i("dexnamic", "alarm is snoozing");
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, context
@@ -105,7 +104,7 @@ public class AlarmScheduler {
 
 			nm.notify(NOTIFY_SNOOZE, notification);
 		} catch (Exception e) {
-			Log.e("dexnamic", e.getMessage());
+//			Log.e("dexnamic", e.getMessage());
 		}
 	}
 

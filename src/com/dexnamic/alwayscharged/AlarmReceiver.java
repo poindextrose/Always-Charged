@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -21,7 +20,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		Log.d("dexnamic", "action = " + intent.getAction());
+//		Log.d("dexnamic", "action = " + intent.getAction());
 
 		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
