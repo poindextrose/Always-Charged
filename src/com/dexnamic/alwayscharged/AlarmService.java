@@ -74,7 +74,10 @@ public class AlarmService extends Service {
 		else
 			isSnooze = false;
 
-		startReadingSensors();
+		if (mMotionToleranceDeg > 0)
+			startReadingSensors();
+		else
+			doAlarm();
 	}
 
 	private boolean screenOn() {
