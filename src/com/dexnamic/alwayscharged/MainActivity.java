@@ -33,12 +33,18 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// manual snooze: set by user on alert dialog
+// unanswered snooze time: 5, 10, 20
+// user activity silent snooze time: 5 minutes
+
 // skip alarm for the night if battery level over a certain amount?
+
+//add multiple snooze options to alertdialog?
 
 // have snooze time get shorter as it gets later at night
 // maybe another strategy if snoozed do to phone movement or telephone usage
 
-// optionally turn on phone ringer and use max volume
+// advanced preferences: optionally turn on phone ringer and use max volume
 
 // progressive alarm volume
 
@@ -62,17 +68,13 @@ import android.widget.Toast;
 
 // if user sets alarm time for some morning time, ask them if they are sure for "am"
 
-// replace screenOn() function with movement (if accelerometers are on device)
-// do this buy silently checking movement in AlertReceiver before doing anything
-// this will prevent "power snooze" to alarm if house loses power
-
 // lengthen alarm duration after testing complete
 
 // advanced preference screen:
-// 		alarm duration
-//      auto snooze time
-//  	movement sensitivity
-//      always max volume
+// alarm duration
+// auto snooze time
+// movement sensitivity
+// always max volume
 
 // use reflection for BatteryManager constants from API 5
 
@@ -83,8 +85,6 @@ import android.widget.Toast;
 // create logging system for bug reports
 
 // check for task killers and warn user
-
-// motion detection, just need to hold off on vibrate for a few seconds
 
 // android.app.backup
 
@@ -122,6 +122,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
+	static final int ABOUT_DIAlOG = 2;
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
@@ -140,11 +141,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
 
-	public final static String KEY_SNOOZE = "key_snooze";
+	public final static String KEY_SNOOZE_TIME_MIN = "key_snooze";
 	public final static String KEY_DURATION = "key_alarm_duration";
 	public final static String KEY_MOTION_TOLERANCE = "key_motion_tolerance";
 
-	public final static int TIMES_TO_REPEAT = 2;
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 
 	private int mTimeFormat; // 12 or 24
@@ -178,6 +178,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		mPreferenceTime = (Preference) ps.findPreference(KEY_TIME);
 		mPreferenceTime.setOnPreferenceClickListener(mOnPreferenceClickListener);
+		mPreferenceTime.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 		setTime();
 
 		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
@@ -195,7 +196,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				MainActivity.this.finish();
 			}
 		});
-		
+
 		Button buttonAdvanced = (Button) findViewById(R.id.ButtonAdvanced);
 		buttonAdvanced.setOnClickListener(new OnClickListener() {
 			@Override
@@ -274,13 +275,15 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //			Log.d("dexnamic", "newValue=" + (String)newValue);
 			if (preference == mRingtonePreference) {
 				setRingtoneSummary((String) newValue);
+			} else if (preference == mPreferenceTime) {
+
 			}
 			return true;
 		}
 	};
 
 	private void setRingtoneSummary(String uriString) {
-		String ringerName = "Silent";
+		String ringerName = getString(R.string.silent);
 		try {
 			Uri uri = Uri.parse(uriString);
 			if (uriString.length() > 0) {
@@ -288,7 +291,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 						MainActivity.this);
 			}
 		} catch (Exception e) {
-			ringerName = "unknown";
+			ringerName = getString(R.string.unknown);
 		} finally {
 			mRingtonePreference.setSummary(ringerName);
 			checkVolume();
@@ -302,7 +305,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			if (preference == mPreferenceTime) {
 				MainActivity.this.showDialog(TIME_DIALOG_ID);
 			} else if (preference == mPreferenceAbout) {
-				showDialog(FIRST_TIME_DIALOG_ID);
+				showDialog(ABOUT_DIAlOG);
 			}
 			return false;
 		}
@@ -341,31 +344,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
+		AlertDialog.Builder builder;
 		switch (id) {
 		case TIME_DIALOG_ID:
 			int hourOfDay = settings.getInt(KEY_HOUR, 22);
 			int minute = settings.getInt(KEY_MINUTE, 0);
 			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay, minute, false);
 		case FIRST_TIME_DIALOG_ID:
-			AlertDialog.Builder builder;
-			AlertDialog alertDialog;
-
-			LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-			View layout = inflater.inflate(R.layout.first_time_dialog,
-					(ViewGroup) findViewById(R.id.first_time_layout_root));
-//			TextView text = (TextView) layout.findViewById(R.id.text);
-//			text.setText("Hello, this is a custom dialog!");
-//			ImageView image = (ImageView) layout.findViewById(R.id.image);
-//			image.setImageResource(R.drawable.android);
-			builder = new AlertDialog.Builder(this);
-			builder.setView(layout);
-			builder.setMessage(getString(R.string.welcome));
-			builder.setPositiveButton(getString(R.string.close),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-						}
-					});
+			builder = prepareDialogBuilder();
 			builder.setNegativeButton(getString(R.string.dontshowagain),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -374,10 +360,34 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 							dialog.dismiss();
 						}
 					});
+			AlertDialog alertDialog = builder.create();
+			return alertDialog;
+		case ABOUT_DIAlOG:
+			builder = prepareDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
 		}
 		return null;
+	}
+
+	private AlertDialog.Builder prepareDialogBuilder() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.first_time_dialog,
+				(ViewGroup) findViewById(R.id.first_time_layout_root));
+//		TextView text = (TextView) layout.findViewById(R.id.text);
+//		text.setText("Hello, this is a custom dialog!");
+//		ImageView image = (ImageView) layout.findViewById(R.id.image);
+//		image.setImageResource(R.drawable.android);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(layout);
+		builder.setTitle(getString(R.string.app_name));
+//		builder.setMessage(getString(R.string.about));
+		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		return builder;
 	}
 
 	private TimePickerDialog.OnTimeSetListener mTimeChangedListener = new TimePickerDialog.OnTimeSetListener() {
@@ -391,9 +401,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	void changeTime(int hourOfDay, int minute) {
 		editor.putInt(KEY_HOUR, hourOfDay);
 		editor.putInt(KEY_MINUTE, minute);
+		editor.commit();
 		mCheckBoxEnable.setChecked(true);
 		mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
-		AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
+		enableAlaram();
 	}
 
 	void setTime() {
@@ -443,7 +454,29 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		int hourOfDay = settings.getInt(KEY_HOUR, 22);
 		int minute = settings.getInt(KEY_MINUTE, 0);
-		AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
+		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
+
+		String msg = "";
+		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
+		minutesUntilAlarm = minutesUntilAlarm % 60;
+		if (hoursUntilAlarm > 0) {
+			msg += hoursUntilAlarm + " ";
+			if(hoursUntilAlarm == 1)
+				msg += getString(R.string.hour);
+			else
+				msg += getString(R.string.hours);
+		}
+		if(hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
+			msg += ", ";
+		if(minutesUntilAlarm > 0) {
+			msg += minutesUntilAlarm + " ";
+			if(minutesUntilAlarm == 1)
+				msg += getString(R.string.minute);
+			else
+				msg += getString(R.string.minutes);
+		}
+		msg += " until alarm";
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();		
 	}
 
 	private void disableAlarms() {
@@ -454,9 +487,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	private void checkVolume() {
 		String chosenRingtone = settings.getString(KEY_RINGTONE, "");
 		if (chosenRingtone.length() > 0
-				&& mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
-			Toast.makeText(MainActivity.this,
-					"Alarm volume is set to zero, press volume keys to adjust", Toast.LENGTH_LONG)
+				&& mAudioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+			Toast.makeText(MainActivity.this, getString(R.string.checkVolume), Toast.LENGTH_LONG)
 					.show();
 		}
 	}

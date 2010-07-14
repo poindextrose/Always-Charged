@@ -9,10 +9,11 @@
 		<Button android:text="Done" android:id="@+id/ButtonDone"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
 			android:layout_weight="1" />
-		<Button android:text="@string/advanced" android:id="@+id/ButtonAdvanced"
+
+		<Button android:text="@string/feedback" android:id="@+id/ButtonFeedback"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
 			android:layout_weight="1" />
-		<Button android:text="@string/feedback" android:id="@+id/ButtonFeedback"
+		<Button android:text="@string/advanced" android:id="@+id/ButtonAdvanced"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
 			android:layout_weight="1" />
 	</LinearLayout>

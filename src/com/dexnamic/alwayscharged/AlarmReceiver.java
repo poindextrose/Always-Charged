@@ -46,6 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
 				startAlarmService(context, action);
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
+				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 				resetRepeatCount(context);
 				startAlarmService(context, action);
 			}
@@ -87,7 +88,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	private void resetRepeatCount(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(MainActivity.KEY_REPEAT_COUNT, MainActivity.TIMES_TO_REPEAT);
+		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
 		editor.commit();
 	}
 }

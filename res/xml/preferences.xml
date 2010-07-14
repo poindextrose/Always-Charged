@@ -5,7 +5,7 @@
 		android:title="@string/enable_alarm" android:summary="@string/enable_alarm_summary" 
 		android:defaultValue="false" />
 
-	<Preference android:key="key_time" android:title="@string/time"
+	<Preference android:key="key_time" android:title="@string/bed_time"
 		android:summary="" />
 
 	<RingtonePreference android:key="key_ringtone"

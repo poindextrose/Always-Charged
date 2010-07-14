@@ -27,14 +27,14 @@ public class AlarmScheduler {
 
 	public static final int NOTIFY_SNOOZE = 1;
 
-	public static void setDailyAlarm(Context context, int hourOfDay, int minute) {
+	public static int setDailyAlarm(Context context, int hourOfDay, int minute) {
 
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 		if (!alarmEnabled)
-			return;
+			return 0;
 
 		Calendar calNow = Calendar.getInstance();
 		Calendar calAlarm = Calendar.getInstance();
@@ -42,7 +42,7 @@ public class AlarmScheduler {
 		calAlarm.set(Calendar.MINUTE, minute);
 		calAlarm.set(Calendar.SECOND, 0);
 		boolean addDay = false;
-		if (calAlarm.compareTo(calNow) <= 0) // if alarm is now or earlier
+		if (calAlarm.before(calNow)) // if alarm is now or earlier
 			addDay = true;
 		long time_ms = calAlarm.getTimeInMillis();
 		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
@@ -52,6 +52,8 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms, interval_ms, pi);
+
+		return (int) ((time_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
 	}
 
 	public static void cancelAlarm(Context context, String category) {
@@ -68,12 +70,15 @@ public class AlarmScheduler {
 		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
-	public static void snoozeAlarm(Context context) {
+	public static void snoozeAlarm(Context context, int snoozeTime_min) {
 		Log.i("dexnamic", "alarm is snoozing");
-		
+
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE, "10");
+		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, context
+				.getString(R.string.default_snooze_time));
 		int minutes = Integer.parseInt(strMinutes);
+		if (snoozeTime_min > 0)
+			minutes = snoozeTime_min;
 
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);

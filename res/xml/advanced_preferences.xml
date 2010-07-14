@@ -12,7 +12,7 @@
 	<ListPreference android:key="key_snooze" android:title="@string/snooze_time"
 		android:summary="" android:entries="@array/entries_snooze"
 		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/dialog_title_snooze"
-		android:defaultValue="10" />
+		android:defaultValue="@string/default_snooze_time" />
 	<ListPreference android:key="key_alarm_duration"
 		android:title="@string/alarm_duration" android:summary=""
 		android:entries="@array/entries_duration" android:entryValues="@array/entryvalues_duration"

@@ -27,9 +27,10 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
-
+	
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
 	private MediaPlayer mMediaPlayer;
@@ -109,7 +110,7 @@ public class AlarmActivity extends Activity {
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
 					alarmFinished();
 				}
 				try {
@@ -131,7 +132,7 @@ public class AlarmActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
 				}
 				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
@@ -155,17 +156,16 @@ public class AlarmActivity extends Activity {
 	static final int DIALOG_ALERT_ID = 0;
 
 	protected Dialog onCreateDialog(int id) {
-		Dialog dialog;
 		switch (id) {
 		case DIALOG_ALERT_ID:
-			String snoozeText = getString(R.string.snooze) + " " + "???"
-					+ " " + getString(R.string.minutes);
+			String snoozeText = getString(R.string.snooze);
+//			+ " " + MANUAL_SNOOZE_TIME_MIN + " " + getString(R.string.minutes);
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-							AlarmScheduler.snoozeAlarm(AlarmActivity.this);
-//							Toast.makeText(AlertActivity.this, getString(R.string.click_notify), Toast.LENGTH_LONG).show();
+							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
+							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
 							alarmFinished();
 						}
 					});
@@ -177,13 +177,11 @@ public class AlarmActivity extends Activity {
 //								}
 //							});
 			AlertDialog alert = builder.create();
-			dialog = alert;
-			dialog.setOnKeyListener(mOnKeyListener);
-			break;
+			alert.setOnKeyListener(mOnKeyListener);
+			return alert;
 		default:
-			dialog = null;
+			return null;
 		}
-		return dialog;
 	}
 
 	private DialogInterface.OnKeyListener mOnKeyListener = new DialogInterface.OnKeyListener() {

@@ -64,7 +64,7 @@ public class AlarmService extends Service {
 
 		// if screen is on, snooze alarm
 		// if phone call is progress, snooze alarm
-		if (screenOn() || telephoneInUse(this)) {
+		if (screenOn() || telephoneInUse()) {
 			doSnooze();
 			return;
 		}
@@ -89,10 +89,9 @@ public class AlarmService extends Service {
 		}
 	}
 
-	private boolean telephoneInUse(Context context) {
+	private boolean telephoneInUse() {
 		try {
-			TelephonyManager tm = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
+			TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 			int callState = tm.getCallState();
 			if (callState == TelephonyManager.CALL_STATE_OFFHOOK
 					|| callState == TelephonyManager.CALL_STATE_RINGING)
@@ -182,13 +181,12 @@ public class AlarmService extends Service {
 		stopReadingSensors();
 
 		PowerManager.WakeLock newWakeLock = mPowerManager.newWakeLock(
-//				PowerManager.FULL_WAKE_LOCK
 				PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, this
 						.getClass().getName());
 		newWakeLock.setReferenceCounted(false);
 		String stringAlarmDuration = mSharedPreferences.getString(MainActivity.KEY_DURATION, "30");
 		long alarmDuration = Long.parseLong(stringAlarmDuration);
-		newWakeLock.acquire(alarmDuration + 15000); // acquire lock for duration of alarm + 15 seconds
+		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for duration of alarm + 10 seconds
 		AlarmScheduler.releaseWakeLock(); // remove original wake lock
 		mWakeLock = newWakeLock; // save new wake lock
 
@@ -205,7 +203,7 @@ public class AlarmService extends Service {
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
 
-		AlarmScheduler.snoozeAlarm(this);
+		AlarmScheduler.snoozeAlarm(this, 0);
 		stopSelf();
 		AlarmScheduler.releaseWakeLock();
 	}
@@ -289,8 +287,6 @@ public class AlarmService extends Service {
 	private void stopReadingSensors() {
 		if (mSensorManager != null && mSensorEventListener != null) {
 			mSensorManager.unregisterListener(mSensorEventListener);
-//			mSensorManager = null;
-//			mSensorEventListener = null;
 		}
 	}
 

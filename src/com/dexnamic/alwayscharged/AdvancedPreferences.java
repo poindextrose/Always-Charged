@@ -21,8 +21,8 @@ public class AdvancedPreferences extends PreferenceActivity {
 
 		PreferenceScreen ps = getPreferenceScreen();
 		SharedPreferences settings = ps.getSharedPreferences();
-		mListPreferenceSnooze = (ListPreference) ps.findPreference(MainActivity.KEY_SNOOZE);
-		mListPreferenceSnooze.setSummary(settings.getString(MainActivity.KEY_SNOOZE, "***") + " "
+		mListPreferenceSnooze = (ListPreference) ps.findPreference(MainActivity.KEY_SNOOZE_TIME_MIN);
+		mListPreferenceSnooze.setSummary(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "***") + " "
 				+ getString(R.string.minutes));
 		mListPreferenceSnooze.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 
