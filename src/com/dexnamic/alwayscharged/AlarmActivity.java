@@ -163,6 +163,8 @@ public class AlarmActivity extends Activity {
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
+							stopRingtone();
+							AlarmScheduler.resetRepeatCount(AlarmActivity.this);
 							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
 							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
 							alarmFinished();
@@ -203,7 +205,7 @@ public class AlarmActivity extends Activity {
 		super.onStart();
 
 		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE, null);
-		int maxVolume = 0;
+//		int maxVolume = 0;
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
 			mMediaPlayer.setDataSource(this, uri);
@@ -282,24 +284,19 @@ public class AlarmActivity extends Activity {
 	}
 
 	public boolean repeatAlarm() {
-//		boolean repeat = mSettings.getBoolean(MainActivity.KEY_REPEAT, false);
-//		if (repeat == false)
-//			return false;
-//		String keyCount = MainActivity.KEY_REPEAT_COUNT;
-//		int count = mSettings.getInt(keyCount, MainActivity.TIMES_TO_REPEAT);
-//		SharedPreferences.Editor editor = mSettings.edit();
-//		if (count > 0) {
-//			editor.putInt(keyCount, count - 1);
-//			editor.commit();
-//			return true;
-//		}
-//		return false;
-		return true;
+		int count = mSettings.getInt(MainActivity.KEY_REPEAT_COUNT, 0);
+		SharedPreferences.Editor editor = mSettings.edit();
+		if (count < MainActivity.TIMES_TO_REPEAT) {
+			count++;
+			editor.putInt(MainActivity.KEY_REPEAT_COUNT, count);
+			editor.commit();
+			return true;
+		}
+		return false;
 	}
 
 	private void alarmFinished() {
 		finish();
-//		AlarmService.releaseWakeLock();
 	}
 
 }

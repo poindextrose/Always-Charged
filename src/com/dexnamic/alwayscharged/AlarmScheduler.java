@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class AlarmScheduler {
 
@@ -28,8 +29,10 @@ public class AlarmScheduler {
 
 	public static int setDailyAlarm(Context context, int hourOfDay, int minute) {
 
+		Log.i(MainActivity.LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
+		
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-
+		
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 		if (!alarmEnabled)
@@ -40,19 +43,20 @@ public class AlarmScheduler {
 		calAlarm.set(Calendar.HOUR_OF_DAY, hourOfDay);
 		calAlarm.set(Calendar.MINUTE, minute);
 		calAlarm.set(Calendar.SECOND, 0);
-		boolean addDay = false;
+		long alarmTime_ms = calAlarm.getTimeInMillis();
+		final long day_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 		if (calAlarm.before(calNow)) // if alarm is now or earlier
-			addDay = true;
-		long time_ms = calAlarm.getTimeInMillis();
-		final long interval_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-		if (addDay)
-			time_ms += interval_ms;
+			alarmTime_ms += day_ms;
+//		int snoozeTime_ms = 60*1000*Integer.parseInt(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "5"));	
+//		if((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
+//			alarmTime_ms -= snoozeTime_ms;
+//		}
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time_ms, interval_ms, pi);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime_ms, day_ms, pi);
 
-		return (int) ((time_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
+		return (int) ((alarmTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
 	}
 
 	public static void cancelAlarm(Context context, String category) {
@@ -90,7 +94,7 @@ public class AlarmScheduler {
 
 			String text = context.getString(R.string.notify_text);
 			// Set the icon, scrolling text and timestamp
-			Notification notification = new Notification(R.drawable.clock, text, System
+			Notification notification = new Notification(R.drawable.ic_stat_notify, text, System
 					.currentTimeMillis());
 			// The PendingIntent to launch our activity if the user selects this
 			// notification
@@ -152,6 +156,13 @@ public class AlarmScheduler {
 			}
 			mWakeLock = null;
 		}
+	}
+	
+	public static void resetRepeatCount(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
+		editor.commit();
 	}
 
 }

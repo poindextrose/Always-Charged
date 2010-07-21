@@ -9,7 +9,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.drawable.Drawable;
@@ -32,22 +31,12 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// manual snooze: set by user on alert dialog
-// unanswered snooze time: 5, 10, 20
-// user activity silent snooze time: 5 minutes
-
 // skip alarm for the night if battery level over a certain amount?
-
-//add multiple snooze options to alertdialog?
-
-// have snooze time get shorter as it gets later at night
-// maybe another strategy if snoozed do to phone movement or telephone usage
 
 // advanced preferences: optionally turn on phone ringer and use max volume
 
 // progressive alarm volume
 
-// alertdialog should have multiple choice on snooze time
 // custom ringtone selection dialog that has vibrate option permanently shown at bottom of screen
 // combine enable check with time setting preference
 
@@ -61,8 +50,6 @@ import android.widget.Toast;
 // "Not Annoying Reminder"
 
 // if alarm comes up over main activity, welcome screen is re-shown
-
-// if user sets alarm time for some morning time, ask them if they are sure for "am"
 
 // advanced preference screen:
 // alarm duration
@@ -140,6 +127,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_MOTION_TOLERANCE = "key_motion_tolerance";
 
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
+	public static final int TIMES_TO_REPEAT = 2;
 
 	private int mTimeFormat; // 12 or 24
 
@@ -148,6 +136,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	private AudioManager mAudioManager;
 
 	private boolean mFirstInstance = true;
+
+	public static final String LOG_TAG = "dexnamic";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -388,18 +378,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			changeTime(hourOfDay, minute);
+			editor.putInt(KEY_HOUR, hourOfDay);
+			editor.putInt(KEY_MINUTE, minute);
+			editor.commit();
+			mCheckBoxEnable.setChecked(true);
+			mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
+			enableAlaram();
 		}
 	};
-
-	void changeTime(int hourOfDay, int minute) {
-		editor.putInt(KEY_HOUR, hourOfDay);
-		editor.putInt(KEY_MINUTE, minute);
-		editor.commit();
-		mCheckBoxEnable.setChecked(true);
-		mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
-		enableAlaram();
-	}
 
 	void setTime() {
 		int hourOfDay = settings.getInt(KEY_HOUR, 22);
@@ -435,17 +421,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 		checkVolume();
 
-		try {
-			Intent.class.getField("ACTION_POWER_DISCONNECTED"); // check for functionality on this API
-			IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-			Intent intentBattery = registerReceiver(null, intentFilter);
-			int plugged = intentBattery.getIntExtra("plugged", 0);
-			if (plugged == 0) { // do not set alarm now since device not plugged in
-				return;
-			}
-		} catch (Exception e) {
-		}
-
 		int hourOfDay = settings.getInt(KEY_HOUR, 22);
 		int minute = settings.getInt(KEY_MINUTE, 0);
 		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
@@ -455,27 +430,28 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		minutesUntilAlarm = minutesUntilAlarm % 60;
 		if (hoursUntilAlarm > 0) {
 			msg += hoursUntilAlarm + " ";
-			if(hoursUntilAlarm == 1)
+			if (hoursUntilAlarm == 1)
 				msg += getString(R.string.hour);
 			else
 				msg += getString(R.string.hours);
 		}
-		if(hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
+		if (hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
 			msg += ", ";
-		if(minutesUntilAlarm > 0) {
+		if (minutesUntilAlarm > 0) {
 			msg += minutesUntilAlarm + " ";
-			if(minutesUntilAlarm == 1)
+			if (minutesUntilAlarm == 1)
 				msg += getString(R.string.minute);
 			else
 				msg += getString(R.string.minutes);
 		}
 		msg += " until alarm";
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();		
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
 
 	private void disableAlarms() {
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_ALARM);
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
+		AlarmScheduler.disablePowerSnooze(this);
 	}
 
 	private void checkVolume() {

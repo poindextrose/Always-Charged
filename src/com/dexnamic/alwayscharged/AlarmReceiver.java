@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -15,18 +16,12 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 */
 	public final static String ACTION_DISCONNECTED = "action_disconnected";
 
-	private PowerManager mPowerManager;
-
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-//		Log.d("dexnamic", "action = " + intent.getAction());
+		Log.i("dexnamic", "Received action = " + intent.getAction());
 
-		mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-
-		// Get the app's shared preferences
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 		int hourOfDay = settings.getInt(MainActivity.KEY_HOUR, 22);
 		int minute = settings.getInt(MainActivity.KEY_MINUTE, 0);
 		String action = intent.getAction();
@@ -44,21 +39,26 @@ public class AlarmReceiver extends BroadcastReceiver {
 				return;
 			} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
 				startAlarmService(context, action);
+				return;
 			} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
 				AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-				resetRepeatCount(context);
+				AlarmScheduler.resetRepeatCount(context);
 				startAlarmService(context, action);
+				return;
+			} else if (action.equals(Intent.ACTION_PACKAGE_REPLACED)) {
+				AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);		
+				return;
 			}
-			try { // Two fields below require API 5
+			try { // Two fields below require API 4
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
 						.get(null))) {
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
 					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 					return;
 				}
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_DISCONNECTED").get(
 						null))) {
-					AlarmScheduler.setDailyAlarm(context, hourOfDay, minute);
+					// Get the app's shared preferences
+					boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 					if (alarmEnabled && AlarmScheduler.isPowerSnoozeSet(context))
 						startPowerSnoozeService(context);
 					return;
@@ -74,20 +74,16 @@ public class AlarmReceiver extends BroadcastReceiver {
 		intent.setAction(action);
 		context.startService(intent);
 
-		AlarmScheduler.setPartialWakeLock(mPowerManager);
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+		AlarmScheduler.setPartialWakeLock(pm);
 	}
 
 	public void startPowerSnoozeService(Context context) {
 		Intent intent = new Intent(context, PowerSnoozeService.class);
 		context.startService(intent);
 
-		AlarmScheduler.setPartialWakeLock(mPowerManager);
+		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+		AlarmScheduler.setPartialWakeLock(pm);
 	}
 
-	private void resetRepeatCount(Context context) {
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
-		editor.commit();
-	}
 }
