@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// force snooze time to 5 minutes
+
 // skip alarm for the night if battery level over a certain amount?
 
 // advanced preferences: optionally turn on phone ringer and use max volume
@@ -162,7 +164,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		mPreferenceTime = (Preference) ps.findPreference(KEY_TIME);
 		mPreferenceTime.setOnPreferenceClickListener(mOnPreferenceClickListener);
-		mPreferenceTime.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+//		mPreferenceTime.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 		setTime();
 
 		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
@@ -236,7 +238,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //			Log.e("dexnamic", e.getMessage());
 		}
 
-		setVolumeControlStream(AudioManager.STREAM_RING);
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 
 		if (savedInstanceState == null) // savedInstanceState is null during first instantiation of class
 			mFirstInstance = true;
@@ -259,8 +261,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //			Log.d("dexnamic", "newValue=" + (String)newValue);
 			if (preference == mRingtonePreference) {
 				setRingtoneSummary((String) newValue);
-			} else if (preference == mPreferenceTime) {
-
 			}
 			return true;
 		}
@@ -457,7 +457,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	private void checkVolume() {
 		String chosenRingtone = settings.getString(KEY_RINGTONE, "");
 		if (chosenRingtone.length() > 0
-				&& mAudioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+				&& mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
 			Toast.makeText(MainActivity.this, getString(R.string.checkVolume), Toast.LENGTH_LONG)
 					.show();
 		}

@@ -4,7 +4,7 @@
     <string name="app_name_no_spaces">AlwaysCharged</string>
     <string name="default_snooze_time">5</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
-    <string name="enable_alarm_summary">Only sounds if device has been sitting still for awhile
+    <string name="enable_alarm_summary">Only sounds if device has been sitting still for 5+ minutes
 and is not charging.</string>    
     <string name="bed_time">Bedtime</string>
     <string name="ringtone">Ringtone</string>

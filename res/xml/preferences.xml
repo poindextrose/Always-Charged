@@ -10,7 +10,7 @@
 
 	<RingtonePreference android:key="key_ringtone"
 		android:title="@string/ringtone" android:summary="choose a ringtone"
-		android:ringtoneType="ringtone|alarm" android:showDefault="false"
+		android:ringtoneType="alarm" android:showDefault="false"
 		android:showSilent="true"
 		android:defaultValue="content://media/internal/audio/media/83" />
 
