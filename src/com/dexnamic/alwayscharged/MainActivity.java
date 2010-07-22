@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+// remove "Advanced" button before publishing
+
 // force snooze time to 5 minutes
 
 // skip alarm for the night if battery level over a certain amount?

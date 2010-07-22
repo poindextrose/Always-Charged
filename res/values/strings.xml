@@ -7,7 +7,7 @@
     <string name="enable_alarm_summary">Only sounds if device has been sitting still for 5+ minutes
 and is not charging.</string>    
     <string name="bed_time">Bedtime</string>
-    <string name="ringtone">Ringtone</string>
+    <string name="ringtone">Alarm Tone</string>
     <string name="repeat">Repeat 2x</string>
     <string name="repeat_summary">Only if alarm is unanswered</string>
     <string name="vibrate">Vibrate</string>

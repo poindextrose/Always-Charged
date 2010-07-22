@@ -47,16 +47,16 @@ public class AlarmScheduler {
 		final long day_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 		if (calAlarm.before(calNow)) // if alarm is now or earlier
 			alarmTime_ms += day_ms;
-//		int snoozeTime_ms = 60*1000*Integer.parseInt(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "5"));	
-//		if((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
-//			alarmTime_ms -= snoozeTime_ms;
-//		}
+		int snoozeTime_ms = 60*1000*Integer.parseInt(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "5"));
+		if((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
+			alarmTime_ms -= snoozeTime_ms;
+		}
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime_ms, day_ms, pi);
 
-		return (int) ((alarmTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
+		return 1 + (int) ((alarmTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
 	}
 
 	public static void cancelAlarm(Context context, String category) {
