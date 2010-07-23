@@ -44,7 +44,7 @@ import android.widget.Toast;
 // custom ringtone selection dialog that has vibrate option permanently shown at bottom of screen
 // combine enable check with time setting preference
 
-// Long Title: "Always Charged Intelligent Alarm"
+// Long Title: "Always Charged (Intelligent Alarm)"
 // "Night(time) Charge Intelligent Reminder"
 // "Night(time) Charge Intelligent Alarm"
 // "IntelliCharge (Alarm)"
