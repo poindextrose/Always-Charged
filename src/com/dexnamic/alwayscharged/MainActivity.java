@@ -1,5 +1,6 @@
 package com.dexnamic.alwayscharged;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import android.app.AlertDialog;
@@ -315,11 +316,27 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				this);
 
 		editor.commit();
+		
+//		prefsChanged();
+	}
+	
+	private void prefsChanged() {
+		try {
+			Class<?> _BackupManager = Class.forName("android.app.backup.BackupManager");
+			Constructor<?> constructor = _BackupManager.getConstructor(new Class[]{Context.class});
+			Object bm = constructor.newInstance(this);
+			Method _dataChanged = _BackupManager.getMethod("dataChanged", (Class[])null);
+			_dataChanged.invoke(bm, (Object[])null);
+//			BackupManager bm = new BackupManager(this);
+//			bm.dataChanged();
+		} catch (Exception e) {
+		}		
 	}
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 //		Toast.makeText(MainActivity.this, key, Toast.LENGTH_SHORT).show();
+		prefsChanged();
 		if (key.equals(KEY_ALARM_ENABLED)) {
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
 				enableAlaram();
