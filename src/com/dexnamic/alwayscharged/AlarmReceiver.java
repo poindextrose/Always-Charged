@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -19,7 +18,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		Log.i("dexnamic", "Received action = " + intent.getAction());
+//		Log.i("dexnamic", "Received action = " + intent.getAction());
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		int hourOfDay = settings.getInt(MainActivity.KEY_HOUR, 22);

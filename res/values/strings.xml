@@ -3,13 +3,12 @@
     <string name="app_name">Always Charged</string>
     <string name="app_name_no_spaces">AlwaysCharged</string>
     <string name="default_snooze_time">5</string>
+    <string name="default_motion_tolerance">4</string>
+    <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
-    <string name="enable_alarm_summary">Only sounds if device has been sitting still for 5+ minutes
-and is not charging</string>    
+    <string name="enable_alarm_summary">Sounds if phone is motionless for 5-10 minutes and is not charging</string>    
     <string name="bed_time">Bedtime</string>
     <string name="ringtone">Alarm Tone</string>
-    <string name="repeat">Repeat 2x</string>
-    <string name="repeat_summary">Only if alarm is unanswered</string>
     <string name="vibrate">Vibrate</string>
     <string name="snooze_time">Snooze Time</string>
     <string name="dialog_title_snooze">Snooze Time</string>
@@ -30,31 +29,28 @@ and is not charging</string>
     <string name="dialog_title_motion_tolerance">Motion Tolerance</string>
     <string name="disabled">Disabled</string>
     <string name="degrees">Degrees</string>
-    
     <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
-    
     <string name="feedback">Feedback</string>
     <string name="sendmail">Send mail...</string>
     <string name="noemail">There are no email clients installed.</string>
-    
     <string name="alarm_message">Time to charge your phone!</string>
-    <string name="dismiss">Dismiss</string>
     <string name="snooze">Snooze</string>
-    
     <string name="notify_text">Click to disable alarm for tonight</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
-    
-    <string name="first_time_text">Have you ever forgotten to plug in your phone at night to find your
-phone\'s battery dead the next day?  If so, then Always Charged is for you.  Just set the time to your bedtime, and if
+    <string name="first_time_text">
+Have you ever forgotten to plug in your phone at night to find your
+phone\'s battery dead the next day?  If so, then <i>Always Charged</i> is for you.
+Just set the time to your regular bedtime, and if
 you remember to plug in your phone, nothing will happen.  However, if you
 forget, an alarm will sound, reminding you to charge your phone.\n\n
 
 This is not just a simple alarm.  It waits patiently and silently snoozes the alarm
-if you are using your phone or moving about.\n\n
-    
+if you are using your phone, moving around, or already have it plugged in and charging.\n\n
+
 If you like or dislike something about this application, or you want to suggest a feature,
 please send me feedback from the button on the main screen.\n\n
     <a href="http://dexnamic.com">Dexnamic.com</a></string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
+    <string name="done">Done</string>
 </resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Toujours chargé</string>
+    <string name="app_name_no_spaces">AlwaysCharged</string>
+    <string name="default_snooze_time">5</string>
+    <string name="default_motion_tolerance">4</string>
+    <string name="default_alarm_duration">20</string>
+    <string name="enable_alarm">Activer les frais de rappel</string>
+    <string name="enable_alarm_summary">Sounds si le téléphone est immobile pendant 5-10 minutes et n\'est pas en charge</string>    
+    <string name="bed_time">Temps Bed</string>
+    <string name="ringtone">Sonnerie d\'alarme</string>
+    <string name="vibrate">Vibreur</string>
+    <string name="snooze_time">Snooze Temps</string>
+    <string name="dialog_title_snooze">Snooze Temps</string>
+    <string name="hour">heure</string>
+    <string name="hours">heures</string>
+    <string name="minute">minute</string>    
+    <string name="minutes">minutes</string>  
+    <string name="seconds">secondes</string> 
+    <string name="until_alarm">jusqu\'à ce que</string>
+    <string name="about">Propos</string>
+    <string name="silent">Silent</string>
+    <string name="unknown">Inconnu</string>
+    <string name="advanced">avancée</string>
+    <string name="advanced_settings">Paramètres avancés</string>
+    <string name="alarm_duration">Durée d\'alarme</string>
+    <string name="dialog_title_duration">Durée d\'alarme </string>
+    <string name="motion_tolerance">Motion Sensibilité</string>
+    <string name="dialog_title_motion_tolerance">Motion Tolérance</string>
+    <string name="disabled">Désactivé</string>
+    <string name="degrees">Degrés</string>
+    <string name="notification_toast">Cliquez notification de licenciement d\'alarme pour</string>
+    <string name="feedback">Commentaires</string>
+    <string name="sendmail">Mail envoyer...</string>
+    <string name="noemail">Il n\'ya pas de clients de messagerie installés.</string>
+    <string name="alarm_message">Temps pour recharger votre téléphone!</string>
+    <string name="snooze">Snooze</string>
+    <string name="notify_text">Cliquez pour désactiver les alarmes</string>
+    <string name="checkVolume">Volume de la sonnerie est réglée à zéro, appuyez sur les touches de volume pour ajuster.</string>
+    <string name="first_time_text">
+Avez-vous déjà oublié de brancher votre téléphone la nuit pour trouver votre 
+téléphone batterie morte le lendemain? Si oui, alors toujours à charge est pour vous. 
+Il suffit de régler le temps de votre heure de coucher, et si 
+Vous souvenez-vous de brancher votre téléphone, rien ne se passera. Toutefois, si vous 
+oublier, une alarme retentit, vous rappeler de recharger votre téléphone.\n\n
+
+Ce n\'est pas seulement une simple alarme. Il attend patiemment et silencieusement sonner l\'alarme 
+Si vous utilisez votre téléphone, se déplacer, ou l\'ont déjà branché et de tarification.\n\n 
+
+Si vous aimez ou n\'aimez pas quelque chose au sujet de cette demande, ou si vous voulez suggérer une fonctionnalité, 
+s\'il vous plaît envoyez-moi des commentaires à partir du bouton sur l\'écran principal.\n\n
+    <a href="http://dexnamic.com">Dexnamic.com</a></string>
+    <string name="close">Fermer</string>
+    <string name="dontshowagain">Ne plus afficher</string>
+    <string name="done">Fait</string>    
+</resources>

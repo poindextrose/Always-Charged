@@ -157,6 +157,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		setContentView(R.layout.main);
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences, false);
 
 		PreferenceScreen ps = getPreferenceScreen();
 		settings = ps.getSharedPreferences();
@@ -446,7 +447,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			else
 				msg += getString(R.string.minutes);
 		}
-		msg += " until alarm";
+		msg += " " + getString(R.string.until_alarm);
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
 

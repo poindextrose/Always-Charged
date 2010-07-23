@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class AlarmScheduler {
 
@@ -29,7 +28,7 @@ public class AlarmScheduler {
 
 	public static int setDailyAlarm(Context context, int hourOfDay, int minute) {
 
-		Log.i(MainActivity.LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
+//		Log.i(MainActivity.LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
 		
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 		
