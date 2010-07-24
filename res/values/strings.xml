@@ -6,7 +6,7 @@
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
-    <string name="enable_alarm_summary">Sounds if phone is motionless for 5-10 minutes and is not charging</string>    
+    <string name="enable_alarm_summary">Sounds after bedtime only if phone is not charging and is motionless for 5 to 10 minutes</string>    
     <string name="bed_time">Bedtime</string>
     <string name="ringtone">Alarm Tone</string>
     <string name="vibrate">Vibrate</string>
