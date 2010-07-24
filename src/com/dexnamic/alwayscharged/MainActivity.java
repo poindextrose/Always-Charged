@@ -242,7 +242,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //			Log.e("dexnamic", e.getMessage());
 		}
 
-		setVolumeControlStream(AudioManager.STREAM_ALARM);
+		setVolumeControlStream(AudioManager.STREAM_RING);
 
 		if (savedInstanceState == null) // savedInstanceState is null during first instantiation of class
 			mFirstInstance = true;
@@ -477,7 +477,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	private void checkVolume() {
 		String chosenRingtone = settings.getString(KEY_RINGTONE, "");
 		if (chosenRingtone.length() > 0
-				&& mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
+				&& mAudioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
 			Toast.makeText(MainActivity.this, getString(R.string.checkVolume), Toast.LENGTH_LONG)
 					.show();
 		}

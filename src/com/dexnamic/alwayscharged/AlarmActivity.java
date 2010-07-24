@@ -209,7 +209,7 @@ public class AlarmActivity extends Activity {
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
 			mMediaPlayer.setDataSource(this, uri);
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);
 			for (int i = 1; i <= 8; i *= 2) {
 				mVolume.push(1 / (float) i);
 			}
@@ -258,7 +258,7 @@ public class AlarmActivity extends Activity {
 		stopRingtone();
 		mHandler.removeMessages(MSG_TIMEOUT);
 		try {
-//			mAudioManager.setStreamVolume(AudioManager.STREAM_ALARM, mSaveVolume, 0);
+//			mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mSaveVolume, 0);
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
