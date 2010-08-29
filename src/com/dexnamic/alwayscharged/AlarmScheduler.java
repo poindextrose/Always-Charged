@@ -14,24 +14,24 @@ import android.preference.PreferenceManager;
 
 public class AlarmScheduler {
 
-	public static final String TYPE_ALARM = "alarm";
-	public static final String TYPE_SNOOZE = "snooze";
-	public static final String TYPE_NOTIFY = "notify";
+	static final String TYPE_ALARM = "alarm";
+	static final String TYPE_SNOOZE = "snooze";
+	static final String TYPE_NOTIFY = "notify";
 
 	/**
 	 * SharedPreference key to indicate if alarm should snooze and
 	 * alarm if device unplugged before it is fully charged
 	 */
-	public final static String KEY_POWER_SNOOZE = "key_power_snooze";
+	final static String KEY_POWER_SNOOZE = "key_power_snooze";
 
-	public static final int NOTIFY_SNOOZE = 1;
+	static final int NOTIFY_SNOOZE = 1;
 
-	public static int setDailyAlarm(Context context, int hourOfDay, int minute) {
+	static int setDailyAlarm(Context context, int hourOfDay, int minute) {
 
 //		Log.i(MainActivity.LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
-		
+
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-		
+
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
 		if (!alarmEnabled)
@@ -46,9 +46,10 @@ public class AlarmScheduler {
 		final long day_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 		if (calAlarm.before(calNow)) // if alarm is now or earlier
 			alarmTime_ms += day_ms;
-		int snoozeTime_ms = 60*1000*Integer.parseInt(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "5"));
+		int snoozeTime_ms = 60 * 1000 * Integer.parseInt(settings.getString(
+				MainActivity.KEY_SNOOZE_TIME_MIN, "5"));
 		long alarmNotifyTime_ms = alarmTime_ms;
-		if((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
+		if ((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
 			alarmTime_ms -= snoozeTime_ms;
 		}
 
@@ -59,7 +60,7 @@ public class AlarmScheduler {
 		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
 	}
 
-	public static void cancelAlarm(Context context, String category) {
+	static void cancelAlarm(Context context, String category) {
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, category);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
@@ -67,18 +68,18 @@ public class AlarmScheduler {
 		cancelNotification(context);
 	}
 
-	public static void cancelNotification(Context context) {
+	static void cancelNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
-	public static void snoozeAlarm(Context context, int snoozeTime_min) {
+	static void snoozeAlarm(Context context, int snoozeTime_min) {
 //		Log.i("dexnamic", "alarm is snoozing");
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, context
-				.getString(R.string.default_snooze_time));
+		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
+				context.getString(R.string.default_snooze_time));
 		int minutes = Integer.parseInt(strMinutes);
 		if (snoozeTime_min > 0)
 			minutes = snoozeTime_min;
@@ -94,8 +95,8 @@ public class AlarmScheduler {
 
 			String text = context.getString(R.string.notify_text);
 			// Set the icon, scrolling text and timestamp
-			Notification notification = new Notification(R.drawable.ic_stat_notify, text, System
-					.currentTimeMillis());
+			Notification notification = new Notification(R.drawable.ic_stat_notify, text,
+					System.currentTimeMillis());
 			// The PendingIntent to launch our activity if the user selects this
 			// notification
 			PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY);
@@ -112,7 +113,7 @@ public class AlarmScheduler {
 		}
 	}
 
-	private static PendingIntent getPendingIntentUpdateCurrent(Context context, String action) {
+	static PendingIntent getPendingIntentUpdateCurrent(Context context, String action) {
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(action);
 
@@ -120,35 +121,29 @@ public class AlarmScheduler {
 
 	}
 
-	public static void enablePowerSnooze(Context context) {
+	static void enablePowerSnooze(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putBoolean(KEY_POWER_SNOOZE, true);
 		editor.commit();
 	}
 
-	public static void disablePowerSnooze(Context context) {
+	static void disablePowerSnooze(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putBoolean(KEY_POWER_SNOOZE, false);
 		editor.commit();
 	}
 
-	public static boolean isPowerSnoozeSet(Context context) {
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		return settings.getBoolean(KEY_POWER_SNOOZE, false);
+	static PowerManager.WakeLock mWakeLock;
 
-	}
-
-	public static PowerManager.WakeLock mWakeLock;
-
-	public static void setPartialWakeLock(PowerManager pm) {
+	static void setPartialWakeLock(PowerManager pm) {
 		mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.dexnamic");
 		mWakeLock.setReferenceCounted(false);
 		mWakeLock.acquire();
 	}
 
-	public static void releaseWakeLock() {
+	static void releaseWakeLock() {
 		if (mWakeLock != null) {
 			try {
 				mWakeLock.release();
@@ -157,12 +152,12 @@ public class AlarmScheduler {
 			mWakeLock = null;
 		}
 	}
-	
-	public static void resetRepeatCount(Context context) {
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+
+	static void resetRepeatCount(Context context, SharedPreferences settings) {
+		if (settings == null)
+			settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
 		editor.commit();
 	}
-
 }

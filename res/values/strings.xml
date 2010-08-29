@@ -30,12 +30,12 @@
     <string name="disabled">Disabled</string>
     <string name="degrees">Degrees</string>
     <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
-    <string name="feedback">Feedback</string>
+    <string name="feedback">Email Developer</string>
     <string name="sendmail">Send mail...</string>
     <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
-    <string name="notify_text">Click to disable alarm for tonight</string>
+    <string name="notify_text">Alarm Snoozed. Click to cancel.</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
     <string name="first_time_text">
 Have you ever forgotten to plug in your phone at night to find your
@@ -48,7 +48,7 @@ This is not just a simple alarm.  It waits patiently and silently snoozes the al
 if you are using your phone, moving around, or already have it plugged in and charging.\n\n
 
 If you like or dislike something about this application, or you want to suggest a feature,
-please send me feedback from the button on the main screen.\n\n
+please send me an email (press the menu button from the main screen).\n\n
     <a href="http://dexnamic.com">Dexnamic.com</a></string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>

@@ -24,7 +24,7 @@ public class PowerSnoozeService extends Service {
 			if (batteryPercent >= 0.80) {
 				AlarmScheduler.disablePowerSnooze(this);
 			} else {
-				AlarmScheduler.resetRepeatCount(this);
+				AlarmScheduler.resetRepeatCount(this, null);
 				AlarmScheduler.snoozeAlarm(this, 0);
 			}
 		}

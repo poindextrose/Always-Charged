@@ -164,7 +164,7 @@ public class AlarmActivity extends Activity {
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							stopRingtone();
-							AlarmScheduler.resetRepeatCount(AlarmActivity.this);
+							AlarmScheduler.resetRepeatCount(AlarmActivity.this, mSettings);
 							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
 							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
 							alarmFinished();

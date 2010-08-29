@@ -25,16 +25,23 @@ import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.provider.Settings;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-// remove "Advanced" button before publishing
+// use "setInexactRepeatnig" for alarms
+// change bed time for different days of the week
 
-// force snooze time to 5 minutes
+// make trial: only works on Monday, Wednesday, and Friday
+
+// problem: is going off 5 minutes early on Becki's phone
+
+// user with Eris says getting a message cancels alarm
+
+// have low battery alarm integrated
 
 // skip alarm for the night if battery level over a certain amount?
 
@@ -179,54 +186,22 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
 
-		Button buttonDone = (Button) findViewById(R.id.ButtonDone);
-		buttonDone.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MainActivity.this.finish();
-			}
-		});
-
-		Button buttonAdvanced = (Button) findViewById(R.id.ButtonAdvanced);
-		buttonAdvanced.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, AdvancedPreferences.class);
-				startActivity(i);
-			}
-		});
-
-		Button buttonFeedback = (Button) findViewById(R.id.ButtonFeedback);
-		buttonFeedback.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Context context = MainActivity.this;
-				Intent i = new Intent(Intent.ACTION_SEND);
-				i.setType("text/plain");
-				String appName2 = context.getString(R.string.app_name_no_spaces);
-				i.putExtra(Intent.EXTRA_EMAIL,
-						new String[] { "dexnamic+" + appName2 + "@gmail.com" });
-				String feedback = context.getString(R.string.feedback);
-				String appName = context.getString(R.string.app_name);
-				i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-//				i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-				Intent i2 = (Intent) i.clone();
-				try {
-					ComponentName cn = new ComponentName("com.google.android.gm",
-							"com.google.android.gm.ComposeActivityGmail");
-					i.setComponent(cn);
-					startActivity(i);
-				} catch (android.content.ActivityNotFoundException ex1) {
-					try {
-						startActivity(Intent
-								.createChooser(i2, context.getString(R.string.sendmail)));
-					} catch (android.content.ActivityNotFoundException ex2) {
-						Toast.makeText(context, context.getString(R.string.noemail),
-								Toast.LENGTH_SHORT).show();
-					}
-				}
-			}
-		});
+//		Button buttonDone = (Button) findViewById(R.id.ButtonDone);
+//		buttonDone.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				MainActivity.this.finish();
+//			}
+//		});
+//
+//		Button buttonAdvanced = (Button) findViewById(R.id.ButtonAdvanced);
+//		buttonAdvanced.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent i = new Intent(MainActivity.this, AdvancedPreferences.class);
+//				startActivity(i);
+//			}
+//		});
 
 		// set wallpaper as background
 		try {
@@ -249,7 +224,53 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		else
 			mFirstInstance = false;
 	}
+	
+	 static final int EMAIL_ID = Menu.FIRST;
+//	 static final int DELETE_ID = Menu.FIRST + 1;
+//	 static final int DELETE_ALL_ID = Menu.FIRST + 2;	
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, EMAIL_ID, 0, R.string.feedback);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case EMAIL_ID:
+			Context context = MainActivity.this;
+			Intent i = new Intent(Intent.ACTION_SEND);
+			i.setType("text/plain");
+			String appName2 = context.getString(R.string.app_name_no_spaces);
+			i.putExtra(Intent.EXTRA_EMAIL,
+					new String[] { "dexnamic+" + appName2 + "@gmail.com" });
+			String feedback = context.getString(R.string.feedback);
+			String appName = context.getString(R.string.app_name);
+			i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
+//			i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+			Intent i2 = (Intent) i.clone();
+			try {
+				ComponentName cn = new ComponentName("com.google.android.gm",
+						"com.google.android.gm.ComposeActivityGmail");
+				i.setComponent(cn);
+				startActivity(i);
+			} catch (android.content.ActivityNotFoundException ex1) {
+				try {
+					startActivity(Intent
+							.createChooser(i2, context.getString(R.string.sendmail)));
+				} catch (android.content.ActivityNotFoundException ex2) {
+					Toast.makeText(context, context.getString(R.string.noemail),
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+			return true;
+		}
+
+		return super.onMenuItemSelected(featureId, item);
+	}
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
