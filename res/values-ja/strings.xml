@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">常に荷電</string>
+    <string name="app_name_no_spaces">AlwaysCharged</string>
+    <string name="default_snooze_time">5</string>
+    <string name="default_motion_tolerance">4</string>
+    <string name="default_alarm_duration">20</string>
+    <string name="enable_alarm">有効にするチャージリマインダー</string>
+    <string name="enable_alarm_summary">携帯電話は5〜10分間静止している場合充電されていませんね</string>    
+    <string name="bed_time">ベッドタイム</string>
+    <string name="ringtone">アラーム音</string>
+    <string name="vibrate">振動する</string>
+    <string name="snooze_time">スヌーズ時間</string>
+    <string name="dialog_title_snooze">スヌーズ時間</string>
+    <string name="hour">時間</string>
+    <string name="hours">時間</string>
+    <string name="minute">分</string>    
+    <string name="minutes">分</string>  
+    <string name="seconds">秒</string> 
+    <string name="until_alarm">アラームまで</string>
+    <string name="about">約</string>
+    <string name="silent">サイレント</string>
+    <string name="unknown">不明</string>
+    <string name="advanced">Advanced</string>
+    <string name="advanced_settings">Advanced Settings</string>
+    <string name="alarm_duration">Alarm Duration</string>
+    <string name="dialog_title_duration">Alarm Duration</string>
+    <string name="motion_tolerance">Motion Sensitivity</string>
+    <string name="dialog_title_motion_tolerance">Motion Tolerance</string>
+    <string name="disabled">無効</string>
+    <string name="degrees">度</string>
+    <string name="notification_toast">をクリックして通知が今夜のためのアラームを却下する</string>
+    <string name="feedback">フィードバック</string>
+    <string name="sendmail">メールを送信する</string>
+    <string name="noemail">ない電子メールクライアントがインストールされます。</string>
+    <string name="alarm_message">時間は携帯電話を充電する！</string>
+    <string name="snooze">居眠り</string>
+    <string name="notify_text">をクリックして無効にするアラームに今夜の</string>
+    <string name="checkVolume">呼出音の音量をゼロに設定されて、記者のボリュームキーを調整します。</string>
+    <string name="first_time_text">
+あなたはあなたの携帯電話で一晩で見つけるためにプラグインを忘れてお
+携帯電話のバッテリー死んで次の日？もしそうなら、の<i>は常に荷電</i>はあなたのためです。
+ちょうどあなたの通常の就寝時間に、時間を設定している場合
+あなたの携帯電話に接続してください、何も起こりません。ただし、場合
+、アラームは、あなたの携帯電話を充電する思い出さ鳴ります忘れている。
+
+これは単純なアラームではない。これは、根気と待機サイレントアラームをsnoozes
+あなたは、あなたの携帯電話を使用して回避、移動、またはすでにそれがで充電接続している場合。
+
+ご希望の場合、またはこのアプリケーションについての何かが嫌いか、機能を提案する場合、
+私は、メイン画面上のボタンからのフィードバックを送信してください。
+    <a href="http://dexnamic.com">Dexnamic.com</a></string>
+    <string name="close">閉じる</string>
+    <string name="dontshowagain">再度表示されない</string>
+    <string name="done">実行</string>
+</resources>
