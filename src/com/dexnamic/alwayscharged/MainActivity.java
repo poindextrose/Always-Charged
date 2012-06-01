@@ -244,8 +244,9 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
 			String appName2 = context.getString(R.string.app_name_no_spaces);
+			// TODO: move this email string to resources
 			i.putExtra(Intent.EXTRA_EMAIL,
-					new String[] { "dexnamic+" + appName2 + "@gmail.com" });
+					new String[] { "alwayscharged@dr.poindexter.us" });
 			String feedback = context.getString(R.string.feedback);
 			String appName = context.getString(R.string.app_name);
 			i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
