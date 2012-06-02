@@ -27,6 +27,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,7 +76,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	private boolean mFirstInstance = true;
 
-	public static final String LOG_TAG = "dexnamic";
+	public static final String LOG_TAG = "AlwaysCharged";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +141,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
 			getWindow().setBackgroundDrawable(drawable);
 		} catch (Exception e) {
-//			Log.e("dexnamic", e.getMessage());
+			Log.e("LOG_TAG", e.getMessage());
 		}
 
 		setVolumeControlStream(AudioManager.STREAM_RING);
@@ -171,33 +172,30 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			showDialog(FIRST_TIME_DIALOG_ID);
 	}
 
-	static final int EMAIL_ID = Menu.FIRST;
-
+	static final int FEEDBACK_MENU_ID = Menu.FIRST;
 	// static final int DELETE_ID = Menu.FIRST + 1;
 	// static final int DELETE_ALL_ID = Menu.FIRST + 2;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, EMAIL_ID, 0, R.string.feedback);
+		menu.add(0, FEEDBACK_MENU_ID, 0, R.string.feedback);
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
-		case EMAIL_ID:
-			Context context = MainActivity.this;
+		case FEEDBACK_MENU_ID:
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
-			//String appName2 = context.getString(R.string.app_name_no_spaces);
-			// TODO: move this email string to resources
-			i.putExtra(Intent.EXTRA_EMAIL,
-					new String[] { "alwayscharged@dr.poindexter.us" });
-			String feedback = context.getString(R.string.feedback);
-			String appName = context.getString(R.string.app_name);
-			i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-//			i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+			String contactEmail = getString(R.string.contact_email);
+			i.putExtra(Intent.EXTRA_EMAIL, new String[] { contactEmail });
+			String feedback = getString(R.string.feedback);
+			String appName = getString(R.string.app_name);
+			i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName
+					+ ")");
+			// i.putExtra(Intent.EXTRA_TEXT , "body of email");
 			Intent i2 = (Intent) i.clone();
 			try {
 				ComponentName cn = new ComponentName("com.google.android.gm",
@@ -206,10 +204,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				startActivity(i);
 			} catch (android.content.ActivityNotFoundException ex1) {
 				try {
-					startActivity(Intent
-							.createChooser(i2, context.getString(R.string.sendmail)));
+					startActivity(Intent.createChooser(i2,
+							getString(R.string.sendmail)));
 				} catch (android.content.ActivityNotFoundException ex2) {
-					Toast.makeText(context, context.getString(R.string.noemail),
+					Toast.makeText(this, getString(R.string.noemail),
 							Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -223,7 +221,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 //			Toast.makeText(MainActivity.this, (String) newValue, Toast.LENGTH_LONG).show();
-//			Log.d("dexnamic", "newValue=" + (String)newValue);
+//			Log.d("LOG_TAG", "newValue=" + (String)newValue);
 			if (preference == mRingtonePreference) {
 				setRingtoneSummary((String) newValue);
 			}

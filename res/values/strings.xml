@@ -16,6 +16,7 @@ v1.1.1\n
     </string>
     <string name="app_name">Always Charged</string>
     <string name="app_name_no_spaces">AlwaysCharged</string>
+    <string name="contact_email">alwayscharged@dr.poindexter.us</string>
     <string name="default_snooze_time">5</string>
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
