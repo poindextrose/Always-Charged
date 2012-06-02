@@ -6,7 +6,7 @@
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Activer les frais de rappel</string>
-    <string name="enable_alarm_summary">Sounds si le téléphone est immobile pendant 5-10 minutes et n\'est pas en charge</string>    
+    <string name="enable_alarm_summary">Sounds si le téléphone est immobile pendant 5&#8211;10 minutes et n\'est pas en charge</string>    
     <string name="bed_time">Temps Bed</string>
     <string name="ringtone">Sonnerie d\'alarme</string>
     <string name="vibrate">Vibreur</string>
@@ -31,7 +31,7 @@
     <string name="degrees">Degrés</string>
     <string name="notification_toast">Cliquez notification de licenciement d\'alarme pour</string>
     <string name="feedback">Commentaires</string>
-    <string name="sendmail">Mail envoyer...</string>
+    <string name="sendmail">Mail envoyer&#8211;</string>
     <string name="noemail">Il n\'ya pas de clients de messagerie installés.</string>
     <string name="alarm_message">Temps pour recharger votre téléphone!</string>
     <string name="snooze">Snooze</string>

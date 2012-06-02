@@ -5,7 +5,7 @@
     <string name="default_motion_tolerance">"4"</string>
     <string name="default_alarm_duration">"20"</string>
     <string name="enable_alarm">"Habilitar Recordatorio de carga"</string>
-    <string name="enable_alarm_summary">"Sonidos después de acostarse sólo si el teléfono no se carga y no se mueve de 5 a 10 minutos"</string>    
+    <string name="enable_alarm_summary">"Sonidos después de acostarse sólo si el teléfono no se carga y no se mueve de 5&#8211;10 minutos"</string>
     <string name="bed_time">"Hora de acostarse"</string>
     <string name="ringtone">"Tono de alarma"</string>
     <string name="vibrate">"Vibración"</string>

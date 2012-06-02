@@ -6,7 +6,7 @@
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">启用收费提醒</string>
-    <string name="enable_alarm_summary">声音，如果手机是为5-10分钟，一动不动，不收费</string>    
+    <string name="enable_alarm_summary">声音，如果手机是为5&#8211;10分钟，一动不动，不收费</string>    
     <string name="bed_time">床时间</string>
     <string name="ringtone">闹钟铃声</string>
     <string name="vibrate">震动</string>
@@ -31,7 +31,7 @@
     <string name="degrees">度</string>
     <string name="notification_toast">按通知解雇今晚报警</string>
     <string name="feedback">反馈</string>
-    <string name="sendmail">发送邮件...</string>
+    <string name="sendmail">发送邮件&#8230;</string>
     <string name="noemail">有没有电子邮件客户端安装。</string>
     <string name="alarm_message">您的手机充电时间！</string>
     <string name="snooze">贪睡</string>
