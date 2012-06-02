@@ -12,6 +12,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -116,6 +119,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG = 2;
+	static final int CHANGELOG_DIALOG_ID = 3;
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
@@ -133,6 +137,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
+	public final static String KEY_VERSION_CODE = "key_version_code";
 
 	public final static String KEY_SNOOZE_TIME_MIN = "key_snooze";
 	public final static String KEY_DURATION = "key_alarm_duration";
@@ -224,10 +229,31 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		else
 			mFirstInstance = false;
 	}
-	
-	 static final int EMAIL_ID = Menu.FIRST;
-//	 static final int DELETE_ID = Menu.FIRST + 1;
-//	 static final int DELETE_ALL_ID = Menu.FIRST + 2;	
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+
+		try {
+			PackageManager pm = getPackageManager();
+			PackageInfo packageInfo = pm.getPackageInfo(this.getPackageName(),
+					0);
+			if (mFirstInstance && (packageInfo.versionCode > settings.getInt(KEY_VERSION_CODE, 0))) {
+				editor.putInt(KEY_VERSION_CODE, packageInfo.versionCode);
+				editor.commit();
+				showDialog(CHANGELOG_DIALOG_ID);
+			}
+		} catch (NameNotFoundException e) {
+		}
+		
+		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
+			showDialog(FIRST_TIME_DIALOG_ID);
+	}
+
+	static final int EMAIL_ID = Menu.FIRST;
+
+	// static final int DELETE_ID = Menu.FIRST + 1;
+	// static final int DELETE_ALL_ID = Menu.FIRST + 2;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -272,14 +298,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		return super.onMenuItemSelected(featureId, item);
 	}
 	
-	@Override
-	protected void onStart() {
-		super.onStart();
-
-		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
-			showDialog(FIRST_TIME_DIALOG_ID);
-	}
-
 	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -401,6 +419,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			builder = prepareDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
+		case CHANGELOG_DIALOG_ID:
+			builder = prepareChangelogDialogBuilder();
+			alertDialog = builder.create();
+			return alertDialog;
 		}
 		return null;
 	}
@@ -425,6 +447,26 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		return builder;
 	}
 
+	private AlertDialog.Builder prepareChangelogDialogBuilder() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.changelog_dialog,
+				(ViewGroup) findViewById(R.id.changelog_layout_root));
+//		TextView text = (TextView) layout.findViewById(R.id.text);
+//		text.setText("Hello, this is a custom dialog!");
+//		ImageView image = (ImageView) layout.findViewById(R.id.image);
+//		image.setImageResource(R.drawable.android);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(layout);
+		builder.setTitle(getString(R.string.changelog_title));
+//		builder.setMessage(getString(R.string.about));
+		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		return builder;
+	}
+	
 	private TimePickerDialog.OnTimeSetListener mTimeChangedListener = new TimePickerDialog.OnTimeSetListener() {
 
 		@Override
