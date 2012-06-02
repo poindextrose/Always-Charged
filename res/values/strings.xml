@@ -48,8 +48,7 @@ This is not just a simple alarm.  It waits patiently and silently snoozes the al
 if you are using your phone, moving around, or already have it plugged in and charging.\n\n
 
 If you like or dislike something about this application, or you want to suggest a feature,
-please send me an email (press the menu button from the main screen).\n\n
-    <a href="http://dexnamic.com">Dexnamic.com</a></string>
+please send me an email (press the menu button from the main screen).</string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
     <string name="done">Done</string>

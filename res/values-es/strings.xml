@@ -31,7 +31,7 @@
     <string name="degrees">grados</string>
     <string name="notification_toast">Haga clic en la notificación de despido de alarma para esta noche</string>
     <string name="feedback">Realimentación</string>
-    <string name="sendmail">enviar correo electrónico...</string>
+    <string name="sendmail">enviar correo electrónico</string>
     <string name="noemail">No hay clientes de correo electrónico instalado</string>
     <string name="alarm_message">Tiempo para cargar su teléfono!</string>
     <string name="snooze">dormitar</string>
@@ -48,8 +48,7 @@ Esto no es sólo una simple alarma. Espera con paciencia y en silencio pausa la 
 si está utilizando el teléfono, para moverse, o ya lo han conectado y carga.\n\n
 
 Si te gusta o no les gusta algo acerca de esta aplicación, o quiere sugerir una característica,
-por favor enviarme comentarios desde el botón en la pantalla principal.\n\n
-    <a href="http://dexnamic.com">Dexnamic.com</a></string>
+por favor enviarme comentarios desde el botón en la pantalla principal.</string>
     <string name="close">cerrar</string>
     <string name="dontshowagain">No volver a mostrar</string>
     <string name="done">Hecho</string>
