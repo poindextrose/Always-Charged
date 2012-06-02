@@ -1,55 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Siempre se carga</string>
-    <string name="app_name_no_spaces">AlwaysCharged</string>
-    <string name="default_snooze_time">5</string>
-    <string name="default_motion_tolerance">4</string>
-    <string name="default_alarm_duration">20</string>
-    <string name="enable_alarm">Recordatorio de carga Habilitar</string>
-    <string name="enable_alarm_summary">Sonidos si el teléfono está en reposo durante 5-10 minutos y no se carga</string>    
-    <string name="bed_time">la hora de dormir</string>
-    <string name="ringtone">tono de alarma</string>
-    <string name="vibrate">vibrar</string>
-    <string name="snooze_time">Límite de tiempo</string>
-    <string name="dialog_title_snooze">Límite de tiempo</string>
-    <string name="hour">hora</string>
-    <string name="hours">horas</string>
-    <string name="minute">minuto</string>    
-    <string name="minutes">acta</string>  
-    <string name="seconds">segundo</string> 
-    <string name="until_alarm">hasta que la alarma</string>
-    <string name="about">sobre</string>
-    <string name="silent">silencioso</string>
-    <string name="unknown">desconocido</string>
-    <string name="advanced">Advanced</string>
-    <string name="advanced_settings">Advanced Settings</string>
-    <string name="alarm_duration">Alarm Duration</string>
-    <string name="dialog_title_duration">Alarm Duration</string>
-    <string name="motion_tolerance">Motion Sensitivity</string>
-    <string name="dialog_title_motion_tolerance">Motion Tolerance</string>
-    <string name="disabled">discapacitado</string>
-    <string name="degrees">grados</string>
-    <string name="notification_toast">Haga clic en la notificación de despido de alarma para esta noche</string>
-    <string name="feedback">Realimentación</string>
-    <string name="sendmail">enviar correo electrónico</string>
-    <string name="noemail">No hay clientes de correo electrónico instalado</string>
-    <string name="alarm_message">Tiempo para cargar su teléfono!</string>
-    <string name="snooze">dormitar</string>
-    <string name="notify_text">Haga clic para desactivar la alarma para esta noche</string>
-    <string name="checkVolume">El volumen del timbre se pone a cero, pulse las teclas de volumen para ajustar.</string>
-    <string name="first_time_text">
-¿Alguna vez has olvidado de conectar el teléfono en la noche para encontrar su
-teléfono batería muerta al día siguiente? Si es así, entonces esta aplicación es para usted.
-Sólo tienes que configurar el tiempo para su hora regular para acostarse, y si
-que no olvide conectar su teléfono, no pasará nada. Sin embargo, si
-olvidar, sonará una alarma, recordándole que debe cargar su teléfono.\n\n
-
-Esto no es sólo una simple alarma. Espera con paciencia y en silencio pausa la alarma
-si está utilizando el teléfono, para moverse, o ya lo han conectado y carga.\n\n
-
-Si te gusta o no les gusta algo acerca de esta aplicación, o quiere sugerir una característica,
-por favor enviarme comentarios desde el botón en la pantalla principal.</string>
-    <string name="close">cerrar</string>
-    <string name="dontshowagain">No volver a mostrar</string>
-    <string name="done">Hecho</string>
+    <string name="app_name">"Always Charged"</string>
+    <string name="app_name_no_spaces">"AlwaysCharged"</string>
+    <string name="default_snooze_time">"5"</string>
+    <string name="default_motion_tolerance">"4"</string>
+    <string name="default_alarm_duration">"20"</string>
+    <string name="enable_alarm">"Habilitar Recordatorio de carga"</string>
+    <string name="enable_alarm_summary">"Sonidos después de acostarse sólo si el teléfono no se carga y no se mueve de 5 a 10 minutos"</string>    
+    <string name="bed_time">"Hora de acostarse"</string>
+    <string name="ringtone">"Tono de alarma"</string>
+    <string name="vibrate">"Vibración"</string>
+    <string name="snooze_time">"Límite de tiempo"</string>
+    <string name="dialog_title_snooze">"Límite de tiempo"</string>
+    <string name="hour">"hora"</string>
+    <string name="hours">"horas"</string>
+    <string name="minute">"minuto"</string>    
+    <string name="minutes">"minutos"</string>  
+    <string name="seconds">"segundo"</string> 
+    <string name="until_alarm">"hasta que la alarma"</string>
+    <string name="about">"Sobre"</string>
+    <string name="silent">"Silencio"</string>
+    <string name="unknown">"Desconocido"</string>
+    <string name="advanced">"Avanzado"</string>
+    <string name="advanced_settings">"Configuración avanzada"</string>
+    <string name="alarm_duration">"Duración de la alarma"</string>
+    <string name="dialog_title_duration">"Duración de la alarma"</string>
+    <string name="motion_tolerance">"De sensibilidad de movimiento"</string>
+    <string name="dialog_title_motion_tolerance">"Tolerancia al movimiento"</string>
+    <string name="disabled">"Desactivado/a"</string>
+    <string name="degrees">"grados"</string>
+    <string name="notification_toast">"Haga clic en la notificación de despido de alarma para esta noche"</string>
+    <string name="feedback">"E-mail del desarrollador"</string>
+    <string name="sendmail">"Enviar Correo"</string>
+    <string name="noemail">"No hay clientes de correo electrónico instalado."</string>
+    <string name="alarm_message">"Tiempo para cargar su teléfono!"</string>
+    <string name="snooze">"Alarma"</string>
+    <string name="notify_text">"Alarma de repetición. Haga clic para cancelar."</string>
+    <string name="checkVolume">"El volumen del timbre se ajusta a cero, pulse las teclas de volumen para ajustar."</string>
+    <string name="first_time_text">"
+¿Alguna vez has olvidado de conectar el teléfono en la noche para encontrar la batería del teléfono está muerto al día siguiente? Si es así, siempre cargada &lt;i&gt; &lt;/ i&gt; es para usted. Sólo tienes que configurar la hora a la hora de acostarse, y si se acuerda de conectar el teléfono, no pasará nada. Sin embargo, si se le olvida, sonará una alarma, para recordarle que debe cargar su teléfono. \ N \ n Esta no es sólo una simple alarma. Espera con paciencia y en silencio dormita la alarma si usted está usando su teléfono, para moverse, o ya lo han conectado y carga. \ N \ n Si te gusta o no les gusta algo acerca de esta solicitud, o quieres sugerir una característica, por favor envíeme un correo electrónico (pulse el botón de menú en la pantalla principal)."</string>
+    <string name="close">"Un saluo,"</string>
+    <string name="dontshowagain">"No volver a mostrar"</string>
+    <string name="done">"hacerlo"</string>
+    <string name="default_ringtone">"Por Omisión"</string>
 </resources>
