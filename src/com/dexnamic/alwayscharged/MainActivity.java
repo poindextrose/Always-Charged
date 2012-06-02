@@ -39,7 +39,7 @@ import android.widget.Toast;
 
 // problem: is going off 5 minutes early on Becki's phone
 
-// user with Eris says getting a message cancels alarm
+// user with Eris says getting a message cancels alarm?
 
 // have low battery alarm integrated
 
@@ -243,7 +243,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			Context context = MainActivity.this;
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
-			String appName2 = context.getString(R.string.app_name_no_spaces);
+			//String appName2 = context.getString(R.string.app_name_no_spaces);
 			// TODO: move this email string to resources
 			i.putExtra(Intent.EXTRA_EMAIL,
 					new String[] { "alwayscharged@dr.poindexter.us" });
@@ -301,7 +301,16 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 						MainActivity.this);
 			}
 		} catch (Exception e) {
-			ringerName = getString(R.string.unknown);
+			ringerName = getString(R.string.default_ringtone);
+			try {
+				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_RINGTONE);
+				if (uriString.length() > 0) {
+					ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
+							MainActivity.this);
+				}
+			} catch (Exception e2) {
+				ringerName = getString(R.string.unknown);
+			}
 		} finally {
 			mRingtonePreference.setSummary(ringerName);
 			checkVolume();

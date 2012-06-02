@@ -31,7 +31,7 @@
     <string name="degrees">Degrees</string>
     <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
     <string name="feedback">Email Developer</string>
-    <string name="sendmail">Send mail...</string>
+    <string name="sendmail">Send mail</string>
     <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
@@ -53,4 +53,5 @@ please send me an email (press the menu button from the main screen).\n\n
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
     <string name="done">Done</string>
+    <string name="default_ringtone">Default</string>
 </resources>
