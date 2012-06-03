@@ -1,0 +1,58 @@
+android.annotation.SuppressLint
+android.annotation.TargetApi
+com.dexnamic.alwayscharged.AlarmActivity:
+    private static final int MSG_TIMEOUT
+    private static final int MSG_UP_VOLUME
+    static final int DIALOG_ALERT_ID
+com.dexnamic.alwayscharged.AlarmReceiver:
+    public static final java.lang.String ACTION_DISCONNECTED
+com.dexnamic.alwayscharged.AlarmScheduler:
+    static final java.lang.String TYPE_ALARM
+    static final java.lang.String TYPE_SNOOZE
+    static final java.lang.String TYPE_NOTIFY
+    static final java.lang.String KEY_POWER_SNOOZE
+    static final int NOTIFY_SNOOZE
+    15:15:public AlarmScheduler()
+com.dexnamic.alwayscharged.AlarmService:
+    private static final int SENSOR_STABILZE_WAIT_TIME_MS
+    private static final int MSG_TIMEOUT
+    private static final int MSG_STABILZE
+    private static final java.lang.String KEY_AZIMUTH
+    private static final java.lang.String KEY_PITCH
+    private static final java.lang.String KEY_ROLL
+com.dexnamic.alwayscharged.BuildConfig
+com.dexnamic.alwayscharged.MainActivity:
+    static final int TIME_DIALOG_ID
+    static final int FIRST_TIME_DIALOG_ID
+    static final int ABOUT_DIAlOG
+    static final int CHANGELOG_DIALOG_ID
+    public static final java.lang.String KEY_ALARM_ENABLED
+    public static final java.lang.String KEY_TIME
+    public static final java.lang.String KEY_HOUR
+    public static final java.lang.String KEY_MINUTE
+    public static final java.lang.String KEY_RINGTONE
+    public static final java.lang.String KEY_REPEAT
+    public static final java.lang.String KEY_VIBRATE
+    public static final java.lang.String KEY_FIRST_TIME
+    public static final java.lang.String KEY_ABOUT
+    public static final java.lang.String KEY_VERSION_CODE
+    public static final java.lang.String KEY_SNOOZE_TIME_MIN
+    public static final java.lang.String KEY_DURATION
+    public static final java.lang.String KEY_MOTION_TOLERANCE
+    public static final java.lang.String KEY_REPEAT_COUNT
+    public static final int TIMES_TO_REPEAT
+    public static final java.lang.String LOG_TAG
+    static final int FEEDBACK_MENU_ID
+com.dexnamic.alwayscharged.MyPrefsBackupAgent:
+    static final java.lang.String PREFS
+    static final java.lang.String PREFS_BACKUP_KEY
+com.dexnamic.alwayscharged.PowerSnoozeService:
+    public static android.os.PowerManager$WakeLock mWakeLock
+com.dexnamic.alwayscharged.R
+com.dexnamic.alwayscharged.R$array
+com.dexnamic.alwayscharged.R$attr
+com.dexnamic.alwayscharged.R$drawable
+com.dexnamic.alwayscharged.R$id
+com.dexnamic.alwayscharged.R$layout
+com.dexnamic.alwayscharged.R$string
+com.dexnamic.alwayscharged.R$xml

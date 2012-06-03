@@ -1,0 +1,70 @@
+com.dexnamic.alwayscharged.AdvancedPreferences
+com.dexnamic.alwayscharged.AlarmActivity
+com.dexnamic.alwayscharged.AlarmReceiver
+com.dexnamic.alwayscharged.AlarmService
+com.dexnamic.alwayscharged.MainActivity
+com.dexnamic.alwayscharged.MyPrefsBackupAgent
+com.dexnamic.alwayscharged.PowerSnoozeService
+com.dexnamic.alwayscharged.R$array: int entries_duration
+com.dexnamic.alwayscharged.R$array: int entries_motion_tolerance
+com.dexnamic.alwayscharged.R$array: int entries_snooze
+com.dexnamic.alwayscharged.R$array: int entryvalues_duration
+com.dexnamic.alwayscharged.R$array: int entryvalues_motion_tolerance
+com.dexnamic.alwayscharged.R$array: int entryvalues_snooze
+com.dexnamic.alwayscharged.R$drawable: int battery
+com.dexnamic.alwayscharged.R$drawable: int ic_stat_notify
+com.dexnamic.alwayscharged.R$id: int changelog_layout_root
+com.dexnamic.alwayscharged.R$id: int changelog_text
+com.dexnamic.alwayscharged.R$id: int first_time_layout_root
+com.dexnamic.alwayscharged.R$id: int first_time_text
+com.dexnamic.alwayscharged.R$layout: int alert
+com.dexnamic.alwayscharged.R$layout: int changelog_dialog
+com.dexnamic.alwayscharged.R$layout: int first_time_dialog
+com.dexnamic.alwayscharged.R$layout: int main
+com.dexnamic.alwayscharged.R$string: int about
+com.dexnamic.alwayscharged.R$string: int advanced
+com.dexnamic.alwayscharged.R$string: int advanced_settings
+com.dexnamic.alwayscharged.R$string: int alarm_duration
+com.dexnamic.alwayscharged.R$string: int alarm_message
+com.dexnamic.alwayscharged.R$string: int app_name
+com.dexnamic.alwayscharged.R$string: int app_name_no_spaces
+com.dexnamic.alwayscharged.R$string: int bed_time
+com.dexnamic.alwayscharged.R$string: int changelog
+com.dexnamic.alwayscharged.R$string: int changelog_title
+com.dexnamic.alwayscharged.R$string: int checkVolume
+com.dexnamic.alwayscharged.R$string: int close
+com.dexnamic.alwayscharged.R$string: int contact_email
+com.dexnamic.alwayscharged.R$string: int default_alarm_duration
+com.dexnamic.alwayscharged.R$string: int default_motion_tolerance
+com.dexnamic.alwayscharged.R$string: int default_ringtone
+com.dexnamic.alwayscharged.R$string: int default_snooze_time
+com.dexnamic.alwayscharged.R$string: int degrees
+com.dexnamic.alwayscharged.R$string: int dialog_title_duration
+com.dexnamic.alwayscharged.R$string: int dialog_title_motion_tolerance
+com.dexnamic.alwayscharged.R$string: int dialog_title_snooze
+com.dexnamic.alwayscharged.R$string: int disabled
+com.dexnamic.alwayscharged.R$string: int done
+com.dexnamic.alwayscharged.R$string: int dontshowagain
+com.dexnamic.alwayscharged.R$string: int enable_alarm
+com.dexnamic.alwayscharged.R$string: int enable_alarm_summary
+com.dexnamic.alwayscharged.R$string: int feedback
+com.dexnamic.alwayscharged.R$string: int first_time_text
+com.dexnamic.alwayscharged.R$string: int hour
+com.dexnamic.alwayscharged.R$string: int hours
+com.dexnamic.alwayscharged.R$string: int minute
+com.dexnamic.alwayscharged.R$string: int minutes
+com.dexnamic.alwayscharged.R$string: int motion_tolerance
+com.dexnamic.alwayscharged.R$string: int noemail
+com.dexnamic.alwayscharged.R$string: int notification_toast
+com.dexnamic.alwayscharged.R$string: int notify_text
+com.dexnamic.alwayscharged.R$string: int ringtone
+com.dexnamic.alwayscharged.R$string: int seconds
+com.dexnamic.alwayscharged.R$string: int sendmail
+com.dexnamic.alwayscharged.R$string: int silent
+com.dexnamic.alwayscharged.R$string: int snooze
+com.dexnamic.alwayscharged.R$string: int snooze_time
+com.dexnamic.alwayscharged.R$string: int unknown
+com.dexnamic.alwayscharged.R$string: int until_alarm
+com.dexnamic.alwayscharged.R$string: int vibrate
+com.dexnamic.alwayscharged.R$xml: int advanced_preferences
+com.dexnamic.alwayscharged.R$xml: int preferences
