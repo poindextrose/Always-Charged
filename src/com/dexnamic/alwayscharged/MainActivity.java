@@ -156,6 +156,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	protected void onStart() {
 		super.onStart();
 
+		// display a change log if the user just upgraded this application
 		try {
 			PackageManager pm = getPackageManager();
 			PackageInfo packageInfo = pm.getPackageInfo(this.getPackageName(),
@@ -168,6 +169,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		} catch (NameNotFoundException e) {
 		}
 		
+		// display a short educational dialog if this is a new user
 		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
 			showDialog(FIRST_TIME_DIALOG_ID);
 	}
