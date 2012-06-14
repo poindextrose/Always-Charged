@@ -30,6 +30,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,25 +69,17 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 	public static final int TIMES_TO_REPEAT = 2;
 
-	private int mTimeFormat; // 12 or 24
-
 	private RingtonePreference mRingtonePreference;
-
-	private AudioManager mAudioManager;
 
 	private boolean mFirstInstance = true;
 
-	public static final String LOG_TAG = "AlwaysCharged";
+	public final String LOG_TAG = this.getClass().getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences);
-
-		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-		mTimeFormat = Settings.System.getInt(getContentResolver(), Settings.System.TIME_12_24, 12);
 
 		// Load the XML preferences file
 		setContentView(R.layout.main);
@@ -113,24 +106,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
 
-//		Button buttonDone = (Button) findViewById(R.id.ButtonDone);
-//		buttonDone.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				MainActivity.this.finish();
-//			}
-//		});
-//
-//		Button buttonAdvanced = (Button) findViewById(R.id.ButtonAdvanced);
-//		buttonAdvanced.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(MainActivity.this, AdvancedPreferences.class);
-//				startActivity(i);
-//			}
-//		});
-
 		// set wallpaper as background
+		// TODO: fix stretching issue
 		try {
 			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
 			Class<?>[] parameterTypes = { Context.class };
@@ -173,22 +150,37 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
 			showDialog(FIRST_TIME_DIALOG_ID);
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+	
+		// Set up a listener whenever a key changes
+		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+	}
 
-	static final int FEEDBACK_MENU_ID = Menu.FIRST;
-	// static final int DELETE_ID = Menu.FIRST + 1;
-	// static final int DELETE_ALL_ID = Menu.FIRST + 2;
+	@Override
+		protected void onPause() {
+			super.onPause();
+	
+	//		Unregister the listener whenever a key changes
+			getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
+					this);
+	
+			editor.commit();
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		menu.add(0, FEEDBACK_MENU_ID, 0, R.string.feedback);
-		return true;
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.options, menu);
+	    return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
-		case FEEDBACK_MENU_ID:
+		case R.id.email_dev:
 			Intent i = new Intent(Intent.ACTION_SEND);
 			i.setType("text/plain");
 			String contactEmail = getString(R.string.contact_email);
@@ -269,27 +261,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		}
 	};
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-//		Unregister the listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
-				this);
-
-		editor.commit();
-		
-//		prefsChanged();
-	}
-	
 	private void prefsChanged() {
 		try {
 			Class<?> _BackupManager = Class.forName("android.app.backup.BackupManager");
@@ -417,7 +388,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				return "noon";
 			}
 		}
-		if (mTimeFormat == 12) {
+		int timeFormat = Settings.System.getInt(getContentResolver(), Settings.System.TIME_12_24, 12);
+		if (timeFormat == 12) {
 			if (hourOfDay >= 12) {
 				if (hourOfDay > 12)
 					hourOfDay -= 12;
@@ -470,11 +442,13 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	private void checkVolume() {
 		String chosenRingtone = settings.getString(KEY_RINGTONE, "");
-		if (chosenRingtone.length() > 0
-				&& mAudioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+		if (chosenRingtone.length() > 0) {
+			AudioManager audioManager;
+			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+			if(audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
 			Toast.makeText(MainActivity.this, getString(R.string.checkVolume), Toast.LENGTH_LONG)
 					.show();
-		}
+		}}
 	}
 
 }
