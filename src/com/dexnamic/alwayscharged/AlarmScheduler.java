@@ -160,4 +160,10 @@ public class AlarmScheduler {
 		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
 		editor.commit();
 	}
+	
+	static void disableAllAlarms(Context context) {
+		cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
+		cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+		disablePowerSnooze(context);
+	}
 }

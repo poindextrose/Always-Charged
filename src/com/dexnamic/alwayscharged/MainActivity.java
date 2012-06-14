@@ -74,15 +74,13 @@ public class MainActivity extends PreferenceActivity implements
 
 	private boolean mFirstInstance = true;
 
-	public final String LOG_TAG = this.getClass().getSimpleName();
+	private final String LOG_TAG = this.getClass().getSimpleName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences);
-
-		// Load the XML preferences file
 		setContentView(R.layout.main);
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -126,7 +124,7 @@ public class MainActivity extends PreferenceActivity implements
 					(Object[]) null);
 			getWindow().setBackgroundDrawable(drawable);
 		} catch (Exception e) {
-			Log.e("LOG_TAG", e.getMessage());
+			Log.e(LOG_TAG, e.getMessage());
 		}
 
 		setVolumeControlStream(AudioManager.STREAM_RING);
@@ -227,7 +225,7 @@ public class MainActivity extends PreferenceActivity implements
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		// Toast.makeText(MainActivity.this, (String) newValue,
 		// Toast.LENGTH_LONG).show();
-		// Log.d("LOG_TAG", "newValue=" + (String)newValue);
+		// Log.d(LOG_TAG, "newValue=" + (String)newValue);
 		if (preference == mRingtonePreference) {
 			setRingtoneSummary((String) newValue);
 		}
@@ -273,16 +271,17 @@ public class MainActivity extends PreferenceActivity implements
 
 	private void prefsChanged() {
 		try {
+			// try to backup preferences to Google if supported on this device
 			Class<?> _BackupManager = Class
 					.forName("android.app.backup.BackupManager");
 			Constructor<?> constructor = _BackupManager
 					.getConstructor(new Class[] { Context.class });
-			Object bm = constructor.newInstance(this);
-			Method _dataChanged = _BackupManager.getMethod("dataChanged",
+			// reflection: BackupManager bm = new BackupManager(this);
+			Object backupManager = constructor.newInstance(this);
+			Method dataChanged = _BackupManager.getMethod("dataChanged",
 					(Class[]) null);
-			_dataChanged.invoke(bm, (Object[]) null);
-			// BackupManager bm = new BackupManager(this);
-			// bm.dataChanged();
+			// reflecdtion: backupManager.dataChanged();
+			dataChanged.invoke(backupManager, (Object[]) null);
 		} catch (Exception e) {
 		}
 	}
@@ -290,13 +289,12 @@ public class MainActivity extends PreferenceActivity implements
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
-		// Toast.makeText(MainActivity.this, key, Toast.LENGTH_SHORT).show();
 		prefsChanged();
 		if (key.equals(KEY_ALARM_ENABLED)) {
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
 				enableAlaram();
 			} else {
-				disableAlarms();
+				AlarmScheduler.disableAllAlarms(this);
 			}
 		}
 	}
@@ -311,7 +309,7 @@ public class MainActivity extends PreferenceActivity implements
 			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay,
 					minute, false);
 		case FIRST_TIME_DIALOG_ID:
-			builder = prepareDialogBuilder();
+			builder = aboutDialogBuilder();
 			builder.setNegativeButton(getString(R.string.dontshowagain),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -323,29 +321,24 @@ public class MainActivity extends PreferenceActivity implements
 			AlertDialog alertDialog = builder.create();
 			return alertDialog;
 		case ABOUT_DIAlOG:
-			builder = prepareDialogBuilder();
+			builder = aboutDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
 		case CHANGELOG_DIALOG_ID:
-			builder = prepareChangelogDialogBuilder();
+			builder = changelogDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
 		}
 		return null;
 	}
 
-	private AlertDialog.Builder prepareDialogBuilder() {
+	private AlertDialog.Builder aboutDialogBuilder() {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 		View layout = inflater.inflate(R.layout.first_time_dialog,
 				(ViewGroup) findViewById(R.id.first_time_layout_root));
-		// TextView text = (TextView) layout.findViewById(R.id.text);
-		// text.setText("Hello, this is a custom dialog!");
-		// ImageView image = (ImageView) layout.findViewById(R.id.image);
-		// image.setImageResource(R.drawable.android);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.app_name));
-		// builder.setMessage(getString(R.string.about));
 		builder.setPositiveButton(getString(R.string.close),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -355,18 +348,13 @@ public class MainActivity extends PreferenceActivity implements
 		return builder;
 	}
 
-	private AlertDialog.Builder prepareChangelogDialogBuilder() {
+	private AlertDialog.Builder changelogDialogBuilder() {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 		View layout = inflater.inflate(R.layout.changelog_dialog,
 				(ViewGroup) findViewById(R.id.changelog_layout_root));
-		// TextView text = (TextView) layout.findViewById(R.id.text);
-		// text.setText("Hello, this is a custom dialog!");
-		// ImageView image = (ImageView) layout.findViewById(R.id.image);
-		// image.setImageResource(R.drawable.android);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.changelog_title));
-		// builder.setMessage(getString(R.string.about));
 		builder.setPositiveButton(getString(R.string.close),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -395,7 +383,7 @@ public class MainActivity extends PreferenceActivity implements
 		mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
 	}
 
-	String formatTime(int hourOfDay, int minute) {
+	private String formatTime(int hourOfDay, int minute) {
 		String suffix = "";
 		if (minute == 0) {
 			switch (hourOfDay) {
@@ -423,7 +411,6 @@ public class MainActivity extends PreferenceActivity implements
 	}
 
 	private void enableAlaram() {
-		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 		checkVolume();
 
 		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
@@ -431,6 +418,10 @@ public class MainActivity extends PreferenceActivity implements
 		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay,
 				minute);
 
+		notifyUserTimeUntilAlarm(minutesUntilAlarm);
+	}
+	
+	private void notifyUserTimeUntilAlarm(int minutesUntilAlarm) {
 		String msg = "";
 		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
 		minutesUntilAlarm = minutesUntilAlarm % 60;
@@ -452,12 +443,6 @@ public class MainActivity extends PreferenceActivity implements
 		}
 		msg += " " + getString(R.string.until_alarm);
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-	}
-
-	private void disableAlarms() {
-		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_ALARM);
-		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
-		AlarmScheduler.disablePowerSnooze(this);
 	}
 
 	private void checkVolume() {
