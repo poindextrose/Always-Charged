@@ -17,12 +17,15 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class AlarmService extends Service {
 
 	private float mMotionToleranceDeg;
 	private final long TIMEOUT_MS = 10000; // 10 seconds in milliseconds
-	private static final int SENSOR_STABILZE_WAIT_TIME_MS = 5000; // 5 seconds in milliseconds
+	private static final int SENSOR_STABILZE_WAIT_TIME_MS = 5000; // 5 seconds
+																	// in
+																	// milliseconds
 
 	public static PowerManager.WakeLock mWakeLock;
 
@@ -30,7 +33,7 @@ public class AlarmService extends Service {
 	private SensorManager mSensorManager;
 	private SharedPreferences mSharedPreferences;
 
-	private boolean isSnooze;
+	private boolean wasSnooze;
 
 	@Override
 	public void onCreate() {
@@ -49,6 +52,7 @@ public class AlarmService extends Service {
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
 
+		Log.v(this.getClass().getSimpleName(), "AlarmServer.onStart()");
 		AlarmScheduler.enablePowerSnooze(this);
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -56,6 +60,7 @@ public class AlarmService extends Service {
 
 		int batteryPlugged = intentBattery.getIntExtra("plugged", 0);
 		if (batteryPlugged > 0) { // skip alarm since device plugged in
+			Log.v(this.getClass().getSimpleName(), "device is plugged. no alarm.");
 			stopSelf();
 			AlarmScheduler.releaseWakeLock();
 			return;
@@ -63,21 +68,42 @@ public class AlarmService extends Service {
 
 		// if screen is on, snooze alarm
 		// if phone call is progress, snooze alarm
-		if (screenOn() || telephoneInUse()) {
+		if (screenOn()) {
+			Log.v(this.getClass().getSimpleName(), "screen is on.  snoozing...");
+			doSnooze();
+			return;
+		}
+		if (telephoneInUse()) {
+			Log.v(this.getClass().getSimpleName(), "telephone in use.  snoozing...");
 			doSnooze();
 			return;
 		}
 
 		String action = intent.getAction();
-		if (action != null && action.equals(AlarmScheduler.TYPE_SNOOZE))
-			isSnooze = true;
-		else
-			isSnooze = false;
+		if (action != null && action.equals(AlarmScheduler.TYPE_SNOOZE)) {
+			Log.v(this.getClass().getSimpleName(), "wasSnooze = true");
+			wasSnooze = true;
+		} else
+			wasSnooze = false;
 
 		if (mMotionToleranceDeg > 0)
 			startReadingSensors();
-		else
-			doAlarm();
+		else {
+			Log.v(this.getClass().getSimpleName(), "motion detection disabled.  alarm...");
+			if (wasSnooze) {
+				doAlarm();
+			} else {
+				Log.v(this.getClass().getSimpleName(), "motion detection disabled.  snoozing...");
+				doSnooze();
+			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		stopReadingSensors();
 	}
 
 	private boolean screenOn() {
@@ -113,11 +139,18 @@ public class AlarmService extends Service {
 	float[] mMagneticValues = new float[3];
 
 	private void startReadingSensors() {
+		Log.v(this.getClass().getSimpleName(), "startReadingSensors()");
 		mAccelEventReceived = false;
 		mMagneticEventReceived = false;
 		mStabilze = false;
-		mAccelValues[0] = SensorManager.GRAVITY_EARTH; // just in case accel can't be read
-		mMagneticValues[0] = SensorManager.MAGNETIC_FIELD_EARTH_MIN; // just in case mag can't be read
+		mAccelValues[0] = SensorManager.GRAVITY_EARTH; // just in case accel
+														// can't be read
+		mMagneticValues[0] = SensorManager.MAGNETIC_FIELD_EARTH_MIN; // just in
+																		// case
+																		// mag
+																		// can't
+																		// be
+																		// read
 		mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		mAccelRegistered = mSensorManager.registerListener(mSensorEventListener, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
@@ -130,7 +163,14 @@ public class AlarmService extends Service {
 			Message msgSensorStabilze = Message.obtain(mHandler, MSG_STABILZE);
 			mHandler.sendMessageDelayed(msgSensorStabilze, SENSOR_STABILZE_WAIT_TIME_MS);
 		} else { // sensors could not be enabled
-			doAlarm();
+			if (wasSnooze) {
+				Log.v(this.getClass().getSimpleName(), "unable to read sensors. do alarm");
+				doAlarm();
+			} else {
+				Log.v(this.getClass().getSimpleName(),
+						"unable to read sensors. snooze until alarm time");
+				doSnooze();
+			}
 			return;
 		}
 	}
@@ -144,9 +184,17 @@ public class AlarmService extends Service {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
-				doAlarm();
+				if (wasSnooze) {
+					Log.v(this.getClass().getSimpleName(), "unable to read sensors. do alarm");
+					doAlarm();
+				} else {
+					Log.v(this.getClass().getSimpleName(),
+							"unable to read sensors. snooze until alarm time");
+					doSnooze();
+				}
 				break;
 			case MSG_STABILZE:
+				Log.v(this.getClass().getSimpleName(), "sensors have stabalized");
 				mStabilze = true;
 				break;
 			}
@@ -157,11 +205,10 @@ public class AlarmService extends Service {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			if (event.accuracy != SensorManager.SENSOR_STATUS_ACCURACY_HIGH)
-				return;
 			if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 				mAccelValues = event.values.clone();
 				mAccelEventReceived = true;
+				// Log.v(this.getClass().getSimpleName(), "accelerometer read");
 			} else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
 				mMagneticValues = event.values.clone();
 				mMagneticEventReceived = true;
@@ -178,6 +225,7 @@ public class AlarmService extends Service {
 	};
 
 	private void doAlarm() {
+		Log.v(this.getClass().getSimpleName(), "doAlarm()");
 
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
@@ -188,7 +236,9 @@ public class AlarmService extends Service {
 		newWakeLock.setReferenceCounted(false);
 		String stringAlarmDuration = mSharedPreferences.getString(MainActivity.KEY_DURATION, "30");
 		long alarmDuration = Long.parseLong(stringAlarmDuration);
-		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for duration of alarm + 10 seconds
+		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for
+															// duration of alarm
+															// + 10 seconds
 		AlarmScheduler.releaseWakeLock(); // remove original wake lock
 		mWakeLock = newWakeLock; // save new wake lock
 
@@ -202,6 +252,7 @@ public class AlarmService extends Service {
 	}
 
 	private void doSnooze() {
+		Log.v(this.getClass().getSimpleName(), "doSnooze()");
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
 
@@ -210,31 +261,32 @@ public class AlarmService extends Service {
 		AlarmScheduler.releaseWakeLock();
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-
-		stopReadingSensors();
-	}
-
 	private void sensorsHaveBeenRead() {
+		Log.v(this.getClass().getSimpleName(), "sensorsHaveBeenRead()");
+
 		stopReadingSensors();
 
 		float[] orientation = new float[3];
 		boolean hasMatrix = getCurrentOrientation(orientation);
 		if (!hasMatrix) {
-//			Log.d("dexnamic", "getCurrentOrientation failed");
-			doSnooze();
+			Log.v(this.getClass().getSimpleName(), "hasMatrix = false");
+			// Log.d("dexnamic", "getCurrentOrientation failed");
+			if (wasSnooze)
+				doAlarm();
+			else
+				doSnooze();
 		}
-		if (isSnooze) {
+		if (wasSnooze) {
 			checkDeviceOrientation(orientation);
 		} else {
 			saveDeviceOrientation(orientation);
+			Log.v(this.getClass().getSimpleName(), "saved device orientaiton.  snoozing...");
 			doSnooze();
 		}
 	}
 
 	private void checkDeviceOrientation(float[] newOrientation) {
+		Log.v(this.getClass().getSimpleName(), "checkDeviceOrientation()");
 		float[] previousOrientation = new float[3];
 		readDeviceOrientation(previousOrientation);
 		saveDeviceOrientation(newOrientation);
@@ -248,10 +300,13 @@ public class AlarmService extends Service {
 			if ((diff_deg > mMotionToleranceDeg) && (diff_deg < (wrap - mMotionToleranceDeg)))
 				deviceMoved = true;
 		}
-		if (deviceMoved)
+		if (deviceMoved) {
+			Log.v(this.getClass().getSimpleName(), "device has moved. snoozing...");
 			doSnooze();
-		else
+		} else {
+			Log.v(this.getClass().getSimpleName(), "device did not move. sounding alarm");
 			doAlarm();
+		}
 	}
 
 	private boolean getCurrentOrientation(float[] orientation) {
@@ -275,8 +330,10 @@ public class AlarmService extends Service {
 		editor.putFloat(KEY_PITCH, orientation[1]);
 		editor.putFloat(KEY_ROLL, orientation[2]);
 		editor.commit();
-//		Log.i("dexnamic", "orientation = (" + orientation[0] * 180.0 / Math.PI + ","
-//				+ orientation[1] * 180.0 / Math.PI + "," + orientation[2] * 180.0 / Math.PI + ")");
+		// Log.i("dexnamic", "orientation = (" + orientation[0] * 180.0 /
+		// Math.PI + ","
+		// + orientation[1] * 180.0 / Math.PI + "," + orientation[2] * 180.0 /
+		// Math.PI + ")");
 	}
 
 	private void readDeviceOrientation(float[] orientation) {

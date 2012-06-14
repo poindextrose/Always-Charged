@@ -25,10 +25,19 @@ public class AlarmScheduler {
 	final static String KEY_POWER_SNOOZE = "key_power_snooze";
 
 	static final int NOTIFY_SNOOZE = 1;
+	
+//	private final String LOG_TAG = this.getClass().getSimpleName();
 
+	/**
+	 * sets a daily, repeating alarm to potentially alter user to uncharging state
+	 * @param context - Application context
+	 * @param hourOfDay - hour to set alarm (0-23)
+	 * @param minute - minute to set alarm (0-59)
+	 * @return number of minutes until next alarm
+	 */
 	static int setDailyAlarm(Context context, int hourOfDay, int minute) {
 
-//		Log.i(MainActivity.LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
+//		Log.i(LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
 
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 
@@ -46,12 +55,14 @@ public class AlarmScheduler {
 		final long day_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 		if (calAlarm.before(calNow)) // if alarm is now or earlier
 			alarmTime_ms += day_ms;
-		int snoozeTime_ms = 60 * 1000 * Integer.parseInt(settings.getString(
-				MainActivity.KEY_SNOOZE_TIME_MIN, "5"));
+		int snoozeTime = Integer.parseInt(settings.getString(
+				MainActivity.KEY_SNOOZE_TIME_MIN, settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
+						context.getString(R.string.default_snooze_time))));
+		int snoozeTime_ms = 60 * 1000 * snoozeTime;
 		long alarmNotifyTime_ms = alarmTime_ms;
-		if ((alarmTime_ms - calNow.getTimeInMillis()) > snoozeTime_ms) {
-			alarmTime_ms -= snoozeTime_ms;
+		if ((calNow.getTimeInMillis() + snoozeTime_ms) < alarmTime_ms) {
 		}
+		alarmTime_ms -= snoozeTime_ms; // need to 
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
