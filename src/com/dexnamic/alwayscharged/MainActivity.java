@@ -37,7 +37,8 @@ import android.view.ViewGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class MainActivity extends PreferenceActivity implements
+		OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
 	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
@@ -48,8 +49,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	private Preference mPreferenceTime;
 	private Preference mPreferenceAbout;
 
-	SharedPreferences settings;
-	SharedPreferences.Editor editor;
+	SharedPreferences mSettings;
+	SharedPreferences.Editor mEditor;
 
 	public final static String KEY_ALARM_ENABLED = "key_alarm_enabled";
 	public final static String KEY_TIME = "key_time";
@@ -85,37 +86,44 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		setContentView(R.layout.main);
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences,
+				false);
 
 		PreferenceScreen ps = getPreferenceScreen();
-		settings = ps.getSharedPreferences();
-		editor = settings.edit();
+		mSettings = ps.getSharedPreferences();
+		mEditor = mSettings.edit();
 
-		mCheckBoxEnable = (CheckBoxPreference) ps.findPreference(KEY_ALARM_ENABLED);
+		mCheckBoxEnable = (CheckBoxPreference) ps
+				.findPreference(KEY_ALARM_ENABLED);
 
 		mPreferenceTime = (Preference) ps.findPreference(KEY_TIME);
-		mPreferenceTime.setOnPreferenceClickListener(mOnPreferenceClickListener);
-//		mPreferenceTime.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mPreferenceTime.setOnPreferenceClickListener(this);
 		setTime();
 
-		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
-		mRingtonePreference.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
-		String uriString = settings.getString(KEY_RINGTONE, null);
+		mRingtonePreference = (RingtonePreference) ps
+				.findPreference(KEY_RINGTONE);
+		mRingtonePreference
+				.setOnPreferenceChangeListener(this);
+		String uriString = mSettings.getString(KEY_RINGTONE, null);
 		setRingtoneSummary(uriString);
 
 		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
-		mPreferenceAbout.setOnPreferenceClickListener(mOnPreferenceClickListener);
+		mPreferenceAbout.setOnPreferenceClickListener(this);
 
 		// set wallpaper as background
 		// TODO: fix stretching issue
 		try {
-			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
+			Class<?> _WallpaperManager = Class
+					.forName("android.app.WallpaperManager");
 			Class<?>[] parameterTypes = { Context.class };
-			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
+			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance",
+					parameterTypes);
 			Object[] args = { this };
 			Object wm = _WM_getinstance.invoke(null, args);
-			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
-			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
+			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable",
+					(Class[]) null);
+			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm,
+					(Object[]) null);
 			getWindow().setBackgroundDrawable(drawable);
 		} catch (Exception e) {
 			Log.e("LOG_TAG", e.getMessage());
@@ -123,7 +131,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		setVolumeControlStream(AudioManager.STREAM_RING);
 
-		if (savedInstanceState == null) // savedInstanceState is null during first instantiation of class
+		if (savedInstanceState == null) // savedInstanceState is null during
+										// first instantiation of class
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
@@ -138,43 +147,46 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			PackageManager pm = getPackageManager();
 			PackageInfo packageInfo = pm.getPackageInfo(this.getPackageName(),
 					0);
-			if (mFirstInstance && (packageInfo.versionCode > settings.getInt(KEY_VERSION_CODE, 0))) {
-				editor.putInt(KEY_VERSION_CODE, packageInfo.versionCode);
-				editor.commit();
+			if (mFirstInstance
+					&& (packageInfo.versionCode > mSettings.getInt(
+							KEY_VERSION_CODE, 0))) {
+				mEditor.putInt(KEY_VERSION_CODE, packageInfo.versionCode);
+				mEditor.commit();
 				showDialog(CHANGELOG_DIALOG_ID);
 			}
 		} catch (NameNotFoundException e) {
 		}
-		
+
 		// display a short educational dialog if this is a new user
-		if (mFirstInstance && settings.getBoolean(KEY_FIRST_TIME, true))
+		if (mFirstInstance && mSettings.getBoolean(KEY_FIRST_TIME, true))
 			showDialog(FIRST_TIME_DIALOG_ID);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-	
+
 		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
-		protected void onPause() {
-			super.onPause();
-	
-	//		Unregister the listener whenever a key changes
-			getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
-					this);
-	
-			editor.commit();
-		}
+	protected void onPause() {
+		super.onPause();
+
+		// Unregister the listener whenever a key changes
+		getPreferenceScreen().getSharedPreferences()
+				.unregisterOnSharedPreferenceChangeListener(this);
+
+		mEditor.commit();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.options, menu);
-	    return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options, menu);
+		return true;
 	}
 
 	@Override
@@ -210,34 +222,35 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 		return super.onMenuItemSelected(featureId, item);
 	}
-	
-	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
-		@Override
-		public boolean onPreferenceChange(Preference preference, Object newValue) {
-//			Toast.makeText(MainActivity.this, (String) newValue, Toast.LENGTH_LONG).show();
-//			Log.d("LOG_TAG", "newValue=" + (String)newValue);
-			if (preference == mRingtonePreference) {
-				setRingtoneSummary((String) newValue);
-			}
-			return true;
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		// Toast.makeText(MainActivity.this, (String) newValue,
+		// Toast.LENGTH_LONG).show();
+		// Log.d("LOG_TAG", "newValue=" + (String)newValue);
+		if (preference == mRingtonePreference) {
+			setRingtoneSummary((String) newValue);
 		}
-	};
+		return true;
+	}
 
 	private void setRingtoneSummary(String uriString) {
 		String ringerName = getString(R.string.silent);
 		try {
 			Uri uri = Uri.parse(uriString);
 			if (uriString.length() > 0) {
-				ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
-						MainActivity.this);
+				ringerName = RingtoneManager
+						.getRingtone(MainActivity.this, uri).getTitle(
+								MainActivity.this);
 			}
 		} catch (Exception e) {
 			ringerName = getString(R.string.default_ringtone);
 			try {
-				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_RINGTONE);
+				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this,
+						RingtoneManager.TYPE_RINGTONE);
 				if (uriString.length() > 0) {
-					ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
-							MainActivity.this);
+					ringerName = RingtoneManager.getRingtone(MainActivity.this,
+							uri).getTitle(MainActivity.this);
 				}
 			} catch (Exception e2) {
 				ringerName = getString(R.string.unknown);
@@ -248,35 +261,36 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		}
 	}
 
-	Preference.OnPreferenceClickListener mOnPreferenceClickListener = new Preference.OnPreferenceClickListener() {
-
-		@Override
-		public boolean onPreferenceClick(Preference preference) {
-			if (preference == mPreferenceTime) {
-				MainActivity.this.showDialog(TIME_DIALOG_ID);
-			} else if (preference == mPreferenceAbout) {
-				showDialog(ABOUT_DIAlOG);
-			}
-			return false;
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference == mPreferenceTime) {
+			MainActivity.this.showDialog(TIME_DIALOG_ID);
+		} else if (preference == mPreferenceAbout) {
+			showDialog(ABOUT_DIAlOG);
 		}
-	};
+		return false;
+	}
 
 	private void prefsChanged() {
 		try {
-			Class<?> _BackupManager = Class.forName("android.app.backup.BackupManager");
-			Constructor<?> constructor = _BackupManager.getConstructor(new Class[]{Context.class});
+			Class<?> _BackupManager = Class
+					.forName("android.app.backup.BackupManager");
+			Constructor<?> constructor = _BackupManager
+					.getConstructor(new Class[] { Context.class });
 			Object bm = constructor.newInstance(this);
-			Method _dataChanged = _BackupManager.getMethod("dataChanged", (Class[])null);
-			_dataChanged.invoke(bm, (Object[])null);
-//			BackupManager bm = new BackupManager(this);
-//			bm.dataChanged();
+			Method _dataChanged = _BackupManager.getMethod("dataChanged",
+					(Class[]) null);
+			_dataChanged.invoke(bm, (Object[]) null);
+			// BackupManager bm = new BackupManager(this);
+			// bm.dataChanged();
 		} catch (Exception e) {
-		}		
+		}
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//		Toast.makeText(MainActivity.this, key, Toast.LENGTH_SHORT).show();
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		// Toast.makeText(MainActivity.this, key, Toast.LENGTH_SHORT).show();
 		prefsChanged();
 		if (key.equals(KEY_ALARM_ENABLED)) {
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
@@ -292,16 +306,17 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		AlertDialog.Builder builder;
 		switch (id) {
 		case TIME_DIALOG_ID:
-			int hourOfDay = settings.getInt(KEY_HOUR, 22);
-			int minute = settings.getInt(KEY_MINUTE, 0);
-			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay, minute, false);
+			int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+			int minute = mSettings.getInt(KEY_MINUTE, 0);
+			return new TimePickerDialog(this, mTimeChangedListener, hourOfDay,
+					minute, false);
 		case FIRST_TIME_DIALOG_ID:
 			builder = prepareDialogBuilder();
 			builder.setNegativeButton(getString(R.string.dontshowagain),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							editor.putBoolean(KEY_FIRST_TIME, false);
-							editor.commit();
+							mEditor.putBoolean(KEY_FIRST_TIME, false);
+							mEditor.commit();
 							dialog.dismiss();
 						}
 					});
@@ -323,19 +338,20 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 		View layout = inflater.inflate(R.layout.first_time_dialog,
 				(ViewGroup) findViewById(R.id.first_time_layout_root));
-//		TextView text = (TextView) layout.findViewById(R.id.text);
-//		text.setText("Hello, this is a custom dialog!");
-//		ImageView image = (ImageView) layout.findViewById(R.id.image);
-//		image.setImageResource(R.drawable.android);
+		// TextView text = (TextView) layout.findViewById(R.id.text);
+		// text.setText("Hello, this is a custom dialog!");
+		// ImageView image = (ImageView) layout.findViewById(R.id.image);
+		// image.setImageResource(R.drawable.android);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.app_name));
-//		builder.setMessage(getString(R.string.about));
-		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		// builder.setMessage(getString(R.string.about));
+		builder.setPositiveButton(getString(R.string.close),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
 		return builder;
 	}
 
@@ -343,29 +359,30 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 		View layout = inflater.inflate(R.layout.changelog_dialog,
 				(ViewGroup) findViewById(R.id.changelog_layout_root));
-//		TextView text = (TextView) layout.findViewById(R.id.text);
-//		text.setText("Hello, this is a custom dialog!");
-//		ImageView image = (ImageView) layout.findViewById(R.id.image);
-//		image.setImageResource(R.drawable.android);
+		// TextView text = (TextView) layout.findViewById(R.id.text);
+		// text.setText("Hello, this is a custom dialog!");
+		// ImageView image = (ImageView) layout.findViewById(R.id.image);
+		// image.setImageResource(R.drawable.android);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.changelog_title));
-//		builder.setMessage(getString(R.string.about));
-		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		// builder.setMessage(getString(R.string.about));
+		builder.setPositiveButton(getString(R.string.close),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
 		return builder;
 	}
-	
+
 	private TimePickerDialog.OnTimeSetListener mTimeChangedListener = new TimePickerDialog.OnTimeSetListener() {
 
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			editor.putInt(KEY_HOUR, hourOfDay);
-			editor.putInt(KEY_MINUTE, minute);
-			editor.commit();
+			mEditor.putInt(KEY_HOUR, hourOfDay);
+			mEditor.putInt(KEY_MINUTE, minute);
+			mEditor.commit();
 			mCheckBoxEnable.setChecked(true);
 			mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
 			enableAlaram();
@@ -373,8 +390,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	};
 
 	void setTime() {
-		int hourOfDay = settings.getInt(KEY_HOUR, 22);
-		int minute = settings.getInt(KEY_MINUTE, 0);
+		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+		int minute = mSettings.getInt(KEY_MINUTE, 0);
 		mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
 	}
 
@@ -388,7 +405,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				return "noon";
 			}
 		}
-		int timeFormat = Settings.System.getInt(getContentResolver(), Settings.System.TIME_12_24, 12);
+		int timeFormat = Settings.System.getInt(getContentResolver(),
+				Settings.System.TIME_12_24, 12);
 		if (timeFormat == 12) {
 			if (hourOfDay >= 12) {
 				if (hourOfDay > 12)
@@ -400,16 +418,18 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				suffix = " am";
 			}
 		}
-		return String.format("%d", hourOfDay) + ":" + String.format("%02d", minute) + suffix;
+		return String.format("%d", hourOfDay) + ":"
+				+ String.format("%02d", minute) + suffix;
 	}
 
 	private void enableAlaram() {
 		AlarmScheduler.cancelAlarm(this, AlarmScheduler.TYPE_SNOOZE);
 		checkVolume();
 
-		int hourOfDay = settings.getInt(KEY_HOUR, 22);
-		int minute = settings.getInt(KEY_MINUTE, 0);
-		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
+		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+		int minute = mSettings.getInt(KEY_MINUTE, 0);
+		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay,
+				minute);
 
 		String msg = "";
 		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
@@ -441,14 +461,16 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	}
 
 	private void checkVolume() {
-		String chosenRingtone = settings.getString(KEY_RINGTONE, "");
+		String chosenRingtone = mSettings.getString(KEY_RINGTONE, "");
 		if (chosenRingtone.length() > 0) {
 			AudioManager audioManager;
 			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			if(audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-			Toast.makeText(MainActivity.this, getString(R.string.checkVolume), Toast.LENGTH_LONG)
-					.show();
-		}}
+			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+				Toast.makeText(MainActivity.this,
+						getString(R.string.checkVolume), Toast.LENGTH_LONG)
+						.show();
+			}
+		}
 	}
 
 }
