@@ -66,8 +66,6 @@ public class AlarmScheduler {
 						context.getString(R.string.default_snooze_time))));
 		int snoozeTime_ms = 60 * 1000 * snoozeTime;
 		long alarmNotifyTime_ms = alarmTime_ms;
-		// if ((calNow.getTimeInMillis() + snoozeTime_ms) < alarmTime_ms) {
-		// }
 		alarmTime_ms -= snoozeTime_ms; // need to measure sensors before actual
 										// bedtime
 

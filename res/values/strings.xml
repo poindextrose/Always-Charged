@@ -3,6 +3,8 @@
     <string name="changelog">More updates are coming soon including scheduling a different bedtime for each day of the week and the ability to adjust motion sensitivity.\n
 \n
 v1.1.3\n
+- Fixed bug that caused the alarm to go off 5 minutes early
+- Updated notification messages to indicate why alarm was automatically snoozed.
 - Added this change log\n
 - Updated the Spanish translation using Google Translate Toolkit.  Please let me know if the translation is poor.\n
 \n
