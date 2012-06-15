@@ -5,6 +5,7 @@
 v1.1.3\n
 - Fixed bug that caused the alarm to go off 5 minutes early
 - Fixed bug where vibrate would not always work when selected
+- Fixed a bug with auto-snooze motion detection on some devices (including Galaxy Nexus)
 - Updated notification messages to indicate why alarm was automatically snoozed.
 - Added this change log\n
 - Updated the Spanish translation using Google Translate Toolkit.  Please let me know if the translation is poor.\n
@@ -20,7 +21,7 @@ v1.1.1\n
     <string name="app_name">Always Charged</string>
     <string name="app_name_no_spaces">AlwaysCharged</string>
     <string name="contact_email">alwayscharged@dr.poindexter.us</string>
-    <string name="default_snooze_time">1</string>
+    <string name="default_snooze_time">5</string>
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
@@ -53,12 +54,12 @@ v1.1.1\n
     <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
-    <string name="notify_init">Charge reminder may alarm soon.  Click to cancel.</string>
-    <string name="notify_motion">Movement was detected, so alarm delayed.  Click to cancel.</string>
-    <string name="notify_screen">Screen was on, so alarm delayed.  Click to cancel.</string>
-    <string name="notify_phone">Phone was in use, so alarm delayed.  Click to cancel.</string>
-    <string name="notify_retry">Alarm not answerd, will retry soon.  Click to cancel.</string>
-    <string name="notify_snooze">Alarm snoozed, will retry soon.  Click to cancel.</string>
+    <string name="notify_init">Charge reminder soon.  Click to cancel.</string>
+    <string name="notify_motion">Auto-snooze (movement).  Click to cancel.</string>
+    <string name="notify_screen">Auto-snooze (screen on).  Click to cancel.</string>
+    <string name="notify_phone">Auto-snooze (phone call).  Click to cancel.</string>
+    <string name="notify_retry">Auto-snooze (retry).  Click to cancel.</string>
+    <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
     <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
     <string name="first_time_text">
