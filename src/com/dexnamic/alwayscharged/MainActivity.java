@@ -94,7 +94,7 @@ public class MainActivity extends PreferenceActivity implements
 		mCheckBoxEnable = (CheckBoxPreference) ps
 				.findPreference(KEY_ALARM_ENABLED);
 
-		mPreferenceTime = (Preference) ps.findPreference(KEY_TIME);
+		mPreferenceTime = ps.findPreference(KEY_TIME);
 		mPreferenceTime.setOnPreferenceClickListener(this);
 		setTime();
 
@@ -105,7 +105,7 @@ public class MainActivity extends PreferenceActivity implements
 		String uriString = mSettings.getString(KEY_RINGTONE, null);
 		setRingtoneSummary(uriString);
 
-		mPreferenceAbout = (Preference) ps.findPreference(KEY_ABOUT);
+		mPreferenceAbout = ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(this);
 
 		// set wallpaper as background
