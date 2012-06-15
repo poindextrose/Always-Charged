@@ -4,6 +4,7 @@
 \n
 v1.1.3\n
 - Fixed bug that caused the alarm to go off 5 minutes early
+- Fixed bug where vibrate would not always work when selected
 - Updated notification messages to indicate why alarm was automatically snoozed.
 - Added this change log\n
 - Updated the Spanish translation using Google Translate Toolkit.  Please let me know if the translation is poor.\n
@@ -19,7 +20,7 @@ v1.1.1\n
     <string name="app_name">Always Charged</string>
     <string name="app_name_no_spaces">AlwaysCharged</string>
     <string name="contact_email">alwayscharged@dr.poindexter.us</string>
-    <string name="default_snooze_time">5</string>
+    <string name="default_snooze_time">1</string>
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>

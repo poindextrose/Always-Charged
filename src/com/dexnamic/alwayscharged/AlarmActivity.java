@@ -221,12 +221,14 @@ public class AlarmActivity extends Activity {
 			mMediaPlayer.setLooping(true);
 			mMediaPlayer.prepare();
 			mMediaPlayer.start();
-			if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
-				mVibrator.vibrate(vibratePattern, 0);
 		} catch (Exception e) {
 //			Log.d("dexnamic", "max Volume = " + maxVolume);
 //			Log.e("dexnamic", e.getMessage());
 		}
+		try {
+			if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
+				mVibrator.vibrate(vibratePattern, 0);
+		} catch (Exception e) {}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
 		String stringAlarmDuration = mSettings.getString(MainActivity.KEY_DURATION, "30");
