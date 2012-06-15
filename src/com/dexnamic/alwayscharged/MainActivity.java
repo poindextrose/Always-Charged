@@ -15,6 +15,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -110,22 +111,28 @@ public class MainActivity extends PreferenceActivity implements
 
 		// set wallpaper as background
 		// TODO: fix stretching issue
-		try {
-			Class<?> _WallpaperManager = Class
-					.forName("android.app.WallpaperManager");
-			Class<?>[] parameterTypes = { Context.class };
-			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance",
-					parameterTypes);
-			Object[] args = { this };
-			Object wm = _WM_getinstance.invoke(null, args);
-			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable",
-					(Class[]) null);
-			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm,
-					(Object[]) null);
-			getWindow().setBackgroundDrawable(drawable);
-		} catch (Exception e) {
-			Log.e(LOG_TAG, e.getMessage());
-		}
+//		try {
+//			Class<?> _WallpaperManager = Class
+//					.forName("android.app.WallpaperManager");
+//			Class<?>[] parameterTypes = { Context.class };
+//			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance",
+//					parameterTypes);
+//			Object[] args = { this };
+//			Object wm = _WM_getinstance.invoke(null, args);
+//			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable",
+//					(Class[]) null);
+//			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm,
+//					(Object[]) null);
+//			int width = getWindow().getAttributes().width;
+//			int height = getWindow().getAttributes().height;
+//			drawable.setBounds(new Rect(0,0,width,height));
+//			LayoutParams lp = new LayoutParams();
+//			
+//			getWindow().setAttributes(LayoutParams.)
+//			getWindow().setBackgroundDrawable(drawable);
+//		} catch (Exception e) {
+//			Log.e(LOG_TAG, e.getMessage());
+//		}
 
 		setVolumeControlStream(AudioManager.STREAM_RING);
 

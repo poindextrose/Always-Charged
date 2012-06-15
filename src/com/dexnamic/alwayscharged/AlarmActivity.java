@@ -68,18 +68,18 @@ public class AlarmActivity extends Activity {
 		}
 
 		// set wallpaper as background
-		try {
-			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
-			Class<?>[] parameterTypes = { Context.class };
-			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
-			Object[] args = { this };
-			Object wm = _WM_getinstance.invoke(null, args);
-			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
-			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
-			getWindow().setBackgroundDrawable(drawable);
-		} catch (Exception e) {
-//			Log.e("dexnamic", e.getMessage());
-		}
+//		try {
+//			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
+//			Class<?>[] parameterTypes = { Context.class };
+//			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
+//			Object[] args = { this };
+//			Object wm = _WM_getinstance.invoke(null, args);
+//			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
+//			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
+//			getWindow().setBackgroundDrawable(drawable);
+//		} catch (Exception e) {
+////			Log.e("dexnamic", e.getMessage());
+//		}
 		
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
