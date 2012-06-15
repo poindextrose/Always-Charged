@@ -109,7 +109,7 @@ public class AlarmActivity extends Activity {
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone);
 					alarmFinished();
 				}
 				try {
@@ -131,7 +131,7 @@ public class AlarmActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry);
 				}
 				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
@@ -165,7 +165,7 @@ public class AlarmActivity extends Activity {
 						public void onClick(DialogInterface dialog, int id) {
 							stopRingtone();
 							AlarmScheduler.resetRepeatCount(AlarmActivity.this, mSettings);
-							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0);
+							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_snooze);
 							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
 							alarmFinished();
 						}

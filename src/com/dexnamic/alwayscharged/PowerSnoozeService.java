@@ -25,7 +25,7 @@ public class PowerSnoozeService extends Service {
 				AlarmScheduler.disablePowerSnooze(this);
 			} else {
 				AlarmScheduler.resetRepeatCount(this, null);
-				AlarmScheduler.snoozeAlarm(this, 0);
+				AlarmScheduler.snoozeAlarm(this, 0, R.string.notify_power);
 			}
 		}
 

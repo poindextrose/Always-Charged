@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class AlarmScheduler {
 
@@ -19,25 +20,29 @@ public class AlarmScheduler {
 	static final String TYPE_NOTIFY = "notify";
 
 	/**
-	 * SharedPreference key to indicate if alarm should snooze and
-	 * alarm if device unplugged before it is fully charged
+	 * SharedPreference key to indicate if alarm should snooze and alarm if
+	 * device unplugged before it is fully charged
 	 */
 	final static String KEY_POWER_SNOOZE = "key_power_snooze";
 
 	static final int NOTIFY_SNOOZE = 1;
-	
-//	private final String LOG_TAG = this.getClass().getSimpleName();
+
+	// private final String LOG_TAG = this.getClass().getSimpleName();
 
 	/**
-	 * sets a daily, repeating alarm to potentially alter user to uncharging state
-	 * @param context - Application context
-	 * @param hourOfDay - hour to set alarm (0-23)
-	 * @param minute - minute to set alarm (0-59)
+	 * sets a daily, repeating alarm to potentially alter user to uncharging
+	 * state
+	 * 
+	 * @param context
+	 *            - Application context
+	 * @param hourOfDay
+	 *            - hour to set alarm (0-23)
+	 * @param minute
+	 *            - minute to set alarm (0-59)
 	 * @return number of minutes until next alarm
 	 */
 	static int setDailyAlarm(Context context, int hourOfDay, int minute) {
-
-//		Log.i(LOG_TAG, "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
+		Log.i("AlarmScheduler", "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
 
 		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 
@@ -56,19 +61,26 @@ public class AlarmScheduler {
 		if (calAlarm.before(calNow)) // if alarm is now or earlier
 			alarmTime_ms += day_ms;
 		int snoozeTime = Integer.parseInt(settings.getString(
-				MainActivity.KEY_SNOOZE_TIME_MIN, settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
+				MainActivity.KEY_SNOOZE_TIME_MIN,
+				settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
 						context.getString(R.string.default_snooze_time))));
 		int snoozeTime_ms = 60 * 1000 * snoozeTime;
 		long alarmNotifyTime_ms = alarmTime_ms;
-		if ((calNow.getTimeInMillis() + snoozeTime_ms) < alarmTime_ms) {
-		}
-		alarmTime_ms -= snoozeTime_ms; // need to 
+		// if ((calNow.getTimeInMillis() + snoozeTime_ms) < alarmTime_ms) {
+		// }
+		alarmTime_ms -= snoozeTime_ms; // need to measure sensors before actual
+										// bedtime
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime_ms, day_ms, pi);
 
-		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return time in minutes until alarm
+		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return
+																							// time
+																							// in
+																							// minutes
+																							// until
+																							// alarm
 	}
 
 	static void cancelAlarm(Context context, String category) {
@@ -85,8 +97,7 @@ public class AlarmScheduler {
 		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
-	static void snoozeAlarm(Context context, int snoozeTime_min) {
-//		Log.i("dexnamic", "alarm is snoozing");
+	static void snoozeAlarm(Context context, int snoozeTime_min, int reason_resource_id) {
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
@@ -100,27 +111,31 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 
-		try {
-			NotificationManager nm = (NotificationManager) context
-					.getSystemService(Context.NOTIFICATION_SERVICE);
+		if (reason_resource_id != R.string.notify_init) {
+			try {
+				NotificationManager nm = (NotificationManager) context
+						.getSystemService(Context.NOTIFICATION_SERVICE);
 
-			String text = context.getString(R.string.notify_text);
-			// Set the icon, scrolling text and timestamp
-			Notification notification = new Notification(R.drawable.ic_stat_notify, text,
-					System.currentTimeMillis());
-			// The PendingIntent to launch our activity if the user selects this
-			// notification
-			PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY);
-			// Set the info for the views that show in the notification panel.
-			notification.setLatestEventInfo(context, context.getString(R.string.app_name), text,
-					npi);
-			// set notification to appear in "Ongoing" category
-			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL
-					| Notification.FLAG_NO_CLEAR;
+				String text = context.getString(reason_resource_id);
+				// Set the icon, scrolling text and timestamp
+				Notification notification = new Notification(R.drawable.ic_stat_notify, text,
+						System.currentTimeMillis());
+				// The PendingIntent to launch our activity if the user selects
+				// this
+				// notification
+				PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY);
+				// Set the info for the views that show in the notification
+				// panel.
+				notification.setLatestEventInfo(context, context.getString(R.string.app_name),
+						text, npi);
+				// set notification to appear in "Ongoing" category
+				notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL
+						| Notification.FLAG_NO_CLEAR;
 
-			nm.notify(NOTIFY_SNOOZE, notification);
-		} catch (Exception e) {
-//			Log.e("dexnamic", e.getMessage());
+				nm.notify(NOTIFY_SNOOZE, notification);
+			} catch (Exception e) {
+				// Log.e("dexnamic", e.getMessage());
+			}
 		}
 	}
 
@@ -171,7 +186,7 @@ public class AlarmScheduler {
 		editor.putInt(MainActivity.KEY_REPEAT_COUNT, 0);
 		editor.commit();
 	}
-	
+
 	static void disableAllAlarms(Context context) {
 		cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
 		cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);

@@ -371,9 +371,12 @@ public class MainActivity extends PreferenceActivity implements
 			mEditor.putInt(KEY_HOUR, hourOfDay);
 			mEditor.putInt(KEY_MINUTE, minute);
 			mEditor.commit();
-			mCheckBoxEnable.setChecked(true);
 			mPreferenceTime.setSummary(formatTime(hourOfDay, minute));
-			enableAlaram();
+			if(mCheckBoxEnable.isChecked()) {
+				enableAlaram();
+			} else {
+				mCheckBoxEnable.setChecked(true); // this will set alarm
+			}
 		}
 	};
 

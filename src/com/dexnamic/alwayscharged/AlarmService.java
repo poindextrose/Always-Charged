@@ -19,7 +19,7 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-public class AlarmService extends Service {
+public class AlarmService extends Service implements SensorEventListener {
 
 	private float mMotionToleranceDeg;
 	private final long TIMEOUT_MS = 10000; // 10 seconds in milliseconds
@@ -70,12 +70,12 @@ public class AlarmService extends Service {
 		// if phone call is progress, snooze alarm
 		if (screenOn()) {
 			Log.v(this.getClass().getSimpleName(), "screen is on.  snoozing...");
-			doSnooze();
+			doSnooze(R.string.notify_screen);
 			return;
 		}
 		if (telephoneInUse()) {
 			Log.v(this.getClass().getSimpleName(), "telephone in use.  snoozing...");
-			doSnooze();
+			doSnooze(R.string.notify_phone);
 			return;
 		}
 
@@ -94,7 +94,7 @@ public class AlarmService extends Service {
 				doAlarm();
 			} else {
 				Log.v(this.getClass().getSimpleName(), "motion detection disabled.  snoozing...");
-				doSnooze();
+				doSnooze(R.string.notify_motion);
 			}
 		}
 	}
@@ -152,10 +152,10 @@ public class AlarmService extends Service {
 																		// be
 																		// read
 		mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		mAccelRegistered = mSensorManager.registerListener(mSensorEventListener, mAccelerometer,
+		mAccelRegistered = mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_NORMAL);
 		mMagneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		mMagneticRegistered = mSensorManager.registerListener(mSensorEventListener, mMagneticField,
+		mMagneticRegistered = mSensorManager.registerListener(this, mMagneticField,
 				SensorManager.SENSOR_DELAY_NORMAL);
 		if (mAccelRegistered || mMagneticRegistered) {
 			Message msgTimeOut = Message.obtain(mHandler, MSG_TIMEOUT);
@@ -169,7 +169,7 @@ public class AlarmService extends Service {
 			} else {
 				Log.v(this.getClass().getSimpleName(),
 						"unable to read sensors. snooze until alarm time");
-				doSnooze();
+				doSnooze(R.string.notify_init);
 			}
 			return;
 		}
@@ -190,7 +190,7 @@ public class AlarmService extends Service {
 				} else {
 					Log.v(this.getClass().getSimpleName(),
 							"unable to read sensors. snooze until alarm time");
-					doSnooze();
+					doSnooze(R.string.notify_init);
 				}
 				break;
 			case MSG_STABILZE:
@@ -201,28 +201,25 @@ public class AlarmService extends Service {
 		}
 	};
 
-	private SensorEventListener mSensorEventListener = new SensorEventListener() {
-
-		@Override
-		public void onSensorChanged(SensorEvent event) {
-			if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-				mAccelValues = event.values.clone();
-				mAccelEventReceived = true;
-				// Log.v(this.getClass().getSimpleName(), "accelerometer read");
-			} else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
-				mMagneticValues = event.values.clone();
-				mMagneticEventReceived = true;
-			}
-			if (mStabilze && (mAccelEventReceived || !mAccelRegistered)
-					&& (mMagneticEventReceived || !mMagneticRegistered)) {
-				sensorsHaveBeenRead();
-			}
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+			mAccelValues = event.values.clone();
+			mAccelEventReceived = true;
+		} else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+			mMagneticValues = event.values.clone();
+			mMagneticEventReceived = true;
 		}
-
-		@Override
-		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		if (mStabilze && (mAccelEventReceived || !mAccelRegistered)
+				&& (mMagneticEventReceived || !mMagneticRegistered)) {
+			sensorsHaveBeenRead();
+			mStabilze = false; // to prevent entering again before sensors can be turned off
 		}
-	};
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
 
 	private void doAlarm() {
 		Log.v(this.getClass().getSimpleName(), "doAlarm()");
@@ -251,12 +248,12 @@ public class AlarmService extends Service {
 		stopSelf();
 	}
 
-	private void doSnooze() {
+	private void doSnooze(int reason_resource_id) {
 		Log.v(this.getClass().getSimpleName(), "doSnooze()");
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
 
-		AlarmScheduler.snoozeAlarm(this, 0);
+		AlarmScheduler.snoozeAlarm(this, 0, reason_resource_id);
 		stopSelf();
 		AlarmScheduler.releaseWakeLock();
 	}
@@ -274,14 +271,14 @@ public class AlarmService extends Service {
 			if (wasSnooze)
 				doAlarm();
 			else
-				doSnooze();
+				doSnooze(R.string.notify_init);
 		}
 		if (wasSnooze) {
 			checkDeviceOrientation(orientation);
 		} else {
 			saveDeviceOrientation(orientation);
 			Log.v(this.getClass().getSimpleName(), "saved device orientaiton.  snoozing...");
-			doSnooze();
+			doSnooze(R.string.notify_init);
 		}
 	}
 
@@ -302,7 +299,7 @@ public class AlarmService extends Service {
 		}
 		if (deviceMoved) {
 			Log.v(this.getClass().getSimpleName(), "device has moved. snoozing...");
-			doSnooze();
+			doSnooze(R.string.notify_motion);
 		} else {
 			Log.v(this.getClass().getSimpleName(), "device did not move. sounding alarm");
 			doAlarm();
@@ -317,6 +314,8 @@ public class AlarmService extends Service {
 		if (!hasMatrix)
 			return false;
 		SensorManager.getOrientation(rotationMatrix, orientation);
+		Log.v(this.getClass().getSimpleName(), "orientation = (" + orientation[0] + ","
+				+ orientation[1] + "," + orientation[2] + ")");
 		return true;
 	}
 
@@ -325,15 +324,12 @@ public class AlarmService extends Service {
 	private final static String KEY_ROLL = "key_roll";
 
 	private void saveDeviceOrientation(float[] orientation) {
+		Log.v(this.getClass().getSimpleName(), "saveDeviceOrientation()");
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putFloat(KEY_AZIMUTH, orientation[0]);
 		editor.putFloat(KEY_PITCH, orientation[1]);
 		editor.putFloat(KEY_ROLL, orientation[2]);
 		editor.commit();
-		// Log.i("dexnamic", "orientation = (" + orientation[0] * 180.0 /
-		// Math.PI + ","
-		// + orientation[1] * 180.0 / Math.PI + "," + orientation[2] * 180.0 /
-		// Math.PI + ")");
 	}
 
 	private void readDeviceOrientation(float[] orientation) {
@@ -344,8 +340,8 @@ public class AlarmService extends Service {
 	}
 
 	private void stopReadingSensors() {
-		if (mSensorManager != null && mSensorEventListener != null) {
-			mSensorManager.unregisterListener(mSensorEventListener);
+		if (mSensorManager != null) {
+			mSensorManager.unregisterListener(this);
 		}
 	}
 

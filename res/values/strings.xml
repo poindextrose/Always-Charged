@@ -50,7 +50,13 @@ v1.1.1\n
     <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
-    <string name="notify_text">Alarm Snoozed. Click to cancel.</string>
+    <string name="notify_init">Charge reminder may alarm soon.  Click to cancel.</string>
+    <string name="notify_motion">Movement was detected, so alarm delayed.  Click to cancel.</string>
+    <string name="notify_screen">Screen was on, so alarm delayed.  Click to cancel.</string>
+    <string name="notify_phone">Phone was in use, so alarm delayed.  Click to cancel.</string>
+    <string name="notify_retry">Alarm not answerd, will retry soon.  Click to cancel.</string>
+    <string name="notify_snooze">Alarm snoozed, will retry soon.  Click to cancel.</string>
+    <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
     <string name="first_time_text">
 Have you ever forgotten to plug in your phone at night to find your
