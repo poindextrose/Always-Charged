@@ -12,7 +12,7 @@ com.dexnamic.alwayscharged.AlarmScheduler:
     static final java.lang.String TYPE_NOTIFY
     static final java.lang.String KEY_POWER_SNOOZE
     static final int NOTIFY_SNOOZE
-    15:15:public AlarmScheduler()
+    16:16:public AlarmScheduler()
 com.dexnamic.alwayscharged.AlarmService:
     private static final int SENSOR_STABILZE_WAIT_TIME_MS
     private static final int MSG_TIMEOUT
@@ -41,8 +41,6 @@ com.dexnamic.alwayscharged.MainActivity:
     public static final java.lang.String KEY_MOTION_TOLERANCE
     public static final java.lang.String KEY_REPEAT_COUNT
     public static final int TIMES_TO_REPEAT
-    public static final java.lang.String LOG_TAG
-    static final int FEEDBACK_MENU_ID
 com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     static final java.lang.String PREFS
     static final java.lang.String PREFS_BACKUP_KEY
@@ -54,5 +52,6 @@ com.dexnamic.alwayscharged.R$attr
 com.dexnamic.alwayscharged.R$drawable
 com.dexnamic.alwayscharged.R$id
 com.dexnamic.alwayscharged.R$layout
+com.dexnamic.alwayscharged.R$menu
 com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$xml

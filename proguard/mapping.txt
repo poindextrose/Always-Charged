@@ -58,13 +58,14 @@ com.dexnamic.alwayscharged.AlarmScheduler -> com.dexnamic.alwayscharged.f:
     int setDailyAlarm(android.content.Context,int,int) -> a
     void cancelAlarm(android.content.Context,java.lang.String) -> a
     void cancelNotification(android.content.Context) -> a
-    void snoozeAlarm(android.content.Context,int) -> a
+    void snoozeAlarm(android.content.Context,int,int) -> b
     android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,java.lang.String) -> b
     void enablePowerSnooze(android.content.Context) -> b
     void disablePowerSnooze(android.content.Context) -> c
     void setPartialWakeLock(android.os.PowerManager) -> a
     void releaseWakeLock() -> a
     void resetRepeatCount(android.content.Context,android.content.SharedPreferences) -> a
+    void disableAllAlarms(android.content.Context) -> d
 com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmService:
     float mMotionToleranceDeg -> j
     long TIMEOUT_MS -> k
@@ -72,7 +73,7 @@ com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmServi
     android.os.PowerManager mPowerManager -> l
     android.hardware.SensorManager mSensorManager -> m
     android.content.SharedPreferences mSharedPreferences -> n
-    boolean isSnooze -> o
+    boolean wasSnooze -> o
     android.hardware.Sensor mAccelerometer -> b
     android.hardware.Sensor mMagneticField -> c
     boolean mAccelRegistered -> d
@@ -83,85 +84,73 @@ com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmServi
     float[] mMagneticValues -> i
     boolean mStabilze -> p
     android.os.Handler mHandler -> q
-    android.hardware.SensorEventListener mSensorEventListener -> r
     void onCreate() -> onCreate
     void onStart(android.content.Intent,int) -> onStart
+    void onDestroy() -> onDestroy
     boolean screenOn() -> a
     boolean telephoneInUse() -> b
     void startReadingSensors() -> c
+    void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
+    void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
     void doAlarm() -> d
-    void doSnooze() -> e
-    void onDestroy() -> onDestroy
-    void sensorsHaveBeenRead() -> f
+    void doSnooze(int) -> a
+    void sensorsHaveBeenRead() -> e
     void checkDeviceOrientation(float[]) -> a
     boolean getCurrentOrientation(float[]) -> b
     void saveDeviceOrientation(float[]) -> c
     void readDeviceOrientation(float[]) -> d
-    void stopReadingSensors() -> g
+    void stopReadingSensors() -> f
     android.os.IBinder onBind(android.content.Intent) -> onBind
-    void access$0(com.dexnamic.alwayscharged.AlarmService) -> a
-    void access$1(com.dexnamic.alwayscharged.AlarmService,boolean) -> a
-    boolean access$2(com.dexnamic.alwayscharged.AlarmService) -> b
-    void access$3(com.dexnamic.alwayscharged.AlarmService) -> c
+    boolean access$0(com.dexnamic.alwayscharged.AlarmService) -> a
+    void access$1(com.dexnamic.alwayscharged.AlarmService) -> b
+    void access$2(com.dexnamic.alwayscharged.AlarmService,int) -> a
+    void access$3(com.dexnamic.alwayscharged.AlarmService,boolean) -> a
 com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.g:
     com.dexnamic.alwayscharged.AlarmService this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.dexnamic.alwayscharged.AlarmService$2 -> com.dexnamic.alwayscharged.h:
-    com.dexnamic.alwayscharged.AlarmService this$0 -> a
-    void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
-    void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
 com.dexnamic.alwayscharged.MainActivity -> com.dexnamic.alwayscharged.MainActivity:
-    android.preference.CheckBoxPreference mCheckBoxEnable -> e
-    android.preference.Preference mPreferenceTime -> f
-    android.preference.Preference mPreferenceAbout -> g
-    android.content.SharedPreferences settings -> a
-    android.content.SharedPreferences$Editor editor -> b
-    int mTimeFormat -> h
-    android.preference.RingtonePreference mRingtonePreference -> i
-    android.media.AudioManager mAudioManager -> j
-    boolean mFirstInstance -> k
-    android.preference.Preference$OnPreferenceChangeListener mOnPreferenceChangedListener -> c
-    android.preference.Preference$OnPreferenceClickListener mOnPreferenceClickListener -> d
-    android.app.TimePickerDialog$OnTimeSetListener mTimeChangedListener -> l
+    android.preference.CheckBoxPreference mCheckBoxEnable -> c
+    android.preference.Preference mPreferenceTime -> d
+    android.preference.Preference mPreferenceAbout -> e
+    android.content.SharedPreferences mSettings -> a
+    android.content.SharedPreferences$Editor mEditor -> b
+    android.preference.RingtonePreference mRingtonePreference -> f
+    boolean mFirstInstance -> g
+    java.lang.String LOG_TAG -> h
+    android.app.TimePickerDialog$OnTimeSetListener mTimeChangedListener -> i
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
-    void setRingtoneSummary(java.lang.String) -> a
     void onResume() -> onResume
     void onPause() -> onPause
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
+    boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
+    void setRingtoneSummary(java.lang.String) -> a
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
     void prefsChanged() -> b
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    android.app.AlertDialog$Builder prepareDialogBuilder() -> c
-    android.app.AlertDialog$Builder prepareChangelogDialogBuilder() -> d
+    android.app.AlertDialog$Builder aboutDialogBuilder() -> c
+    android.app.AlertDialog$Builder changelogDialogBuilder() -> d
     void setTime() -> a
     java.lang.String formatTime(int,int) -> a
     void enableAlaram() -> e
-    void disableAlarms() -> f
-    void checkVolume() -> g
-    android.preference.RingtonePreference access$0(com.dexnamic.alwayscharged.MainActivity) -> a
-    void access$1(com.dexnamic.alwayscharged.MainActivity,java.lang.String) -> a
-    android.preference.Preference access$2(com.dexnamic.alwayscharged.MainActivity) -> b
-    android.preference.Preference access$3(com.dexnamic.alwayscharged.MainActivity) -> c
-    android.preference.CheckBoxPreference access$4(com.dexnamic.alwayscharged.MainActivity) -> d
-    void access$5(com.dexnamic.alwayscharged.MainActivity) -> e
-com.dexnamic.alwayscharged.MainActivity$1 -> com.dexnamic.alwayscharged.i:
-    com.dexnamic.alwayscharged.MainActivity this$0 -> a
-    boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
-com.dexnamic.alwayscharged.MainActivity$2 -> com.dexnamic.alwayscharged.j:
-    com.dexnamic.alwayscharged.MainActivity this$0 -> a
-    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-com.dexnamic.alwayscharged.MainActivity$3 -> com.dexnamic.alwayscharged.k:
+    void notifyUserTimeUntilAlarm(int) -> a
+    void checkVolume() -> f
+    android.preference.Preference access$0(com.dexnamic.alwayscharged.MainActivity) -> a
+    java.lang.String access$1(com.dexnamic.alwayscharged.MainActivity,int,int) -> a
+    android.preference.CheckBoxPreference access$2(com.dexnamic.alwayscharged.MainActivity) -> b
+    void access$3(com.dexnamic.alwayscharged.MainActivity) -> c
+com.dexnamic.alwayscharged.MainActivity$1 -> com.dexnamic.alwayscharged.h:
     com.dexnamic.alwayscharged.MainActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-com.dexnamic.alwayscharged.MainActivity$4 -> com.dexnamic.alwayscharged.l:
+com.dexnamic.alwayscharged.MainActivity$2 -> com.dexnamic.alwayscharged.i:
     com.dexnamic.alwayscharged.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainActivity$5 -> com.dexnamic.alwayscharged.m:
+com.dexnamic.alwayscharged.MainActivity$3 -> com.dexnamic.alwayscharged.j:
     com.dexnamic.alwayscharged.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainActivity$6 -> com.dexnamic.alwayscharged.n:
+com.dexnamic.alwayscharged.MainActivity$4 -> com.dexnamic.alwayscharged.k:
     com.dexnamic.alwayscharged.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.MyPrefsBackupAgent -> com.dexnamic.alwayscharged.MyPrefsBackupAgent:
