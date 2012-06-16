@@ -11,12 +11,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	/* sqlite3 /data/data/com.dexnamic.alwayscharged/databases/alwayscharged.db */
 
 	private static final String DATABASE_NAME = "alwayscharged.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 7;
 
 	private static final String TABLE_ALARMS = "alarms";
 
 	// Contacts Table Columns names
 	static final String KEY_ID = "_id";
+	static final String KEY_ENABLED = "enabled";
 	static final String KEY_LABEL = "label";
 	static final String KEY_HOUR = "hour";
 	static final String KEY_MINUTE = "minute";
@@ -25,20 +26,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_VIBRATE = "vibrate";
 
 	String CREATE_TABLE_ALARMS = "CREATE TABLE " + TABLE_ALARMS + "(" + KEY_ID
-			+ " INTEGER PRIMARY KEY," + KEY_LABEL + " TEXT," + KEY_HOUR + " INTEGER," + KEY_MINUTE
-			+ " INTEGER," + KEY_REPEATS + " INTEGER," + KEY_RINGTONE + " TEXT," + KEY_VIBRATE
-			+ " INTEGER" + ")";
+			+ " INTEGER PRIMARY KEY," + KEY_ENABLED + " INTEGER," + KEY_LABEL + " TEXT," + KEY_HOUR
+			+ " INTEGER," + KEY_MINUTE + " INTEGER," + KEY_REPEATS + " INTEGER," + KEY_RINGTONE
+			+ " TEXT," + KEY_VIBRATE + " INTEGER" + ")";
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
-
-	/*
-	 * 06-16 10:17:41.239: E/SQLiteDatabase(24300):
-	 * android.database.sqlite.SQLiteException: table alarms has no column named
-	 * vibrate: , while compiling: INSERT INTO
-	 * alarms(minute,vibrate,ringtone,label,repeats,hour) VALUES (?,?,?,?,?,?)
-	 */
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -46,10 +40,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		AlarmDetail alarm = new AlarmDetail();
 		// TODO: read from preferences for first time
+		alarm.setEnabled(0);
 		alarm.setLabel("my first alarm");
 		alarm.setHour(21);
 		alarm.setMinute(30);
-		alarm.setRepeats(127); // every day
+		alarm.setRepeats(3); 
 		alarm.setRingtone("Default");
 		alarm.setVibrate(1);
 
@@ -79,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private ContentValues putValues(AlarmDetail alarm) {
 		ContentValues values = new ContentValues();
+		values.put(KEY_ENABLED, alarm.getEnabled());
 		values.put(KEY_LABEL, alarm.getLabel());
 		values.put(KEY_HOUR, alarm.getHour());
 		values.put(KEY_MINUTE, alarm.getMinute());
@@ -91,8 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public AlarmDetail getAlarm(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query(TABLE_ALARMS, new String[] { KEY_ID, KEY_LABEL, KEY_HOUR,
-				KEY_MINUTE, KEY_REPEATS, KEY_RINGTONE, KEY_VIBRATE }, KEY_ID + "=?",
+		Cursor cursor = db.query(TABLE_ALARMS, null, KEY_ID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();

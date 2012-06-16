@@ -3,6 +3,7 @@ package com.dexnamic.alwayscharged;
 public class AlarmDetail {
     
 	private Integer ID;
+	private Integer enabled;
 	private String label;
 	private Integer hour;
 	private Integer minute;
@@ -68,6 +69,14 @@ public class AlarmDetail {
 
 	public void setID(Integer iD) {
 		ID = iD;
+	}
+
+	public Integer getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
 	}
 	
 }
