@@ -29,6 +29,8 @@
 		</activity>
 		<activity android:name=".AlarmDetailPreferenceActivity" android:label="@string/alarm_detail">
 		</activity>
+		<activity android:name=".AlarmListActivity" android:label="@string/set_alarm">
+		</activity>
 		<receiver android:name=".AlarmReceiver">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />

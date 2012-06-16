@@ -4,25 +4,33 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "alwayscharged";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 6;
 
 	private static final String TABLE_ALARMS = "alarms";
-	private static final String CREATE_TABLE_ALARMS = "";
 
 	// Contacts Table Columns names
-	private static final String KEY_ID = "id";
-	private static final String KEY_LABEL = "label";
-	private static final String KEY_HOUR = "hour";
-	private static final String KEY_MINUTE = "minute";
-	private static final String KEY_REPEATS = "repeats";
-	private static final String KEY_RINGTONE = "ringtone";
-	private static final String KEY_VIBRATE = "vibrate";
+	static final String KEY_ID = "_id";
+	static final String KEY_LABEL = "label";
+	static final String KEY_HOUR = "hour";
+	static final String KEY_MINUTE = "minute";
+	static final String KEY_REPEATS = "repeats";
+	static final String KEY_RINGTONE = "ringtone";
+	static final String KEY_VIBRATE = "vibrate";
+	
+    String CREATE_TABLE_ALARMS = "CREATE TABLE " + TABLE_ALARMS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY," +
+    		KEY_LABEL + " TEXT," +
+    		KEY_HOUR + " INTEGER," +
+    		KEY_MINUTE + " INTEGER" +
+    		KEY_REPEATS + " INTEGER" +
+    		KEY_RINGTONE + " TEXT" +
+    		KEY_VIBRATE + " INTEGER" +
+    		")";
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -31,6 +39,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_ALARMS);
+		
+		AlarmDetail alarm = new AlarmDetail();
+		// TODO: read from preferences for first time
+		alarm.setLabel("my first alarm");
+		alarm.setHour(21);
+		alarm.setMinute(30);
+		alarm.setRepeats(2^8-1); // every day
+		alarm.setRingtone("Default");
+		alarm.setVibrate(1);
+		
+		db.insert(TABLE_ALARMS, null, putValues(alarm));
 	}
 
 	@Override
@@ -91,4 +110,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	            new String[] { String.valueOf(alarm.getID()) });
 	    db.close();
 	}
+	
+    public Cursor getAllAlarms() {
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_ALARMS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery(selectQuery, null);
+    }
 }

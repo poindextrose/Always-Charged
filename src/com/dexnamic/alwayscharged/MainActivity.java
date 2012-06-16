@@ -288,7 +288,8 @@ public class MainActivity extends PreferenceActivity implements
 		} else if (preference == mPreferenceUpgrade) {
 			showDialog(UPGRADE_DIALOG_ID);
 		} else if (preference == mPreferenceSetAlarm) {
-//			Intent intent = new Intent(this, )
+			Intent intent = new Intent(this, AlarmListActivity.class);
+			startActivity(intent);
 		}
 		return false;
 	}

@@ -86,6 +86,7 @@ new features.</string>
     <string name="default_ringtone">Default</string>
     <string name="changelog_title">Change Log</string>
     <string name="set_alarm">Set alarms</string>
+    <string name="add_alarm">Add alarm</string>
     <!-- alarm detail -->
     <string name="alarm_detail">Alarm Detail</string>
     <string name="turn_alarm_on">Turn alarm on</string>
