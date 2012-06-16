@@ -15,8 +15,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -28,7 +26,6 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,17 +40,24 @@ public class MainActivity extends PreferenceActivity implements
 
 	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
-	static final int ABOUT_DIAlOG = 2;
+	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
+	static final int UPGRADE_DIALOG_ID = 4;
 
 	private CheckBoxPreference mCheckBoxEnable;
 	private Preference mPreferenceTime;
 	private Preference mPreferenceAbout;
+	private Preference mPreferenceAdvanced;
+	private Preference mPreferenceUpgrade;
+	private Preference mPreferenceSetAlarm;
 
 	SharedPreferences mSettings;
 	SharedPreferences.Editor mEditor;
 
+	public final static String KEY_UPGRADE = "key_upgrade";
 	public final static String KEY_ALARM_ENABLED = "key_alarm_enabled";
+	public final static String KEY_SET_ALARM = "key_set_alarm";
+	public final static String KEY_ADVANCED = "key_advanced";
 	public final static String KEY_TIME = "key_time";
 	public final static String KEY_HOUR = "key_hour";
 	public final static String KEY_MINUTE = "key_minute";
@@ -75,14 +79,11 @@ public class MainActivity extends PreferenceActivity implements
 
 	private boolean mFirstInstance = true;
 
-	private final String LOG_TAG = this.getClass().getSimpleName();
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences);
-		setContentView(R.layout.main);
 
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences,
@@ -94,6 +95,12 @@ public class MainActivity extends PreferenceActivity implements
 
 		mCheckBoxEnable = (CheckBoxPreference) ps
 				.findPreference(KEY_ALARM_ENABLED);
+		
+		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
+		mPreferenceAdvanced.setOnPreferenceClickListener(this);
+		
+		mPreferenceUpgrade = ps.findPreference(KEY_UPGRADE);
+		mPreferenceUpgrade.setOnPreferenceClickListener(this);
 
 		mPreferenceTime = ps.findPreference(KEY_TIME);
 		mPreferenceTime.setOnPreferenceClickListener(this);
@@ -108,6 +115,9 @@ public class MainActivity extends PreferenceActivity implements
 
 		mPreferenceAbout = ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(this);
+		
+		mPreferenceSetAlarm = ps.findPreference(KEY_SET_ALARM);
+		mPreferenceSetAlarm.setOnPreferenceClickListener(this);
 
 		// set wallpaper as background
 		// TODO: fix stretching issue
@@ -271,7 +281,14 @@ public class MainActivity extends PreferenceActivity implements
 		if (preference == mPreferenceTime) {
 			MainActivity.this.showDialog(TIME_DIALOG_ID);
 		} else if (preference == mPreferenceAbout) {
-			showDialog(ABOUT_DIAlOG);
+			showDialog(ABOUT_DIAlOG_ID);
+		} else if (preference == mPreferenceAdvanced) {
+			Intent intent = new Intent(this, AdvancedPreferences.class);
+			startActivity(intent);
+		} else if (preference == mPreferenceUpgrade) {
+			showDialog(UPGRADE_DIALOG_ID);
+		} else if (preference == mPreferenceSetAlarm) {
+//			Intent intent = new Intent(this, )
 		}
 		return false;
 	}
@@ -287,7 +304,7 @@ public class MainActivity extends PreferenceActivity implements
 			Object backupManager = constructor.newInstance(this);
 			Method dataChanged = _BackupManager.getMethod("dataChanged",
 					(Class[]) null);
-			// reflecdtion: backupManager.dataChanged();
+			// reflection: backupManager.dataChanged();
 			dataChanged.invoke(backupManager, (Object[]) null);
 		} catch (Exception e) {
 		}
@@ -327,12 +344,16 @@ public class MainActivity extends PreferenceActivity implements
 					});
 			AlertDialog alertDialog = builder.create();
 			return alertDialog;
-		case ABOUT_DIAlOG:
+		case ABOUT_DIAlOG_ID:
 			builder = aboutDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
 		case CHANGELOG_DIALOG_ID:
 			builder = changelogDialogBuilder();
+			alertDialog = builder.create();
+			return alertDialog;
+		case UPGRADE_DIALOG_ID:
+			builder = upgradeDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
 		}
@@ -362,6 +383,22 @@ public class MainActivity extends PreferenceActivity implements
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.changelog_title));
+		builder.setPositiveButton(getString(R.string.close),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+		return builder;
+	}
+	
+	private AlertDialog.Builder upgradeDialogBuilder() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.upgrade_dialog,
+				(ViewGroup) findViewById(R.id.upgrade_layout_root));
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(layout);
+		builder.setTitle(getString(R.string.upgrade_to_pro));
 		builder.setPositiveButton(getString(R.string.close),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {

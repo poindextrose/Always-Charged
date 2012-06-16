@@ -27,10 +27,8 @@ public class AlarmScheduler {
 
 	static final int NOTIFY_SNOOZE = 1;
 
-	// private final String LOG_TAG = this.getClass().getSimpleName();
-
 	/**
-	 * sets a daily, repeating alarm to potentially alter user to uncharging
+	 * sets a daily, repeating alarm to potentially alter user to not-charging
 	 * state
 	 * 
 	 * @param context
@@ -73,12 +71,7 @@ public class AlarmScheduler {
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime_ms, day_ms, pi);
 
-		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0); // return
-																							// time
-																							// in
-																							// minutes
-																							// until
-																							// alarm
+		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0);
 	}
 
 	static void cancelAlarm(Context context, String category) {
@@ -109,6 +102,7 @@ public class AlarmScheduler {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 
+		// no need to notify user before alarm may go off...
 		if (reason_resource_id != R.string.notify_init) {
 			try {
 				NotificationManager nm = (NotificationManager) context

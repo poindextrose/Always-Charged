@@ -2,6 +2,8 @@
 <resources>
     <string name="changelog">More updates are coming soon including scheduling a different bedtime for each day of the week and the ability to adjust motion sensitivity.\n
 \n
+v1.2\n
+- 
 v1.1.3\n
 - Fixed bug that caused the alarm to go off 5 minutes early\n
 - Fixed bug where vibrate would not always work when selected\n
@@ -21,7 +23,7 @@ v1.1.1\n
     <string name="app_name">Always Charged</string>
     <string name="app_name_no_spaces">AlwaysCharged</string>
     <string name="contact_email">alwayscharged@dr.poindexter.us</string>
-    <string name="default_snooze_time">5</string>
+    <string name="default_snooze_time">1</string>
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
@@ -62,6 +64,8 @@ v1.1.1\n
     <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
     <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
+    <string name="upgrade_to_pro">Upgrade to Pro version</string>
+    <string name="upgrade_summary">Schedule multiple alarms, advanced settings, and more&#8230;</string>
     <string name="first_time_text">
 Have you ever forgotten to plug in your phone at night to find your
 phone\'s battery dead the next day?  If so, then <i>Always Charged</i> is for you.
@@ -74,9 +78,15 @@ if you are using your phone, moving around, or already have it plugged in and ch
 
 If you like or dislike something about this application, or you want to suggest a feature,
 please send me an email (press the menu button from the main screen).</string>
+	<string name="upgrade_dialog">You can upgrade Always Charged to take advantage of
+new features.</string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
     <string name="done">Done</string>
     <string name="default_ringtone">Default</string>
     <string name="changelog_title">Change Log</string>
+    <string name="set_alarm">Set alarms</string>
+    <!-- alarm detail -->
+    <string name="alarm_detail">Alarm Detail</string>
+    <string name="turn_alarm_on">Turn alarm on</string>
 </resources>

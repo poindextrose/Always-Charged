@@ -7,11 +7,14 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
-public class AdvancedPreferences extends PreferenceActivity {
+public class AdvancedPreferences extends PreferenceActivity 
+//implements Preference.OnPreferenceClickListener
+{
 
 	private ListPreference mListPreferenceSnooze;
 	private ListPreference mListPreferenceDuration;
 	private ListPreference mListPreferenceMotion;
+//	private Preference mTestPref;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class AdvancedPreferences extends PreferenceActivity {
 		setMotionToleranceSummary(settings.getString(MainActivity.KEY_MOTION_TOLERANCE,
 				"***"));
 		mListPreferenceMotion.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		
+//		mTestPref = ps.findPreference("test1");
+//		mTestPref.setOnPreferenceClickListener(this);
 	}
 
 	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
@@ -65,5 +71,15 @@ public class AdvancedPreferences extends PreferenceActivity {
 		}
 		mListPreferenceMotion.setSummary(summary);
 	}
+
+//	@Override
+//	public boolean onPreferenceClick(Preference preference) {
+//
+//		if(preference == mTestPref) {
+//			Intent intent = new Intent(this, AlarmDetailPreferenceActivity.class);
+//			startActivity(intent);
+//		}
+//		return false;
+//	}
 
 }

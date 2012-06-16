@@ -1,7 +1,6 @@
 package com.dexnamic.alwayscharged;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Stack;
 
 import android.app.Activity;
@@ -14,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
