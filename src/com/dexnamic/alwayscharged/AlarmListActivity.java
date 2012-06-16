@@ -3,8 +3,11 @@ package com.dexnamic.alwayscharged;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class AlarmListActivity extends ListActivity {
 	

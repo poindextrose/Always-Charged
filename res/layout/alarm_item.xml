@@ -10,28 +10,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/alarm_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/checkBox"
-        android:text="10:00 pm" />
-
-    <TextView
-        android:id="@+id/alarm_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="label of alarm" />
-
-    <TextView
-        android:id="@+id/alarm_repeat"
+    <RelativeLayout
+        android:id="@+id/alarm_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/checkBox"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/checkBox"
-        android:text="Mon,Tue,Wed,Thu,Fri,Sat,Sun" />
+        android:background="@drawable/layout_selector"
+        android:clickable="true" >
+
+        <!--
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        -->
+
+        <TextView
+            android:id="@+id/alarm_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/checkBox"
+            android:text="10:00 pm" />
+
+        <TextView
+            android:id="@+id/alarm_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="label of alarm" />
+
+        <TextView
+            android:id="@+id/alarm_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Mon,Tue,Wed,Thu,Fri,Sat,Sun" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,24 +1,34 @@
 package com.dexnamic.alwayscharged;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class AlarmListCursorAdaptor extends SimpleCursorAdapter {
 
-    public AlarmListCursorAdaptor(Context context, int layout, Cursor c, String[] from, int[] to) {
+	public AlarmListCursorAdaptor(Context context, int layout, Cursor c, String[] from, int[] to) {
 		super(context, layout, c, from, to);
-    }
+	}
 
-    @Override
+	@Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+		OnItemClickListener onItemClickListener = new OnItemClickListener(cursor.getInt(cursor
+				.getColumnIndex(DatabaseHelper.KEY_ID)));
+    	
+    	View summary = (View) view.findViewById(R.id.alarm_summary);
+    	summary.setOnClickListener(onItemClickListener);
+    	
     	int isEnabled = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ENABLED));
         CheckBox checkbox = (CheckBox) view.findViewById(R.id.checkBox);
         checkbox.setChecked((isEnabled == 1));
+        checkbox.setOnClickListener(onItemClickListener);
 
         int hour = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_HOUR));
         int minute = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_MINUTE));
@@ -50,5 +60,23 @@ public class AlarmListCursorAdaptor extends SimpleCursorAdapter {
         	repeatTextView.setText(repeatString);
         }
     }
+
+	private class OnItemClickListener implements OnClickListener {
+		private int mPosition;
+
+		OnItemClickListener(int position) {
+			mPosition = position;
+		}
+
+		@Override
+		public void onClick(View v) {
+			if (v.getId() == R.id.alarm_summary) {
+				Log.i(this.getClass().getSimpleName(), "onClick summary, id = " + mPosition);
+			}
+			if (v.getId() == R.id.checkBox) {
+				Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + mPosition);
+			}
+		}
+	}
 
 }
