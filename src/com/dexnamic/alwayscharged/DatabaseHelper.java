@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	private static final String DATABASE_NAME = "alwayscharged";
-	private static final int DATABASE_VERSION = 6;
+	/* sqlite3 /data/data/com.dexnamic.alwayscharged/databases/alwayscharged.db */
+
+	private static final String DATABASE_NAME = "alwayscharged.db";
+	private static final int DATABASE_VERSION = 2;
 
 	private static final String TABLE_ALARMS = "alarms";
 
@@ -21,34 +23,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_REPEATS = "repeats";
 	static final String KEY_RINGTONE = "ringtone";
 	static final String KEY_VIBRATE = "vibrate";
-	
-    String CREATE_TABLE_ALARMS = "CREATE TABLE " + TABLE_ALARMS + "("
-            + KEY_ID + " INTEGER PRIMARY KEY," +
-    		KEY_LABEL + " TEXT," +
-    		KEY_HOUR + " INTEGER," +
-    		KEY_MINUTE + " INTEGER" +
-    		KEY_REPEATS + " INTEGER" +
-    		KEY_RINGTONE + " TEXT" +
-    		KEY_VIBRATE + " INTEGER" +
-    		")";
+
+	String CREATE_TABLE_ALARMS = "CREATE TABLE " + TABLE_ALARMS + "(" + KEY_ID
+			+ " INTEGER PRIMARY KEY," + KEY_LABEL + " TEXT," + KEY_HOUR + " INTEGER," + KEY_MINUTE
+			+ " INTEGER," + KEY_REPEATS + " INTEGER," + KEY_RINGTONE + " TEXT," + KEY_VIBRATE
+			+ " INTEGER" + ")";
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
+	/*
+	 * 06-16 10:17:41.239: E/SQLiteDatabase(24300):
+	 * android.database.sqlite.SQLiteException: table alarms has no column named
+	 * vibrate: , while compiling: INSERT INTO
+	 * alarms(minute,vibrate,ringtone,label,repeats,hour) VALUES (?,?,?,?,?,?)
+	 */
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_ALARMS);
-		
+
 		AlarmDetail alarm = new AlarmDetail();
 		// TODO: read from preferences for first time
 		alarm.setLabel("my first alarm");
 		alarm.setHour(21);
 		alarm.setMinute(30);
-		alarm.setRepeats(2^8-1); // every day
+		alarm.setRepeats(127); // every day
 		alarm.setRingtone("Default");
 		alarm.setVibrate(1);
-		
+
 		db.insert(TABLE_ALARMS, null, putValues(alarm));
 	}
 
@@ -66,13 +70,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.insert(TABLE_ALARMS, null, putValues(alarm));
 		db.close();
 	}
-	
+
 	public int updateAlarm(AlarmDetail alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
-	    return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
-	            new String[] { String.valueOf(alarm.getID()) });
+		return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
+				new String[] { String.valueOf(alarm.getID()) });
 	}
-	
+
 	private ContentValues putValues(AlarmDetail alarm) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_LABEL, alarm.getLabel());
@@ -103,18 +107,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE)));
 		return alarm;
 	}
-	
+
 	public void deleteAlarm(AlarmDetail alarm) {
-	    SQLiteDatabase db = this.getWritableDatabase();
-	    db.delete(TABLE_ALARMS, KEY_ID + " = ?",
-	            new String[] { String.valueOf(alarm.getID()) });
-	    db.close();
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(alarm.getID()) });
+		db.close();
 	}
-	
-    public Cursor getAllAlarms() {
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_ALARMS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery(selectQuery, null);
-    }
+
+	public Cursor getAllAlarms() {
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + TABLE_ALARMS;
+		SQLiteDatabase db = this.getWritableDatabase();
+		return db.rawQuery(selectQuery, null);
+	}
 }

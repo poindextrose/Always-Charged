@@ -30,7 +30,7 @@ public class AlarmListActivity extends ListActivity {
 		// an XML template for your list item, and
 		// The column to map to a specific item, by ID, in your template.
 		ListAdapter adapter = new SimpleCursorAdapter(this,  
-		                android.R.layout.simple_list_item_1,  // Use a template that displays a text view
+		                R.layout.alarm_item,  // Use a template that displays a text view
 		                cursor,                                    // Give the cursor to the list adapter
 		                new String[] {DatabaseHelper.KEY_LABEL} ,          // Map the NAME column in the people database to...
 		                new int[] { R.id.alarm_item });              // The "text1" view defined in the XML template
