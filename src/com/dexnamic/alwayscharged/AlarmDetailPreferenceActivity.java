@@ -2,7 +2,6 @@ package com.dexnamic.alwayscharged;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.widget.Toast;
 
 public class AlarmDetailPreferenceActivity extends PreferenceActivity {
 	
@@ -12,6 +11,7 @@ public class AlarmDetailPreferenceActivity extends PreferenceActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		setContentView(R.layout.alarm_detail);
 		addPreferencesFromResource(R.xml.alarm_detail);
 		
 		Bundle extras = getIntent().getExtras();
