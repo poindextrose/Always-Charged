@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    
-	<CheckBoxPreference android:title="@string/enable_alarm" android:summary="@string/turn_alarm_on" 
-		android:defaultValue="false" />
-	<Preference android:title="Time" android:summary="hh:mm"/>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:summary="@string/turn_alarm_on"
+        android:title="@string/enable_alarm" />
+
+    <Preference
+        android:summary="hh:mm"
+        android:title="Time" />
+    <Preference
+        android:summary="Never"
+        android:title="Repeat" />
+    <Preference
+        android:summary="Default"
+        android:title="Ringtone" />
+
+    <CheckBoxPreference android:title="Vibrate" />
+
+    <EditTextPreference android:title="Label" android:summary=""/>
 
 </PreferenceScreen>
