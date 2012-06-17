@@ -3,21 +3,54 @@
 
     <CheckBoxPreference
         android:defaultValue="false"
+        android:key="key_checkbox"
         android:summary="@string/turn_alarm_on"
         android:title="@string/enable_alarm" />
 
     <Preference
+        android:key="key_time"
         android:summary="hh:mm"
         android:title="Time" />
-    <Preference
+
+    <PreferenceScreen
+        android:key="key_repeat"
         android:summary="Never"
-        android:title="Repeat" />
+        android:title="Repeat" >
+        <CheckBoxPreference
+            android:key="key_monday"
+            android:title="Monday" />
+        <CheckBoxPreference
+            android:key="key_tuesday"
+            android:title="Tuesday" />
+        <CheckBoxPreference
+            android:key="key_wednesday"
+            android:title="Wednesday" />
+        <CheckBoxPreference
+            android:key="key_thursday"
+            android:title="Thursday" />
+        <CheckBoxPreference
+            android:key="key_friday"
+            android:title="Friday" />
+        <CheckBoxPreference
+            android:key="key_saturday"
+            android:title="Saturday" />
+        <CheckBoxPreference
+            android:key="key_sunday"
+            android:title="Sunday" />
+    </PreferenceScreen>
+
     <Preference
+        android:key="key_ringtone"
         android:summary="Default"
         android:title="Ringtone" />
 
-    <CheckBoxPreference android:title="Vibrate" />
+    <CheckBoxPreference
+        android:key="key_vibrate"
+        android:title="Vibrate" />
 
-    <EditTextPreference android:title="Label" android:summary=""/>
+    <EditTextPreference
+        android:key="key+label"
+        android:summary=""
+        android:title="Label" />
 
 </PreferenceScreen>

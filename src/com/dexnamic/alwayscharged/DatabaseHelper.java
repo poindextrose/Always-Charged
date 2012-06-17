@@ -94,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		AlarmDetail alarm = new AlarmDetail();
 		alarm.setID(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED)));
 		alarm.setLabel(cursor.getString(cursor.getColumnIndex(KEY_LABEL)));
 		alarm.setHour(cursor.getInt(cursor.getColumnIndex(KEY_HOUR)));
 		alarm.setMinute(cursor.getInt(cursor.getColumnIndex(KEY_MINUTE)));

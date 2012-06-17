@@ -71,12 +71,40 @@ public class AlarmDetail {
 		ID = iD;
 	}
 
-	public Integer getEnabled() {
+	public int getEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
 	}
-	
+
+	public CharSequence getTime() {
+
+		return "" + hour + ":" + minute;
+	}
+
+	public static String repeatToString(int repeat) {
+		StringBuffer repeatString = new StringBuffer();
+		if ((repeat & 1) == 1)
+			repeatString.append("Mon,");
+		if ((repeat >> 1 & 1) == 1)
+			repeatString.append("Tue,");
+		if ((repeat >> 2 & 1) == 1)
+			repeatString.append("Wed,");
+		if ((repeat >> 3 & 1) == 1)
+			repeatString.append("Thu,");
+		if ((repeat >> 4 & 1) == 1)
+			repeatString.append("Fri,");
+		if ((repeat >> 5 & 1) == 1)
+			repeatString.append("Sat,");
+		if ((repeat >> 6 & 1) == 1)
+			repeatString.append("Sun,");
+		if (repeatString.length() == 0)
+			repeatString.append("No repeat");
+		else
+			repeatString.deleteCharAt(repeatString.length() - 1);
+		return repeatString.toString();
+	}
+
 }
