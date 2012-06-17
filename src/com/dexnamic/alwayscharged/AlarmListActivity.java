@@ -1,15 +1,19 @@
 package com.dexnamic.alwayscharged;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class AlarmListActivity extends ListActivity {
+public class AlarmListActivity extends ListActivity
+implements AlarmListCursorAdaptor.OnListClickListener
+{
 	
 	private DatabaseHelper dbHelper;
 
@@ -35,8 +39,7 @@ public class AlarmListActivity extends ListActivity {
 		ListAdapter adapter = new AlarmListCursorAdaptor(this,  
 		                R.layout.alarm_item,  // Use a template that displays a text view
 		                cursor,                                    // Give the cursor to the list adapter
-		                new String[] {},// not needed since bindView() is overridden
-		                new int[] {});// not needed since bindView() is overridden
+		                this);
 		setListAdapter(adapter);
 	}
 
@@ -45,6 +48,19 @@ public class AlarmListActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onStop();
 		
+	}
+
+	@Override
+	public void alarmChecked(int id, boolean isChecked) {
+		Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + id);
+	}
+
+	@Override
+	public void alarmSelected(int id) {
+		Log.i(this.getClass().getSimpleName(), "onClick summary, id = " + id);
+		Intent intent = new Intent(this, AlarmDetailPreferenceActivity.class);
+		intent.putExtra("id", id);
+		startActivity(intent);
 	}
 
 }

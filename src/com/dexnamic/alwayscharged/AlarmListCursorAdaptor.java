@@ -1,9 +1,7 @@
 package com.dexnamic.alwayscharged;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -12,8 +10,16 @@ import android.widget.TextView;
 
 public class AlarmListCursorAdaptor extends SimpleCursorAdapter {
 
-	public AlarmListCursorAdaptor(Context context, int layout, Cursor c, String[] from, int[] to) {
-		super(context, layout, c, from, to);
+	interface OnListClickListener {
+		abstract void alarmChecked(int id, boolean isChecked);
+		abstract void alarmSelected(int id);
+	}
+	
+	private OnListClickListener onListClickListener;
+	
+	public AlarmListCursorAdaptor(Context context, int layout, Cursor c, OnListClickListener onListClickListener) {
+		super(context, layout, c, new String[] { }, new int[] {});
+		this.onListClickListener = onListClickListener;
 	}
 
 	@Override
@@ -62,19 +68,21 @@ public class AlarmListCursorAdaptor extends SimpleCursorAdapter {
     }
 
 	private class OnItemClickListener implements OnClickListener {
-		private int mPosition;
+		private int id;
 
-		OnItemClickListener(int position) {
-			mPosition = position;
+		OnItemClickListener(int id) {
+			this.id = id;
 		}
 
 		@Override
 		public void onClick(View v) {
 			if (v.getId() == R.id.alarm_summary) {
-				Log.i(this.getClass().getSimpleName(), "onClick summary, id = " + mPosition);
+				if(onListClickListener != null)
+					onListClickListener.alarmSelected(id);
 			}
 			if (v.getId() == R.id.checkBox) {
-				Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + mPosition);
+				if(onListClickListener != null)
+					onListClickListener.alarmChecked(id, ((CheckBox)v).isChecked());
 			}
 		}
 	}
