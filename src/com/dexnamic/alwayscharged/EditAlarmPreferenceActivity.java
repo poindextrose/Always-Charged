@@ -6,9 +6,14 @@ import com.dexnamic.android.preference.ListPreferenceMultiSelect;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.RingtonePreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -19,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		OnPreferenceClickListener, OnPreferenceChangeListener, OnClickListener,
@@ -34,10 +40,12 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	CheckBoxPreference checkBox;
 	Preference time;
 	ListPreferenceMultiSelect repeatPreference;
-	// CheckBoxPreference monday, tuesday, wednesday, thursday, friday,
-	// saturday, sunday;
+
+	CheckBoxPreference vibrate;
 
 	Button cancelButton, deleteButton, okButton;
+
+	private RingtonePreference mRingtonePreference;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +67,12 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		repeatPreference = (ListPreferenceMultiSelect) ps.findPreference("key_repeat");
 		repeatPreference.setOnPreferenceChangeListener(this);
-		repeatPreference.setOnPreferenceClickListener(this);
 
-		// monday = (CheckBoxPreference) ps.findPreference("key_monday");
-		// monday.setOnPreferenceClickListener(this);
-		// tuesday = (CheckBoxPreference) ps.findPreference("key_tuesday");
-		// tuesday.setOnPreferenceClickListener(this);
-		// wednesday = (CheckBoxPreference) ps.findPreference("key_wednesday");
-		// wednesday.setOnPreferenceClickListener(this);
-		// thursday = (CheckBoxPreference) ps.findPreference("key_thursday");
-		// thursday.setOnPreferenceClickListener(this);
-		// friday = (CheckBoxPreference) ps.findPreference("key_friday");
-		// friday.setOnPreferenceClickListener(this);
-		// saturday = (CheckBoxPreference) ps.findPreference("key_saturday");
-		// saturday.setOnPreferenceClickListener(this);
-		// sunday = (CheckBoxPreference) ps.findPreference("key_sunday");
-		// sunday.setOnPreferenceClickListener(this);
+		mRingtonePreference = (RingtonePreference) ps.findPreference("key_ringtone");
+		mRingtonePreference.setOnPreferenceChangeListener(this);
+
+		vibrate = (CheckBoxPreference) ps.findPreference("key_vibrate");
+		vibrate.setOnPreferenceClickListener(this);
 
 		cancelButton = (Button) findViewById(R.id.buttonCancel);
 		cancelButton.setOnClickListener(this);
@@ -111,13 +109,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
 
-		// monday.setChecked(mAlarm.getRepeats(0));
-		// tuesday.setChecked(mAlarm.getRepeats(1));
-		// wednesday.setChecked(mAlarm.getRepeats(2));
-		// thursday.setChecked(mAlarm.getRepeats(3));
-		// friday.setChecked(mAlarm.getRepeats(4));
-		// saturday.setChecked(mAlarm.getRepeats(5));
-		// sunday.setChecked(mAlarm.getRepeats(6));
+		mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 
 	}
 
@@ -126,44 +118,47 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		if (preference == checkBox) {
 			mAlarm.setEnabled(checkBox.isChecked());
-			Log.i("", "checkBox clicked " + mAlarm.getEnabled());
-			// } else if (preference == repeatPreference) {
-			// ArrayList<String> defaultValue = new ArrayList<String>();
-			// Integer repeats = mAlarm.getRepeats();
-			// for (int i = 0; i < 7; i++) {
-			// if((repeats & (1 << i)) > 0)
-			// defaultValue.add("" + i);
-			// }
-			// repeatPreference.setDefaultValue(defaultValue);
+		} else if (preference == time) {
+			showDialog(TIME_DIALOG_ID);
+		} else if (preference == vibrate) {
+			mAlarm.setVibrate(vibrate.isChecked());
 		}
-		// } else if (preference == repeatPreference) {
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == monday) {
-		// mAlarm.setRepeats(0, monday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == tuesday) {
-		// mAlarm.setRepeats(1, tuesday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == wednesday) {
-		// mAlarm.setRepeats(2, wednesday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == thursday) {
-		// mAlarm.setRepeats(3, thursday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == friday) {
-		// mAlarm.setRepeats(4, friday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == saturday) {
-		// mAlarm.setRepeats(5, saturday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == sunday) {
-		// mAlarm.setRepeats(6, sunday.isChecked());
-		// repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-		// } else if (preference == time) {
-		// showDialog(TIME_DIALOG_ID);
-		// }
 
 		return true;
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (preference == repeatPreference) {
+			@SuppressWarnings("unchecked")
+			ArrayList<String> results = (ArrayList<String>) newValue;
+			Integer repeat = 0;
+			for (String s : results) {
+				repeat = repeat | (1 << Integer.parseInt(s));
+			}
+			mAlarm.setRepeats(repeat);
+			repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+			return true;
+		} else if (preference == mRingtonePreference) {
+			mAlarm.setRingtone((String)newValue);
+			mRingtonePreference.setSummary(mAlarm.getRingerName(this));
+			checkVolume();
+		}
+		return false;
+	}
+	
+
+	
+	private void checkVolume() {
+		String chosenRingtone = mAlarm.getRingtone();
+		if (chosenRingtone.length() > 0) {
+			AudioManager audioManager;
+			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+				Toast.makeText(this, getString(R.string.checkVolume),
+						Toast.LENGTH_LONG).show();
+			}
+		}
 	}
 
 	private void cancelEdit() {
@@ -227,21 +222,5 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			return new TimePickerDialog(this, this, mAlarm.getHour(), mAlarm.getMinute(), false);
 		}
 		return null;
-	}
-
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (preference == repeatPreference) {
-			@SuppressWarnings("unchecked")
-			ArrayList<String> results = (ArrayList<String>) newValue;
-			Integer repeat = 0;
-			for (String s : results) {
-				repeat = repeat | (1 << Integer.parseInt(s));
-			}
-			mAlarm.setRepeats(repeat);
-			repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
-			return true;
-		}
-		return false;
 	}
 }

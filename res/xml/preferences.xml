@@ -20,7 +20,7 @@
 		android:title="@string/ringtone" android:summary="choose a ringtone"
 		android:ringtoneType="ringtone|alarm" android:showDefault="false"
 		android:showSilent="true"
-		android:defaultValue="content://media/internal/audio/media/83" />
+		android:defaultValue="content://settings/system/ringtone" />
 
 	<CheckBoxPreference android:key="key_vibrate"
 		android:title="@string/vibrate"

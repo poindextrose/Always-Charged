@@ -1,7 +1,10 @@
 package com.dexnamic.alwayscharged;
 
 import android.content.Context;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 public class Alarm {
     
@@ -161,4 +164,31 @@ public class Alarm {
 				+ String.format("%02d", minute) + suffix;
 	}
 
+	public String getRingerName(Context context) {
+		String ringerName;// = context.getString(R.string.silent);
+		try {
+			Uri uri = Uri.parse(ringtone);
+//			if (ringtone.length() > 0) {
+				ringerName = RingtoneManager.getRingtone(context, uri).getTitle(
+						context);
+//			}
+		} catch (Exception e) {
+			ringerName = context.getString(R.string.default_ringtone);
+			try {
+				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(context,
+						RingtoneManager.TYPE_RINGTONE);
+				if (ringtone.length() > 0) {
+					ringerName = RingtoneManager.getRingtone(context, uri).getTitle(
+							context);
+				}
+			} catch (Exception e2) {
+				ringerName = context.getString(R.string.unknown);
+			}
+		} finally {
+			// TODO: call checkVolume() from somewhere
+//			checkVolume();
+		}
+		return ringerName;
+	}
+	
 }

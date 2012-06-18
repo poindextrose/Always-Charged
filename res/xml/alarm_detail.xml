@@ -14,42 +14,13 @@
 
     <com.dexnamic.android.preference.ListPreferenceMultiSelect
         android:dialogTitle="Repeat"
-        android:entries="@array/pref_upload_buckets_default_entries"
-        android:entryValues="@array/pref_upload_buckets_default_values"
+        android:entries="@array/pref_days_of_week"
+        android:entryValues="@array/pref_days_of_week_values"
         android:key="key_repeat"
-        android:title="Repeat" />
-
-    <!--
-    <PreferenceScreen
-        android:key="key_repeat"
-        android:summary="Never"
-        android:title="Repeat" >
-        <CheckBoxPreference
-            android:key="key_monday"
-            android:title="Monday" />
-        <CheckBoxPreference
-            android:key="key_tuesday"
-            android:title="Tuesday" />
-        <CheckBoxPreference
-            android:key="key_wednesday"
-            android:title="Wednesday" />
-        <CheckBoxPreference
-            android:key="key_thursday"
-            android:title="Thursday" />
-        <CheckBoxPreference
-            android:key="key_friday"
-            android:title="Friday" />
-        <CheckBoxPreference
-            android:key="key_saturday"
-            android:title="Saturday" />
-        <CheckBoxPreference
-            android:key="key_sunday"
-            android:title="Sunday" />
-    </PreferenceScreen>
-    -->
-    <Preference
+        android:title="Repeat" />
+    <RingtonePreference
         android:key="key_ringtone"
-        android:summary="Default"
+        android:summary=""
         android:title="Ringtone" />
 
     <CheckBoxPreference

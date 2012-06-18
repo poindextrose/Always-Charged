@@ -41,11 +41,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Alarm alarm = new Alarm();
 		// TODO: read from preferences for first time
 		alarm.setEnabled(false);
-		alarm.setLabel("my first alarm");
+		alarm.setLabel("my daily bedtime");
 		alarm.setHour(21);
 		alarm.setMinute(30);
-		alarm.setRepeats(3); 
-		alarm.setRingtone("Default");
+		alarm.setRepeats(127); 
+		alarm.setRingtone("content://settings/system/ringtone");
 		alarm.setVibrate(true);
 
 		db.insert(TABLE_ALARMS, null, putValues(alarm));

@@ -42,7 +42,7 @@
         <item>0</item>
     </string-array>
         
-	<string-array name="pref_upload_buckets_default_entries">
+	<string-array name="pref_days_of_week">
 		<item>Monday</item>
 		<item>Tuesday</item>
 		<item>Wednesday</item>
@@ -51,7 +51,7 @@
 		<item>Saturday</item>
 		<item>Sunday</item>
 	</string-array>
-	<string-array name="pref_upload_buckets_default_values">
+	<string-array name="pref_days_of_week_values">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>

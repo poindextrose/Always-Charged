@@ -242,10 +242,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		String ringerName = getString(R.string.silent);
 		try {
 			Uri uri = Uri.parse(uriString);
-			if (uriString.length() > 0) {
+//			if (uriString.length() > 0) {
 				ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
 						MainActivity.this);
-			}
+//			}
 		} catch (Exception e) {
 			ringerName = getString(R.string.default_ringtone);
 			try {
