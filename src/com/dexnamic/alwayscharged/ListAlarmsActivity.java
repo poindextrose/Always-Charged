@@ -11,8 +11,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class AlarmListActivity extends ListActivity
-implements AlarmListCursorAdaptor.OnListClickListener
+public class ListAlarmsActivity extends ListActivity
+implements ListAlarmsCursorAdaptor.OnListClickListener
 {
 	
 	private DatabaseHelper dbHelper;
@@ -36,7 +36,7 @@ implements AlarmListCursorAdaptor.OnListClickListener
 		// Create the ListAdapter. A SimpleCursorAdapter lets you specify two interesting things:
 		// an XML template for your list item, and
 		// The column to map to a specific item, by ID, in your template.
-		ListAdapter adapter = new AlarmListCursorAdaptor(this,  
+		ListAdapter adapter = new ListAlarmsCursorAdaptor(this,  
 		                R.layout.alarm_item,  // Use a template that displays a text view
 		                cursor,                                    // Give the cursor to the list adapter
 		                this);
@@ -58,7 +58,7 @@ implements AlarmListCursorAdaptor.OnListClickListener
 	@Override
 	public void alarmSelected(int id) {
 		Log.i(this.getClass().getSimpleName(), "onClick summary, id = " + id);
-		Intent intent = new Intent(this, AlarmDetailPreferenceActivity.class);
+		Intent intent = new Intent(this, EditAlarmPreferenceActivity.class);
 		intent.putExtra("id", id);
 		startActivity(intent);
 	}

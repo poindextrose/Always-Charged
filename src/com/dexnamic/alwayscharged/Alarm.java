@@ -1,6 +1,9 @@
 package com.dexnamic.alwayscharged;
 
-public class AlarmDetail {
+import android.content.Context;
+import android.provider.Settings;
+
+public class Alarm {
     
 	private Integer ID;
 	private Integer enabled;
@@ -11,7 +14,7 @@ public class AlarmDetail {
 	private String ringtone;
 	private Integer vibrate;
 
-	public AlarmDetail() {
+	public Alarm() {
 		ID = -1;
 	}
 	
@@ -42,9 +45,32 @@ public class AlarmDetail {
 	public Integer getRepeats() {
 		return repeats;
 	}
+	
+	/**
+	 * 
+	 * @param day Monday = 0, Tuesday = 1, ..., Sunday = 6
+	 * @return 
+	 */
+	public Boolean getRepeats(Integer day) {
+		return ((repeats >> day & 1) == 1);
+	}
 
 	public void setRepeats(Integer repeats) {
 		this.repeats = repeats;
+	}
+	
+	/**
+	 * 
+	 * @param day - Monday = 0, Tuesday = 1, ..., Sunday = 6
+	 * @param repeat_on_day
+	 */
+	public void setRepeats(Integer day, int repeat_on_day) {
+		if(repeat_on_day > 0) {
+			repeats = (1 << repeat_on_day | day);
+		} else {
+			int mask = 0xFF ^ (1 << repeat_on_day);
+			repeats = repeats & mask;
+		}
 	}
 
 	public String getRingtone() {
@@ -79,9 +105,9 @@ public class AlarmDetail {
 		this.enabled = enabled;
 	}
 
-	public CharSequence getTime() {
+	public CharSequence getTime(Context context) {
 
-		return "" + hour + ":" + minute;
+		return formatTime(context, hour, minute);
 	}
 
 	public static String repeatToString(int repeat) {
@@ -105,6 +131,34 @@ public class AlarmDetail {
 		else
 			repeatString.deleteCharAt(repeatString.length() - 1);
 		return repeatString.toString();
+	}
+	
+
+	public static String formatTime(Context context, int hourOfDay, int minute) {
+		String suffix = "";
+		if (minute == 0) {
+			switch (hourOfDay) {
+			case 0:
+				return "midnight";
+			case 12:
+				return "noon";
+			}
+		}
+		int timeFormat = Settings.System.getInt(context.getContentResolver(),
+				Settings.System.TIME_12_24, 12);
+		if (timeFormat == 12) {
+			if (hourOfDay >= 12) {
+				if (hourOfDay > 12)
+					hourOfDay -= 12;
+				suffix = " pm";
+			} else {
+				if (hourOfDay == 0)
+					hourOfDay = 12;
+				suffix = " am";
+			}
+		}
+		return String.format("%d", hourOfDay) + ":"
+				+ String.format("%02d", minute) + suffix;
 	}
 
 }

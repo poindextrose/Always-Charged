@@ -12,7 +12,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
-public class AlarmDetailPreferenceActivity extends PreferenceActivity implements
+public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		OnPreferenceClickListener, OnPreferenceChangeListener {
 
 	private int mId;
@@ -60,10 +60,10 @@ public class AlarmDetailPreferenceActivity extends PreferenceActivity implements
 
 	private void setPreferences() {
 
-		AlarmDetail alarm = database.getAlarm(mId);
+		Alarm alarm = database.getAlarm(mId);
 
 		checkBox.setChecked((alarm.getEnabled() == 1));
-		time.setSummary(alarm.getTime());
+		time.setSummary(alarm.getTime(this));
 
 //		repeatPreference.setSummary(AlarmDetail.repeatToString(alarm.getRepeats()));
 

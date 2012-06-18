@@ -27,9 +27,9 @@
 		</activity>
 		<activity android:name=".AdvancedPreferences" android:label="@string/advanced_settings">
 		</activity>
-		<activity android:name=".AlarmDetailPreferenceActivity" android:label="@string/alarm_detail">
+		<activity android:name=".EditAlarmPreferenceActivity" android:label="@string/alarm_detail">
 		</activity>
-		<activity android:name=".AlarmListActivity" android:label="@string/set_alarm">
+		<activity android:name=".ListAlarmsActivity" android:label="@string/set_alarm">
 		</activity>
 		<receiver android:name=".AlarmReceiver">
 			<intent-filter>

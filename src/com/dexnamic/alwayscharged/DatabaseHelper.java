@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_ALARMS);
 
-		AlarmDetail alarm = new AlarmDetail();
+		Alarm alarm = new Alarm();
 		// TODO: read from preferences for first time
 		alarm.setEnabled(0);
 		alarm.setLabel("my first alarm");
@@ -60,19 +60,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		onCreate(db);
 	}
 
-	public void addAlarm(AlarmDetail alarm) {
+	public void addAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.insert(TABLE_ALARMS, null, putValues(alarm));
 		db.close();
 	}
 
-	public int updateAlarm(AlarmDetail alarm) {
+	public int updateAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
 				new String[] { String.valueOf(alarm.getID()) });
 	}
 
-	private ContentValues putValues(AlarmDetail alarm) {
+	private ContentValues putValues(Alarm alarm) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_ENABLED, alarm.getEnabled());
 		values.put(KEY_LABEL, alarm.getLabel());
@@ -84,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return values;
 	}
 
-	public AlarmDetail getAlarm(int id) {
+	public Alarm getAlarm(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		Cursor cursor = db.query(TABLE_ALARMS, null, KEY_ID + "=?",
@@ -92,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (cursor != null)
 			cursor.moveToFirst();
 
-		AlarmDetail alarm = new AlarmDetail();
+		Alarm alarm = new Alarm();
 		alarm.setID(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
 		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED)));
 		alarm.setLabel(cursor.getString(cursor.getColumnIndex(KEY_LABEL)));
@@ -104,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return alarm;
 	}
 
-	public void deleteAlarm(AlarmDetail alarm) {
+	public void deleteAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(alarm.getID()) });
 		db.close();
