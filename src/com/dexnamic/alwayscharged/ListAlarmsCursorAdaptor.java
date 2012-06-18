@@ -9,8 +9,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class ListAlarmsCursorAdaptor extends SimpleCursorAdapter {
-
-	private Context context;
 	
 	interface OnListClickListener {
 		abstract void alarmChecked(int id, boolean isChecked);
@@ -21,7 +19,6 @@ public class ListAlarmsCursorAdaptor extends SimpleCursorAdapter {
 	
 	public ListAlarmsCursorAdaptor(Context context, int layout, Cursor c, OnListClickListener onListClickListener) {
 		super(context, layout, c, new String[] { }, new int[] {});
-		this.context = context;
 		this.onListClickListener = onListClickListener;
 	}
 

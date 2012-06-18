@@ -2,8 +2,6 @@ package com.dexnamic.alwayscharged;
 
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.DialogPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -62,7 +60,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		Alarm alarm = database.getAlarm(mId);
 
-		checkBox.setChecked((alarm.getEnabled() == 1));
+		checkBox.setChecked(alarm.getEnabled());
 		time.setSummary(alarm.getTime(this));
 
 //		repeatPreference.setSummary(AlarmDetail.repeatToString(alarm.getRepeats()));

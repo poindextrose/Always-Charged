@@ -40,13 +40,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Alarm alarm = new Alarm();
 		// TODO: read from preferences for first time
-		alarm.setEnabled(0);
+		alarm.setEnabled(false);
 		alarm.setLabel("my first alarm");
 		alarm.setHour(21);
 		alarm.setMinute(30);
 		alarm.setRepeats(3); 
 		alarm.setRingtone("Default");
-		alarm.setVibrate(1);
+		alarm.setVibrate(true);
 
 		db.insert(TABLE_ALARMS, null, putValues(alarm));
 	}
@@ -94,13 +94,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Alarm alarm = new Alarm();
 		alarm.setID(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
-		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED)));
+		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED))==1);
 		alarm.setLabel(cursor.getString(cursor.getColumnIndex(KEY_LABEL)));
 		alarm.setHour(cursor.getInt(cursor.getColumnIndex(KEY_HOUR)));
 		alarm.setMinute(cursor.getInt(cursor.getColumnIndex(KEY_MINUTE)));
 		alarm.setRepeats(cursor.getInt(cursor.getColumnIndex(KEY_REPEATS)));
 		alarm.setRingtone(cursor.getString(cursor.getColumnIndex(KEY_RINGTONE)));
-		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE)));
+		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE))==1);
 		return alarm;
 	}
 

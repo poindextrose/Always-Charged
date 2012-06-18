@@ -5,11 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 public class ListAlarmsActivity extends ListActivity
 implements ListAlarmsCursorAdaptor.OnListClickListener
@@ -24,11 +20,6 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 		setContentView(R.layout.alarm_list);
 		
 		dbHelper = new DatabaseHelper(this);
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
 		
 		Cursor cursor = dbHelper.getAllAlarms();
 		startManagingCursor(cursor);
@@ -44,15 +35,24 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 	}
 
 	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
+	protected void onStart() {
+		super.onStart();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 		
+		if(dbHelper != null)
+			dbHelper.close();
 	}
 
 	@Override
 	public void alarmChecked(int id, boolean isChecked) {
-		Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + id);
+//		Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + id);
+		Alarm alarm = dbHelper.getAlarm(id);
+		alarm.setEnabled(isChecked);
+		dbHelper.updateAlarm(alarm);
 	}
 
 	@Override

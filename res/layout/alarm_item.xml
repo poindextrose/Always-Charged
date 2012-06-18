@@ -30,24 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/checkBox"
-            android:text="10:00 pm" />
+            android:layout_toRightOf="@+id/checkBox" />
 
         <TextView
             android:id="@+id/alarm_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="label of alarm" />
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/alarm_repeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="Mon,Tue,Wed,Thu,Fri,Sat,Sun" />
+            android:layout_alignParentLeft="true" />
     </RelativeLayout>
 
 </RelativeLayout>

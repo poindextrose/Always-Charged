@@ -6,13 +6,13 @@ import android.provider.Settings;
 public class Alarm {
     
 	private Integer ID;
-	private Integer enabled;
+	private Boolean enabled;
 	private String label;
 	private Integer hour;
 	private Integer minute;
 	private Integer repeats;
 	private String ringtone;
-	private Integer vibrate;
+	private Boolean vibrate;
 
 	public Alarm() {
 		ID = -1;
@@ -81,11 +81,11 @@ public class Alarm {
 		this.ringtone = ringtone;
 	}
 
-	public Integer getVibrate() {
+	public Boolean getVibrate() {
 		return vibrate;
 	}
 
-	public void setVibrate(Integer vibrate) {
+	public void setVibrate(Boolean vibrate) {
 		this.vibrate = vibrate;
 	}
 
@@ -97,11 +97,11 @@ public class Alarm {
 		ID = iD;
 	}
 
-	public int getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(Integer enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
