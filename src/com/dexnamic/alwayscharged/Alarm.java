@@ -127,7 +127,7 @@ public class Alarm {
 		if ((repeat >> 6 & 1) == 1)
 			repeatString.append("Sun,");
 		if (repeatString.length() == 0)
-			repeatString.append("No repeat");
+			repeatString.append("Never");
 		else
 			repeatString.deleteCharAt(repeatString.length() - 1);
 		return repeatString.toString();

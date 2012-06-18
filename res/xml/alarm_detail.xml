@@ -12,6 +12,14 @@
         android:summary="hh:mm"
         android:title="Time" />
 
+    <com.dexnamic.android.preference.ListPreferenceMultiSelect
+        android:dialogTitle="Repeat"
+        android:entries="@array/pref_upload_buckets_default_entries"
+        android:entryValues="@array/pref_upload_buckets_default_values"
+        android:key="key_repeat"
+        android:title="Repeat" />
+
+    <!--
     <PreferenceScreen
         android:key="key_repeat"
         android:summary="Never"
@@ -37,8 +45,8 @@
         <CheckBoxPreference
             android:key="key_sunday"
             android:title="Sunday" />
-    </PreferenceScreen>
-
+    </PreferenceScreen>
+    -->
     <Preference
         android:key="key_ringtone"
         android:summary="Default"
