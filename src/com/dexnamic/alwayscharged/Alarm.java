@@ -64,11 +64,11 @@ public class Alarm {
 	 * @param day - Monday = 0, Tuesday = 1, ..., Sunday = 6
 	 * @param repeat_on_day
 	 */
-	public void setRepeats(Integer day, int repeat_on_day) {
-		if(repeat_on_day > 0) {
-			repeats = (1 << repeat_on_day | day);
+	public void setRepeats(Integer day, Boolean repeat_on_day) {
+		if(repeat_on_day) {
+			repeats = (1 << day | repeats);
 		} else {
-			int mask = 0xFF ^ (1 << repeat_on_day);
+			int mask = 0xFF ^ (1 << day);
 			repeats = repeats & mask;
 		}
 	}

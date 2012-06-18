@@ -116,6 +116,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		if (preference == checkBox) {
 			mAlarm.setEnabled(checkBox.isChecked());
 			Log.i("", "checkBox clicked " + mAlarm.getEnabled());
+		} else if (preference == monday) {
+			mAlarm.setRepeats(0, monday.isChecked());
 		}
 		if (preference == time) {
 			// Toast.makeText(this, "time", Toast.LENGTH_SHORT).show();
