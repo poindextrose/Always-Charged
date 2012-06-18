@@ -267,7 +267,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == mPreferenceTime) {
-			MainActivity.this.showDialog(TIME_DIALOG_ID);
+			showDialog(TIME_DIALOG_ID);
 		} else if (preference == mPreferenceAbout) {
 			showDialog(ABOUT_DIAlOG_ID);
 		} else if (preference == mPreferenceAdvanced) {

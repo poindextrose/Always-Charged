@@ -1,9 +1,10 @@
 package com.dexnamic.alwayscharged;
 
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -12,11 +13,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
 public class EditAlarmPreferenceActivity extends PreferenceActivity implements
-		OnPreferenceClickListener, OnClickListener {
+		OnPreferenceClickListener, OnClickListener, TimePickerDialog.OnTimeSetListener {
 
+	static final int TIME_DIALOG_ID = 0;
+	
 	private int mId;
 
 	Alarm mAlarm;
@@ -118,9 +121,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			Log.i("", "checkBox clicked " + mAlarm.getEnabled());
 		} else if (preference == monday) {
 			mAlarm.setRepeats(0, monday.isChecked());
-		}
-		if (preference == time) {
-			// Toast.makeText(this, "time", Toast.LENGTH_SHORT).show();
+		} else if (preference == time) {
+			showDialog(TIME_DIALOG_ID);
 		}
 
 		return false;
@@ -172,5 +174,21 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	    // platform.
 		saveAlarm();
 	    return;
+	}
+
+	@Override
+	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+		mAlarm.setHour(hourOfDay);
+		mAlarm.setMinute(minute);
+		time.setSummary(mAlarm.getTime(this));
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case TIME_DIALOG_ID:
+			return new TimePickerDialog(this, this, mAlarm.getHour(), mAlarm.getMinute(), false);
+		}
+		return null;
 	}
 }
