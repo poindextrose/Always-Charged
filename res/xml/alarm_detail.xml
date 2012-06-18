@@ -49,7 +49,7 @@
         android:title="Vibrate" />
 
     <EditTextPreference
-        android:key="key+label"
+        android:key="key_label"
         android:summary=""
         android:title="Label" />
 

@@ -243,7 +243,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		try {
 			Uri uri = Uri.parse(uriString);
 			if (uriString.length() > 0) {
-				ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
+				ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
 						MainActivity.this);
 			}
 		} catch (Exception e) {
@@ -252,7 +252,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this,
 						RingtoneManager.TYPE_RINGTONE);
 				if (uriString.length() > 0) {
-					ringerName = RingtoneManager.getRingtone(MainActivity.this, uri).getTitle(
+					ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
 							MainActivity.this);
 				}
 			} catch (Exception e2) {

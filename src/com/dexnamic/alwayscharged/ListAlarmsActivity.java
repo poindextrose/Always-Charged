@@ -4,7 +4,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListAdapter;
 
 public class ListAlarmsActivity extends ListActivity
@@ -35,11 +34,6 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		
@@ -49,7 +43,6 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 
 	@Override
 	public void alarmChecked(int id, boolean isChecked) {
-//		Log.i(this.getClass().getSimpleName(), "onClick checkbox, id = " + id);
 		Alarm alarm = dbHelper.getAlarm(id);
 		alarm.setEnabled(isChecked);
 		dbHelper.updateAlarm(alarm);
@@ -57,7 +50,6 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 
 	@Override
 	public void alarmSelected(int id) {
-		Log.i(this.getClass().getSimpleName(), "onClick summary, id = " + id);
 		Intent intent = new Intent(this, EditAlarmPreferenceActivity.class);
 		intent.putExtra("id", id);
 		startActivity(intent);
