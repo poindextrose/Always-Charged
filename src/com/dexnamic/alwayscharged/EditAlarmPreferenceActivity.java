@@ -8,17 +8,15 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.media.AudioManager;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.RingtonePreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,18 +32,17 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	private int mId;
 
-	Alarm mAlarm;
-	DatabaseHelper database;
+	private Alarm mAlarm;
+	private DatabaseHelper database;
 
-	CheckBoxPreference checkBox;
-	Preference time;
-	ListPreferenceMultiSelect repeatPreference;
-
-	CheckBoxPreference vibrate;
-
+	private CheckBoxPreference mEnabledCheckBox;
+	private Preference mTimePreference;
+	private ListPreferenceMultiSelect mRepeatPreference;
+	private CheckBoxPreference mVibrateCheckBox;
 	Button cancelButton, deleteButton, okButton;
 
 	private RingtonePreference mRingtonePreference;
+	private EditTextPreference mLabelPreference;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,20 +56,23 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		PreferenceScreen ps = getPreferenceScreen();
 
-		checkBox = (CheckBoxPreference) ps.findPreference("key_checkbox");
-		checkBox.setOnPreferenceClickListener(this);
+		mEnabledCheckBox = (CheckBoxPreference) ps.findPreference("key_checkbox");
+		mEnabledCheckBox.setOnPreferenceClickListener(this);
 
-		time = ps.findPreference("key_time");
-		time.setOnPreferenceClickListener(this);
+		mTimePreference = ps.findPreference("key_time");
+		mTimePreference.setOnPreferenceClickListener(this);
 
-		repeatPreference = (ListPreferenceMultiSelect) ps.findPreference("key_repeat");
-		repeatPreference.setOnPreferenceChangeListener(this);
+		mRepeatPreference = (ListPreferenceMultiSelect) ps.findPreference("key_repeat");
+		mRepeatPreference.setOnPreferenceChangeListener(this);
 
 		mRingtonePreference = (RingtonePreference) ps.findPreference("key_ringtone");
 		mRingtonePreference.setOnPreferenceChangeListener(this);
+		
+		mLabelPreference = (EditTextPreference) ps.findPreference("key_label");
+		mLabelPreference.setOnPreferenceChangeListener(this);
 
-		vibrate = (CheckBoxPreference) ps.findPreference("key_vibrate");
-		vibrate.setOnPreferenceClickListener(this);
+		mVibrateCheckBox = (CheckBoxPreference) ps.findPreference("key_vibrate");
+		mVibrateCheckBox.setOnPreferenceClickListener(this);
 
 		cancelButton = (Button) findViewById(R.id.buttonCancel);
 		cancelButton.setOnClickListener(this);
@@ -103,25 +103,30 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	private void setPreferences() {
 
-		checkBox.setChecked(mAlarm.getEnabled());
+		mEnabledCheckBox.setChecked(mAlarm.getEnabled());
 
-		time.setSummary(mAlarm.getTime(this));
+		mTimePreference.setSummary(mAlarm.getTime(this));
 
-		repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+		mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
 
 		mRingtonePreference.setSummary(mAlarm.getRingerName(this));
+		
+		mVibrateCheckBox.setChecked(mAlarm.getVibrate());
+		
+		mLabelPreference.setSummary(mAlarm.getLabel());
+		mLabelPreference.setText(mAlarm.getLabel());
 
 	}
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 
-		if (preference == checkBox) {
-			mAlarm.setEnabled(checkBox.isChecked());
-		} else if (preference == time) {
+		if (preference == mEnabledCheckBox) {
+			mAlarm.setEnabled(mEnabledCheckBox.isChecked());
+		} else if (preference == mTimePreference) {
 			showDialog(TIME_DIALOG_ID);
-		} else if (preference == vibrate) {
-			mAlarm.setVibrate(vibrate.isChecked());
+		} else if (preference == mVibrateCheckBox) {
+			mAlarm.setVibrate(mVibrateCheckBox.isChecked());
 		}
 
 		return true;
@@ -129,7 +134,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if (preference == repeatPreference) {
+		if (preference == mRepeatPreference) {
 			@SuppressWarnings("unchecked")
 			ArrayList<String> results = (ArrayList<String>) newValue;
 			Integer repeat = 0;
@@ -137,12 +142,16 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 				repeat = repeat | (1 << Integer.parseInt(s));
 			}
 			mAlarm.setRepeats(repeat);
-			repeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+			mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
 			return true;
 		} else if (preference == mRingtonePreference) {
 			mAlarm.setRingtone((String)newValue);
 			mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 			checkVolume();
+		} else if (preference == mLabelPreference) {
+			mAlarm.setLabel((String)newValue);
+			mLabelPreference.setSummary((String)newValue);
+			return true;
 		}
 		return false;
 	}
@@ -212,7 +221,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 		mAlarm.setHour(hourOfDay);
 		mAlarm.setMinute(minute);
-		time.setSummary(mAlarm.getTime(this));
+		mTimePreference.setSummary(mAlarm.getTime(this));
 	}
 
 	@Override
