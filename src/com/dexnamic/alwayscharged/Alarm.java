@@ -19,6 +19,13 @@ public class Alarm {
 
 	public Alarm() {
 		ID = -1;
+		setEnabled(false);
+		setLabel("my daily bedtime");
+		setHour(21);
+		setMinute(30);
+		setRepeats(127); 
+		setRingtone("content://settings/system/ringtone");
+		setVibrate(true);
 	}
 	
 	public String getLabel() {

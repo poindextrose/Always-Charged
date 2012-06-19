@@ -1,7 +1,6 @@
 package com.dexnamic.alwayscharged;
 
 import java.util.ArrayList;
-
 import com.dexnamic.android.preference.ListPreferenceMultiSelect;
 
 import android.app.Dialog;
@@ -39,7 +38,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	private Preference mTimePreference;
 	private ListPreferenceMultiSelect mRepeatPreference;
 	private CheckBoxPreference mVibrateCheckBox;
-	Button cancelButton, deleteButton, okButton;
+	private Button cancelButton, deleteButton, okButton;
 
 	private RingtonePreference mRingtonePreference;
 	private EditTextPreference mLabelPreference;
@@ -67,7 +66,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mRingtonePreference = (RingtonePreference) ps.findPreference("key_ringtone");
 		mRingtonePreference.setOnPreferenceChangeListener(this);
-		
+
 		mLabelPreference = (EditTextPreference) ps.findPreference("key_label");
 		mLabelPreference.setOnPreferenceChangeListener(this);
 
@@ -83,7 +82,10 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		database = new DatabaseHelper(this);
 
-		mAlarm = database.getAlarm(mId);
+		if (mId >= 0)
+			mAlarm = database.getAlarm(mId);
+		else
+			mAlarm = new Alarm();
 	}
 
 	@Override
@@ -108,11 +110,18 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		mTimePreference.setSummary(mAlarm.getTime(this));
 
 		mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+		StringBuffer checked = new StringBuffer();
+//		List<Integer> checkedIndicies = new ArrayList<Integer>();
+		for(Integer i = 0; i < 7; i++) {
+			if(mAlarm.getRepeats(i))
+				checked.append(i.toString() + ",");
+		}
+		mRepeatPreference.setValue(checked.toString());
 
 		mRingtonePreference.setSummary(mAlarm.getRingerName(this));
-		
+
 		mVibrateCheckBox.setChecked(mAlarm.getVibrate());
-		
+
 		mLabelPreference.setSummary(mAlarm.getLabel());
 		mLabelPreference.setText(mAlarm.getLabel());
 
@@ -145,27 +154,24 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
 			return true;
 		} else if (preference == mRingtonePreference) {
-			mAlarm.setRingtone((String)newValue);
+			mAlarm.setRingtone((String) newValue);
 			mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 			checkVolume();
 		} else if (preference == mLabelPreference) {
-			mAlarm.setLabel((String)newValue);
-			mLabelPreference.setSummary((String)newValue);
+			mAlarm.setLabel((String) newValue);
+			mLabelPreference.setSummary((String) newValue);
 			return true;
 		}
 		return false;
 	}
-	
 
-	
 	private void checkVolume() {
 		String chosenRingtone = mAlarm.getRingtone();
 		if (chosenRingtone.length() > 0) {
 			AudioManager audioManager;
 			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-				Toast.makeText(this, getString(R.string.checkVolume),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.checkVolume), Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -175,12 +181,16 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	}
 
 	private void deleteAlarm() {
-		database.deleteAlarm(mAlarm);
+		if (mId >= 0)
+			database.deleteAlarm(mAlarm);
 		finish();
 	}
 
 	private void saveAlarm() {
-		database.updateAlarm(mAlarm);
+		if (mId >= 0)
+			database.updateAlarm(mAlarm);
+		else
+			database.addAlarm(mAlarm);
 		finish();
 	}
 

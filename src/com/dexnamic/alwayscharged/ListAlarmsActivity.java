@@ -4,19 +4,27 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListAdapter;
 
 public class ListAlarmsActivity extends ListActivity
-implements ListAlarmsCursorAdaptor.OnListClickListener
+implements ListAlarmsCursorAdaptor.OnListClickListener, OnClickListener
 {
 	
 	private DatabaseHelper dbHelper;
+	
+	private Button addButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_list);
+		
+		addButton = (Button) findViewById(R.id.add_alarm);
+		addButton.setOnClickListener(this);
 		
 		dbHelper = new DatabaseHelper(this);
 		
@@ -53,6 +61,14 @@ implements ListAlarmsCursorAdaptor.OnListClickListener
 		Intent intent = new Intent(this, EditAlarmPreferenceActivity.class);
 		intent.putExtra("id", id);
 		startActivity(intent);
+	}
+
+	@Override
+	public void onClick(View view) {
+		if(view == addButton) {
+			this.alarmSelected(-1);
+		}
+		
 	}
 
 }
