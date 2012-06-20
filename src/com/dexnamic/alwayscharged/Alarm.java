@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.Settings;
-import android.util.Log;
 
 public class Alarm {
     

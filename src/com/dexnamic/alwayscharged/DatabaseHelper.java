@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_ALARMS);
 
 		Alarm alarm = new Alarm();
-		// TODO: read from preferences for first time
+		// TODO: read from preferences for upgrades
 
 		db.insert(TABLE_ALARMS, null, putValues(alarm));
 	}
@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void addAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		long id = db.insert(TABLE_ALARMS, null, putValues(alarm));
-		alarm.setID((int)id);
+		alarm.setID((int) id);
 		db.close();
 	}
 
@@ -81,20 +81,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public Alarm getAlarm(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor cursor = db.query(TABLE_ALARMS, null, KEY_ID + "=?",
+		Cursor cursor = db.query(TABLE_ALARMS, null, KEY_ID + " = ?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 
 		Alarm alarm = new Alarm();
 		alarm.setID(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
-		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED))==1);
+		alarm.setEnabled(cursor.getInt(cursor.getColumnIndex(KEY_ENABLED)) == 1);
 		alarm.setLabel(cursor.getString(cursor.getColumnIndex(KEY_LABEL)));
 		alarm.setHour(cursor.getInt(cursor.getColumnIndex(KEY_HOUR)));
 		alarm.setMinute(cursor.getInt(cursor.getColumnIndex(KEY_MINUTE)));
 		alarm.setRepeats(cursor.getInt(cursor.getColumnIndex(KEY_REPEATS)));
 		alarm.setRingtone(cursor.getString(cursor.getColumnIndex(KEY_RINGTONE)));
-		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE))==1);
+		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE)) == 1);
 		return alarm;
 	}
 
@@ -109,5 +109,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String selectQuery = "SELECT  * FROM " + TABLE_ALARMS;
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.rawQuery(selectQuery, null);
+	}
+
+	public Cursor getAllActiveAlarms() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(TABLE_ALARMS, new String[] { KEY_ID, KEY_ENABLED, KEY_HOUR,
+				KEY_MINUTE, KEY_REPEATS }, KEY_ENABLED + " = ? ", new String[] { "1" }, null, null,
+				null);
+		if (cursor != null)
+			cursor.moveToFirst();
+		return cursor;
 	}
 }

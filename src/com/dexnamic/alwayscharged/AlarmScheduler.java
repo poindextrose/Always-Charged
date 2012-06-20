@@ -39,56 +39,86 @@ public class AlarmScheduler {
 	 *            - minute to set alarm (0-59)
 	 * @return number of minutes until next alarm
 	 */
-	static int setDailyAlarm(Context context, int hourOfDay, int minute) {
-		Log.i("AlarmScheduler", "setDailyAlarm(" + hourOfDay + ", " + minute + ")");
+	static int setDailyAlarm(Context context, int repeats, int hourOfDay, int minute, int id) {
+		Log.i("AlarmScheduler", "setDailyAlarm(" + repeats + ", " + hourOfDay + ", " + minute
+				+ ", " + id + ")");
 
-		AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+		// AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		boolean alarmEnabled = settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
-		if (!alarmEnabled)
-			return 0;
+		// boolean alarmEnabled =
+		// settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false);
+		// if (!alarmEnabled)
+		// return 0;
 
-		Calendar calNow = Calendar.getInstance();
-		Calendar calAlarm = Calendar.getInstance();
-		calAlarm.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		calAlarm.set(Calendar.MINUTE, minute);
-		calAlarm.set(Calendar.SECOND, 0);
-		long alarmTime_ms = calAlarm.getTimeInMillis();
-		final long day_ms = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-		if (calAlarm.before(calNow)) // if alarm is now or earlier
-			alarmTime_ms += day_ms;
+		// TODO: clean this up
 		int snoozeTime = Integer.parseInt(settings.getString(
 				MainActivity.KEY_SNOOZE_TIME_MIN,
 				settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
 						context.getString(R.string.default_snooze_time))));
-		int snoozeTime_ms = 60 * 1000 * snoozeTime;
-		long alarmNotifyTime_ms = alarmTime_ms;
-		alarmTime_ms -= snoozeTime_ms; // need to measure sensors before actual
-										// bedtime
+
+		Calendar now = Calendar.getInstance();
+		Calendar alarmCalendar = Calendar.getInstance();
+		Calendar nearestAlarmCalendar = null;
+		// real alarm needs lead time to measurement movement
+		alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
+		alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		alarmCalendar.set(Calendar.MINUTE, minute);
+		alarmCalendar.set(Calendar.SECOND, 0);
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_ALARM);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime_ms, day_ms, pi);
+		int week_ms = 7 * 24 * 60 * 60 * 1000;
 
-		return 1 + (int) ((alarmNotifyTime_ms - calNow.getTimeInMillis()) / 1000.0 / 60.0);
+		if (repeats > 0) {
+
+			for (Integer day = 0; day < 7; day++) {
+				if ((repeats & (1 << day)) > 0) {
+					alarmCalendar.set(Calendar.DAY_OF_WEEK, (day + 1) % 7);
+					while (alarmCalendar.before(now))
+						alarmCalendar.add(Calendar.DAY_OF_WEEK, 7);
+					if (nearestAlarmCalendar == null || alarmCalendar.before(nearestAlarmCalendar))
+						nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
+					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm",
+							id, day);
+					alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+							alarmCalendar.getTimeInMillis(), week_ms, pendingIntent);
+				}
+			}
+		} else {
+			while (alarmCalendar.before(now))
+				alarmCalendar.add(Calendar.DAY_OF_WEEK, 1);
+			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm", id,
+					-1);
+			alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
+					pendingIntent);
+		}
+
+		return 1 + (int) ((nearestAlarmCalendar.getTimeInMillis() - now.getTimeInMillis()) / 1000.0 / 60.0);
 	}
 
-	static void cancelAlarm(Context context, String category) {
-		PendingIntent pi = getPendingIntentUpdateCurrent(context, category);
+	static void cancelAlarm(Context context, String action, int id, int day) {
+		PendingIntent pi = getPendingIntentUpdateCurrent(context, action, id, day);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
 
 		cancelNotification(context);
 	}
 
+	static void cancelAlarm(Context context, Intent intent) {
+		PendingIntent pi = getPendingIntentUpdateCurrent(context, intent);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(pi);
+
+		cancelNotification(context);
+	}
+	
 	static void cancelNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(AlarmScheduler.NOTIFY_SNOOZE);
 	}
 
-	static void snoozeAlarm(Context context, int snoozeTime_min, int reason_resource_id) {
+	static void snoozeAlarm(Context context, int snoozeTime_min, int reason_resource_id, int id, int day) {
 
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN,
@@ -98,7 +128,7 @@ public class AlarmScheduler {
 			minutes = snoozeTime_min;
 
 		final long time_ms = System.currentTimeMillis() + minutes * 60 * 1000;
-		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE);
+		PendingIntent pi = getPendingIntentUpdateCurrent(context, TYPE_SNOOZE, id, day);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 
@@ -115,7 +145,7 @@ public class AlarmScheduler {
 				// The PendingIntent to launch our activity if the user selects
 				// this
 				// notification
-				PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY);
+				PendingIntent npi = getPendingIntentUpdateCurrent(context, TYPE_NOTIFY, id, day);
 				// Set the info for the views that show in the notification
 				// panel.
 				notification.setLatestEventInfo(context, context.getString(R.string.app_name),
@@ -126,15 +156,21 @@ public class AlarmScheduler {
 
 				nm.notify(NOTIFY_SNOOZE, notification);
 			} catch (Exception e) {
-				// Log.e("dexnamic", e.getMessage());
 			}
 		}
 	}
 
-	static PendingIntent getPendingIntentUpdateCurrent(Context context, String action) {
+	static PendingIntent getPendingIntentUpdateCurrent(Context context, String action, int id,
+			int day) {
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(action);
+		intent.putExtra("id", id);
+		intent.putExtra("day", day);
+		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+	}
+	
+	static PendingIntent getPendingIntentUpdateCurrent(Context context, Intent intent) {
 		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}
@@ -179,9 +215,9 @@ public class AlarmScheduler {
 		editor.commit();
 	}
 
-	static void disableAllAlarms(Context context) {
-		cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
-		cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
-		disablePowerSnooze(context);
-	}
+	// static void disableAllAlarms(Context context) {
+	// cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
+	// cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+	// disablePowerSnooze(context);
+	// }
 }

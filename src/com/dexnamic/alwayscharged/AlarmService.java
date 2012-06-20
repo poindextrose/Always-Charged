@@ -11,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -47,10 +48,19 @@ public class AlarmService extends Service implements SensorEventListener {
 				MainActivity.KEY_MOTION_TOLERANCE, "4");
 		mMotionToleranceDeg = Float.parseFloat(stringMotionTolerance);
 	}
+	
+	int mId, mDay;
 
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
+		
+		Bundle extras = intent.getExtras();
+		if (extras == null) {
+			Log.e("", "extras == null 938290493");
+		}
+		mId = extras.getInt("id");
+		mDay = extras.getInt("day");
 
 		Log.v(this.getClass().getSimpleName(), "AlarmServer.onStart()");
 		AlarmScheduler.enablePowerSnooze(this);
@@ -70,12 +80,12 @@ public class AlarmService extends Service implements SensorEventListener {
 		// if phone call is progress, snooze alarm
 		if (screenOn()) {
 			Log.v(this.getClass().getSimpleName(), "screen is on.  snoozing...");
-			doSnooze(R.string.notify_screen);
+			doSnooze(R.string.notify_screen, mId, mDay);
 			return;
 		}
 		if (telephoneInUse()) {
 			Log.v(this.getClass().getSimpleName(), "telephone in use.  snoozing...");
-			doSnooze(R.string.notify_phone);
+			doSnooze(R.string.notify_phone, mId, mDay);
 			return;
 		}
 
@@ -94,7 +104,7 @@ public class AlarmService extends Service implements SensorEventListener {
 				doAlarm();
 			} else {
 				Log.v(this.getClass().getSimpleName(), "motion detection disabled.  snoozing...");
-				doSnooze(R.string.notify_motion);
+				doSnooze(R.string.notify_motion, mId, mDay);
 			}
 		}
 	}
@@ -169,7 +179,7 @@ public class AlarmService extends Service implements SensorEventListener {
 			} else {
 				Log.v(this.getClass().getSimpleName(),
 						"unable to read sensors. snooze until alarm time");
-				doSnooze(R.string.notify_init);
+				doSnooze(R.string.notify_init, mId, mDay);
 			}
 			return;
 		}
@@ -190,7 +200,7 @@ public class AlarmService extends Service implements SensorEventListener {
 				} else {
 					Log.v(this.getClass().getSimpleName(),
 							"unable to read sensors. snooze until alarm time");
-					doSnooze(R.string.notify_init);
+					doSnooze(R.string.notify_init, mId, mDay);
 				}
 				break;
 			case MSG_STABILZE:
@@ -248,12 +258,12 @@ public class AlarmService extends Service implements SensorEventListener {
 		stopSelf();
 	}
 
-	private void doSnooze(int reason_resource_id) {
+	private void doSnooze(int reason_resource_id, int id, int day) {
 		Log.v(this.getClass().getSimpleName(), "doSnooze()");
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
 
-		AlarmScheduler.snoozeAlarm(this, 0, reason_resource_id);
+		AlarmScheduler.snoozeAlarm(this, 0, reason_resource_id, id, day);
 		stopSelf();
 		AlarmScheduler.releaseWakeLock();
 	}
@@ -271,14 +281,14 @@ public class AlarmService extends Service implements SensorEventListener {
 			if (wasSnooze)
 				doAlarm();
 			else
-				doSnooze(R.string.notify_init);
+				doSnooze(R.string.notify_init, mId, mDay);
 		}
 		if (wasSnooze) {
 			checkDeviceOrientation(orientation);
 		} else {
 			saveDeviceOrientation(orientation);
 			Log.v(this.getClass().getSimpleName(), "saved device orientaiton.  snoozing...");
-			doSnooze(R.string.notify_init);
+			doSnooze(R.string.notify_init, mId, mDay);
 		}
 	}
 
@@ -299,7 +309,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		}
 		if (deviceMoved) {
 			Log.v(this.getClass().getSimpleName(), "device has moved. snoozing...");
-			doSnooze(R.string.notify_motion);
+			doSnooze(R.string.notify_motion, mId, mDay);
 		} else {
 			Log.v(this.getClass().getSimpleName(), "device did not move. sounding alarm");
 			doAlarm();

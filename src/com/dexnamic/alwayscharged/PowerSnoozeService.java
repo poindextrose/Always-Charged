@@ -3,8 +3,10 @@ package com.dexnamic.alwayscharged;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.util.Log;
 
 public class PowerSnoozeService extends Service {
 
@@ -13,6 +15,14 @@ public class PowerSnoozeService extends Service {
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
+
+		String action = intent.getAction();
+		Bundle extras = intent.getExtras();
+		if (extras == null) {
+			Log.e("", "extras == null 938290493");
+		}
+		int id = extras.getInt("id");
+		int day = extras.getInt("day");
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(null, intentBatteryChanged);
@@ -25,7 +35,7 @@ public class PowerSnoozeService extends Service {
 				AlarmScheduler.disablePowerSnooze(this);
 			} else {
 				AlarmScheduler.resetRepeatCount(this, null);
-				AlarmScheduler.snoozeAlarm(this, 0, R.string.notify_power);
+				AlarmScheduler.snoozeAlarm(this, 0, R.string.notify_power, id, day);
 			}
 		}
 

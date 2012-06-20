@@ -304,7 +304,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
 				enableAlaram();
 			} else {
-				AlarmScheduler.disableAllAlarms(this);
+//				AlarmScheduler.disableAllAlarms(this);
 			}
 		}
 	}
@@ -410,13 +410,13 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	}
 
 	private void enableAlaram() {
-		checkVolume();
-
-		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-		int minute = mSettings.getInt(KEY_MINUTE, 0);
-		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
-
-		notifyUserTimeUntilAlarm(minutesUntilAlarm);
+//		checkVolume();
+//
+//		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+//		int minute = mSettings.getInt(KEY_MINUTE, 0);
+//		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
+//
+//		notifyUserTimeUntilAlarm(minutesUntilAlarm);
 	}
 
 	private void notifyUserTimeUntilAlarm(int minutesUntilAlarm) {

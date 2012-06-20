@@ -34,6 +34,8 @@ public class AlarmActivity extends Activity {
 	private Vibrator mVibrator;
 
 	private SharedPreferences mSettings;
+	
+	private int mId, mDay;
 
 	public static final long[] vibratePattern = { 500, 500 };
 
@@ -101,13 +103,13 @@ public class AlarmActivity extends Activity {
 					try {
 						int plugged = intent.getIntExtra("plugged", 0);
 						if (plugged > 0) {
-							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
+							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, mId, mDay);
 							alarmFinished();
 						}
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone, mId, mDay);
 					alarmFinished();
 				}
 				try {
@@ -129,7 +131,7 @@ public class AlarmActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mId, mDay);
 				}
 				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
@@ -163,7 +165,7 @@ public class AlarmActivity extends Activity {
 						public void onClick(DialogInterface dialog, int id) {
 							stopRingtone();
 							AlarmScheduler.resetRepeatCount(AlarmActivity.this, mSettings);
-							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_snooze);
+							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_snooze, mId, mDay);
 							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
 							alarmFinished();
 						}
@@ -201,6 +203,12 @@ public class AlarmActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null) {
+			mId = bundle.getInt("id");
+			mDay = bundle.getInt("id");
+		}
 
 		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE, null);
 //		int maxVolume = 0;
