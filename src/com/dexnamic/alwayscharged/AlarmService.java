@@ -48,13 +48,13 @@ public class AlarmService extends Service implements SensorEventListener {
 				MainActivity.KEY_MOTION_TOLERANCE, "4");
 		mMotionToleranceDeg = Float.parseFloat(stringMotionTolerance);
 	}
-	
+
 	int mId, mDay;
 
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
-		
+
 		Bundle extras = intent.getExtras();
 		if (extras == null) {
 			Log.e("", "extras == null 938290493");
@@ -62,7 +62,8 @@ public class AlarmService extends Service implements SensorEventListener {
 		mId = extras.getInt("id");
 		mDay = extras.getInt("day");
 
-		Log.v(this.getClass().getSimpleName(), "AlarmServer.onStart()");
+		Log.v(getClass().getSimpleName(), "onStart(), id=" + mId + ", day=" + mDay);
+
 		AlarmScheduler.enablePowerSnooze(this);
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -223,7 +224,8 @@ public class AlarmService extends Service implements SensorEventListener {
 		if (mStabilze && (mAccelEventReceived || !mAccelRegistered)
 				&& (mMagneticEventReceived || !mMagneticRegistered)) {
 			sensorsHaveBeenRead();
-			mStabilze = false; // to prevent entering again before sensors can be turned off
+			mStabilze = false; // to prevent entering again before sensors can
+								// be turned off
 		}
 	}
 

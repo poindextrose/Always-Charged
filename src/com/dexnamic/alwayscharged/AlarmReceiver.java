@@ -20,16 +20,30 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
-		Bundle extras = intent.getExtras();
 		if (action != null) {
+			Log.v(getClass().getSimpleName(), "onReceive(), action=" + action);
+			try {
+				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
+						.get(null))) {
+					Log.v(getClass().getSimpleName(), "ACTION_POWER_CONNECTED");
+					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, 0, 0);
+					return;
+				}
+			} catch (Exception e) {
+			}
+			Bundle extras = intent.getExtras();
 			if (extras != null) {
 				int id = extras.getInt("id");
 				int day = extras.getInt("day");
 				if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
+					Log.v(getClass().getSimpleName(), "onReceive(), Nofication clicked, id=" + id
+							+ ", day=" + day);
 					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, id, day);
 					AlarmScheduler.disablePowerSnooze(context);
 					return;
 				} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
+					Log.v(getClass().getSimpleName(), "onReceive(), Snooze alarm, id=" + id
+							+ ", day=" + day);
 					startAlarmService(context, action, id, day);
 
 					// remove enabled from alarm if it does not repeat
@@ -39,27 +53,22 @@ public class AlarmReceiver extends BroadcastReceiver {
 						alarm.setEnabled(false);
 						database.updateAlarm(alarm);
 						database.close();
+						Log.v(getClass().getSimpleName(), "onReceive(), disable alarm, id=" + id
+								+ ", day=" + day);
 					}
 
 					return;
-				} else if (action.equals(AlarmScheduler.TYPE_ALARM)) {
+				} else if (action.contains(AlarmScheduler.TYPE_ALARM)) {
+					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id
+							+ ", day=" + day);
 					// original single alarm
 					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, id, day);
 					AlarmScheduler.resetRepeatCount(context, null);
 					startAlarmService(context, action, id, day);
 				}
-
-				try {
-					if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED").get(
-							null))) {
-						AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, id, day);
-						return;
-					}
-				} catch (Exception e) {
-				}
 			}
 
-			// TODO: get the following to work
+			// TODO: enable and test powersnooze
 			// disabling power snooze for now until everything else is working
 			// try {
 			// if (action.equals((String)

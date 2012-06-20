@@ -22,6 +22,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -218,8 +219,10 @@ public class AlarmActivity extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
 			mId = bundle.getInt("id");
-			mDay = bundle.getInt("id");
+			mDay = bundle.getInt("day");
 		}
+		
+		Log.v(getClass().getSimpleName(), "onStart(), id=" + mId + ", day=" + mDay);
 
 		// String chosenRingtone =
 		// mSettings.getString(MainActivity.KEY_RINGTONE, null);

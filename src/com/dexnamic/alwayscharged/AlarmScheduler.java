@@ -74,16 +74,16 @@ public class AlarmScheduler {
 					alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
 					alarmCalendar.set(Calendar.SECOND, 0);
 					// Calendar: 1 = Sunday, 2 = Monday, ...
-					alarmCalendar.set(Calendar.DAY_OF_WEEK, ((day + 1) % 7)+1);
+					alarmCalendar.set(Calendar.DAY_OF_WEEK, ((day + 1) % 7) + 1);
 					while (alarmCalendar.before(now))
 						alarmCalendar.add(Calendar.WEEK_OF_YEAR, 1);
 					if (nearestAlarmCalendar == null || alarmCalendar.before(nearestAlarmCalendar))
 						nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
-					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm",
-							id, day);
+					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, TYPE_ALARM
+							+ "," + id, id, day);
 					alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 							alarmCalendar.getTimeInMillis(), week_ms, pendingIntent);
-					Log.i("", "setRepeating " + alarmCalendar.toString());
+					Log.v("", "setRepeating " + alarmCalendar.toString());
 				}
 			}
 		} else {
@@ -95,9 +95,11 @@ public class AlarmScheduler {
 			alarmCalendar.set(Calendar.SECOND, 0);
 			while (alarmCalendar.before(now))
 				alarmCalendar.add(Calendar.DAY_OF_WEEK, 1);
-			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm", id, -1);
+			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, TYPE_ALARM + ","
+					+ id, id, -1);
 			alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
 					pendingIntent);
+			Log.v("", "set " + alarmCalendar.toString());
 			nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
 		}
 
@@ -109,9 +111,13 @@ public class AlarmScheduler {
 	}
 
 	static void cancelAlarm(Context context, String action, int id, int day) {
+		if (action.contains(TYPE_ALARM))
+			action = TYPE_ALARM + "," + id;
 		PendingIntent pi = getPendingIntentUpdateCurrent(context, action, id, day);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
+		Log.v("AlarmScheduler", "cancelAlarm() action=" + action + ", id=" + id
+				+ ", day=" + day);
 
 		cancelNotification(context);
 	}
