@@ -36,6 +36,7 @@ public class AlarmActivity extends Activity {
 	private SharedPreferences mSettings;
 
 	private int mId, mDay;
+	private DatabaseHelper mDatabaseHelper;
 
 	public static final long[] vibratePattern = { 500, 500 };
 
@@ -222,8 +223,8 @@ public class AlarmActivity extends Activity {
 
 		// String chosenRingtone =
 		// mSettings.getString(MainActivity.KEY_RINGTONE, null);
-		DatabaseHelper db = new DatabaseHelper(this);
-		Alarm alarm = db.getAlarm(mId);
+		mDatabaseHelper = new DatabaseHelper(this);
+		Alarm alarm = mDatabaseHelper.getAlarm(mId);
 		String chosenRingtone = alarm.getRingtone();
 		// int maxVolume = 0;
 		try {
@@ -287,6 +288,9 @@ public class AlarmActivity extends Activity {
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
+		
+		if(mDatabaseHelper != null)
+			mDatabaseHelper.close();
 	}
 
 	@Override

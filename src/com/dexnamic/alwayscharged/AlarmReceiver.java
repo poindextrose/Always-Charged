@@ -76,30 +76,31 @@ public class AlarmReceiver extends BroadcastReceiver {
 			DatabaseHelper database = new DatabaseHelper(context);
 
 			Cursor cursor = database.getAllActiveAlarms();
-			if (cursor == null)
-				return;
-
-			if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-				do {
-					int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-					for (Integer i = -1; i < 7; i++) {
-						AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM, _id, i);
-					}
-				} while (cursor.moveToNext());
-				return;
+			if (cursor != null && cursor.moveToFirst()) {
+				if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+					do {
+						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+						for (Integer i = -1; i < 7; i++) {
+							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM, _id, i);
+						}
+					} while (cursor.moveToNext());
+				}
+				if (action.equals(Intent.ACTION_BOOT_COMPLETED)
+						|| action.equals(Intent.ACTION_PACKAGE_REPLACED)
+						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+					cursor.moveToFirst();
+					do {
+						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+						int repeats = cursor.getInt(cursor
+								.getColumnIndex(DatabaseHelper.KEY_REPEATS));
+						int hour = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_HOUR));
+						int minute = cursor
+								.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_MINUTE));
+						AlarmScheduler.setDailyAlarm(context, repeats, hour, minute, _id);
+					} while (cursor.moveToNext());
+				}
 			}
-			if (action.equals(Intent.ACTION_BOOT_COMPLETED)
-					|| action.equals(Intent.ACTION_PACKAGE_REPLACED)
-					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-				do {
-					int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-					int repeats = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_REPEATS));
-					int hour = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_HOUR));
-					int minute = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_MINUTE));
-					AlarmScheduler.setDailyAlarm(context, repeats, hour, minute, _id);
-				} while (cursor.moveToNext());
-				return;
-			}
+			database.close();
 		}
 	}
 

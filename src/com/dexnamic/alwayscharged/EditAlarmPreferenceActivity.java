@@ -89,11 +89,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
-		if (database != null)
-			database.close();
+	protected void onStart() {
+		super.onStart();
 	}
 
 	@Override
@@ -103,6 +100,13 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		setPreferences();
 	}
 
+	@Override
+	protected void onStop() {
+		super.onStop();
+	
+		if (database != null)
+			database.close();
+	}
 	private void setPreferences() {
 
 		mEnabledCheckBox.setChecked(mAlarm.getEnabled());

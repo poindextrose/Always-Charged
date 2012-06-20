@@ -252,6 +252,8 @@ public class AlarmService extends Service implements SensorEventListener {
 		AlarmScheduler.cancelNotification(this);
 
 		Intent intentActivity = new Intent(this, AlarmActivity.class);
+		intentActivity.putExtra("id", mId);
+		intentActivity.putExtra("id", mDay);
 		intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intentActivity);
 

@@ -59,27 +59,26 @@ public class AlarmScheduler {
 						context.getString(R.string.default_snooze_time))));
 
 		Calendar now = Calendar.getInstance();
-		Calendar alarmCalendar = Calendar.getInstance();
 		Calendar nearestAlarmCalendar = null;
-		// real alarm needs lead time to measurement movement
-		alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		alarmCalendar.set(Calendar.MINUTE, minute);
-		alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
-		alarmCalendar.set(Calendar.SECOND, 0);
 
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		int week_ms = 7 * 24 * 60 * 60 * 1000;
 
 		if (repeats > 0) {
-
-			for (Integer day = 0; day < 7; day++) {
+			for (Integer day = 0; day < 7; day++) { // 0 = monday, 1 = tuesday
 				if ((repeats & (1 << day)) > 0) {
-					alarmCalendar.set(Calendar.DAY_OF_WEEK, (day + 1) % 7);
+					Calendar alarmCalendar = Calendar.getInstance();
+					alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+					alarmCalendar.set(Calendar.MINUTE, minute);
+					// real alarm needs lead time to measurement movement
+					alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
+					alarmCalendar.set(Calendar.SECOND, 0);
+					// Calendar: 1 = Sunday, 2 = Monday, ...
+					alarmCalendar.set(Calendar.DAY_OF_WEEK, ((day + 1) % 7)+1);
 					while (alarmCalendar.before(now))
-						alarmCalendar.add(Calendar.DAY_OF_WEEK, 7);
+						alarmCalendar.add(Calendar.WEEK_OF_YEAR, 1);
 					if (nearestAlarmCalendar == null || alarmCalendar.before(nearestAlarmCalendar))
 						nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
-					nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
 					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm",
 							id, day);
 					alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
@@ -88,11 +87,18 @@ public class AlarmScheduler {
 				}
 			}
 		} else {
+			Calendar alarmCalendar = Calendar.getInstance();
+			alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+			alarmCalendar.set(Calendar.MINUTE, minute);
+			// real alarm needs lead time to measurement movement
+			alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
+			alarmCalendar.set(Calendar.SECOND, 0);
 			while (alarmCalendar.before(now))
 				alarmCalendar.add(Calendar.DAY_OF_WEEK, 1);
 			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, "alarm", id, -1);
 			alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
 					pendingIntent);
+			nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
 		}
 
 		int minutesUntilNextAlarm = 1 + (int) ((nearestAlarmCalendar.getTimeInMillis() - now

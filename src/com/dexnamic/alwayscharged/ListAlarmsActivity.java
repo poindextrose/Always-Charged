@@ -42,11 +42,11 @@ implements ListAlarmsCursorAdaptor.OnListClickListener, OnClickListener
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onStop() {
+		super.onStop();
 		
-		if(dbHelper != null)
-			dbHelper.close();
+//		if(dbHelper != null)
+//			dbHelper.close();
 	}
 
 	@Override
