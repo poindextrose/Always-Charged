@@ -4,16 +4,16 @@
     <Preference android:key="key_upgrade" android:title="@string/upgrade_to_pro"
         android:summary="@string/upgrade_summary" />
     
-	<CheckBoxPreference android:key="key_alarm_enabled"
+<!-- 	<CheckBoxPreference android:key="key_alarm_enabled"
 		android:title="@string/enable_alarm" android:summary="@string/enable_alarm_summary" 
-		android:defaultValue="false" />
+		android:defaultValue="false" /> -->
 	
 	<Preference android:key="key_set_alarm" android:title="@string/set_alarm" />
 
 	<Preference android:key="key_advanced" android:title="@string/advanced_settings"
 	    android:summary="" />
 	
-	<Preference android:key="key_time" android:title="@string/bed_time"
+	<!-- <Preference android:key="key_time" android:title="@string/bed_time"
 		android:summary="" />
 
 	<RingtonePreference android:key="key_ringtone"
@@ -24,7 +24,7 @@
 
 	<CheckBoxPreference android:key="key_vibrate"
 		android:title="@string/vibrate"
-		android:defaultValue="true" />
+		android:defaultValue="true" /> -->
 <!--	<CheckBoxPreference android:key="key_repeat"-->
 <!--		android:title="@string/repeat" android:summary="@string/repeat_summary"-->
 <!--		android:defaultValue="false" />-->

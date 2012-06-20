@@ -27,14 +27,14 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
-	
+
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
 	private MediaPlayer mMediaPlayer;
 	private Vibrator mVibrator;
 
 	private SharedPreferences mSettings;
-	
+
 	private int mId, mDay;
 
 	public static final long[] vibratePattern = { 500, 500 };
@@ -57,8 +57,7 @@ public class AlarmActivity extends Activity {
 		}
 
 		setContentView(R.layout.alert);
-	
-		
+
 		// stop alarm if user plugs in device
 		try {
 			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
@@ -68,24 +67,27 @@ public class AlarmActivity extends Activity {
 		}
 
 		// set wallpaper as background
-//		try {
-//			Class<?> _WallpaperManager = Class.forName("android.app.WallpaperManager");
-//			Class<?>[] parameterTypes = { Context.class };
-//			Method _WM_getinstance = _WallpaperManager.getMethod("getInstance", parameterTypes);
-//			Object[] args = { this };
-//			Object wm = _WM_getinstance.invoke(null, args);
-//			Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable", (Class[]) null);
-//			Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[]) null);
-//			getWindow().setBackgroundDrawable(drawable);
-//		} catch (Exception e) {
-////			Log.e("dexnamic", e.getMessage());
-//		}
-		
+		// try {
+		// Class<?> _WallpaperManager =
+		// Class.forName("android.app.WallpaperManager");
+		// Class<?>[] parameterTypes = { Context.class };
+		// Method _WM_getinstance = _WallpaperManager.getMethod("getInstance",
+		// parameterTypes);
+		// Object[] args = { this };
+		// Object wm = _WM_getinstance.invoke(null, args);
+		// Method _WM_getDrawable = _WallpaperManager.getMethod("getDrawable",
+		// (Class[]) null);
+		// Drawable drawable = (Drawable) _WM_getDrawable.invoke(wm, (Object[])
+		// null);
+		// getWindow().setBackgroundDrawable(drawable);
+		// } catch (Exception e) {
+		// // Log.e("dexnamic", e.getMessage());
+		// }
+
 		IntentFilter intentPhoneStateChanged = new IntentFilter(
 				TelephonyManager.ACTION_PHONE_STATE_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentPhoneStateChanged);
-		IntentFilter intentActionBatteryChanged = new IntentFilter(
-				Intent.ACTION_BATTERY_CHANGED);
+		IntentFilter intentActionBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		registerReceiver(mBroadcastReceiver, intentActionBatteryChanged);
 
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -103,18 +105,21 @@ public class AlarmActivity extends Activity {
 					try {
 						int plugged = intent.getIntExtra("plugged", 0);
 						if (plugged > 0) {
-							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, mId, mDay);
+							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, mId,
+									mDay);
 							alarmFinished();
 						}
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone, mId, mDay);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone, mId,
+							mDay);
 					alarmFinished();
 				}
 				try {
-					String actionPowerConnected = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
-					if(action.equals(actionPowerConnected)) {
+					String actionPowerConnected = (String) Intent.class.getField(
+							"ACTION_POWER_CONNECTED").get(null);
+					if (action.equals(actionPowerConnected)) {
 						alarmFinished();
 					}
 				} catch (Exception e) {
@@ -122,7 +127,7 @@ public class AlarmActivity extends Activity {
 			}
 		}
 	};
-	
+
 	private static final int MSG_TIMEOUT = 1;
 	private static final int MSG_UP_VOLUME = 2;
 
@@ -131,7 +136,8 @@ public class AlarmActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mId, mDay);
+					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mId,
+							mDay);
 				}
 				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
@@ -158,25 +164,29 @@ public class AlarmActivity extends Activity {
 		switch (id) {
 		case DIALOG_ALERT_ID:
 			String snoozeText = getString(R.string.snooze);
-//			+ " " + MANUAL_SNOOZE_TIME_MIN + " " + getString(R.string.minutes);
+			// + " " + MANUAL_SNOOZE_TIME_MIN + " " +
+			// getString(R.string.minutes);
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 							stopRingtone();
 							AlarmScheduler.resetRepeatCount(AlarmActivity.this, mSettings);
-							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_snooze, mId, mDay);
-							Toast.makeText(AlarmActivity.this, getString(R.string.notification_toast), Toast.LENGTH_LONG).show();
+							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0,
+									R.string.notify_snooze, mId, mDay);
+							Toast.makeText(AlarmActivity.this,
+									getString(R.string.notification_toast), Toast.LENGTH_LONG)
+									.show();
 							alarmFinished();
 						}
 					});
-//					.setNegativeButton(getString(R.string.dismiss),
-//							new DialogInterface.OnClickListener() {
-//								public void onClick(DialogInterface dialog, int id) {
-//									AlarmScheduler.disablePowerSnooze(AlertActivity.this);
-//									alarmFinished();
-//								}
-//							});
+			// .setNegativeButton(getString(R.string.dismiss),
+			// new DialogInterface.OnClickListener() {
+			// public void onClick(DialogInterface dialog, int id) {
+			// AlarmScheduler.disablePowerSnooze(AlertActivity.this);
+			// alarmFinished();
+			// }
+			// });
 			AlertDialog alert = builder.create();
 			alert.setOnKeyListener(mOnKeyListener);
 			return alert;
@@ -198,20 +208,24 @@ public class AlarmActivity extends Activity {
 
 	private Stack<Float> mVolume = new Stack<Float>();
 
-//	private int mVolumeLevels;
+	// private int mVolumeLevels;
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
+
 		Bundle bundle = getIntent().getExtras();
-		if(bundle != null) {
+		if (bundle != null) {
 			mId = bundle.getInt("id");
 			mDay = bundle.getInt("id");
 		}
 
-		String chosenRingtone = mSettings.getString(MainActivity.KEY_RINGTONE, null);
-//		int maxVolume = 0;
+		// String chosenRingtone =
+		// mSettings.getString(MainActivity.KEY_RINGTONE, null);
+		DatabaseHelper db = new DatabaseHelper(this);
+		Alarm alarm = db.getAlarm(mId);
+		String chosenRingtone = alarm.getRingtone();
+		// int maxVolume = 0;
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
 			mMediaPlayer.setDataSource(this, uri);
@@ -219,26 +233,28 @@ public class AlarmActivity extends Activity {
 			for (int i = 1; i <= 8; i *= 2) {
 				mVolume.push(1 / (float) i);
 			}
-//			mVolumeLevels = mVolume.size();
-//			float volume = mVolume.pop();
-//			mMediaPlayer.setVolume(volume, volume);
-//			Message msg = Message.obtain(mHandler, MSG_UP_VOLUME);
-//			mHandler.sendMessageDelayed(msg, 1000);
+			// mVolumeLevels = mVolume.size();
+			// float volume = mVolume.pop();
+			// mMediaPlayer.setVolume(volume, volume);
+			// Message msg = Message.obtain(mHandler, MSG_UP_VOLUME);
+			// mHandler.sendMessageDelayed(msg, 1000);
 			mMediaPlayer.setLooping(true);
 			mMediaPlayer.prepare();
 			mMediaPlayer.start();
 		} catch (Exception e) {
-//			Log.d("dexnamic", "max Volume = " + maxVolume);
-//			Log.e("dexnamic", e.getMessage());
+			// Log.d("dexnamic", "max Volume = " + maxVolume);
+			// Log.e("dexnamic", e.getMessage());
 		}
 		try {
-			if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
+			// if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
+			if (alarm.getVibrate())
 				mVibrator.vibrate(vibratePattern, 0);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
 		String stringAlarmDuration = mSettings.getString(MainActivity.KEY_DURATION, "30");
-		long alarmDuration_ms = Long.parseLong(stringAlarmDuration)*1000;
+		long alarmDuration_ms = Long.parseLong(stringAlarmDuration) * 1000;
 		mHandler.sendMessageDelayed(msg, alarmDuration_ms);
 
 		showDialog(DIALOG_ALERT_ID);
@@ -266,7 +282,8 @@ public class AlarmActivity extends Activity {
 		stopRingtone();
 		mHandler.removeMessages(MSG_TIMEOUT);
 		try {
-//			mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mSaveVolume, 0);
+			// mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
+			// mSaveVolume, 0);
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}

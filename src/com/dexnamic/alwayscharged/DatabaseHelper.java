@@ -25,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String KEY_RINGTONE = "ringtone";
 	static final String KEY_VIBRATE = "vibrate";
 
+	private Context context;
+
 	String CREATE_TABLE_ALARMS = "CREATE TABLE " + TABLE_ALARMS + "(" + KEY_ID
 			+ " INTEGER PRIMARY KEY," + KEY_ENABLED + " INTEGER," + KEY_LABEL + " TEXT," + KEY_HOUR
 			+ " INTEGER," + KEY_MINUTE + " INTEGER," + KEY_REPEATS + " INTEGER," + KEY_RINGTONE
@@ -32,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 
 	@Override
@@ -41,7 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Alarm alarm = new Alarm();
 		// TODO: read from preferences for upgrades
 
-		db.insert(TABLE_ALARMS, null, putValues(alarm));
+		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
+
+		if (id >= 0 && alarm.getEnabled()) {
+			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
+					alarm.getMinute(), id);
+		}
 	}
 
 	@Override
@@ -55,13 +63,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public void addAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		long id = db.insert(TABLE_ALARMS, null, putValues(alarm));
-		alarm.setID((int) id);
+		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
+		alarm.setID(id);
 		db.close();
+
+		if (id >= 0 && alarm.getEnabled()) {
+			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
+					alarm.getMinute(), id);
+		}
 	}
 
 	public int updateAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
+		AlarmScheduler.cancelAlarm(context, alarm);
+		if (alarm.getEnabled())
+			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
+					alarm.getMinute(), alarm.getID());
 		return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
 				new String[] { String.valueOf(alarm.getID()) });
 	}
@@ -102,6 +119,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(alarm.getID()) });
 		db.close();
+		AlarmScheduler.cancelAlarm(context, alarm);
 	}
 
 	public Cursor getAllAlarms() {

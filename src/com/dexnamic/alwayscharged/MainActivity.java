@@ -38,14 +38,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
 		TimePickerDialog.OnTimeSetListener {
 
-	static final int TIME_DIALOG_ID = 0;
+//	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
 	static final int UPGRADE_DIALOG_ID = 4;
 
-	private CheckBoxPreference mCheckBoxEnable;
-	private Preference mPreferenceTime;
+//	private CheckBoxPreference mCheckBoxEnable;
+//	private Preference mPreferenceTime;
 	private Preference mPreferenceAbout;
 	private Preference mPreferenceAdvanced;
 	private Preference mPreferenceUpgrade;
@@ -55,15 +55,15 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	SharedPreferences.Editor mEditor;
 
 	public final static String KEY_UPGRADE = "key_upgrade";
-	public final static String KEY_ALARM_ENABLED = "key_alarm_enabled";
+//	public final static String KEY_ALARM_ENABLED = "key_alarm_enabled";
 	public final static String KEY_SET_ALARM = "key_set_alarm";
 	public final static String KEY_ADVANCED = "key_advanced";
-	public final static String KEY_TIME = "key_time";
-	public final static String KEY_HOUR = "key_hour";
-	public final static String KEY_MINUTE = "key_minute";
-	public final static String KEY_RINGTONE = "key_ringtone";
-	public final static String KEY_REPEAT = "key_repeat";
-	public final static String KEY_VIBRATE = "key_vibrate";
+//	public final static String KEY_TIME = "key_time";
+//	public final static String KEY_HOUR = "key_hour";
+//	public final static String KEY_MINUTE = "key_minute";
+//	public final static String KEY_RINGTONE = "key_ringtone";
+//	public final static String KEY_REPEAT = "key_repeat";
+//	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
 	public final static String KEY_VERSION_CODE = "key_version_code";
@@ -75,7 +75,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 	public static final int TIMES_TO_REPEAT = 2;
 
-	private RingtonePreference mRingtonePreference;
+//	private RingtonePreference mRingtonePreference;
 
 	private boolean mFirstInstance = true;
 
@@ -92,7 +92,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		mSettings = ps.getSharedPreferences();
 		mEditor = mSettings.edit();
 
-		mCheckBoxEnable = (CheckBoxPreference) ps.findPreference(KEY_ALARM_ENABLED);
+//		mCheckBoxEnable = (CheckBoxPreference) ps.findPreference(KEY_ALARM_ENABLED);
 
 		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
 		mPreferenceAdvanced.setOnPreferenceClickListener(this);
@@ -100,14 +100,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		mPreferenceUpgrade = ps.findPreference(KEY_UPGRADE);
 		mPreferenceUpgrade.setOnPreferenceClickListener(this);
 
-		mPreferenceTime = ps.findPreference(KEY_TIME);
-		mPreferenceTime.setOnPreferenceClickListener(this);
-		setTime();
-
-		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
-		mRingtonePreference.setOnPreferenceChangeListener(this);
-		String uriString = mSettings.getString(KEY_RINGTONE, null);
-		setRingtoneSummary(uriString);
+//		mPreferenceTime = ps.findPreference(KEY_TIME);
+//		mPreferenceTime.setOnPreferenceClickListener(this);
+//		setTime();
+//
+//		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
+//		mRingtonePreference.setOnPreferenceChangeListener(this);
+//		String uriString = mSettings.getString(KEY_RINGTONE, null);
+//		setRingtoneSummary(uriString);
 
 		mPreferenceAbout = ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(this);
@@ -232,43 +232,44 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 		// Toast.makeText(MainActivity.this, (String) newValue,
 		// Toast.LENGTH_LONG).show();
 		// Log.d(LOG_TAG, "newValue=" + (String)newValue);
-		if (preference == mRingtonePreference) {
-			setRingtoneSummary((String) newValue);
-		}
+//		if (preference == mRingtonePreference) {
+//			setRingtoneSummary((String) newValue);
+//		}
 		return true;
 	}
 
-	private void setRingtoneSummary(String uriString) {
-		String ringerName = getString(R.string.silent);
-		try {
-			Uri uri = Uri.parse(uriString);
-//			if (uriString.length() > 0) {
-				ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
-						MainActivity.this);
+//	private void setRingtoneSummary(String uriString) {
+//		String ringerName = getString(R.string.silent);
+//		try {
+//			Uri uri = Uri.parse(uriString);
+////			if (uriString.length() > 0) {
+//				ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
+//						MainActivity.this);
+////			}
+//		} catch (Exception e) {
+//			ringerName = getString(R.string.default_ringtone);
+//			try {
+//				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this,
+//						RingtoneManager.TYPE_RINGTONE);
+//				if (uriString.length() > 0) {
+//					ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
+//							MainActivity.this);
+//				}
+//			} catch (Exception e2) {
+//				ringerName = getString(R.string.unknown);
 //			}
-		} catch (Exception e) {
-			ringerName = getString(R.string.default_ringtone);
-			try {
-				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this,
-						RingtoneManager.TYPE_RINGTONE);
-				if (uriString.length() > 0) {
-					ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
-							MainActivity.this);
-				}
-			} catch (Exception e2) {
-				ringerName = getString(R.string.unknown);
-			}
-		} finally {
-			mRingtonePreference.setSummary(ringerName);
-			checkVolume();
-		}
-	}
+//		} finally {
+//			mRingtonePreference.setSummary(ringerName);
+//			checkVolume();
+//		}
+//	}
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference == mPreferenceTime) {
-			showDialog(TIME_DIALOG_ID);
-		} else if (preference == mPreferenceAbout) {
+//		if (preference == mPreferenceTime) {
+//			showDialog(TIME_DIALOG_ID);
+//		} else 
+			if (preference == mPreferenceAbout) {
 			showDialog(ABOUT_DIAlOG_ID);
 		} else if (preference == mPreferenceAdvanced) {
 			Intent intent = new Intent(this, AdvancedPreferences.class);
@@ -300,23 +301,23 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		prefsChanged();
-		if (key.equals(KEY_ALARM_ENABLED)) {
-			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
-				enableAlaram();
-			} else {
-//				AlarmScheduler.disableAllAlarms(this);
-			}
-		}
+//		if (key.equals(KEY_ALARM_ENABLED)) {
+//			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
+//				enableAlaram();
+//			} else {
+////				AlarmScheduler.disableAllAlarms(this);
+//			}
+//		}
 	}
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		AlertDialog.Builder builder;
 		switch (id) {
-		case TIME_DIALOG_ID:
-			int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-			int minute = mSettings.getInt(KEY_MINUTE, 0);
-			return new TimePickerDialog(this, this, hourOfDay, minute, false);
+//		case TIME_DIALOG_ID:
+//			int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+//			int minute = mSettings.getInt(KEY_MINUTE, 0);
+//			return new TimePickerDialog(this, this, hourOfDay, minute, false);
 		case FIRST_TIME_DIALOG_ID:
 			builder = aboutDialogBuilder();
 			builder.setNegativeButton(getString(R.string.dontshowagain),
@@ -392,22 +393,22 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
 	@Override
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-		mEditor.putInt(KEY_HOUR, hourOfDay);
-		mEditor.putInt(KEY_MINUTE, minute);
-		mEditor.commit();
-		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
-		if (mCheckBoxEnable.isChecked()) {
-			enableAlaram();
-		} else {
-			mCheckBoxEnable.setChecked(true); // this will set alarm
-		}
+//		mEditor.putInt(KEY_HOUR, hourOfDay);
+//		mEditor.putInt(KEY_MINUTE, minute);
+//		mEditor.commit();
+//		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
+//		if (mCheckBoxEnable.isChecked()) {
+//			enableAlaram();
+//		} else {
+//			mCheckBoxEnable.setChecked(true); // this will set alarm
+//		}
 	}
 
-	void setTime() {
-		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-		int minute = mSettings.getInt(KEY_MINUTE, 0);
-		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
-	}
+//	void setTime() {
+//		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
+//		int minute = mSettings.getInt(KEY_MINUTE, 0);
+//		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
+//	}
 
 	private void enableAlaram() {
 //		checkVolume();
@@ -419,40 +420,40 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 //		notifyUserTimeUntilAlarm(minutesUntilAlarm);
 	}
 
-	private void notifyUserTimeUntilAlarm(int minutesUntilAlarm) {
-		String msg = "";
-		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
-		minutesUntilAlarm = minutesUntilAlarm % 60;
-		if (hoursUntilAlarm > 0) {
-			msg += hoursUntilAlarm + " ";
-			if (hoursUntilAlarm == 1)
-				msg += getString(R.string.hour);
-			else
-				msg += getString(R.string.hours);
-		}
-		if (hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
-			msg += ", ";
-		if (minutesUntilAlarm > 0) {
-			msg += minutesUntilAlarm + " ";
-			if (minutesUntilAlarm == 1)
-				msg += getString(R.string.minute);
-			else
-				msg += getString(R.string.minutes);
-		}
-		msg += " " + getString(R.string.until_alarm);
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-	}
+//	private void notifyUserTimeUntilAlarm(int minutesUntilAlarm) {
+//		String msg = "";
+//		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
+//		minutesUntilAlarm = minutesUntilAlarm % 60;
+//		if (hoursUntilAlarm > 0) {
+//			msg += hoursUntilAlarm + " ";
+//			if (hoursUntilAlarm == 1)
+//				msg += getString(R.string.hour);
+//			else
+//				msg += getString(R.string.hours);
+//		}
+//		if (hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
+//			msg += ", ";
+//		if (minutesUntilAlarm > 0) {
+//			msg += minutesUntilAlarm + " ";
+//			if (minutesUntilAlarm == 1)
+//				msg += getString(R.string.minute);
+//			else
+//				msg += getString(R.string.minutes);
+//		}
+//		msg += " " + getString(R.string.until_alarm);
+//		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//	}
 
-	private void checkVolume() {
-		String chosenRingtone = mSettings.getString(KEY_RINGTONE, "");
-		if (chosenRingtone.length() > 0) {
-			AudioManager audioManager;
-			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-				Toast.makeText(MainActivity.this, getString(R.string.checkVolume),
-						Toast.LENGTH_LONG).show();
-			}
-		}
-	}
+//	private void checkVolume() {
+//		String chosenRingtone = mSettings.getString(KEY_RINGTONE, "");
+//		if (chosenRingtone.length() > 0) {
+//			AudioManager audioManager;
+//			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+//				Toast.makeText(MainActivity.this, getString(R.string.checkVolume),
+//						Toast.LENGTH_LONG).show();
+//			}
+//		}
+//	}
 
 }
