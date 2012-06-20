@@ -111,14 +111,16 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
 		StringBuffer checked = new StringBuffer();
-//		List<Integer> checkedIndicies = new ArrayList<Integer>();
-		for(Integer i = 0; i < 7; i++) {
-			if(mAlarm.getRepeats(i))
+		// List<Integer> checkedIndicies = new ArrayList<Integer>();
+		for (Integer i = 0; i < 7; i++) {
+			if (mAlarm.getRepeats(i))
 				checked.append(i.toString() + ",");
 		}
 		mRepeatPreference.setValue(checked.toString());
 
 		mRingtonePreference.setSummary(mAlarm.getRingerName(this));
+		getPreferenceManager().getSharedPreferences().edit()
+				.putString("key_ringtone", mAlarm.getRingtone()).commit();
 
 		mVibrateCheckBox.setChecked(mAlarm.getVibrate());
 
@@ -157,6 +159,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mAlarm.setRingtone((String) newValue);
 			mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 			checkVolume();
+			return true;
 		} else if (preference == mLabelPreference) {
 			mAlarm.setLabel((String) newValue);
 			mLabelPreference.setSummary((String) newValue);
