@@ -22,49 +22,84 @@ public class AlarmReceiver extends BroadcastReceiver {
 		String action = intent.getAction();
 		if (action != null) {
 			Log.v(getClass().getSimpleName(), "onReceive(), action=" + action);
+
+			/*
+			 * If the device is rebooted, application reinstalled, or time zone
+			 * changed, set the alarm.
+			 */
+			if (action.equals(Intent.ACTION_BOOT_COMPLETED)
+					|| action.equals(Intent.ACTION_PACKAGE_REPLACED)
+					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+				DatabaseHelper database = new DatabaseHelper(context);
+				Cursor cursor = database.getAllActiveAlarms();
+				if (cursor != null && cursor.moveToFirst()) {
+					cursor.moveToFirst();
+					do {
+						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+						Alarm alarm = database.getAlarm(_id);
+						Scheduler.setDailyAlarm(context, alarm);
+					} while (cursor.moveToNext());
+					database.close();
+				}
+				return;
+			} 
+			
+			/*
+			 * If user connects their device to a power source, then cancel the
+			 * snooze
+			 */
 			try {
 				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
 						.get(null))) {
-					Log.v(getClass().getSimpleName(), "ACTION_POWER_CONNECTED");
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, 0, 0);
+					// Log.v(getClass().getSimpleName(),
+					// "ACTION_POWER_CONNECTED");
+					Scheduler.cancelSnooze(context);
 					return;
 				}
 			} catch (Exception e) {
 			}
+
+			/*
+			 * If user clicked the notification, then cancel the snooze(s)
+			 */
+			if (action.equals(Scheduler.TYPE_NOTIFY)) {
+				Log.v(getClass().getSimpleName(), "onReceive(), Nofication clicked");
+				Scheduler.cancelSnooze(context);
+				Scheduler.disablePowerSnooze(context);
+				return;
+			}
+
 			Bundle extras = intent.getExtras();
 			if (extras != null) {
-				int id = extras.getInt("id");
+				Alarm alarm = (Alarm) extras.getSerializable("alarm");
+				int id = alarm.getID();
 				int day = extras.getInt("day");
-				if (action.equals(AlarmScheduler.TYPE_NOTIFY)) {
-					Log.v(getClass().getSimpleName(), "onReceive(), Nofication clicked, id=" + id
-							+ ", day=" + day);
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, id, day);
-					AlarmScheduler.disablePowerSnooze(context);
-					return;
-				} else if (action.equals(AlarmScheduler.TYPE_SNOOZE)) {
+				// snooze alarm received
+				if (action.equals(Scheduler.TYPE_SNOOZE)) {
 					Log.v(getClass().getSimpleName(), "onReceive(), Snooze alarm, id=" + id
 							+ ", day=" + day);
-					startAlarmService(context, action, id, day);
+					startAlarmService(context, action, alarm);
 
 					// remove enabled from alarm if it does not repeat
 					if (day <= 0) {
 						DatabaseHelper database = new DatabaseHelper(context);
-						Alarm alarm = database.getAlarm(id);
-						alarm.setEnabled(false);
-						database.updateAlarm(alarm);
+						Alarm alarm_edit = database.getAlarm(id);
+						alarm_edit.setEnabled(false);
+						database.updateAlarm(alarm_edit);
 						database.close();
 						Log.v(getClass().getSimpleName(), "onReceive(), disable alarm, id=" + id
 								+ ", day=" + day);
 					}
 
 					return;
-				} else if (action.contains(AlarmScheduler.TYPE_ALARM)) {
+					// initial alarm received
+				} else if (action.contains(Scheduler.TYPE_ALARM)) {
 					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id
 							+ ", day=" + day);
 					// original single alarm
-					AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, id, day);
-					AlarmScheduler.resetRepeatCount(context, null);
-					startAlarmService(context, action, id, day);
+					Scheduler.cancelSnooze(context);
+					Scheduler.resetRepeatCount(context, null);
+					startAlarmService(context, action, alarm);
 				}
 			}
 
@@ -82,56 +117,26 @@ public class AlarmReceiver extends BroadcastReceiver {
 			// } catch (Exception e) {
 			// }
 
-			DatabaseHelper database = new DatabaseHelper(context);
-
-			Cursor cursor = database.getAllActiveAlarms();
-			if (cursor != null && cursor.moveToFirst()) {
-				if (action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-					do {
-						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-						for (Integer i = -1; i < 7; i++) {
-							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_ALARM, _id, i);
-						}
-					} while (cursor.moveToNext());
-				}
-				if (action.equals(Intent.ACTION_BOOT_COMPLETED)
-						|| action.equals(Intent.ACTION_PACKAGE_REPLACED)
-						|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-					cursor.moveToFirst();
-					do {
-						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-						int repeats = cursor.getInt(cursor
-								.getColumnIndex(DatabaseHelper.KEY_REPEATS));
-						int hour = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_HOUR));
-						int minute = cursor
-								.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_MINUTE));
-						AlarmScheduler.setDailyAlarm(context, repeats, hour, minute, _id);
-					} while (cursor.moveToNext());
-				}
-			}
-			database.close();
 		}
 	}
 
-	static public void startAlarmService(Context context, String action, int id, int day) {
+	static public void startAlarmService(Context context, String action, Alarm alarm) {
 		Intent intent = new Intent(context, AlarmService.class);
 		intent.setAction(action);
-		intent.putExtra("id", id);
-		intent.putExtra("day", id);
+		intent.putExtra("alarm", alarm);
 		context.startService(intent);
 
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		AlarmScheduler.setPartialWakeLock(pm);
+		Scheduler.setPartialWakeLock(pm);
 	}
 
-	static public void startPowerSnoozeService(Context context, int id, int day) {
+	static public void startPowerSnoozeService(Context context, Alarm alarm) {
 		Intent intent = new Intent(context, PowerSnoozeService.class);
-		intent.putExtra("id", id);
-		intent.putExtra("day", day);
+		intent.putExtra("alarm", alarm);
 		context.startService(intent);
 
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		AlarmScheduler.setPartialWakeLock(pm);
+		Scheduler.setPartialWakeLock(pm);
 	}
 
 }

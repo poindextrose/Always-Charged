@@ -34,7 +34,7 @@ import android.view.ViewGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
+public class MainPreferenceActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
 		Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
 		TimePickerDialog.OnTimeSetListener {
 

@@ -24,19 +24,19 @@ public class AdvancedPreferences extends PreferenceActivity
 
 		PreferenceScreen ps = getPreferenceScreen();
 		SharedPreferences settings = ps.getSharedPreferences();
-		mListPreferenceSnooze = (ListPreference) ps.findPreference(MainActivity.KEY_SNOOZE_TIME_MIN);
-		mListPreferenceSnooze.setSummary(settings.getString(MainActivity.KEY_SNOOZE_TIME_MIN, "***") + " "
+		mListPreferenceSnooze = (ListPreference) ps.findPreference(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN);
+		mListPreferenceSnooze.setSummary(settings.getString(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN, "***") + " "
 				+ getString(R.string.minutes));
 		mListPreferenceSnooze.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 
-		mListPreferenceDuration = (ListPreference) ps.findPreference(MainActivity.KEY_DURATION);
-		mListPreferenceDuration.setSummary(settings.getString(MainActivity.KEY_DURATION, "***")
+		mListPreferenceDuration = (ListPreference) ps.findPreference(MainPreferenceActivity.KEY_DURATION);
+		mListPreferenceDuration.setSummary(settings.getString(MainPreferenceActivity.KEY_DURATION, "***")
 				+ " " + getString(R.string.seconds));
 		mListPreferenceDuration.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 
 		mListPreferenceMotion = (ListPreference) ps
-				.findPreference(MainActivity.KEY_MOTION_TOLERANCE);
-		setMotionToleranceSummary(settings.getString(MainActivity.KEY_MOTION_TOLERANCE,
+				.findPreference(MainPreferenceActivity.KEY_MOTION_TOLERANCE);
+		setMotionToleranceSummary(settings.getString(MainPreferenceActivity.KEY_MOTION_TOLERANCE,
 				"***"));
 		mListPreferenceMotion.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
 		

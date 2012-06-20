@@ -36,8 +36,7 @@ public class AlarmActivity extends Activity {
 
 	private SharedPreferences mSettings;
 
-	private int mId, mDay;
-	private DatabaseHelper mDatabaseHelper;
+	private Alarm mAlarm;
 
 	public static final long[] vibratePattern = { 500, 500 };
 
@@ -107,15 +106,13 @@ public class AlarmActivity extends Activity {
 					try {
 						int plugged = intent.getIntExtra("plugged", 0);
 						if (plugged > 0) {
-							AlarmScheduler.cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE, mId,
-									mDay);
+							Scheduler.cancelSnooze(context);
 							alarmFinished();
 						}
 					} catch (Exception e) {
 					}
 				} else if (action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone, mId,
-							mDay);
+					Scheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_phone, mAlarm);
 					alarmFinished();
 				}
 				try {
@@ -138,8 +135,7 @@ public class AlarmActivity extends Activity {
 			switch (msg.what) {
 			case MSG_TIMEOUT:
 				if (repeatAlarm()) {
-					AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mId,
-							mDay);
+					Scheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mAlarm);
 				}
 				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
@@ -162,41 +158,6 @@ public class AlarmActivity extends Activity {
 
 	static final int DIALOG_ALERT_ID = 0;
 
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case DIALOG_ALERT_ID:
-			String snoozeText = getString(R.string.snooze);
-			// + " " + MANUAL_SNOOZE_TIME_MIN + " " +
-			// getString(R.string.minutes);
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
-					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							stopRingtone();
-							AlarmScheduler.resetRepeatCount(AlarmActivity.this, mSettings);
-							AlarmScheduler.snoozeAlarm(AlarmActivity.this, 0,
-									R.string.notify_snooze, mId, mDay);
-							Toast.makeText(AlarmActivity.this,
-									getString(R.string.notification_toast), Toast.LENGTH_LONG)
-									.show();
-							alarmFinished();
-						}
-					});
-			// .setNegativeButton(getString(R.string.dismiss),
-			// new DialogInterface.OnClickListener() {
-			// public void onClick(DialogInterface dialog, int id) {
-			// AlarmScheduler.disablePowerSnooze(AlertActivity.this);
-			// alarmFinished();
-			// }
-			// });
-			AlertDialog alert = builder.create();
-			alert.setOnKeyListener(mOnKeyListener);
-			return alert;
-		default:
-			return null;
-		}
-	}
-
 	private DialogInterface.OnKeyListener mOnKeyListener = new DialogInterface.OnKeyListener() {
 
 		@Override
@@ -217,18 +178,16 @@ public class AlarmActivity extends Activity {
 		super.onStart();
 
 		Bundle bundle = getIntent().getExtras();
-		if (bundle != null) {
-			mId = bundle.getInt("id");
-			mDay = bundle.getInt("day");
-		}
-		
-		Log.v(getClass().getSimpleName(), "onStart(), id=" + mId + ", day=" + mDay);
+//		if (bundle == null) {
+//			throw new Exception("missing bundle in AlarmActivity.onStart()");
+//		}
+		mAlarm = (Alarm) bundle.getSerializable("alarm");
+
+		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 
 		// String chosenRingtone =
 		// mSettings.getString(MainActivity.KEY_RINGTONE, null);
-		mDatabaseHelper = new DatabaseHelper(this);
-		Alarm alarm = mDatabaseHelper.getAlarm(mId);
-		String chosenRingtone = alarm.getRingtone();
+		String chosenRingtone = mAlarm.getRingtone();
 		// int maxVolume = 0;
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
@@ -251,13 +210,13 @@ public class AlarmActivity extends Activity {
 		}
 		try {
 			// if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
-			if (alarm.getVibrate())
+			if (mAlarm.getVibrate())
 				mVibrator.vibrate(vibratePattern, 0);
 		} catch (Exception e) {
 		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
-		String stringAlarmDuration = mSettings.getString(MainActivity.KEY_DURATION, "30");
+		String stringAlarmDuration = mSettings.getString(MainPreferenceActivity.KEY_DURATION, "30");
 		long alarmDuration_ms = Long.parseLong(stringAlarmDuration) * 1000;
 		mHandler.sendMessageDelayed(msg, alarmDuration_ms);
 
@@ -269,6 +228,41 @@ public class AlarmActivity extends Activity {
 		super.onResume();
 		if (mKeyguardLock != null) {
 			mKeyguardLock.disableKeyguard();
+		}
+	}
+
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DIALOG_ALERT_ID:
+			String snoozeText = getString(R.string.snooze);
+			// + " " + MANUAL_SNOOZE_TIME_MIN + " " +
+			// getString(R.string.minutes);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
+					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							stopRingtone();
+							Scheduler.resetRepeatCount(AlarmActivity.this, mSettings);
+							Scheduler.snoozeAlarm(AlarmActivity.this, 0,
+									R.string.notify_snooze, mAlarm);
+							Toast.makeText(AlarmActivity.this,
+									getString(R.string.notification_toast), Toast.LENGTH_LONG)
+									.show();
+							alarmFinished();
+						}
+					});
+			// .setNegativeButton(getString(R.string.dismiss),
+			// new DialogInterface.OnClickListener() {
+			// public void onClick(DialogInterface dialog, int id) {
+			// AlarmScheduler.disablePowerSnooze(AlertActivity.this);
+			// alarmFinished();
+			// }
+			// });
+			AlertDialog alert = builder.create();
+			alert.setOnKeyListener(mOnKeyListener);
+			return alert;
+		default:
+			return null;
 		}
 	}
 
@@ -291,9 +285,6 @@ public class AlarmActivity extends Activity {
 			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
-		
-		if(mDatabaseHelper != null)
-			mDatabaseHelper.close();
 	}
 
 	@Override
@@ -316,11 +307,11 @@ public class AlarmActivity extends Activity {
 	}
 
 	public boolean repeatAlarm() {
-		int count = mSettings.getInt(MainActivity.KEY_REPEAT_COUNT, 0);
+		int count = mSettings.getInt(MainPreferenceActivity.KEY_REPEAT_COUNT, 0);
 		SharedPreferences.Editor editor = mSettings.edit();
-		if (count < MainActivity.TIMES_TO_REPEAT) {
+		if (count < MainPreferenceActivity.TIMES_TO_REPEAT) {
 			count++;
-			editor.putInt(MainActivity.KEY_REPEAT_COUNT, count);
+			editor.putInt(MainPreferenceActivity.KEY_REPEAT_COUNT, count);
 			editor.commit();
 			return true;
 		}

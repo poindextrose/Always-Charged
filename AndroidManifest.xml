@@ -15,7 +15,7 @@
 		android:backupAgent="MyPrefsBackupAgent">
 		<meta-data android:name="com.google.android.backup.api_key"
 			android:value="AEdPqrEAAAAIwIFuER3ObsRuVV2SwJAWK96tpjpXzkw1Im4esw" />
-		<activity android:name=".MainActivity" android:label="@string/app_name">
+		<activity android:name=".MainPreferenceActivity" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

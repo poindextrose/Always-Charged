@@ -47,8 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 
 		if (id >= 0 && alarm.getEnabled()) {
-			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
-					alarm.getMinute(), id);
+			Scheduler.setDailyAlarm(context, alarm);
 		}
 	}
 
@@ -68,17 +67,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 
 		if (id >= 0 && alarm.getEnabled()) {
-			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
-					alarm.getMinute(), id);
+			Scheduler.setDailyAlarm(context, alarm);
 		}
 	}
 
 	public int updateAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		AlarmScheduler.cancelAlarm(context, alarm);
+		Scheduler.cancelAlarm(context, alarm);
 		if (alarm.getEnabled())
-			AlarmScheduler.setDailyAlarm(context, alarm.getRepeats(), alarm.getHour(),
-					alarm.getMinute(), alarm.getID());
+			Scheduler.setDailyAlarm(context, alarm);
 		return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
 				new String[] { String.valueOf(alarm.getID()) });
 	}
@@ -119,7 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(alarm.getID()) });
 		db.close();
-		AlarmScheduler.cancelAlarm(context, alarm);
+		Scheduler.cancelAlarm(context, alarm);
 	}
 
 	public Cursor getAllAlarms() {

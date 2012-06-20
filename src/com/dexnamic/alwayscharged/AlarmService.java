@@ -45,26 +45,25 @@ public class AlarmService extends Service implements SensorEventListener {
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		String stringMotionTolerance = mSharedPreferences.getString(
-				MainActivity.KEY_MOTION_TOLERANCE, "4");
+				MainPreferenceActivity.KEY_MOTION_TOLERANCE, "4");
 		mMotionToleranceDeg = Float.parseFloat(stringMotionTolerance);
 	}
 
-	int mId, mDay;
+	Alarm mAlarm;
 
 	@Override
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
 
 		Bundle extras = intent.getExtras();
-		if (extras == null) {
-			Log.e("", "extras == null 938290493");
-		}
-		mId = extras.getInt("id");
-		mDay = extras.getInt("day");
+		// if (extras == null) {
+		// Log.e("", "extras == null 938290493");
+		// }
+		mAlarm = (Alarm) extras.getSerializable("alarm");
 
-		Log.v(getClass().getSimpleName(), "onStart(), id=" + mId + ", day=" + mDay);
+		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 
-		AlarmScheduler.enablePowerSnooze(this);
+		Scheduler.enablePowerSnooze(this);
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(null, intentBatteryChanged);
@@ -73,7 +72,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		if (batteryPlugged > 0) { // skip alarm since device plugged in
 			Log.v(this.getClass().getSimpleName(), "device is plugged. no alarm.");
 			stopSelf();
-			AlarmScheduler.releaseWakeLock();
+			Scheduler.releaseWakeLock();
 			return;
 		}
 
@@ -81,17 +80,17 @@ public class AlarmService extends Service implements SensorEventListener {
 		// if phone call is progress, snooze alarm
 		if (screenOn()) {
 			Log.v(this.getClass().getSimpleName(), "screen is on.  snoozing...");
-			doSnooze(R.string.notify_screen, mId, mDay);
+			doSnooze(R.string.notify_screen);
 			return;
 		}
 		if (telephoneInUse()) {
 			Log.v(this.getClass().getSimpleName(), "telephone in use.  snoozing...");
-			doSnooze(R.string.notify_phone, mId, mDay);
+			doSnooze(R.string.notify_phone);
 			return;
 		}
 
 		String action = intent.getAction();
-		if (action != null && action.equals(AlarmScheduler.TYPE_SNOOZE)) {
+		if (action != null && action.equals(Scheduler.TYPE_SNOOZE)) {
 			Log.v(this.getClass().getSimpleName(), "wasSnooze = true");
 			wasSnooze = true;
 		} else
@@ -105,7 +104,7 @@ public class AlarmService extends Service implements SensorEventListener {
 				doAlarm();
 			} else {
 				Log.v(this.getClass().getSimpleName(), "motion detection disabled.  snoozing...");
-				doSnooze(R.string.notify_motion, mId, mDay);
+				doSnooze(R.string.notify_motion);
 			}
 		}
 	}
@@ -180,7 +179,7 @@ public class AlarmService extends Service implements SensorEventListener {
 			} else {
 				Log.v(this.getClass().getSimpleName(),
 						"unable to read sensors. snooze until alarm time");
-				doSnooze(R.string.notify_init, mId, mDay);
+				doSnooze(R.string.notify_init);
 			}
 			return;
 		}
@@ -201,7 +200,7 @@ public class AlarmService extends Service implements SensorEventListener {
 				} else {
 					Log.v(this.getClass().getSimpleName(),
 							"unable to read sensors. snooze until alarm time");
-					doSnooze(R.string.notify_init, mId, mDay);
+					doSnooze(R.string.notify_init);
 				}
 				break;
 			case MSG_STABILZE:
@@ -243,33 +242,32 @@ public class AlarmService extends Service implements SensorEventListener {
 				PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, this
 						.getClass().getName());
 		newWakeLock.setReferenceCounted(false);
-		String stringAlarmDuration = mSharedPreferences.getString(MainActivity.KEY_DURATION, "30");
+		String stringAlarmDuration = mSharedPreferences.getString(MainPreferenceActivity.KEY_DURATION, "30");
 		long alarmDuration = Long.parseLong(stringAlarmDuration);
 		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for
 															// duration of alarm
 															// + 10 seconds
-		AlarmScheduler.releaseWakeLock(); // remove original wake lock
+		Scheduler.releaseWakeLock(); // remove original wake lock
 		mWakeLock = newWakeLock; // save new wake lock
 
-		AlarmScheduler.cancelNotification(this);
+		Scheduler.cancelNotification(this);
 
 		Intent intentActivity = new Intent(this, AlarmActivity.class);
-		intentActivity.putExtra("id", mId);
-		intentActivity.putExtra("id", mDay);
+		intentActivity.putExtra("alarm", mAlarm);
 		intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intentActivity);
 
 		stopSelf();
 	}
 
-	private void doSnooze(int reason_resource_id, int id, int day) {
+	private void doSnooze(int reason_resource_id) {
 		Log.v(this.getClass().getSimpleName(), "doSnooze()");
 		mHandler.removeMessages(MSG_TIMEOUT);
 		stopReadingSensors();
 
-		AlarmScheduler.snoozeAlarm(this, 0, reason_resource_id, id, day);
+		Scheduler.snoozeAlarm(this, 0, reason_resource_id, mAlarm);
 		stopSelf();
-		AlarmScheduler.releaseWakeLock();
+		Scheduler.releaseWakeLock();
 	}
 
 	private void sensorsHaveBeenRead() {
@@ -285,14 +283,14 @@ public class AlarmService extends Service implements SensorEventListener {
 			if (wasSnooze)
 				doAlarm();
 			else
-				doSnooze(R.string.notify_init, mId, mDay);
+				doSnooze(R.string.notify_init);
 		}
 		if (wasSnooze) {
 			checkDeviceOrientation(orientation);
 		} else {
 			saveDeviceOrientation(orientation);
 			Log.v(this.getClass().getSimpleName(), "saved device orientaiton.  snoozing...");
-			doSnooze(R.string.notify_init, mId, mDay);
+			doSnooze(R.string.notify_init);
 		}
 	}
 
@@ -313,7 +311,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		}
 		if (deviceMoved) {
 			Log.v(this.getClass().getSimpleName(), "device has moved. snoozing...");
-			doSnooze(R.string.notify_motion, mId, mDay);
+			doSnooze(R.string.notify_motion);
 		} else {
 			Log.v(this.getClass().getSimpleName(), "device did not move. sounding alarm");
 			doAlarm();

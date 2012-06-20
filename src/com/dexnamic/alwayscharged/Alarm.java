@@ -1,12 +1,18 @@
 package com.dexnamic.alwayscharged;
 
+import java.io.Serializable;
+
 import android.content.Context;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.Settings;
 
-public class Alarm {
+public class Alarm implements Serializable {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer ID;
 	private Boolean enabled;
 	private String label;
@@ -25,6 +31,11 @@ public class Alarm {
 		setRepeats(127); 
 		setRingtone("content://settings/system/ringtone");
 		setVibrate(true);
+	}
+	
+	// TODO: make more useful output
+	public String toString() {
+		return "Alarm, id=" + ID + ((enabled == true) ? "enabled": "" );
 	}
 	
 	public String getLabel() {

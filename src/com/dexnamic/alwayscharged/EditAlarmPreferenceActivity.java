@@ -72,6 +72,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mVibrateCheckBox = (CheckBoxPreference) ps.findPreference("key_vibrate");
 		mVibrateCheckBox.setOnPreferenceClickListener(this);
+		mVibrateCheckBox.setOnPreferenceChangeListener(this);
 
 		cancelButton = (Button) findViewById(R.id.buttonCancel);
 		cancelButton.setOnClickListener(this);
@@ -149,6 +150,9 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		
+		enableAlarm();
+		
 		if (preference == mRepeatPreference) {
 			@SuppressWarnings("unchecked")
 			ArrayList<String> results = (ArrayList<String>) newValue;
@@ -169,7 +173,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mLabelPreference.setSummary((String) newValue);
 			return true;
 		}
-		return false;
+		return true;
 	}
 
 	private void checkVolume() {
@@ -239,6 +243,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		mAlarm.setHour(hourOfDay);
 		mAlarm.setMinute(minute);
 		mTimePreference.setSummary(mAlarm.getTime(this));
+		enableAlarm();
 	}
 
 	@Override
@@ -248,5 +253,11 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			return new TimePickerDialog(this, this, mAlarm.getHour(), mAlarm.getMinute(), false);
 		}
 		return null;
+	}
+	
+	private void enableAlarm() {
+		/* if the user changes anything then enable the alarm */
+		mAlarm.setEnabled(true);
+		mEnabledCheckBox.setChecked(mAlarm.getEnabled());
 	}
 }
