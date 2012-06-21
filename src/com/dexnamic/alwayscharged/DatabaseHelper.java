@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 
 		if (id >= 0 && alarm.getEnabled()) {
-			Scheduler.setDailyAlarm(context, alarm);
+			Scheduler.setDailyAlarm(context, alarm, false);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 
 		if (id >= 0 && alarm.getEnabled()) {
-			Scheduler.setDailyAlarm(context, alarm);
+			Scheduler.setDailyAlarm(context, alarm, true);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		Scheduler.cancelAlarm(context, alarm);
 		if (alarm.getEnabled())
-			Scheduler.setDailyAlarm(context, alarm);
+			Scheduler.setDailyAlarm(context, alarm, true);
 		return db.update(TABLE_ALARMS, putValues(alarm), KEY_ID + " = ?",
 				new String[] { String.valueOf(alarm.getID()) });
 	}

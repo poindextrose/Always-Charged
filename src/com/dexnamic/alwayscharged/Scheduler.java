@@ -34,13 +34,14 @@ public class Scheduler {
 	 * 
 	 * @param context
 	 *            - Application context
+	 * @param b 
 	 * @param hourOfDay
 	 *            - hour to set alarm (0-23)
 	 * @param minute
 	 *            - minute to set alarm (0-59)
 	 * @return number of minutes until next alarm
 	 */
-	static int setDailyAlarm(Context context, Alarm alarm) {
+	static int setDailyAlarm(Context context, Alarm alarm, boolean showToast) {
 		int repeats = alarm.getRepeats();
 		int hourOfDay = alarm.getHour();
 		int minute = alarm.getMinute();
@@ -109,7 +110,8 @@ public class Scheduler {
 				.getTimeInMillis()) / 1000 / 60);
 		// Toast.makeText(context, "Minutes = " + minutesUntilNextAlarm,
 		// Toast.LENGTH_LONG).show();
-		notifyUserTimeUntilAlarm(context, minutesUntilNextAlarm);
+		if(showToast)
+			notifyUserTimeUntilAlarm(context, minutesUntilNextAlarm);
 
 		return minutesUntilNextAlarm;
 	}

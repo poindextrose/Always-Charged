@@ -28,7 +28,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 			 * changed, set the alarm.
 			 */
 			if (action.equals(Intent.ACTION_BOOT_COMPLETED)
-					|| action.equals(Intent.ACTION_PACKAGE_REPLACED)
+					|| (action.equals(Intent.ACTION_PACKAGE_REPLACED) && intent.getDataString()
+							.contains(context.getPackageName()))
 					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
 				DatabaseHelper database = new DatabaseHelper(context);
 				Cursor cursor = database.getAllActiveAlarms();
@@ -37,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 					do {
 						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
 						Alarm alarm = database.getAlarm(_id);
-						Scheduler.setDailyAlarm(context, alarm);
+						Scheduler.setDailyAlarm(context, alarm, false);
 					} while (cursor.moveToNext());
 					cursor.close();
 					database.close();
