@@ -5,46 +5,60 @@
     android:layout_margin="5dp"
     android:orientation="horizontal" >
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <FrameLayout
+        android:id="@+id/checkbox_wrapper"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center" >
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/alarm_summary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/checkBox"
+        android:layout_alignBottom="@+id/checkbox_wrapper"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/checkBox"
+        android:layout_toRightOf="@+id/checkbox_wrapper"
         android:background="@drawable/layout_selector"
-        android:clickable="true" >
+        android:clickable="true"
+        android:padding="5dp" >
 
         <!--
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
         -->
 
         <TextView
             android:id="@+id/alarm_time"
+            style="@android:style/TextAppearance.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/checkBox" />
+            android:layout_toRightOf="@+id/checkbox_wrapper"
+            android:text="9:30 pm" />
 
         <TextView
             android:id="@+id/alarm_label"
+            style="@android:style/TextAppearance.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:text="the label" />
 
         <TextView
             android:id="@+id/alarm_repeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:text="Mon,Tue,Wed,Thu,Fri,Sat,Sun" />
     </RelativeLayout>
 
 </RelativeLayout>
