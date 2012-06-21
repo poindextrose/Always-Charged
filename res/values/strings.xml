@@ -47,7 +47,7 @@ v1.1.1\n
     <string name="alarm_duration">Alarm Duration</string>
     <string name="dialog_title_duration">Alarm Duration</string>
     <string name="motion_tolerance">Motion Sensitivity</string>
-    <string name="dialog_title_motion_tolerance">Motion Tolerance</string>
+    <string name="dialog_title_motion_tolerance">Motion Sensitivity</string>
     <string name="disabled">Disabled</string>
     <string name="degrees">Degrees</string>
     <string name="notification_toast">Click notification to dismiss alarm for tonight</string>

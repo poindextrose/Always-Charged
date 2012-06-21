@@ -30,10 +30,10 @@
     </string-array>
     
     <string-array name="entries_motion_tolerance">
-        <item>2 degrees</item>
-        <item>4 degrees</item>  
-        <item>8 degrees</item>
-        <item>Disable Motion Detection</item>
+        <item>High</item>
+        <item>Medium</item>  
+        <item>Low</item>
+        <item>Disable Motion Snooze</item>
     </string-array>
     <string-array name="entryvalues_motion_tolerance">
         <item>2</item>
