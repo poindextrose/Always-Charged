@@ -90,4 +90,7 @@ new features.</string>
     <!-- alarm detail -->
     <string name="alarm_detail">Alarm Detail</string>
     <string name="turn_alarm_on">Turn alarm on</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="ok">OK</string>
 </resources>

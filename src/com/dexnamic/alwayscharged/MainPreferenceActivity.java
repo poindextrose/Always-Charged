@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,36 +15,28 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.preference.RingtonePreference;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class MainPreferenceActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
-		Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener,
-		TimePickerDialog.OnTimeSetListener {
+		Preference.OnPreferenceClickListener
+		{
 
-//	static final int TIME_DIALOG_ID = 0;
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
 	static final int UPGRADE_DIALOG_ID = 4;
 
-//	private CheckBoxPreference mCheckBoxEnable;
-//	private Preference mPreferenceTime;
 	private Preference mPreferenceAbout;
 	private Preference mPreferenceAdvanced;
 	private Preference mPreferenceUpgrade;
@@ -55,15 +46,10 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	SharedPreferences.Editor mEditor;
 
 	public final static String KEY_UPGRADE = "key_upgrade";
-//	public final static String KEY_ALARM_ENABLED = "key_alarm_enabled";
 	public final static String KEY_SET_ALARM = "key_set_alarm";
 	public final static String KEY_ADVANCED = "key_advanced";
-//	public final static String KEY_TIME = "key_time";
 //	public final static String KEY_HOUR = "key_hour";
 //	public final static String KEY_MINUTE = "key_minute";
-//	public final static String KEY_RINGTONE = "key_ringtone";
-//	public final static String KEY_REPEAT = "key_repeat";
-//	public final static String KEY_VIBRATE = "key_vibrate";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
 	public final static String KEY_VERSION_CODE = "key_version_code";
@@ -74,8 +60,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 
 	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
 	public static final int TIMES_TO_REPEAT = 2;
-
-//	private RingtonePreference mRingtonePreference;
 
 	private boolean mFirstInstance = true;
 
@@ -92,22 +76,11 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		mSettings = ps.getSharedPreferences();
 		mEditor = mSettings.edit();
 
-//		mCheckBoxEnable = (CheckBoxPreference) ps.findPreference(KEY_ALARM_ENABLED);
-
 		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
 		mPreferenceAdvanced.setOnPreferenceClickListener(this);
 
 		mPreferenceUpgrade = ps.findPreference(KEY_UPGRADE);
 		mPreferenceUpgrade.setOnPreferenceClickListener(this);
-
-//		mPreferenceTime = ps.findPreference(KEY_TIME);
-//		mPreferenceTime.setOnPreferenceClickListener(this);
-//		setTime();
-//
-//		mRingtonePreference = (RingtonePreference) ps.findPreference(KEY_RINGTONE);
-//		mRingtonePreference.setOnPreferenceChangeListener(this);
-//		String uriString = mSettings.getString(KEY_RINGTONE, null);
-//		setRingtoneSummary(uriString);
 
 		mPreferenceAbout = ps.findPreference(KEY_ABOUT);
 		mPreferenceAbout.setOnPreferenceClickListener(this);
@@ -228,47 +201,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	}
 
 	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		// Toast.makeText(MainActivity.this, (String) newValue,
-		// Toast.LENGTH_LONG).show();
-		// Log.d(LOG_TAG, "newValue=" + (String)newValue);
-//		if (preference == mRingtonePreference) {
-//			setRingtoneSummary((String) newValue);
-//		}
-		return true;
-	}
-
-//	private void setRingtoneSummary(String uriString) {
-//		String ringerName = getString(R.string.silent);
-//		try {
-//			Uri uri = Uri.parse(uriString);
-////			if (uriString.length() > 0) {
-//				ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
-//						MainActivity.this);
-////			}
-//		} catch (Exception e) {
-//			ringerName = getString(R.string.default_ringtone);
-//			try {
-//				Uri uri = RingtoneManager.getActualDefaultRingtoneUri(this,
-//						RingtoneManager.TYPE_RINGTONE);
-//				if (uriString.length() > 0) {
-//					ringerName = RingtoneManager.getRingtone(this, uri).getTitle(
-//							MainActivity.this);
-//				}
-//			} catch (Exception e2) {
-//				ringerName = getString(R.string.unknown);
-//			}
-//		} finally {
-//			mRingtonePreference.setSummary(ringerName);
-//			checkVolume();
-//		}
-//	}
-
-	@Override
 	public boolean onPreferenceClick(Preference preference) {
-//		if (preference == mPreferenceTime) {
-//			showDialog(TIME_DIALOG_ID);
-//		} else 
 			if (preference == mPreferenceAbout) {
 			showDialog(ABOUT_DIAlOG_ID);
 		} else if (preference == mPreferenceAdvanced) {
@@ -301,23 +234,12 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		prefsChanged();
-//		if (key.equals(KEY_ALARM_ENABLED)) {
-//			if (sharedPreferences.getBoolean(KEY_ALARM_ENABLED, false)) {
-//				enableAlaram();
-//			} else {
-////				AlarmScheduler.disableAllAlarms(this);
-//			}
-//		}
 	}
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		AlertDialog.Builder builder;
 		switch (id) {
-//		case TIME_DIALOG_ID:
-//			int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-//			int minute = mSettings.getInt(KEY_MINUTE, 0);
-//			return new TimePickerDialog(this, this, hourOfDay, minute, false);
 		case FIRST_TIME_DIALOG_ID:
 			builder = aboutDialogBuilder();
 			builder.setNegativeButton(getString(R.string.dontshowagain),
@@ -390,46 +312,5 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		});
 		return builder;
 	}
-
-	@Override
-	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//		mEditor.putInt(KEY_HOUR, hourOfDay);
-//		mEditor.putInt(KEY_MINUTE, minute);
-//		mEditor.commit();
-//		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
-//		if (mCheckBoxEnable.isChecked()) {
-//			enableAlaram();
-//		} else {
-//			mCheckBoxEnable.setChecked(true); // this will set alarm
-//		}
-	}
-
-//	void setTime() {
-//		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-//		int minute = mSettings.getInt(KEY_MINUTE, 0);
-//		mPreferenceTime.setSummary(Alarm.formatTime(this, hourOfDay, minute));
-//	}
-
-	private void enableAlaram() {
-//		checkVolume();
-//
-//		int hourOfDay = mSettings.getInt(KEY_HOUR, 22);
-//		int minute = mSettings.getInt(KEY_MINUTE, 0);
-//		int minutesUntilAlarm = AlarmScheduler.setDailyAlarm(this, hourOfDay, minute);
-//
-//		notifyUserTimeUntilAlarm(minutesUntilAlarm);
-	}
-
-//	private void checkVolume() {
-//		String chosenRingtone = mSettings.getString(KEY_RINGTONE, "");
-//		if (chosenRingtone.length() > 0) {
-//			AudioManager audioManager;
-//			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-//			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
-//				Toast.makeText(MainActivity.this, getString(R.string.checkVolume),
-//						Toast.LENGTH_LONG).show();
-//			}
-//		}
-//	}
 
 }
