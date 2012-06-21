@@ -75,29 +75,25 @@ public class AlarmReceiver extends BroadcastReceiver {
 			if (extras != null) {
 				Alarm alarm = (Alarm) extras.getSerializable(Scheduler.TYPE_ALARM);
 				int id = alarm.getID();
-				int day = extras.getInt("day");
 				// snooze alarm received
 				if (action.equals(Scheduler.TYPE_SNOOZE)) {
-					Log.v(getClass().getSimpleName(), "onReceive(), Snooze alarm, id=" + id
-							+ ", day=" + day);
+					Log.v(getClass().getSimpleName(), "onReceive(), Snooze alarm, id=" + id);
 					startAlarmService(context, action, alarm);
 
 					// remove enabled from alarm if it does not repeat
-					if (day <= 0) {
+					if (alarm.getRepeats() == 0) {
 						DatabaseHelper database = new DatabaseHelper(context);
 						Alarm alarm_edit = database.getAlarm(id);
 						alarm_edit.setEnabled(false);
 						database.updateAlarm(alarm_edit);
 						database.close();
-						Log.v(getClass().getSimpleName(), "onReceive(), disable alarm, id=" + id
-								+ ", day=" + day);
+						Log.v(getClass().getSimpleName(), "onReceive(), disable alarm, id=");
 					}
 
 					return;
 					// initial alarm received
 				} else if (action.contains(Scheduler.TYPE_ALARM)) {
-					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id
-							+ ", day=" + day);
+					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id);
 					// original single alarm
 					Scheduler.cancelSnooze(context);
 					Scheduler.resetRepeatCount(context, null);
