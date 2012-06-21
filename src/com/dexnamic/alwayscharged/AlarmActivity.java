@@ -178,15 +178,10 @@ public class AlarmActivity extends Activity {
 		super.onStart();
 
 		Bundle bundle = getIntent().getExtras();
-//		if (bundle == null) {
-//			throw new Exception("missing bundle in AlarmActivity.onStart()");
-//		}
 		mAlarm = (Alarm) bundle.getSerializable("alarm");
 
 		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 
-		// String chosenRingtone =
-		// mSettings.getString(MainActivity.KEY_RINGTONE, null);
 		String chosenRingtone = mAlarm.getRingtone();
 		// int maxVolume = 0;
 		try {
@@ -209,7 +204,6 @@ public class AlarmActivity extends Activity {
 			// Log.e("dexnamic", e.getMessage());
 		}
 		try {
-			// if (mSettings.getBoolean(MainActivity.KEY_VIBRATE, false))
 			if (mAlarm.getVibrate())
 				mVibrator.vibrate(vibratePattern, 0);
 		} catch (Exception e) {

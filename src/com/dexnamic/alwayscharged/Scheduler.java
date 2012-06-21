@@ -107,9 +107,35 @@ public class Scheduler {
 
 		int minutesUntilNextAlarm = 1 + (int) ((nearestAlarmCalendar.getTimeInMillis() - now
 				.getTimeInMillis()) / 1000 / 60);
-		Toast.makeText(context, "Minutes = " + minutesUntilNextAlarm, Toast.LENGTH_LONG).show();
+		// Toast.makeText(context, "Minutes = " + minutesUntilNextAlarm,
+		// Toast.LENGTH_LONG).show();
+		notifyUserTimeUntilAlarm(context, minutesUntilNextAlarm);
 
 		return minutesUntilNextAlarm;
+	}
+
+	private static void notifyUserTimeUntilAlarm(Context context, int minutesUntilAlarm) {
+		String msg = "";
+		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
+		minutesUntilAlarm = minutesUntilAlarm % 60;
+		if (hoursUntilAlarm > 0) {
+			msg += hoursUntilAlarm + " ";
+			if (hoursUntilAlarm == 1)
+				msg += context.getString(R.string.hour);
+			else
+				msg += context.getString(R.string.hours);
+		}
+		if (hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
+			msg += ", ";
+		if (minutesUntilAlarm > 0) {
+			msg += minutesUntilAlarm + " ";
+			if (minutesUntilAlarm == 1)
+				msg += context.getString(R.string.minute);
+			else
+				msg += context.getString(R.string.minutes);
+		}
+		msg += " " + context.getString(R.string.until_alarm);
+		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	}
 
 	static void cancelAlarm(Context context, Alarm alarm, int day) {

@@ -39,6 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 						Alarm alarm = database.getAlarm(_id);
 						Scheduler.setDailyAlarm(context, alarm);
 					} while (cursor.moveToNext());
+					cursor.close();
 					database.close();
 				}
 				return;

@@ -7,7 +7,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.Settings;
 
-public class Alarm implements Serializable {
+public class Alarm implements Serializable, Cloneable {
     
 	/**
 	 * 
@@ -31,6 +31,30 @@ public class Alarm implements Serializable {
 		setRepeats(127); 
 		setRingtone("content://settings/system/ringtone");
 		setVibrate(true);
+	}
+	public Alarm clone() {
+		Alarm alarm = new Alarm();
+		alarm.setID(ID);
+		alarm.setEnabled(enabled);
+		alarm.setLabel(label);
+		alarm.setHour(hour);
+		alarm.setMinute(minute);
+		alarm.setRepeats(repeats);
+		alarm.setRingtone(ringtone);
+		alarm.setVibrate(vibrate);
+		return alarm;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o == this) return true; 
+		if (!(o instanceof Alarm)) {
+		       return false;
+	     }
+		Alarm a = (Alarm) o;
+		return (ID==a.getID() && enabled == a.getEnabled() && label.equals(a.getLabel()) &&
+				hour==a.getHour() && minute==a.getMinute() && repeats==a.getRepeats()
+				&& ringtone.equals(a.getRingtone()) && vibrate==a.getVibrate());
 	}
 	
 	// TODO: make more useful output

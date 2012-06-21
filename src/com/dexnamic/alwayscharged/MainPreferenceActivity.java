@@ -420,30 +420,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 //		notifyUserTimeUntilAlarm(minutesUntilAlarm);
 	}
 
-//	private void notifyUserTimeUntilAlarm(int minutesUntilAlarm) {
-//		String msg = "";
-//		int hoursUntilAlarm = (int) (minutesUntilAlarm / 60);
-//		minutesUntilAlarm = minutesUntilAlarm % 60;
-//		if (hoursUntilAlarm > 0) {
-//			msg += hoursUntilAlarm + " ";
-//			if (hoursUntilAlarm == 1)
-//				msg += getString(R.string.hour);
-//			else
-//				msg += getString(R.string.hours);
-//		}
-//		if (hoursUntilAlarm > 0 && minutesUntilAlarm > 0)
-//			msg += ", ";
-//		if (minutesUntilAlarm > 0) {
-//			msg += minutesUntilAlarm + " ";
-//			if (minutesUntilAlarm == 1)
-//				msg += getString(R.string.minute);
-//			else
-//				msg += getString(R.string.minutes);
-//		}
-//		msg += " " + getString(R.string.until_alarm);
-//		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-//	}
-
 //	private void checkVolume() {
 //		String chosenRingtone = mSettings.getString(KEY_RINGTONE, "");
 //		if (chosenRingtone.length() > 0) {

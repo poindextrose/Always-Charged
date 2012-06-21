@@ -32,6 +32,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	private int mId;
 
 	private Alarm mAlarm;
+//	private Alarm mAlarmOriginal;
 	private DatabaseHelper database;
 
 	private CheckBoxPreference mEnabledCheckBox;
@@ -80,6 +81,11 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		deleteButton.setOnClickListener(this);
 		okButton = (Button) findViewById(R.id.buttonOK);
 		okButton.setOnClickListener(this);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
 
 		database = new DatabaseHelper(this);
 
@@ -87,11 +93,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mAlarm = database.getAlarm(mId);
 		else
 			mAlarm = new Alarm();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
+//		mAlarmOriginal = (Alarm) mAlarm.clone();
 	}
 
 	@Override
@@ -104,10 +106,11 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	@Override
 	protected void onStop() {
 		super.onStop();
-	
+
 		if (database != null)
 			database.close();
 	}
+
 	private void setPreferences() {
 
 		mEnabledCheckBox.setChecked(mAlarm.getEnabled());
@@ -150,9 +153,9 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		
+
 		enableAlarm();
-		
+
 		if (preference == mRepeatPreference) {
 			@SuppressWarnings("unchecked")
 			ArrayList<String> results = (ArrayList<String>) newValue;
@@ -198,9 +201,9 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	}
 
 	private void saveAlarm() {
-		if (mId >= 0)
+		if (mId >= 0) {
 			database.updateAlarm(mAlarm);
-		else
+		} else
 			database.addAlarm(mAlarm);
 		finish();
 	}
@@ -234,6 +237,10 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		// This will be called either automatically for you on 2.0
 		// or later, or by the code above on earlier versions of the
 		// platform.
+
+		// if alarm is not new and nothing change then no need to save again
+//		if(mId >= 0 && mAlarm.equals(mAlarmOriginal))
+//			finish();
 		saveAlarm();
 		return;
 	}
@@ -254,7 +261,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		}
 		return null;
 	}
-	
+
 	private void enableAlarm() {
 		/* if the user changes anything then enable the alarm */
 		mAlarm.setEnabled(true);
