@@ -178,7 +178,7 @@ public class AlarmActivity extends Activity {
 		super.onStart();
 
 		Bundle bundle = getIntent().getExtras();
-		mAlarm = (Alarm) bundle.getSerializable("alarm");
+		mAlarm = (Alarm) bundle.getSerializable(Scheduler.TYPE_ALARM);
 
 		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 

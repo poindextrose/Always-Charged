@@ -72,7 +72,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 			Bundle extras = intent.getExtras();
 			if (extras != null) {
-				Alarm alarm = (Alarm) extras.getSerializable("alarm");
+				Alarm alarm = (Alarm) extras.getSerializable(Scheduler.TYPE_ALARM);
 				int id = alarm.getID();
 				int day = extras.getInt("day");
 				// snooze alarm received
@@ -124,7 +124,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	static public void startAlarmService(Context context, String action, Alarm alarm) {
 		Intent intent = new Intent(context, AlarmService.class);
 		intent.setAction(action);
-		intent.putExtra("alarm", alarm);
+		intent.putExtra(Scheduler.TYPE_ALARM, alarm);
 		context.startService(intent);
 
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -133,7 +133,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	static public void startPowerSnoozeService(Context context, Alarm alarm) {
 		Intent intent = new Intent(context, PowerSnoozeService.class);
-		intent.putExtra("alarm", alarm);
+		intent.putExtra(Scheduler.TYPE_ALARM, alarm);
 		context.startService(intent);
 
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);

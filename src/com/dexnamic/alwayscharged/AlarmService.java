@@ -59,7 +59,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		// if (extras == null) {
 		// Log.e("", "extras == null 938290493");
 		// }
-		mAlarm = (Alarm) extras.getSerializable("alarm");
+		mAlarm = (Alarm) extras.getSerializable(Scheduler.TYPE_ALARM);
 
 		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 
@@ -253,7 +253,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		Scheduler.cancelNotification(this);
 
 		Intent intentActivity = new Intent(this, AlarmActivity.class);
-		intentActivity.putExtra("alarm", mAlarm);
+		intentActivity.putExtra(Scheduler.TYPE_ALARM, mAlarm);
 		intentActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intentActivity);
 

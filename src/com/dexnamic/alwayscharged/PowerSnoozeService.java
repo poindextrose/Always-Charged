@@ -20,7 +20,7 @@ public class PowerSnoozeService extends Service {
 //		if (extras == null) {
 //			Log.e("", "extras == null 938290493");
 //		}
-		Alarm alarm = (Alarm) extras.getSerializable("alarm");
+		Alarm alarm = (Alarm) extras.getSerializable(Scheduler.TYPE_ALARM);
 
 		IntentFilter intentBatteryChanged = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		Intent intentBattery = registerReceiver(null, intentBatteryChanged);
