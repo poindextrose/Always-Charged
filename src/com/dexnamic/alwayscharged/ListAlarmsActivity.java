@@ -9,44 +9,52 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListAdapter;
 
-public class ListAlarmsActivity extends ListActivity
-implements ListAlarmsCursorAdaptor.OnListClickListener, OnClickListener
-{
-	
+public class ListAlarmsActivity extends ListActivity implements
+		ListAlarmsCursorAdaptor.OnListClickListener, OnClickListener {
+
 	private DatabaseHelper dbHelper;
-	
+
 	private Button addButton;
+
+	private Cursor cursor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_list);
-		
+
 		addButton = (Button) findViewById(R.id.add_alarm);
 		addButton.setOnClickListener(this);
-		
+
 		dbHelper = new DatabaseHelper(this);
-		
-		Cursor cursor = dbHelper.getAllAlarms();
+
+		cursor = dbHelper.getAllAlarms();
 		startManagingCursor(cursor);
 
-		// Create the ListAdapter. A SimpleCursorAdapter lets you specify two interesting things:
+		// Create the ListAdapter. A SimpleCursorAdapter lets you specify two
+		// interesting things:
 		// an XML template for your list item, and
 		// The column to map to a specific item, by ID, in your template.
-		ListAdapter adapter = new ListAlarmsCursorAdaptor(this,  
-		                R.layout.alarm_item,  // Use a template that displays a text view
-		                cursor,                                    // Give the cursor to the list adapter
-		                this);
+		ListAdapter adapter = new ListAlarmsCursorAdaptor(this, R.layout.alarm_item, // Use
+																						// a
+																						// template
+																						// that
+																						// displays
+																						// a
+																						// text
+																						// view
+				cursor, // Give the cursor to the list adapter
+				this);
 		setListAdapter(adapter);
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		
-//		if(dbHelper != null)
-//			dbHelper.close();
+
+		// if(dbHelper != null)
+		// dbHelper.close();
 	}
 
 	@Override
@@ -65,10 +73,14 @@ implements ListAlarmsCursorAdaptor.OnListClickListener, OnClickListener
 
 	@Override
 	public void onClick(View view) {
-		if(view == addButton) {
-			this.alarmSelected(-1);
+		if (view == addButton) {
+			if (MainPreferenceActivity.UPGRADED_TO_PRO == false && cursor.getCount() > 0) {
+				// TODO: tell user they need to upgrade for more alarms
+			} else {
+				this.alarmSelected(-1);
+			}
 		}
-		
+
 	}
 
 }

@@ -32,6 +32,8 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		Preference.OnPreferenceClickListener
 		{
 
+	public static Boolean UPGRADED_TO_PRO = false;
+	
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
@@ -78,6 +80,9 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 
 		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
 		mPreferenceAdvanced.setOnPreferenceClickListener(this);
+		if(UPGRADED_TO_PRO == false) {
+//			mPreferenceAdvanced.
+		}
 
 		mPreferenceUpgrade = ps.findPreference(KEY_UPGRADE);
 		mPreferenceUpgrade.setOnPreferenceClickListener(this);
@@ -120,6 +125,11 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
+		
+		if(UPGRADED_TO_PRO)
+			upgradeToPro();
+		else
+			advertiseForPro();
 	}
 
 	@Override
@@ -305,12 +315,30 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.upgrade_to_pro));
-		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
 		});
+		builder.setPositiveButton(getString(R.string.purchase), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				upgradeToPro();
+				dialog.dismiss();
+			}
+		});
 		return builder;
+	}
+	
+	private void advertiseForPro() {
+		mPreferenceAdvanced.setEnabled(false);
+	}
+	
+	private void upgradeToPro() {
+		UPGRADED_TO_PRO = true;
+		PreferenceScreen ps = getPreferenceScreen();
+		ps.removePreference(mPreferenceUpgrade);
+		
+		mPreferenceAdvanced.setEnabled(true);
 	}
 
 }

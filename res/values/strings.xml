@@ -65,7 +65,8 @@ v1.1.1\n
     <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string>
     <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
     <string name="upgrade_to_pro">Upgrade to Pro version</string>
-    <string name="upgrade_summary">Schedule multiple alarms, advanced settings, and more&#8230;</string>
+    <string name="upgrade_summary">Schedule alarm repeating schedule, advanced settings,
+         and more&#8230;</string>
     <string name="first_time_text">
 Have you ever forgotten to plug in your phone at night to find your
 phone\'s battery dead the next day?  If so, then <i>Always Charged</i> is for you.
@@ -93,4 +94,5 @@ new features.</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
+    <string name="purchase">Purchase</string>
 </resources>

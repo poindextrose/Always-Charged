@@ -3,7 +3,6 @@ package com.dexnamic.alwayscharged;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
@@ -15,51 +14,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 * to signal that activity should check battery level and snooze alarm if
 	 * power snooze enabled
 	 */
-	public final static String ACTION_DISCONNECTED = "action_disconnected";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
 		if (action != null) {
-			Log.v(getClass().getSimpleName(), "onReceive(), action=" + action);
-
-			/*
-			 * If the device is rebooted, application reinstalled, or time zone
-			 * changed, set the alarm.
-			 */
-			if (action.equals(Intent.ACTION_BOOT_COMPLETED)
-					|| (action.equals(Intent.ACTION_PACKAGE_REPLACED) && intent.getDataString()
-							.contains(context.getPackageName()))
-					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-				DatabaseHelper database = new DatabaseHelper(context);
-				Cursor cursor = database.getAllActiveAlarms();
-				if (cursor != null && cursor.moveToFirst()) {
-					cursor.moveToFirst();
-					do {
-						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-						Alarm alarm = database.getAlarm(_id);
-						Scheduler.setDailyAlarm(context, alarm, false);
-					} while (cursor.moveToNext());
-					cursor.close();
-					database.close();
-				}
-				return;
-			} 
-			
-			/*
-			 * If user connects their device to a power source, then cancel the
-			 * snooze
-			 */
-			try {
-				if (action.equals((String) Intent.class.getField("ACTION_POWER_CONNECTED")
-						.get(null))) {
-					// Log.v(getClass().getSimpleName(),
-					// "ACTION_POWER_CONNECTED");
-					Scheduler.cancelSnooze(context);
-					return;
-				}
-			} catch (Exception e) {
-			}
 
 			/*
 			 * If user clicked the notification, then cancel the snooze(s)
@@ -100,21 +59,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 					startAlarmService(context, action, alarm);
 				}
 			}
-
-			// TODO: enable and test powersnooze
-			// disabling power snooze for now until everything else is working
-			// try {
-			// if (action.equals((String)
-			// Intent.class.getField("ACTION_POWER_DISCONNECTED").get(
-			// null))) {
-			// if (settings.getBoolean(MainActivity.KEY_ALARM_ENABLED, false)
-			// && settings.getBoolean(AlarmScheduler.KEY_POWER_SNOOZE, false))
-			// startPowerSnoozeService(context);
-			// return;
-			// }
-			// } catch (Exception e) {
-			// }
-
 		}
 	}
 
