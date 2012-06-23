@@ -16,10 +16,11 @@
 
 package com.dexnamic.alwayscharged.billing;
 
-import com.example.dungeons.BillingService.RequestPurchase;
-import com.example.dungeons.BillingService.RestoreTransactions;
-import com.example.dungeons.Consts.PurchaseState;
-import com.example.dungeons.Consts.ResponseCode;
+import com.dexnamic.alwayscharged.R;
+import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
+import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
+import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
+import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -56,9 +57,9 @@ import java.util.Set;
 /**
  * A sample application that demonstrates in-app billing.
  */
-public class Dungeons extends Activity implements OnClickListener,
+public class UpgradeProActivity extends Activity implements OnClickListener,
         OnItemSelectedListener {
-    private static final String TAG = "Dungeons";
+    private static final String TAG = "UpgradePro";
 
     /**
      * Used for storing the log text.
@@ -71,6 +72,9 @@ public class Dungeons extends Activity implements OnClickListener,
      * to get all the purchases for this user.
      */
     private static final String DB_INITIALIZED = "db_initialized";
+
+    private DungeonsPurchaseObserver mDungeonsPurchaseObserver;
+    private Handler mHandler;
 
     private BillingService mBillingService;
     private Button mBuyButton;
@@ -113,7 +117,7 @@ public class Dungeons extends Activity implements OnClickListener,
      */
     private class DungeonsPurchaseObserver extends PurchaseObserver {
         public DungeonsPurchaseObserver(Handler handler) {
-            super(Dungeons.this, handler);
+            super(UpgradeProActivity.this, handler);
         }
 
         @Override
@@ -224,20 +228,7 @@ public class Dungeons extends Activity implements OnClickListener,
 
     /** An array of product list entries for the products that can be purchased. */
     private static final CatalogEntry[] CATALOG = new CatalogEntry[] {
-        new CatalogEntry("sword_001", R.string.two_handed_sword, Managed.MANAGED),
-        new CatalogEntry("potion_001", R.string.potions, Managed.UNMANAGED),
-        new CatalogEntry("subscription_monthly", R.string.subscription_monthly,
-                Managed.SUBSCRIPTION),
-        new CatalogEntry("subscription_yearly", R.string.subscription_yearly,
-                Managed.SUBSCRIPTION),
-        new CatalogEntry("android.test.purchased", R.string.android_test_purchased,
-                Managed.UNMANAGED),
-        new CatalogEntry("android.test.canceled", R.string.android_test_canceled,
-                Managed.UNMANAGED),
-        new CatalogEntry("android.test.refunded", R.string.android_test_refunded,
-                Managed.UNMANAGED),
-        new CatalogEntry("android.test.item_unavailable", R.string.android_test_item_unavailable,
-                Managed.UNMANAGED),
+        new CatalogEntry("unlock Pro", R.string.upgrade_pro, Managed.MANAGED),
     };
 
     private String mItemName;
@@ -249,7 +240,7 @@ public class Dungeons extends Activity implements OnClickListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.billing);
 
         mHandler = new Handler();
         mDungeonsPurchaseObserver = new DungeonsPurchaseObserver(mHandler);
@@ -321,41 +312,41 @@ public class Dungeons extends Activity implements OnClickListener,
     protected Dialog onCreateDialog(int id) {
         switch (id) {
         case DIALOG_CANNOT_CONNECT_ID:
-            return createDialog(R.string.cannot_connect_title,
-                    R.string.cannot_connect_message);
+//            return createDialog(R.string.cannot_connect_title,
+//                    R.string.cannot_connect_message);
         case DIALOG_BILLING_NOT_SUPPORTED_ID:
-            return createDialog(R.string.billing_not_supported_title,
-                    R.string.billing_not_supported_message);
+//            return createDialog(R.string.billing_not_supported_title,
+//                    R.string.billing_not_supported_message);
             case DIALOG_SUBSCRIPTIONS_NOT_SUPPORTED_ID:
-                return createDialog(R.string.subscriptions_not_supported_title,
-                        R.string.subscriptions_not_supported_message);
+//                return createDialog(R.string.subscriptions_not_supported_title,
+//                        R.string.subscriptions_not_supported_message);
         default:
             return null;
         }
     }
 
-    private Dialog createDialog(int titleId, int messageId) {
-        String helpUrl = replaceLanguageAndRegion(getString(R.string.help_url));
-        if (Consts.DEBUG) {
-            Log.i(TAG, helpUrl);
-        }
-        final Uri helpUri = Uri.parse(helpUrl);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(titleId)
-            .setIcon(android.R.drawable.stat_sys_warning)
-            .setMessage(messageId)
-            .setCancelable(false)
-            .setPositiveButton(android.R.string.ok, null)
-            .setNegativeButton(R.string.learn_more, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, helpUri);
-                    startActivity(intent);
-                }
-            });
-        return builder.create();
-    }
+//    private Dialog createDialog(int titleId, int messageId) {
+//        String helpUrl = replaceLanguageAndRegion(getString(R.string.help_url));
+//        if (Consts.DEBUG) {
+//            Log.i(TAG, helpUrl);
+//        }
+//        final Uri helpUri = Uri.parse(helpUrl);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle(titleId)
+//            .setIcon(android.R.drawable.stat_sys_warning)
+//            .setMessage(messageId)
+//            .setCancelable(false)
+//            .setPositiveButton(android.R.string.ok, null)
+//            .setNegativeButton(R.string.learn_more, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, helpUri);
+//                    startActivity(intent);
+//                }
+//            });
+//        return builder.create();
+//    }
 
     /**
      * Replaces the language and/or country of the device into the given string.
@@ -379,35 +370,35 @@ public class Dungeons extends Activity implements OnClickListener,
      * Sets up the UI.
      */
     private void setupWidgets() {
-        mLogTextView = (TextView) findViewById(R.id.log);
-
-        mBuyButton = (Button) findViewById(R.id.buy_button);
-        mBuyButton.setEnabled(false);
-        mBuyButton.setOnClickListener(this);
-
-        mEditPayloadButton = (Button) findViewById(R.id.payload_edit_button);
-        mEditPayloadButton.setEnabled(false);
-        mEditPayloadButton.setOnClickListener(this);
-
-        mEditSubscriptionsButton = (Button) findViewById(R.id.subscriptions_edit_button);
-        mEditSubscriptionsButton.setVisibility(View.INVISIBLE);
-        mEditSubscriptionsButton.setOnClickListener(this);
-
-        mSelectItemSpinner = (Spinner) findViewById(R.id.item_choices);
-        mCatalogAdapter = new CatalogAdapter(this, CATALOG);
-        mSelectItemSpinner.setAdapter(mCatalogAdapter);
-        mSelectItemSpinner.setOnItemSelectedListener(this);
-
-        mOwnedItemsCursor = mPurchaseDatabase.queryAllPurchasedItems();
-        startManagingCursor(mOwnedItemsCursor);
-        String[] from = new String[] { PurchaseDatabase.PURCHASED_PRODUCT_ID_COL,
-                PurchaseDatabase.PURCHASED_QUANTITY_COL
-        };
-        int[] to = new int[] { R.id.item_name, R.id.item_quantity };
-        mOwnedItemsAdapter = new SimpleCursorAdapter(this, R.layout.item_row,
-                mOwnedItemsCursor, from, to);
-        mOwnedItemsTable = (ListView) findViewById(R.id.owned_items);
-        mOwnedItemsTable.setAdapter(mOwnedItemsAdapter);
+//        mLogTextView = (TextView) findViewById(R.id.log);
+//
+//        mBuyButton = (Button) findViewById(R.id.buy_button);
+//        mBuyButton.setEnabled(false);
+//        mBuyButton.setOnClickListener(this);
+//
+//        mEditPayloadButton = (Button) findViewById(R.id.payload_edit_button);
+//        mEditPayloadButton.setEnabled(false);
+//        mEditPayloadButton.setOnClickListener(this);
+//
+//        mEditSubscriptionsButton = (Button) findViewById(R.id.subscriptions_edit_button);
+//        mEditSubscriptionsButton.setVisibility(View.INVISIBLE);
+//        mEditSubscriptionsButton.setOnClickListener(this);
+//
+//        mSelectItemSpinner = (Spinner) findViewById(R.id.item_choices);
+//        mCatalogAdapter = new CatalogAdapter(this, CATALOG);
+//        mSelectItemSpinner.setAdapter(mCatalogAdapter);
+//        mSelectItemSpinner.setOnItemSelectedListener(this);
+//
+//        mOwnedItemsCursor = mPurchaseDatabase.queryAllPurchasedItems();
+//        startManagingCursor(mOwnedItemsCursor);
+//        String[] from = new String[] { PurchaseDatabase.PURCHASED_PRODUCT_ID_COL,
+//                PurchaseDatabase.PURCHASED_QUANTITY_COL
+//        };
+//        int[] to = new int[] { R.id.item_name, R.id.item_quantity };
+//        mOwnedItemsAdapter = new SimpleCursorAdapter(this, R.layout.item_row,
+//                mOwnedItemsCursor, from, to);
+//        mOwnedItemsTable = (ListView) findViewById(R.id.owned_items);
+//        mOwnedItemsTable.setAdapter(mOwnedItemsAdapter);
     }
 
     private void prependLogEntry(CharSequence cs) {
@@ -436,7 +427,7 @@ public class Dungeons extends Activity implements OnClickListener,
         boolean initialized = prefs.getBoolean(DB_INITIALIZED, false);
         if (!initialized) {
             mBillingService.restoreTransactions();
-            Toast.makeText(this, R.string.restoring_transactions, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, R.string.restoring_transactions, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -532,42 +523,42 @@ public class Dungeons extends Activity implements OnClickListener,
      * Displays the dialog used to edit the payload dialog.
      */
     private void showPayloadEditDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        final View view = View.inflate(this, R.layout.edit_payload, null);
-        final TextView payloadText = (TextView) view.findViewById(R.id.payload_text);
-        if (mPayloadContents != null) {
-            payloadText.setText(mPayloadContents);
-        }
-
-        dialog.setView(view);
-        dialog.setPositiveButton(
-                R.string.edit_payload_accept,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mPayloadContents = payloadText.getText().toString();
-                    }
-                });
-        dialog.setNegativeButton(
-                R.string.edit_payload_clear,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (dialog != null) {
-                            mPayloadContents = null;
-                            dialog.cancel();
-                        }
-                    }
-                });
-        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                if (dialog != null) {
-                    dialog.cancel();
-                }
-            }
-        });
-        dialog.show();
+//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+//        final View view = View.inflate(this, R.layout.edit_payload, null);
+//        final TextView payloadText = (TextView) view.findViewById(R.id.payload_text);
+//        if (mPayloadContents != null) {
+//            payloadText.setText(mPayloadContents);
+//        }
+//
+//        dialog.setView(view);
+//        dialog.setPositiveButton(
+//                R.string.edit_payload_accept,
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        mPayloadContents = payloadText.getText().toString();
+//                    }
+//                });
+//        dialog.setNegativeButton(
+//                R.string.edit_payload_clear,
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        if (dialog != null) {
+//                            mPayloadContents = null;
+//                            dialog.cancel();
+//                        }
+//                    }
+//                });
+//        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//                if (dialog != null) {
+//                    dialog.cancel();
+//                }
+//            }
+//        });
+//        dialog.show();
     }
 
     /**

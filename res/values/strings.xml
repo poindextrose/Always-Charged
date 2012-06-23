@@ -95,4 +95,7 @@ new features.</string>
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
     <string name="purchase">Purchase</string>
+    
+    <!-- Billing -->
+    <string name="upgrade_pro">Upgrade to Pro</string>
 </resources>
