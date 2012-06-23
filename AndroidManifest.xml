@@ -89,6 +89,11 @@
                 <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".billing.UpgradeProActivity"
+            android:label="@string/upgrade_pro" >
+        </activity>
         <!--  -->
     </application>
 

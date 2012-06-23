@@ -3,6 +3,8 @@ package com.dexnamic.alwayscharged;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -233,7 +235,9 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			Intent intent = new Intent(this, AdvancedPreferences.class);
 			startActivity(intent);
 		} else if (preference == mPreferenceUpgrade) {
-			showDialog(UPGRADE_DIALOG_ID);
+//			showDialog(UPGRADE_DIALOG_ID);
+			Intent intent = new Intent(this, UpgradeProActivity.class);
+			startActivity(intent);
 		} else if (preference == mPreferenceSetAlarm) {
 			Intent intent = new Intent(this, ListAlarmsActivity.class);
 			startActivity(intent);
@@ -286,9 +290,9 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			alertDialog = builder.create();
 			return alertDialog;
 		case UPGRADE_DIALOG_ID:
-			builder = upgradeDialogBuilder();
-			alertDialog = builder.create();
-			return alertDialog;
+//			builder = upgradeDialogBuilder();
+//			alertDialog = builder.create();
+//			return alertDialog;
 		}
 		return null;
 	}
@@ -323,26 +327,26 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		return builder;
 	}
 
-	private AlertDialog.Builder upgradeDialogBuilder() {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-		View layout = inflater.inflate(R.layout.upgrade_dialog,
-				(ViewGroup) findViewById(R.id.upgrade_layout_root));
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setView(layout);
-		builder.setTitle(getString(R.string.upgrade_to_pro));
-		builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		builder.setPositiveButton(getString(R.string.purchase), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				upgradeToPro();
-				dialog.dismiss();
-			}
-		});
-		return builder;
-	}
+//	private AlertDialog.Builder upgradeDialogBuilder() {
+//		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//		View layout = inflater.inflate(R.layout.upgrade_dialog,
+//				(ViewGroup) findViewById(R.id.upgrade_layout_root));
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//		builder.setView(layout);
+//		builder.setTitle(getString(R.string.upgrade_to_pro));
+//		builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.dismiss();
+//			}
+//		});
+//		builder.setPositiveButton(getString(R.string.purchase), new DialogInterface.OnClickListener() {
+//			public void onClick(DialogInterface dialog, int which) {
+//				upgradeToPro();
+//				dialog.dismiss();
+//			}
+//		});
+//		return builder;
+//	}
 	
 	private void advertiseForPro() {
 		mPreferenceAdvanced.setEnabled(false);
