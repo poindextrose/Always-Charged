@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:backupAgent="MyPrefsBackupAgent"
@@ -59,7 +60,7 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".ResetAlarmsReceiver">
+        <receiver android:name=".ResetAlarmsReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -77,6 +78,18 @@
 
         <service android:name=".AlarmService" />
         <service android:name=".PowerSnoozeService" />
+
+        <!-- In App Purchasing -->
+        <service android:name=".billing.BillingService" />
+
+        <receiver android:name=".billing.BillingReceiver" >
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <!--  -->
     </application>
 
 </manifest>

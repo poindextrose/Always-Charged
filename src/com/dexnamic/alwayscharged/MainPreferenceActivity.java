@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -64,6 +65,16 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	public static final int TIMES_TO_REPEAT = 2;
 
 	private boolean mFirstInstance = true;
+	
+    /**
+     * The SharedPreferences key for recording whether we initialized the
+     * database.  If false, then we perform a RestoreTransactions request
+     * to get all the purchases for this user.
+     */
+    private static final String DB_INITIALIZED = "db_initialized";
+
+//    private DungeonsPurchaseObserver mDungeonsPurchaseObserver;
+    private Handler mHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,31 +194,35 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.email_dev:
-			Intent i = new Intent(Intent.ACTION_SEND);
-			i.setType("text/plain");
-			String contactEmail = getString(R.string.contact_email);
-			i.putExtra(Intent.EXTRA_EMAIL, new String[] { contactEmail });
-			String feedback = getString(R.string.feedback);
-			String appName = getString(R.string.app_name);
-			i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-			// i.putExtra(Intent.EXTRA_TEXT , "body of email");
-			Intent i2 = (Intent) i.clone();
-			try {
-				ComponentName cn = new ComponentName("com.google.android.gm",
-						"com.google.android.gm.ComposeActivityGmail");
-				i.setComponent(cn);
-				startActivity(i);
-			} catch (android.content.ActivityNotFoundException ex1) {
-				try {
-					startActivity(Intent.createChooser(i2, getString(R.string.sendmail)));
-				} catch (android.content.ActivityNotFoundException ex2) {
-					Toast.makeText(this, getString(R.string.noemail), Toast.LENGTH_SHORT).show();
-				}
-			}
+			sendFeedbackEmail();
 			return true;
 		}
 
 		return super.onMenuItemSelected(featureId, item);
+	}
+	
+	private void sendFeedbackEmail() {
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("text/plain");
+		String contactEmail = getString(R.string.contact_email);
+		i.putExtra(Intent.EXTRA_EMAIL, new String[] { contactEmail });
+		String feedback = getString(R.string.feedback);
+		String appName = getString(R.string.app_name);
+		i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
+		// i.putExtra(Intent.EXTRA_TEXT , "body of email");
+		Intent i2 = (Intent) i.clone();
+		try {
+			ComponentName cn = new ComponentName("com.google.android.gm",
+					"com.google.android.gm.ComposeActivityGmail");
+			i.setComponent(cn);
+			startActivity(i);
+		} catch (android.content.ActivityNotFoundException ex1) {
+			try {
+				startActivity(Intent.createChooser(i2, getString(R.string.sendmail)));
+			} catch (android.content.ActivityNotFoundException ex2) {
+				Toast.makeText(this, getString(R.string.noemail), Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override
