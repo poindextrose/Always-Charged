@@ -25,6 +25,8 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import javax.crypto.EncryptedPrivateKeyInfo;
+
 /**
  * Security-related methods. For a secure implementation, all of this code
  * should be implemented on a server that communicates with the
@@ -56,6 +58,7 @@ public class Security {
      * A class to hold the verified purchase information.
      */
     public static class VerifiedPurchase {
+    	
         public PurchaseState purchaseState;
         public String notificationId;
         public String productId;
@@ -100,6 +103,7 @@ public class Security {
      * and then several purchases can be batched together.
      * @param signedData the signed JSON string (signed, not encrypted)
      * @param signature the signature for the data, signed with the private key
+     * @throws Base64DecoderException 
      */
     public static ArrayList<VerifiedPurchase> verifyPurchase(String signedData, String signature) {
         if (signedData == null) {
@@ -124,9 +128,16 @@ public class Security {
              * Generally, encryption keys / passwords should only be kept in memory
              * long enough to perform the operation they need to perform.
              */
-            String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlF+HoeOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZrNbxEfdI+MCPn1RqHz0vAOK+IlRWH2JQTRQc50iZ+UFmI2remxD1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfznDQPOHLiBRnV3m5FqX8bnSkKtK1i9hjTlWDlVi2GSRwGA3Cq6z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcC9s5owL8Y50D+NMMsWIx5zUTQmO8OmrrptaSsKlLR0HmHwL7boMc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQFX2Bof/97lVL2DRPCzs/DAdHKJmw3Qsl2Y8T18KatONAQIDAQAB";
-            PublicKey key = Security.generatePublicKey(base64EncodedPublicKey);
-            verified = Security.verify(key, signedData, signature);
+            //  String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlF+HoeOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZrNbxEfdI+MCPn1RqHz0vAOK+IlRWH2JQTRQc50iZ+UFmI2remxD1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfznDQPOHLiBRnV3m5FqX8bnSkKtK1i9hjTlWDlVi2GSRwGA3Cq6z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcC9s5owL8Y50D+NMMsWIx5zUTQmO8OmrrptaSsKlLR0HmHwL7boMc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQFX2Bof/97lVL2DRPCzs/DAdHKJmw3Qsl2Y8T18KatONAQIDAQAB";
+            String encryptedKey = "RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWn1qFoOOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZsfhGSlq+I605RDn89Ei17bQVV86bedEp8cpz0NN0L4ojoaueG1D1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfyTt96gq2Ps8K4aLcrHia1SEO97QG0nS9IWIYWL5NbJaheL2Si7z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcCgnS1rgjDivYlWXV39VoSeB59ToQ7AHcPRt0Q9D1mi1SRy7vZocc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQCFM2+lILNTj9A1nZ4E6l4VHsXQN9u7hcZVF84Fl3YigFwkGAwEB";
+            final long scramble = 98572098420l;
+            PublicKey key;
+			try {
+				key = Security.generatePublicKey(decryptKey(encryptedKey, scramble));
+	            verified = Security.verify(key, signedData, signature);
+			} catch (Exception e) {
+				verified = false;
+			}
             if (!verified) {
                 Log.w(TAG, "signature does not match data.");
                 return null;
@@ -244,4 +255,33 @@ public class Security {
         }
         return false;
     }
+    
+    private static String decryptKey(String encryptedKey, long scramble) throws Base64DecoderException {
+    	byte[] encryptedBytes = Base64.decode(encryptedKey);
+    	
+    	byte[] keyBytes = new byte[encryptedBytes.length];
+    	
+        int lengthBytes = encryptedBytes.length;
+        for(int i = 0; i < lengthBytes; i++) {
+        	byte temp = (byte) (scramble >> (i % Long.SIZE));
+        	keyBytes[i] = (byte) (encryptedBytes[i] ^ temp);
+        }
+    	
+    	return Base64.encode(keyBytes);
+    }
+    
+//    private static String encryptKey(String key, long scramble) {
+//
+//        byte[] keyBytes = Base64.decode(key, Base64.DEFAULT);
+//        
+//        byte[] encryptedBytes = new byte[keyBytes.length];
+//
+//        int lengthBytes = keyBytes.length;
+//        for(int i = 0; i < lengthBytes; i++) {
+//        	byte temp = (byte) (scramble >> (i % Long.SIZE));
+//        	encryptedBytes[i] = (byte) (keyBytes[i] ^ temp);
+//        }
+//        
+//        return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
+//    }
 }
