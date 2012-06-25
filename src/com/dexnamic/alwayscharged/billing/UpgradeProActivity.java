@@ -29,27 +29,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.text.Spanned;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -70,7 +58,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	 * database. If false, then we perform a RestoreTransactions request to get
 	 * all the purchases for this user.
 	 */
-	private static final String DB_INITIALIZED = "db_initialized";
+	public static final String DB_INITIALIZED = "db_initialized";
 
 	private UpgradePurchaseObserver mPurchaseObserver;
 	private Handler mHandler;
@@ -107,6 +95,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 					restoreDatabase();
 					 mBuyButton.setEnabled(true);
 				} else {
+					// TODO: link button to standalone pro version if available
 					 showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
 				}
 			}
@@ -118,12 +107,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 			if (Consts.DEBUG) {
 				Log.i(TAG, "onPurchaseStateChange() itemId: " + itemId + " " + purchaseState);
 			}
-
-//			if (developerPayload == null) {
-//				logProductActivity(itemId, purchaseState.toString());
-//			} else {
-//				logProductActivity(itemId, purchaseState + "\n\t" + developerPayload);
-//			}
 
 			if (purchaseState == PurchaseState.PURCHASED) {
 				userUpgradeToPro();
@@ -162,12 +145,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 				if (Consts.DEBUG) {
 					Log.d(TAG, "completed RestoreTransactions request");
 				}
-				// Update the shared preferences so that we don't perform
-				// a RestoreTransactions again.
-				SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-				SharedPreferences.Editor edit = prefs.edit();
-				edit.putBoolean(DB_INITIALIZED, true);
-				edit.commit();
 			} else {
 				if (Consts.DEBUG) {
 					Log.d(TAG, "RestoreTransactions error: " + responseCode);
@@ -198,14 +175,12 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 	public void userUpgradeToPro() {
 		Log.v(TAG, "userUpgradeToPro()");
-		
-		// TODO register this in preferences but obfuscate by combining with device ID
+		finish();
 	}
 
 	public void userDowngradedFromPro() {
 		Log.v(TAG, "userDowngradeFromPor()");
 		
-		// remove pro features and clear upgrade preference
 	}
 
 	/**
@@ -335,32 +310,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 		mBuyButton = (Button) findViewById(R.id.buy_button);
 		mBuyButton.setEnabled(false);
 		mBuyButton.setOnClickListener(this);
-		//
-		// mEditPayloadButton = (Button) findViewById(R.id.payload_edit_button);
-		// mEditPayloadButton.setEnabled(false);
-		// mEditPayloadButton.setOnClickListener(this);
-		//
-		// mEditSubscriptionsButton = (Button)
-		// findViewById(R.id.subscriptions_edit_button);
-		// mEditSubscriptionsButton.setVisibility(View.INVISIBLE);
-		// mEditSubscriptionsButton.setOnClickListener(this);
-		//
-		// mSelectItemSpinner = (Spinner) findViewById(R.id.item_choices);
-		// mCatalogAdapter = new CatalogAdapter(this, CATALOG);
-		// mSelectItemSpinner.setAdapter(mCatalogAdapter);
-		// mSelectItemSpinner.setOnItemSelectedListener(this);
-		//
-		// mOwnedItemsCursor = mPurchaseDatabase.queryAllPurchasedItems();
-		// startManagingCursor(mOwnedItemsCursor);
-		// String[] from = new String[] {
-		// PurchaseDatabase.PURCHASED_PRODUCT_ID_COL,
-		// PurchaseDatabase.PURCHASED_QUANTITY_COL
-		// };
-		// int[] to = new int[] { R.id.item_name, R.id.item_quantity };
-		// mOwnedItemsAdapter = new SimpleCursorAdapter(this, R.layout.item_row,
-		// mOwnedItemsCursor, from, to);
-		// mOwnedItemsTable = (ListView) findViewById(R.id.owned_items);
-		// mOwnedItemsTable.setAdapter(mOwnedItemsAdapter);
 	}
 
 	private void prependLogEntry(CharSequence cs) {

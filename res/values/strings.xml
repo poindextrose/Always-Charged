@@ -108,5 +108,7 @@ new features.</string>
      Your version of Market may be out of date.
      You can continue to use this app but you
      won\'t be able to make purchases.</string>
+     <string name="check_purchase">Checking for previous purchases.</string>
+     <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
 
 </resources>

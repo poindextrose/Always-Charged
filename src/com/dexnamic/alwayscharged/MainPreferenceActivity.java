@@ -1,18 +1,14 @@
 package com.dexnamic.alwayscharged;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-
+import com.dexnamic.alwayscharged.billing.BillingService;
+import com.dexnamic.alwayscharged.billing.ResponseHandler;
 import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -31,12 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class MainPreferenceActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
-		Preference.OnPreferenceClickListener
-		{
+public class MainPreferenceActivity extends PreferenceActivity implements
+		Preference.OnPreferenceClickListener {
 
-	public static Boolean UPGRADED_TO_PRO = false;
-	
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
@@ -53,8 +46,8 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	public final static String KEY_UPGRADE = "key_upgrade";
 	public final static String KEY_SET_ALARM = "key_set_alarm";
 	public final static String KEY_ADVANCED = "key_advanced";
-//	public final static String KEY_HOUR = "key_hour";
-//	public final static String KEY_MINUTE = "key_minute";
+	// public final static String KEY_HOUR = "key_hour";
+	// public final static String KEY_MINUTE = "key_minute";
 	public final static String KEY_FIRST_TIME = "key_first_time";
 	public final static String KEY_ABOUT = "key_about";
 	public final static String KEY_VERSION_CODE = "key_version_code";
@@ -67,16 +60,12 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 	public static final int TIMES_TO_REPEAT = 2;
 
 	private boolean mFirstInstance = true;
-	
-    /**
-     * The SharedPreferences key for recording whether we initialized the
-     * database.  If false, then we perform a RestoreTransactions request
-     * to get all the purchases for this user.
-     */
-    private static final String DB_INITIALIZED = "db_initialized";
 
-//    private DungeonsPurchaseObserver mDungeonsPurchaseObserver;
-    private Handler mHandler;
+	// private DungeonsPurchaseObserver mDungeonsPurchaseObserver;
+	private Handler mHandler;
+
+	private BillingService mBillingService;
+	private Boolean mHasPurchased;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +82,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 
 		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
 		mPreferenceAdvanced.setOnPreferenceClickListener(this);
-		if(UPGRADED_TO_PRO == false) {
-//			mPreferenceAdvanced.
-		}
 
 		mPreferenceUpgrade = ps.findPreference(KEY_UPGRADE);
 		mPreferenceUpgrade.setOnPreferenceClickListener(this);
@@ -138,11 +124,9 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
-		
-		if(UPGRADED_TO_PRO)
-			upgradeToPro();
-		else
-			advertiseForPro();
+
+//		mRestorePurchaseObserver = new RestorePurchaseObserver(this, mHandler);
+
 	}
 
 	@Override
@@ -161,28 +145,35 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		} catch (NameNotFoundException e) {
 		}
 
-		// display a short educational dialog if this is a new user
-		if (mFirstInstance && mSettings.getBoolean(KEY_FIRST_TIME, true))
+		// if app is starting for the first time
+		if (mFirstInstance && mSettings.getBoolean(KEY_FIRST_TIME, true)) {
+
+			checkIfUserPurchasedUpgradeToPro();
+
 			showDialog(FIRST_TIME_DIALOG_ID);
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		mHasPurchased = ResponseHandler.hasPurchased(this);
+		if (mHasPurchased) {
+			upgradeToPro();
+		}
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
+	protected void onStop() {
+		super.onStop();
+	}
 
-		// Unregister the listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
-				this);
-
-		mEditor.commit();
+	private void checkIfUserPurchasedUpgradeToPro() {
+		mBillingService = new BillingService();
+		mBillingService.setContext(this);
+		mBillingService.restoreTransactions();
+		Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
 	}
 
 	@Override
@@ -202,7 +193,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 
 		return super.onMenuItemSelected(featureId, item);
 	}
-	
+
 	private void sendFeedbackEmail() {
 		Intent i = new Intent(Intent.ACTION_SEND);
 		i.setType("text/plain");
@@ -229,13 +220,13 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-			if (preference == mPreferenceAbout) {
+		if (preference == mPreferenceAbout) {
 			showDialog(ABOUT_DIAlOG_ID);
 		} else if (preference == mPreferenceAdvanced) {
 			Intent intent = new Intent(this, AdvancedPreferences.class);
 			startActivity(intent);
 		} else if (preference == mPreferenceUpgrade) {
-//			showDialog(UPGRADE_DIALOG_ID);
+			// showDialog(UPGRADE_DIALOG_ID);
 			Intent intent = new Intent(this, UpgradeProActivity.class);
 			startActivity(intent);
 		} else if (preference == mPreferenceSetAlarm) {
@@ -243,26 +234,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			startActivity(intent);
 		}
 		return false;
-	}
-
-	private void prefsChanged() {
-		try {
-			// try to backup preferences to Google if supported on this device
-			Class<?> _BackupManager = Class.forName("android.app.backup.BackupManager");
-			Constructor<?> constructor = _BackupManager
-					.getConstructor(new Class[] { Context.class });
-			// reflection: BackupManager bm = new BackupManager(this);
-			Object backupManager = constructor.newInstance(this);
-			Method dataChanged = _BackupManager.getMethod("dataChanged", (Class[]) null);
-			// reflection: backupManager.dataChanged();
-			dataChanged.invoke(backupManager, (Object[]) null);
-		} catch (Exception e) {
-		}
-	}
-
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		prefsChanged();
 	}
 
 	@Override
@@ -290,9 +261,9 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 			alertDialog = builder.create();
 			return alertDialog;
 		case UPGRADE_DIALOG_ID:
-//			builder = upgradeDialogBuilder();
-//			alertDialog = builder.create();
-//			return alertDialog;
+			// builder = upgradeDialogBuilder();
+			// alertDialog = builder.create();
+			// return alertDialog;
 		}
 		return null;
 	}
@@ -327,36 +298,15 @@ public class MainPreferenceActivity extends PreferenceActivity implements OnShar
 		return builder;
 	}
 
-//	private AlertDialog.Builder upgradeDialogBuilder() {
-//		LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//		View layout = inflater.inflate(R.layout.upgrade_dialog,
-//				(ViewGroup) findViewById(R.id.upgrade_layout_root));
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setView(layout);
-//		builder.setTitle(getString(R.string.upgrade_to_pro));
-//		builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//			}
-//		});
-//		builder.setPositiveButton(getString(R.string.purchase), new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int which) {
-//				upgradeToPro();
-//				dialog.dismiss();
-//			}
-//		});
-//		return builder;
+//	private void downgradeFromPro() {
+//		Toast.makeText(this, R.string.downgrading, Toast.LENGTH_LONG).show();
+//		// TODO: disable all alarms
+//		finish();
 //	}
-	
-	private void advertiseForPro() {
-		mPreferenceAdvanced.setEnabled(false);
-	}
-	
+
 	private void upgradeToPro() {
-		UPGRADED_TO_PRO = true;
 		PreferenceScreen ps = getPreferenceScreen();
 		ps.removePreference(mPreferenceUpgrade);
-		
 		mPreferenceAdvanced.setEnabled(true);
 	}
 

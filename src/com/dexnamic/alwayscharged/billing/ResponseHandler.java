@@ -10,6 +10,8 @@ import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 /**
@@ -116,7 +118,7 @@ public class ResponseHandler {
 			final String productId, final String orderId, final long purchaseTime,
 			final String developerPayload) {
 
-		// would update database here if one was needed
+		setPurchaseState(context, purchaseState);
 
 		// This needs to be synchronized because the UI thread can change the
 		// value of sPurchaseObserver.
@@ -126,6 +128,40 @@ public class ResponseHandler {
 						purchaseTime, developerPayload);
 			}
 		}
+	}
+
+	// used for obfuscating purchase state in shared preferences
+	private final static Long RAND_PURCHASED = 3923923932l;
+	private final static Long RAND_REFUNDED = 4862394729l;
+
+	public static void setPurchaseState(Context context, PurchaseState purchaseState) {
+		SharedPreferences sharedPreferences = context.getSharedPreferences(
+				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
+		Editor editor = sharedPreferences.edit();
+		String unique_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
+				android.provider.Settings.Secure.ANDROID_ID);
+		Long id = Long.parseLong(unique_id, 16);
+		Long purchasePref;
+		if (purchaseState == PurchaseState.PURCHASED)
+			purchasePref = id ^ RAND_PURCHASED;
+		else
+			purchasePref = id ^ RAND_REFUNDED;
+		editor.putLong(Consts.PURCHASE_PREFERENCES, purchasePref);
+		editor.commit();
+	}
+
+	public static Boolean hasPurchased(Context context) {
+
+		SharedPreferences sharedPreferences = context.getSharedPreferences(
+				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
+		String unique_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
+				android.provider.Settings.Secure.ANDROID_ID);
+		Long id = Long.parseLong(unique_id, 16);
+		Long purchasePref = sharedPreferences.getLong(Consts.PURCHASE_PREFERENCES, 0);
+		if ((purchasePref ^ id) == RAND_PURCHASED)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -168,6 +204,15 @@ public class ResponseHandler {
 	public static void responseCodeReceived(Context context, RestoreTransactions request,
 			ResponseCode responseCode) {
 		if (sPurchaseObserver != null) {
+			if (responseCode == ResponseCode.RESULT_OK) {
+				// Update the shared preferences so that we don't perform
+				// a RestoreTransactions again.
+				SharedPreferences prefs = context.getSharedPreferences(Consts.PURCHASE_PREFERENCES,
+						Context.MODE_PRIVATE);
+				SharedPreferences.Editor edit = prefs.edit();
+				edit.putBoolean(Consts.PURCHASE_PREFERENCES, true);
+				edit.commit();
+			}
 			sPurchaseObserver.onRestoreTransactionsResponse(request, responseCode);
 		}
 	}

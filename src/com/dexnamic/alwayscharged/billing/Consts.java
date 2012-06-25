@@ -21,6 +21,12 @@ package com.dexnamic.alwayscharged.billing;
  * to support in-app billing.
  */
 public class Consts {
+	
+	// SharedPreferences for storing purchase state
+	// it is purposely made something misleading to discourage hackers
+	public static String PURCHASE_PREFERENCES = "debug_log";
+	public static String PURCHASE_RESTORED = "0";
+	
     // The response codes for a request, defined by Android Market.
     public enum ResponseCode {
         RESULT_OK,

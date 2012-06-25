@@ -1,5 +1,8 @@
 package com.dexnamic.alwayscharged;
 
+import com.dexnamic.alwayscharged.billing.ResponseHandler;
+import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -74,8 +77,8 @@ public class ListAlarmsActivity extends ListActivity implements
 	@Override
 	public void onClick(View view) {
 		if (view == addButton) {
-			if (MainPreferenceActivity.UPGRADED_TO_PRO == false && cursor.getCount() > 0) {
-				// TODO: tell user they need to upgrade for more alarms
+			if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
+				startActivity(new Intent(this, UpgradeProActivity.class));
 			} else {
 				this.alarmSelected(-1);
 			}
