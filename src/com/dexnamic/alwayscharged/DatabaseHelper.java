@@ -59,6 +59,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Create tables again
 		onCreate(db);
 	}
+	
+	public void removeAllAlarms() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ALARMS);
+		onCreate(db);
+	}
 
 	public void addAlarm(Alarm alarm) {
 		SQLiteDatabase db = this.getWritableDatabase();

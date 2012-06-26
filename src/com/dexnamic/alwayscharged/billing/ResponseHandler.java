@@ -2,6 +2,7 @@
 
 package com.dexnamic.alwayscharged.billing;
 
+import com.dexnamic.alwayscharged.DatabaseHelper;
 import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
@@ -119,6 +120,14 @@ public class ResponseHandler {
 			final String developerPayload) {
 
 		setPurchaseState(context, purchaseState);
+		if(purchaseState == PurchaseState.REFUNDED) {
+			// clear database if purchase refunded
+			DatabaseHelper database = new DatabaseHelper(context);
+			/* this should be done on a background thread
+			 * but this is a tiny database
+			 */
+			database.removeAllAlarms();
+		}
 
 		// This needs to be synchronized because the UI thread can change the
 		// value of sPurchaseObserver.
