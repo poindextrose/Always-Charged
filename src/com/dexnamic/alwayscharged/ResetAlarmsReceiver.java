@@ -30,9 +30,9 @@ public class ResetAlarmsReceiver extends BroadcastReceiver {
 						Alarm alarm = database.getAlarm(_id);
 						Scheduler.setDailyAlarm(context, alarm, false);
 					} while (cursor.moveToNext());
-					cursor.close();
-					database.close();
 				}
+				cursor.close();
+				database.close();
 				return;
 			}
 		}

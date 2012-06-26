@@ -104,8 +104,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
+	protected void onPause() {
+		super.onPause();
 
 		if (database != null)
 			database.close();

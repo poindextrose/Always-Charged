@@ -1,8 +1,15 @@
 package com.dexnamic.alwayscharged;
 
 import com.dexnamic.alwayscharged.billing.BillingService;
+import com.dexnamic.alwayscharged.billing.Consts;
+import com.dexnamic.alwayscharged.billing.PurchaseObserver;
 import com.dexnamic.alwayscharged.billing.ResponseHandler;
 import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
+import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
+import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
+import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
+import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -19,6 +26,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +42,8 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
 	static final int UPGRADE_DIALOG_ID = 4;
+	
+	static final String TAG = "MainPreferenceActivity";
 
 	private Preference mPreferenceAbout;
 	private Preference mPreferenceAdvanced;
@@ -66,6 +76,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 	private BillingService mBillingService;
 	private Boolean mHasPurchased;
+	private UpgradePurchaseObserver mUpgradePurchaseObserver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +163,17 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 			showDialog(FIRST_TIME_DIALOG_ID);
 		}
+		
+		mHandler = new Handler();
+		mUpgradePurchaseObserver = new UpgradePurchaseObserver(mHandler);
+		ResponseHandler.register(mUpgradePurchaseObserver);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		ResponseHandler.unregister(mUpgradePurchaseObserver);
 	}
 
 	@Override
@@ -308,6 +330,66 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		PreferenceScreen ps = getPreferenceScreen();
 		ps.removePreference(mPreferenceUpgrade);
 		mPreferenceAdvanced.setEnabled(true);
+	}
+
+	/**
+	 * A {@link PurchaseObserver} is used to get callbacks when Android Market
+	 * sends messages to this application so that we can update the UI.
+	 */
+	private class UpgradePurchaseObserver extends PurchaseObserver {
+		public UpgradePurchaseObserver(Handler handler) {
+			super(MainPreferenceActivity.this, handler);
+		}
+
+		@Override
+		public void onBillingSupported(boolean supported, String type) {
+		}
+
+		@Override
+		public void onPurchaseStateChange(PurchaseState purchaseState, String itemId, int quantity,
+				long purchaseTime, String developerPayload) {
+
+			if (purchaseState == PurchaseState.PURCHASED) {
+				upgradeToPro();
+			}
+		}
+
+		@Override
+		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
+			if (Consts.DEBUG) {
+				Log.d(TAG, request.mProductId + ": " + responseCode);
+			}
+			if (responseCode == ResponseCode.RESULT_OK) {
+				if (Consts.DEBUG) {
+					Log.i(TAG, "purchase was successfully sent to server");
+				}
+//				logProductActivity(request.mProductId, "sending purchase request");
+			} else if (responseCode == ResponseCode.RESULT_USER_CANCELED) {
+				if (Consts.DEBUG) {
+					Log.i(TAG, "user canceled purchase");
+				}
+//				logProductActivity(request.mProductId, "dismissed purchase dialog");
+			} else {
+				if (Consts.DEBUG) {
+					Log.i(TAG, "purchase failed");
+				}
+//				logProductActivity(request.mProductId, "request purchase returned " + responseCode);
+			}
+		}
+
+		@Override
+		public void onRestoreTransactionsResponse(RestoreTransactions request,
+				ResponseCode responseCode) {
+			if (responseCode == ResponseCode.RESULT_OK) {
+				if (Consts.DEBUG) {
+					Log.d(TAG, "completed RestoreTransactions request");
+				}
+			} else {
+				if (Consts.DEBUG) {
+					Log.d(TAG, "RestoreTransactions error: " + responseCode);
+				}
+			}
+		}
 	}
 
 }

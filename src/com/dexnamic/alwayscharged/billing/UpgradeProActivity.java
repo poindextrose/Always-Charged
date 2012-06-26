@@ -52,6 +52,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 //	private String mProductID = "upgrade_pro";
 	private String mProductID = "android.test.purchased";
 //	private String mProductID = "android.test.canceled";
+//	private String mProductID = "android.test.refunded";
 	
 	/**
 	 * The SharedPreferences key for recording whether we initialized the
@@ -65,7 +66,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 	private BillingService mBillingService;
 	private Button mBuyButton;
-	private Set<String> mOwnedItems = new HashSet<String>();
 
 	/**
 	 * The developer payload that is sent with subsequent purchase requests.
@@ -214,8 +214,8 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	 * Called when this activity is no longer visible.
 	 */
 	@Override
-	protected void onStop() {
-		super.onStop();
+	protected void onPause() {
+		super.onPause();
 		ResponseHandler.unregister(mPurchaseObserver);
 	}
 

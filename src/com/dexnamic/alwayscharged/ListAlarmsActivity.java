@@ -53,11 +53,11 @@ public class ListAlarmsActivity extends ListActivity implements
 	}
 
 	@Override
-	protected void onStop() {
-		super.onStop();
+	protected void onDestroy() {
+		super.onDestroy();
 
-		// if(dbHelper != null)
-		// dbHelper.close();
+		if (dbHelper != null)
+			dbHelper.close();
 	}
 
 	@Override
