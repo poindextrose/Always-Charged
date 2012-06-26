@@ -320,12 +320,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		return builder;
 	}
 
-//	private void downgradeFromPro() {
-//		Toast.makeText(this, R.string.downgrading, Toast.LENGTH_LONG).show();
-//		// TODO: disable all alarms
-//		finish();
-//	}
-
 	private void upgradeToPro() {
 		PreferenceScreen ps = getPreferenceScreen();
 		ps.removePreference(mPreferenceUpgrade);

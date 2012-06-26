@@ -189,8 +189,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	protected void onStart() {
 		super.onStart();
 		ResponseHandler.register(mPurchaseObserver);
-
-		// TODO: check preferences to see if already purchased
 	}
 
 	/**

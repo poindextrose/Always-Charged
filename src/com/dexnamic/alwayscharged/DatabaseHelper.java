@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_ALARMS = "alarms";
 
 	// Contacts Table Columns names
-	static final String KEY_ID = "_id";
+	public static final String KEY_ID = "_id";
 	static final String KEY_ENABLED = "enabled";
 	static final String KEY_LABEL = "label";
 	static final String KEY_HOUR = "hour";
@@ -42,7 +42,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_ALARMS);
 
 		Alarm alarm = new Alarm();
-		// TODO: read from preferences for upgrades
 
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 

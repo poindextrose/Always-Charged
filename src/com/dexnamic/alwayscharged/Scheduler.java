@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -57,7 +58,6 @@ public class Scheduler {
 		// if (!alarmEnabled)
 		// return 0;
 
-		// TODO: clean this up
 		int snoozeTime = Integer.parseInt(settings.getString(
 				MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,
 				settings.getString(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,

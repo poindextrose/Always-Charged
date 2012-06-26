@@ -2,7 +2,9 @@
 
 package com.dexnamic.alwayscharged.billing;
 
+import com.dexnamic.alwayscharged.Alarm;
 import com.dexnamic.alwayscharged.DatabaseHelper;
+import com.dexnamic.alwayscharged.Scheduler;
 import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
@@ -13,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.util.Log;
 
 /**
@@ -122,11 +125,21 @@ public class ResponseHandler {
 		setPurchaseState(context, purchaseState);
 		if(purchaseState == PurchaseState.REFUNDED) {
 			// clear database if purchase refunded
-			DatabaseHelper database = new DatabaseHelper(context);
 			/* this should be done on a background thread
-			 * but this is a tiny database
-			 */
+			 * but this is a tiny database */
+			DatabaseHelper database = new DatabaseHelper(context);
+			Cursor cursor = database.getAllActiveAlarms();
+			if (cursor != null && cursor.moveToFirst()) {
+				cursor.moveToFirst();
+				do {
+					int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+					Alarm alarm = database.getAlarm(_id);
+					Scheduler.cancelAlarm(context, alarm);
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
 			database.removeAllAlarms();
+			database.close();
 		}
 
 		// This needs to be synchronized because the UI thread can change the
