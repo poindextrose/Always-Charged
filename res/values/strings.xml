@@ -78,8 +78,11 @@ if you are using your phone, moving around, or already have it plugged in and ch
 
 If you like or dislike something about this application, or you want to suggest a feature,
 please send me an email (press the menu button from the main screen).</string>
-    <string name="upgrade_dialog">You can upgrade Always Charged to take advantage of
-new features.</string>
+    <string name="upgrade_dialog">Please upgrade Always Charged to take advantage of
+new features:\n
+  - Advanced Settings\n
+  - Multiple alarms\n
+  - Choose repeat schedule</string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
     <string name="done">Done</string>

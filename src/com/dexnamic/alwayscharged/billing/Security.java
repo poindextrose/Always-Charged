@@ -25,8 +25,6 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import javax.crypto.EncryptedPrivateKeyInfo;
-
 /**
  * Security-related methods. For a secure implementation, all of this code
  * should be implemented on a server that communicates with the
@@ -172,7 +170,7 @@ public class Security {
                 int response = jElement.getInt("purchaseState");
                 PurchaseState purchaseState = PurchaseState.valueOf(response);
                 String productId = jElement.getString("productId");
-                String packageName = jElement.getString("packageName");
+//                String packageName = jElement.getString("packageName");
                 long purchaseTime = jElement.getLong("purchaseTime");
                 String orderId = jElement.optString("orderId", "");
                 String notifyId = null;

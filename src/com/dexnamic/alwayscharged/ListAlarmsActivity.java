@@ -78,7 +78,9 @@ public class ListAlarmsActivity extends ListActivity implements
 	public void onClick(View view) {
 		if (view == addButton) {
 			if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
-				startActivity(new Intent(this, UpgradeProActivity.class));
+				Intent intent = new Intent(this, UpgradeProActivity.class);
+//				intent.setAction("add button");
+				startActivity(intent);
 			} else {
 				this.alarmSelected(-1);
 			}

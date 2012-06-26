@@ -25,7 +25,6 @@ import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,9 +37,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import java.util.HashSet;
+import android.widget.TextView;
+
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * A sample application that demonstrates in-app billing.
@@ -49,11 +48,11 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	private static final String TAG = "UpgradePro";
 
 	private String mItemName = "Unlock Pro";
-//	private String mProductID = "upgrade_pro";
+	// private String mProductID = "upgrade_pro";
 	private String mProductID = "android.test.purchased";
-//	private String mProductID = "android.test.canceled";
-//	private String mProductID = "android.test.refunded";
-	
+	// private String mProductID = "android.test.canceled";
+	// private String mProductID = "android.test.refunded";
+
 	/**
 	 * The SharedPreferences key for recording whether we initialized the
 	 * database. If false, then we perform a RestoreTransactions request to get
@@ -93,10 +92,10 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 			if (type == null || type.equals(Consts.ITEM_TYPE_INAPP)) {
 				if (supported) {
 					restoreDatabase();
-					 mBuyButton.setEnabled(true);
+					mBuyButton.setEnabled(true);
 				} else {
 					// TODO: link button to standalone pro version if available
-					 showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
+					showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
 				}
 			}
 		}
@@ -180,7 +179,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 	public void userDowngradedFromPro() {
 		Log.v(TAG, "userDowngradeFromPor()");
-		
+
 	}
 
 	/**
@@ -190,7 +189,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	protected void onStart() {
 		super.onStart();
 		ResponseHandler.register(mPurchaseObserver);
-		
+
 		// TODO: check preferences to see if already purchased
 	}
 
@@ -203,8 +202,9 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 			if (Consts.DEBUG) {
 				Log.d(TAG, "buying: " + mItemName + " sku: " + mProductID);
 			}
-	
-			if (!mBillingService.requestPurchase(mProductID, Consts.ITEM_TYPE_INAPP, mDeveloperPayloadContents)) {
+
+			if (!mBillingService.requestPurchase(mProductID, Consts.ITEM_TYPE_INAPP,
+					mDeveloperPayloadContents)) {
 				showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
 			}
 		}
@@ -251,8 +251,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case DIALOG_CANNOT_CONNECT_ID:
-			 return createDialog(R.string.cannot_connect_title,
-			 R.string.cannot_connect_message);
+			return createDialog(R.string.cannot_connect_title, R.string.cannot_connect_message);
 		case DIALOG_BILLING_NOT_SUPPORTED_ID:
 			return createDialog(R.string.billing_not_supported_title,
 					R.string.billing_not_supported_message);
@@ -310,6 +309,12 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 		mBuyButton = (Button) findViewById(R.id.buy_button);
 		mBuyButton.setEnabled(false);
 		mBuyButton.setOnClickListener(this);
+
+//		String action = getIntent().getAction();
+//		if (action != null && action.contains("add button")) {
+//			TextView reason = (TextView) findViewById(R.id.upgrade_reason);
+//			reason.setText("To add multiple alarms or modify the repeating schedule you must upgrade to pro.");
+//		}
 	}
 
 	private void prependLogEntry(CharSequence cs) {

@@ -1,6 +1,8 @@
 package com.dexnamic.alwayscharged;
 
 import java.util.ArrayList;
+
+import com.dexnamic.alwayscharged.billing.ResponseHandler;
 import com.dexnamic.android.preference.ListPreferenceMultiSelect;
 
 import android.app.Dialog;
@@ -64,6 +66,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mRepeatPreference = (ListPreferenceMultiSelect) ps.findPreference("key_repeat");
 		mRepeatPreference.setOnPreferenceChangeListener(this);
+		if(!ResponseHandler.hasPurchased(this))
+			mRepeatPreference.setEnabled(false);
 
 		mRingtonePreference = (RingtonePreference) ps.findPreference("key_ringtone");
 		mRingtonePreference.setOnPreferenceChangeListener(this);
