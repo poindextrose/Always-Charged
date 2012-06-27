@@ -209,17 +209,19 @@ com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.de
     void alarmChecked(int,boolean) -> a
     void alarmSelected(int) -> a
 com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.MainPreferenceActivity:
-    android.preference.Preference mPreferenceAbout -> c
-    android.preference.Preference mPreferenceAdvanced -> d
-    android.preference.Preference mPreferenceUpgrade -> e
-    android.preference.Preference mPreferenceSetAlarm -> f
+    android.preference.Preference mPreferenceAbout -> e
+    android.preference.Preference mPreferenceAdvanced -> f
+    android.preference.Preference mPreferenceUpgrade -> g
+    android.preference.Preference mPreferenceSetAlarm -> h
     android.content.SharedPreferences mSettings -> a
     android.content.SharedPreferences$Editor mEditor -> b
-    boolean mFirstInstance -> g
-    android.os.Handler mHandler -> h
-    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> i
-    java.lang.Boolean mHasPurchased -> j
-    com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver mUpgradePurchaseObserver -> k
+    boolean mFirstInstance -> i
+    android.os.Handler mHandler -> j
+    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> k
+    java.lang.Boolean mHasPurchased -> l
+    com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver mUpgradePurchaseObserver -> m
+    int mHour -> c
+    int mMinute -> d
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onPause() -> onPause

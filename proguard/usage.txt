@@ -46,7 +46,9 @@ com.dexnamic.alwayscharged.MainPreferenceActivity:
     public static final java.lang.String KEY_UPGRADE
     public static final java.lang.String KEY_SET_ALARM
     public static final java.lang.String KEY_ADVANCED
-    public static final java.lang.String KEY_FIRST_TIME
+    public static final java.lang.String KEY_HOUR
+    public static final java.lang.String KEY_MINUTE
+    public static final java.lang.String KEY_SHOW_INTRO_DIAGLOG
     public static final java.lang.String KEY_ABOUT
     public static final java.lang.String KEY_VERSION_CODE
     public static final java.lang.String KEY_SNOOZE_TIME_MIN
