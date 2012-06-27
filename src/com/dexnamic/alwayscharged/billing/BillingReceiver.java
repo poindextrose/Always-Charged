@@ -63,7 +63,7 @@ public class BillingReceiver extends BroadcastReceiver {
                     ResponseCode.RESULT_ERROR.ordinal());
             checkResponseCode(context, requestId, responseCodeIndex);
         } else {
-            Log.w(TAG, "unexpected action: " + action);
+            if(Consts.DEBUG) Log.w(TAG, "unexpected action: " + action);
         }
     }
 

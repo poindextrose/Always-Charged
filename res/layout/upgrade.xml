@@ -24,7 +24,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dip"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/upgrade_justification"
@@ -34,7 +35,9 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="10dip"
             android:layout_marginTop="40dp"
-            android:text="@string/upgrade_dialog" />
+            android:text="@string/upgrade_dialog"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </RelativeLayout>

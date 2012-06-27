@@ -1,18 +1,20 @@
 android.annotation.SuppressLint
 android.annotation.TargetApi
+com.android.vending.billing.IMarketBillingService$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_sendBillingRequest
+    34:34:public android.os.IBinder asBinder()
+com.android.vending.billing.IMarketBillingService$Stub$Proxy:
+    82:82:public java.lang.String getInterfaceDescriptor()
+com.dexnamic.alwayscharged.Alarm:
+    private static final long serialVersionUID
+    112:118:public void setRepeats(java.lang.Integer,java.lang.Boolean)
 com.dexnamic.alwayscharged.AlarmActivity:
     private static final int MSG_TIMEOUT
     private static final int MSG_UP_VOLUME
     static final int DIALOG_ALERT_ID
 com.dexnamic.alwayscharged.AlarmReceiver:
-    public static final java.lang.String ACTION_DISCONNECTED
-com.dexnamic.alwayscharged.AlarmScheduler:
-    static final java.lang.String TYPE_ALARM
-    static final java.lang.String TYPE_SNOOZE
-    static final java.lang.String TYPE_NOTIFY
-    static final java.lang.String KEY_POWER_SNOOZE
-    static final int NOTIFY_SNOOZE
-    16:16:public AlarmScheduler()
+    76:82:public static void startPowerSnoozeService(android.content.Context,com.dexnamic.alwayscharged.Alarm)
 com.dexnamic.alwayscharged.AlarmService:
     private static final int SENSOR_STABILZE_WAIT_TIME_MS
     private static final int MSG_TIMEOUT
@@ -21,18 +23,29 @@ com.dexnamic.alwayscharged.AlarmService:
     private static final java.lang.String KEY_PITCH
     private static final java.lang.String KEY_ROLL
 com.dexnamic.alwayscharged.BuildConfig
-com.dexnamic.alwayscharged.MainActivity:
+com.dexnamic.alwayscharged.DatabaseHelper:
+    private static final java.lang.String DATABASE_NAME
+    private static final int DATABASE_VERSION
+    private static final java.lang.String TABLE_ALARMS
+    public static final java.lang.String KEY_ID
+    static final java.lang.String KEY_ENABLED
+    static final java.lang.String KEY_LABEL
+    static final java.lang.String KEY_HOUR
+    static final java.lang.String KEY_MINUTE
+    static final java.lang.String KEY_REPEATS
+    static final java.lang.String KEY_RINGTONE
+    static final java.lang.String KEY_VIBRATE
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity:
     static final int TIME_DIALOG_ID
+com.dexnamic.alwayscharged.MainPreferenceActivity:
     static final int FIRST_TIME_DIALOG_ID
-    static final int ABOUT_DIAlOG
+    static final int ABOUT_DIAlOG_ID
     static final int CHANGELOG_DIALOG_ID
-    public static final java.lang.String KEY_ALARM_ENABLED
-    public static final java.lang.String KEY_TIME
-    public static final java.lang.String KEY_HOUR
-    public static final java.lang.String KEY_MINUTE
-    public static final java.lang.String KEY_RINGTONE
-    public static final java.lang.String KEY_REPEAT
-    public static final java.lang.String KEY_VIBRATE
+    static final int UPGRADE_DIALOG_ID
+    static final java.lang.String TAG
+    public static final java.lang.String KEY_UPGRADE
+    public static final java.lang.String KEY_SET_ALARM
+    public static final java.lang.String KEY_ADVANCED
     public static final java.lang.String KEY_FIRST_TIME
     public static final java.lang.String KEY_ABOUT
     public static final java.lang.String KEY_VERSION_CODE
@@ -46,12 +59,93 @@ com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     static final java.lang.String PREFS_BACKUP_KEY
 com.dexnamic.alwayscharged.PowerSnoozeService:
     public static android.os.PowerManager$WakeLock mWakeLock
-com.dexnamic.alwayscharged.R
+com.dexnamic.alwayscharged.R:
+    10:10:public R()
 com.dexnamic.alwayscharged.R$array
 com.dexnamic.alwayscharged.R$attr
+com.dexnamic.alwayscharged.R$color
 com.dexnamic.alwayscharged.R$drawable
 com.dexnamic.alwayscharged.R$id
 com.dexnamic.alwayscharged.R$layout
 com.dexnamic.alwayscharged.R$menu
 com.dexnamic.alwayscharged.R$string
+com.dexnamic.alwayscharged.R$styleable:
+    166:166:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
+com.dexnamic.alwayscharged.Scheduler:
+    static final java.lang.String TYPE_ALARM
+    static final java.lang.String TYPE_SNOOZE
+    static final java.lang.String TYPE_NOTIFY
+    static final java.lang.String KEY_POWER_SNOOZE
+    static final int NOTIFY_SNOOZE
+    18:18:public Scheduler()
+com.dexnamic.alwayscharged.billing.BillingReceiver:
+    private static final java.lang.String TAG
+com.dexnamic.alwayscharged.billing.BillingService:
+    private static final java.lang.String TAG
+    499:499:public boolean checkBillingSupported(java.lang.String)
+com.dexnamic.alwayscharged.billing.BillingService$CheckBillingSupported:
+    213:216:public BillingService$CheckBillingSupported(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
+com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase:
+    251:252:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
+    262:263:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String,java.lang.String)
+com.dexnamic.alwayscharged.billing.Consts:
+    public static final java.lang.String MARKET_BILLING_SERVICE_ACTION
+    public static final java.lang.String ACTION_CONFIRM_NOTIFICATION
+    public static final java.lang.String ACTION_GET_PURCHASE_INFORMATION
+    public static final java.lang.String ACTION_RESTORE_TRANSACTIONS
+    public static final java.lang.String ACTION_NOTIFY
+    public static final java.lang.String ACTION_RESPONSE_CODE
+    public static final java.lang.String ACTION_PURCHASE_STATE_CHANGED
+    public static final java.lang.String NOTIFICATION_ID
+    public static final java.lang.String INAPP_SIGNED_DATA
+    public static final java.lang.String INAPP_SIGNATURE
+    public static final java.lang.String INAPP_REQUEST_ID
+    public static final java.lang.String INAPP_RESPONSE_CODE
+    public static final java.lang.String BILLING_REQUEST_METHOD
+    public static final java.lang.String BILLING_REQUEST_API_VERSION
+    public static final java.lang.String BILLING_REQUEST_PACKAGE_NAME
+    public static final java.lang.String BILLING_REQUEST_ITEM_ID
+    public static final java.lang.String BILLING_REQUEST_ITEM_TYPE
+    public static final java.lang.String BILLING_REQUEST_DEVELOPER_PAYLOAD
+    public static final java.lang.String BILLING_REQUEST_NOTIFY_IDS
+    public static final java.lang.String BILLING_REQUEST_NONCE
+    public static final java.lang.String BILLING_RESPONSE_RESPONSE_CODE
+    public static final java.lang.String BILLING_RESPONSE_PURCHASE_INTENT
+    public static final java.lang.String BILLING_RESPONSE_REQUEST_ID
+    public static final java.lang.String ITEM_TYPE_INAPP
+    public static final java.lang.String ITEM_TYPE_SUBSCRIPTION
+    public static final boolean DEBUG
+    23:23:public Consts()
+com.dexnamic.alwayscharged.billing.PurchaseObserver:
+    private static final java.lang.String TAG
+com.dexnamic.alwayscharged.billing.ResponseHandler:
+    private static final java.lang.String TAG
+com.dexnamic.alwayscharged.billing.Security:
+    private static final java.lang.String TAG
+    private static final java.lang.String KEY_FACTORY_ALGORITHM
+    private static final java.lang.String SIGNATURE_ALGORITHM
+    37:37:public Security()
+com.dexnamic.alwayscharged.billing.UpgradeProActivity:
+    private static final java.lang.String TAG
+    public static final java.lang.String DB_INITIALIZED
+    private static final int DIALOG_CANNOT_CONNECT_ID
+    private static final int DIALOG_BILLING_NOT_SUPPORTED_ID
+com.dexnamic.alwayscharged.util.Base64:
+    public static final boolean ENCODE
+    public static final boolean DECODE
+    private static final byte EQUALS_SIGN
+    private static final byte NEW_LINE
+    private static final byte WHITE_SPACE_ENC
+    private static final byte EQUALS_SIGN_ENC
+    258:258:public static java.lang.String encodeWebSafe(byte[],boolean)
+    431:432:public static byte[] decodeWebSafe(java.lang.String)
+    445:445:public static byte[] decode(byte[])
+    458:458:public static byte[] decodeWebSafe(byte[])
+    489:489:public static byte[] decodeWebSafe(byte[],int,int)
+com.dexnamic.alwayscharged.util.Base64DecoderException:
+    private static final long serialVersionUID
+com.dexnamic.android.preference.ListPreferenceMultiSelect:
+    private static final java.lang.String DEFAULT_SEPARATOR
+    68:69:public ListPreferenceMultiSelect(android.content.Context)
+    183:192:public static boolean contains(java.lang.String,java.lang.String,java.lang.String)

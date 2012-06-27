@@ -48,8 +48,8 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	private static final String TAG = "UpgradePro";
 
 	private String mItemName = "Unlock Pro";
-	// private String mProductID = "upgrade_pro";
-	private String mProductID = "android.test.purchased";
+	 private String mProductID = "upgrade_pro";
+//	private String mProductID = "android.test.purchased";
 	// private String mProductID = "android.test.canceled";
 	// private String mProductID = "android.test.refunded";
 
@@ -173,12 +173,12 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	}
 
 	public void userUpgradeToPro() {
-		Log.v(TAG, "userUpgradeToPro()");
+		if (Consts.DEBUG) Log.v(TAG, "userUpgradeToPro()");
 		finish();
 	}
 
 	public void userDowngradedFromPro() {
-		Log.v(TAG, "userDowngradeFromPor()");
+		if (Consts.DEBUG) Log.v(TAG, "userDowngradeFromPor()");
 
 	}
 

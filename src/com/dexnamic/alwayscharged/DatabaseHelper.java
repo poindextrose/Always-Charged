@@ -11,7 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	/* sqlite3 /data/data/com.dexnamic.alwayscharged/databases/alwayscharged.db */
 
 	private static final String DATABASE_NAME = "alwayscharged.db";
-	private static final int DATABASE_VERSION = 7;
+	private static final int DATABASE_VERSION = 1;
 
 	private static final String TABLE_ALARMS = "alarms";
 

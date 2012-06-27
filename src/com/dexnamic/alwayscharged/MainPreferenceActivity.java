@@ -13,6 +13,7 @@ import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,7 +59,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	public final static String KEY_ADVANCED = "key_advanced";
 	// public final static String KEY_HOUR = "key_hour";
 	// public final static String KEY_MINUTE = "key_minute";
-	public final static String KEY_FIRST_TIME = "key_first_time";
+	public final static String KEY_SHOW_INTRO_DIAGLOG = "key_show_intro_dialog";
 	public final static String KEY_ABOUT = "key_about";
 	public final static String KEY_VERSION_CODE = "key_version_code";
 
@@ -155,11 +156,15 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			}
 		} catch (NameNotFoundException e) {
 		}
+		
+		SharedPreferences prefs = getSharedPreferences(Consts.PURCHASE_PREFERENCES,
+				Context.MODE_PRIVATE);
+		if(!prefs.getBoolean(Consts.PURCHASE_RESTORED, false)) {
+			checkIfUserPurchasedUpgradeToPro();
+		}
 
 		// if app is starting for the first time
-		if (mFirstInstance && mSettings.getBoolean(KEY_FIRST_TIME, true)) {
-
-			checkIfUserPurchasedUpgradeToPro();
+		if (mFirstInstance && mSettings.getBoolean(KEY_SHOW_INTRO_DIAGLOG, true)) {
 
 			showDialog(FIRST_TIME_DIALOG_ID);
 		}
@@ -267,7 +272,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			builder.setNegativeButton(getString(R.string.dontshowagain),
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
-							mEditor.putBoolean(KEY_FIRST_TIME, false);
+							mEditor.putBoolean(KEY_SHOW_INTRO_DIAGLOG, false);
 							mEditor.commit();
 							dialog.dismiss();
 						}

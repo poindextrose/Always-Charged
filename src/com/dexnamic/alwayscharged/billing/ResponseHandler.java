@@ -123,10 +123,12 @@ public class ResponseHandler {
 			final String developerPayload) {
 
 		setPurchaseState(context, purchaseState);
-		if(purchaseState == PurchaseState.REFUNDED) {
+		if (purchaseState == PurchaseState.REFUNDED) {
 			// clear database if purchase refunded
-			/* this should be done on a background thread
-			 * but this is a tiny database */
+			/*
+			 * this should be done on a background thread but this is a tiny
+			 * database
+			 */
 			DatabaseHelper database = new DatabaseHelper(context);
 			Cursor cursor = database.getAllActiveAlarms();
 			if (cursor != null && cursor.moveToFirst()) {
@@ -160,9 +162,7 @@ public class ResponseHandler {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(
 				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
 		Editor editor = sharedPreferences.edit();
-		String unique_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
-				android.provider.Settings.Secure.ANDROID_ID);
-		Long id = Long.parseLong(unique_id, 16);
+		Long id = getAndroidID(context);
 		Long purchasePref;
 		if (purchaseState == PurchaseState.PURCHASED)
 			purchasePref = id ^ RAND_PURCHASED;
@@ -176,14 +176,22 @@ public class ResponseHandler {
 
 		SharedPreferences sharedPreferences = context.getSharedPreferences(
 				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
-		String unique_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
-				android.provider.Settings.Secure.ANDROID_ID);
-		Long id = Long.parseLong(unique_id, 16);
-		Long purchasePref = sharedPreferences.getLong(Consts.PURCHASE_PREFERENCES, 0);
+		long purchasePref = sharedPreferences.getLong(Consts.PURCHASE_PREFERENCES, 0);
+		long id = getAndroidID(context);
 		if ((purchasePref ^ id) == RAND_PURCHASED)
 			return true;
 		else
 			return false;
+	}
+
+	private static long getAndroidID(Context context) {
+		String unique_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
+				android.provider.Settings.Secure.ANDROID_ID);
+		int length = unique_id.length();
+		if (length > 63)
+			length = 63;
+		Long id = Long.parseLong(unique_id.substring(0, length - 1), 16);
+		return id;
 	}
 
 	/**
@@ -225,16 +233,17 @@ public class ResponseHandler {
 	 */
 	public static void responseCodeReceived(Context context, RestoreTransactions request,
 			ResponseCode responseCode) {
+//		Log.v("ResponseHandler", "responseCodeReceived = " + responseCode);
+		if (responseCode == ResponseCode.RESULT_OK) {
+			// Update the shared preferences so that we don't perform
+			// a RestoreTransactions again.
+			SharedPreferences prefs = context.getSharedPreferences(Consts.PURCHASE_PREFERENCES,
+					Context.MODE_PRIVATE);
+			SharedPreferences.Editor edit = prefs.edit();
+			edit.putBoolean(Consts.PURCHASE_RESTORED, true);
+			edit.commit();
+		}
 		if (sPurchaseObserver != null) {
-			if (responseCode == ResponseCode.RESULT_OK) {
-				// Update the shared preferences so that we don't perform
-				// a RestoreTransactions again.
-				SharedPreferences prefs = context.getSharedPreferences(Consts.PURCHASE_PREFERENCES,
-						Context.MODE_PRIVATE);
-				SharedPreferences.Editor edit = prefs.edit();
-				edit.putBoolean(Consts.PURCHASE_PREFERENCES, true);
-				edit.commit();
-			}
 			sPurchaseObserver.onRestoreTransactionsResponse(request, responseCode);
 		}
 	}

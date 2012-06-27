@@ -112,5 +112,5 @@ public class Consts {
     public static final String ITEM_TYPE_INAPP = "inapp";
     public static final String ITEM_TYPE_SUBSCRIPTION = "subs";
     
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 }

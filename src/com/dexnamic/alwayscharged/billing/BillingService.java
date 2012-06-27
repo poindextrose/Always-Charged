@@ -139,7 +139,7 @@ public class BillingService extends Service implements ServiceConnection {
          * @param e the exception
          */
         protected void onRemoteException(RemoteException e) {
-            Log.w(TAG, "remote billing service crashed");
+            if(Consts.DEBUG) Log.w(TAG, "remote billing service crashed");
             mService = null;
         }
 
@@ -293,7 +293,7 @@ public class BillingService extends Service implements ServiceConnection {
             PendingIntent pendingIntent
                     = response.getParcelable(Consts.BILLING_RESPONSE_PURCHASE_INTENT);
             if (pendingIntent == null) {
-                Log.e(TAG, "Error with requestPurchase");
+            	if (Consts.DEBUG) Log.e(TAG, "Error with requestPurchase");
                 return Consts.BILLING_RESPONSE_INVALID_REQUEST_ID;
             }
 
@@ -429,6 +429,8 @@ public class BillingService extends Service implements ServiceConnection {
      */
     public void handleCommand(Intent intent, int startId) {
         String action = intent.getAction();
+        if(action == null)
+        	return;
         if (Consts.DEBUG) {
             Log.i(TAG, "handleCommand() action: " + action);
         }
