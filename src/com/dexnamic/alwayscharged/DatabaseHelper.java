@@ -42,6 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_ALARMS);
 
 		Alarm alarm = new Alarm();
+		alarm.setHour(MainPreferenceActivity.mHour);
+		alarm.setMinute(MainPreferenceActivity.mMinute);
 
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 
