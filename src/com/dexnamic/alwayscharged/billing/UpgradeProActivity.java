@@ -37,8 +37,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
-
 import java.util.Locale;
 
 /**
@@ -153,6 +151,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	}
 
 	/** Called when the activity is first created. */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

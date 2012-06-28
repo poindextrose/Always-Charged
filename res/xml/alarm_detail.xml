@@ -10,26 +10,26 @@
     <Preference
         android:key="key_time"
         android:summary="hh:mm"
-        android:title="Time" />
+        android:title="@string/time" />
 
     <com.dexnamic.android.preference.ListPreferenceMultiSelect
         android:dialogTitle="Repeat"
         android:entries="@array/pref_days_of_week"
         android:entryValues="@array/pref_days_of_week_values"
         android:key="key_repeat"
-        android:title="Repeat" />
+        android:title="@string/repeat" />
     <RingtonePreference
         android:key="key_ringtone"
         android:summary=""
-        android:title="Ringtone" />
+        android:title="@string/ringtone" />
 
     <CheckBoxPreference
         android:key="key_vibrate"
-        android:title="Vibrate" />
+        android:title="@string/vibrate" />
 
     <EditTextPreference
         android:key="key_label"
         android:summary=""
-        android:title="Label" />
+        android:title="@string/label" />
 
 </PreferenceScreen>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
+    <string name="app_name">Always Charged</string><string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
 \n
 v2.0\n
 - Added ability to upgrade to Pro to get new features:\n
@@ -25,17 +25,19 @@ v1.1.2\n
 v1.1.1\n
 - Fixed compatibility with Galaxy Nexus.\n
 - Updated developer name to Dr Poindexter\n</string>
-    <string name="app_name">Always Charged</string>
-    <string name="app_name_no_spaces">AlwaysCharged</string>
+    
+<!--     <string name="app_name_no_spaces">AlwaysCharged</string> -->
     <string name="contact_email">alwayscharged@dr.poindexter.us</string>
     <string name="default_snooze_time">5</string>
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
     <string name="enable_alarm_summary">Sounds after bedtime only if phone is not charging and is motionless for 5 to 10 minutes</string>
-    <string name="bed_time">Bedtime</string>
+    <string name="time">Time</string>
+    <string name="repeat">Repeat</string>
     <string name="ringtone">Alarm Tone</string>
     <string name="vibrate">Vibrate</string>
+    <string name="label">Label</string>
     <string name="snooze_time">Snooze Time</string>
     <string name="dialog_title_snooze">Snooze Time</string>
     <string name="hour">hour</string>
@@ -61,7 +63,7 @@ v1.1.1\n
     <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
-    <string name="notify_init">Charge reminder soon.  Click to cancel.</string>
+    <string name="notify_init">Charge reminder.  Click to cancel.</string>
     <string name="notify_motion">Auto-snooze (movement).  Click to cancel.</string>
     <string name="notify_screen">Auto-snooze (screen on).  Click to cancel.</string>
     <string name="notify_phone">Auto-snooze (phone call).  Click to cancel.</string>

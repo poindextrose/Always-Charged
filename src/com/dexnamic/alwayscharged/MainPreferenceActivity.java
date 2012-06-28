@@ -57,6 +57,8 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	public final static String KEY_UPGRADE = "key_upgrade";
 	public final static String KEY_SET_ALARM = "key_set_alarm";
 	public final static String KEY_ADVANCED = "key_advanced";
+	// hour & minute are legacy for upgrading from single alarm
+	// to multiple alarms stored in sqlite database
 	public final static String KEY_HOUR = "key_hour";
 	public final static String KEY_MINUTE = "key_minute";
 	public final static String KEY_SHOW_INTRO_DIAGLOG = "key_show_intro_dialog";
@@ -72,28 +74,23 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 	private boolean mFirstInstance = true;
 
-	// private DungeonsPurchaseObserver mDungeonsPurchaseObserver;
 	private Handler mHandler;
 
 	private BillingService mBillingService;
 	private Boolean mHasPurchased;
 	private UpgradePurchaseObserver mUpgradePurchaseObserver;
-	public static int mHour;
-	public static int mMinute;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		addPreferencesFromResource(R.xml.preferences);
+		addPreferencesFromResource(R.xml.main_preferences);
 
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.main_preferences, false);
 		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences, false);
 
 		PreferenceScreen ps = getPreferenceScreen();
 		mSettings = ps.getSharedPreferences();
-		mHour = mSettings.getInt(KEY_HOUR, 21);
-		mMinute = mSettings.getInt(KEY_MINUTE, 30);
 		mEditor = mSettings.edit();
 
 		mPreferenceAdvanced = ps.findPreference(KEY_ADVANCED);
