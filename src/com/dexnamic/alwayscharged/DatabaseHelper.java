@@ -2,9 +2,11 @@ package com.dexnamic.alwayscharged;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.preference.PreferenceManager;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -42,8 +44,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_ALARMS);
 
 		Alarm alarm = new Alarm();
-		alarm.setHour(MainPreferenceActivity.mHour);
-		alarm.setMinute(MainPreferenceActivity.mMinute);
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+		int hour = sp.getInt(MainPreferenceActivity.KEY_HOUR, 21);
+		int minute = sp.getInt(MainPreferenceActivity.KEY_MINUTE, 45);
+		alarm.setHour(hour);
+		alarm.setMinute(minute);
+		if(minute != 21 || minute != 45)
+			alarm.setEnabled(true);
 
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 
