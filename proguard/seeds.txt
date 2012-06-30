@@ -2,17 +2,27 @@ com.android.vending.billing.IMarketBillingService
 com.android.vending.billing.IMarketBillingService$Stub
 com.android.vending.billing.IMarketBillingService$Stub$Proxy
 com.dexnamic.alwayscharged.AdvancedPreferences
+com.dexnamic.alwayscharged.AdvancedPreferences: AdvancedPreferences()
 com.dexnamic.alwayscharged.AlarmActivity
+com.dexnamic.alwayscharged.AlarmActivity: AlarmActivity()
 com.dexnamic.alwayscharged.AlarmReceiver
+com.dexnamic.alwayscharged.AlarmReceiver: AlarmReceiver()
 com.dexnamic.alwayscharged.AlarmService
+com.dexnamic.alwayscharged.AlarmService: AlarmService()
 com.dexnamic.alwayscharged.EditAlarmPreferenceActivity
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity: EditAlarmPreferenceActivity()
 com.dexnamic.alwayscharged.EditAlarmPreferenceActivity: void onClick(android.view.View)
 com.dexnamic.alwayscharged.ListAlarmsActivity
+com.dexnamic.alwayscharged.ListAlarmsActivity: ListAlarmsActivity()
 com.dexnamic.alwayscharged.ListAlarmsActivity: void onClick(android.view.View)
 com.dexnamic.alwayscharged.MainPreferenceActivity
+com.dexnamic.alwayscharged.MainPreferenceActivity: MainPreferenceActivity()
 com.dexnamic.alwayscharged.MyPrefsBackupAgent
+com.dexnamic.alwayscharged.MyPrefsBackupAgent: MyPrefsBackupAgent()
 com.dexnamic.alwayscharged.PowerReceiver
+com.dexnamic.alwayscharged.PowerReceiver: PowerReceiver()
 com.dexnamic.alwayscharged.PowerSnoozeService
+com.dexnamic.alwayscharged.PowerSnoozeService: PowerSnoozeService()
 com.dexnamic.alwayscharged.R$array: int entries_duration
 com.dexnamic.alwayscharged.R$array: int entries_motion_tolerance
 com.dexnamic.alwayscharged.R$array: int entries_snooze
@@ -66,8 +76,6 @@ com.dexnamic.alwayscharged.R$string: int alarm_detail
 com.dexnamic.alwayscharged.R$string: int alarm_duration
 com.dexnamic.alwayscharged.R$string: int alarm_message
 com.dexnamic.alwayscharged.R$string: int app_name
-com.dexnamic.alwayscharged.R$string: int app_name_no_spaces
-com.dexnamic.alwayscharged.R$string: int bed_time
 com.dexnamic.alwayscharged.R$string: int billing_not_supported_message
 com.dexnamic.alwayscharged.R$string: int billing_not_supported_title
 com.dexnamic.alwayscharged.R$string: int cancel
@@ -99,6 +107,7 @@ com.dexnamic.alwayscharged.R$string: int first_time_text
 com.dexnamic.alwayscharged.R$string: int help_url
 com.dexnamic.alwayscharged.R$string: int hour
 com.dexnamic.alwayscharged.R$string: int hours
+com.dexnamic.alwayscharged.R$string: int label
 com.dexnamic.alwayscharged.R$string: int learn_more
 com.dexnamic.alwayscharged.R$string: int minute
 com.dexnamic.alwayscharged.R$string: int minutes
@@ -114,6 +123,7 @@ com.dexnamic.alwayscharged.R$string: int notify_screen
 com.dexnamic.alwayscharged.R$string: int notify_snooze
 com.dexnamic.alwayscharged.R$string: int ok
 com.dexnamic.alwayscharged.R$string: int purchase
+com.dexnamic.alwayscharged.R$string: int repeat
 com.dexnamic.alwayscharged.R$string: int ringtone
 com.dexnamic.alwayscharged.R$string: int seconds
 com.dexnamic.alwayscharged.R$string: int sendmail
@@ -121,6 +131,7 @@ com.dexnamic.alwayscharged.R$string: int set_alarm
 com.dexnamic.alwayscharged.R$string: int silent
 com.dexnamic.alwayscharged.R$string: int snooze
 com.dexnamic.alwayscharged.R$string: int snooze_time
+com.dexnamic.alwayscharged.R$string: int time
 com.dexnamic.alwayscharged.R$string: int turn_alarm_on
 com.dexnamic.alwayscharged.R$string: int unknown
 com.dexnamic.alwayscharged.R$string: int until_alarm
@@ -134,15 +145,20 @@ com.dexnamic.alwayscharged.R$styleable: int ListPreferenceMultiSelect_checkAll
 com.dexnamic.alwayscharged.R$styleable: int ListPreferenceMultiSelect_separator
 com.dexnamic.alwayscharged.R$xml: int advanced_preferences
 com.dexnamic.alwayscharged.R$xml: int alarm_detail
-com.dexnamic.alwayscharged.R$xml: int preferences
+com.dexnamic.alwayscharged.R$xml: int main_preferences
 com.dexnamic.alwayscharged.ResetAlarmsReceiver
+com.dexnamic.alwayscharged.ResetAlarmsReceiver: ResetAlarmsReceiver()
 com.dexnamic.alwayscharged.billing.BillingReceiver
+com.dexnamic.alwayscharged.billing.BillingReceiver: BillingReceiver()
 com.dexnamic.alwayscharged.billing.BillingService
+com.dexnamic.alwayscharged.billing.BillingService: BillingService()
 com.dexnamic.alwayscharged.billing.Consts$PurchaseState: com.dexnamic.alwayscharged.billing.Consts$PurchaseState[] values()
 com.dexnamic.alwayscharged.billing.Consts$PurchaseState: com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(java.lang.String)
 com.dexnamic.alwayscharged.billing.Consts$ResponseCode: com.dexnamic.alwayscharged.billing.Consts$ResponseCode[] values()
 com.dexnamic.alwayscharged.billing.Consts$ResponseCode: com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(java.lang.String)
 com.dexnamic.alwayscharged.billing.UpgradeProActivity
+com.dexnamic.alwayscharged.billing.UpgradeProActivity: UpgradeProActivity()
 com.dexnamic.alwayscharged.billing.UpgradeProActivity: void onClick(android.view.View)
 com.dexnamic.android.preference.ListPreferenceMultiSelect
 com.dexnamic.android.preference.ListPreferenceMultiSelect: ListPreferenceMultiSelect(android.content.Context,android.util.AttributeSet)
+com.dexnamic.android.preference.ListPreferenceMultiSelect: ListPreferenceMultiSelect(android.content.Context)

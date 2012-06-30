@@ -72,7 +72,7 @@ com.dexnamic.alwayscharged.R$layout
 com.dexnamic.alwayscharged.R$menu
 com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$styleable:
-    166:166:public R$styleable()
+    169:169:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_ALARM
@@ -80,12 +80,12 @@ com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_NOTIFY
     static final java.lang.String KEY_POWER_SNOOZE
     static final int NOTIFY_SNOOZE
-    18:18:public Scheduler()
+    17:17:public Scheduler()
 com.dexnamic.alwayscharged.billing.BillingReceiver:
     private static final java.lang.String TAG
 com.dexnamic.alwayscharged.billing.BillingService:
     private static final java.lang.String TAG
-    499:499:public boolean checkBillingSupported(java.lang.String)
+    503:503:public boolean checkBillingSupported(java.lang.String)
 com.dexnamic.alwayscharged.billing.BillingService$CheckBillingSupported:
     213:216:public BillingService$CheckBillingSupported(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
 com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase:
@@ -149,5 +149,4 @@ com.dexnamic.alwayscharged.util.Base64DecoderException:
     private static final long serialVersionUID
 com.dexnamic.android.preference.ListPreferenceMultiSelect:
     private static final java.lang.String DEFAULT_SEPARATOR
-    68:69:public ListPreferenceMultiSelect(android.content.Context)
     183:192:public static boolean contains(java.lang.String,java.lang.String,java.lang.String)

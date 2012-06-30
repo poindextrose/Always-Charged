@@ -428,6 +428,8 @@ public class BillingService extends Service implements ServiceConnection {
      * @param startId an identifier for the invocation instance of this service
      */
     public void handleCommand(Intent intent, int startId) {
+    	if(intent == null)
+    		return;
         String action = intent.getAction();
         if(action == null)
         	return;
@@ -450,6 +452,8 @@ public class BillingService extends Service implements ServiceConnection {
                     ResponseCode.RESULT_ERROR.ordinal());
             ResponseCode responseCode = ResponseCode.valueOf(responseCodeIndex);
             checkResponseCode(requestId, responseCode);
+        } else if (Consts.ACTION_RESTORE_TRANSACTIONS.equals(action)) {
+        	restoreTransactions();
         }
     }
 

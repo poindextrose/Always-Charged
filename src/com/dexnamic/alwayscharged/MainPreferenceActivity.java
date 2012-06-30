@@ -76,7 +76,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 	private Handler mHandler;
 
-	private BillingService mBillingService;
+//	private BillingService mBillingService;
 	private Boolean mHasPurchased;
 	private UpgradePurchaseObserver mUpgradePurchaseObserver;
 	
@@ -198,9 +198,12 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	}
 
 	private void checkIfUserPurchasedUpgradeToPro() {
-		mBillingService = new BillingService();
-		mBillingService.setContext(this);
-		mBillingService.restoreTransactions();
+        Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
+        intent.setClass(this, BillingService.class);
+        startService(intent);
+//		mBillingService = new BillingService();
+//		mBillingService.setContext(this);
+//		mBillingService.restoreTransactions();
 		Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
 	}
 
