@@ -16,6 +16,7 @@
 
 package com.dexnamic.alwayscharged.billing;
 
+import com.dexnamic.alwayscharged.AlwaysCharged;
 import com.dexnamic.alwayscharged.R;
 import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
@@ -28,6 +29,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -196,10 +198,11 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mBuyButton) {
+			if(AlwaysCharged.isDebuggable)
+				mProductID = "android.test.purchased";
 			if (Consts.DEBUG) {
 				Log.d(TAG, "buying: " + mItemName + " sku: " + mProductID);
 			}
-
 			if (!mBillingService.requestPurchase(mProductID, Consts.ITEM_TYPE_INAPP,
 					mDeveloperPayloadContents)) {
 				showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
@@ -338,7 +341,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	private void restoreDatabase() {
 		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		boolean initialized = prefs.getBoolean(DB_INITIALIZED, false);
-		if (!initialized) {
+		if (!initialized && !AlwaysCharged.isDebuggable) {
 			mBillingService.restoreTransactions();
 			// Toast.makeText(this, R.string.restoring_transactions,
 			// Toast.LENGTH_LONG).show();

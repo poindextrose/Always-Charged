@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -43,7 +44,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
 	static final int UPGRADE_DIALOG_ID = 4;
-	
+
 	static final String TAG = "MainPreferenceActivity";
 
 	private Preference mPreferenceAbout;
@@ -76,10 +77,10 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 	private Handler mHandler;
 
-//	private BillingService mBillingService;
+	// private BillingService mBillingService;
 	private Boolean mHasPurchased;
 	private UpgradePurchaseObserver mUpgradePurchaseObserver;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -138,7 +139,8 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		else
 			mFirstInstance = false;
 
-//		mRestorePurchaseObserver = new RestorePurchaseObserver(this, mHandler);
+		// mRestorePurchaseObserver = new RestorePurchaseObserver(this,
+		// mHandler);
 
 	}
 
@@ -157,10 +159,10 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			}
 		} catch (NameNotFoundException e) {
 		}
-		
+
 		SharedPreferences prefs = getSharedPreferences(Consts.PURCHASE_PREFERENCES,
 				Context.MODE_PRIVATE);
-		if(!prefs.getBoolean(Consts.PURCHASE_RESTORED, false)) {
+		if (!prefs.getBoolean(Consts.PURCHASE_RESTORED, false)) {
 			checkIfUserPurchasedUpgradeToPro();
 		}
 
@@ -169,16 +171,16 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 			showDialog(FIRST_TIME_DIALOG_ID);
 		}
-		
+
 		mHandler = new Handler();
 		mUpgradePurchaseObserver = new UpgradePurchaseObserver(mHandler);
 		ResponseHandler.register(mUpgradePurchaseObserver);
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
+
 		ResponseHandler.unregister(mUpgradePurchaseObserver);
 	}
 
@@ -198,13 +200,15 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	}
 
 	private void checkIfUserPurchasedUpgradeToPro() {
-        Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
-        intent.setClass(this, BillingService.class);
-        startService(intent);
-//		mBillingService = new BillingService();
-//		mBillingService.setContext(this);
-//		mBillingService.restoreTransactions();
-		Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
+		if (!AlwaysCharged.isDebuggable) {
+			Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
+			intent.setClass(this, BillingService.class);
+			startService(intent);
+			// mBillingService = new BillingService();
+			// mBillingService.setContext(this);
+			// mBillingService.restoreTransactions();
+			Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
@@ -366,17 +370,20 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 				if (Consts.DEBUG) {
 					Log.i(TAG, "purchase was successfully sent to server");
 				}
-//				logProductActivity(request.mProductId, "sending purchase request");
+				// logProductActivity(request.mProductId,
+				// "sending purchase request");
 			} else if (responseCode == ResponseCode.RESULT_USER_CANCELED) {
 				if (Consts.DEBUG) {
 					Log.i(TAG, "user canceled purchase");
 				}
-//				logProductActivity(request.mProductId, "dismissed purchase dialog");
+				// logProductActivity(request.mProductId,
+				// "dismissed purchase dialog");
 			} else {
 				if (Consts.DEBUG) {
 					Log.i(TAG, "purchase failed");
 				}
-//				logProductActivity(request.mProductId, "request purchase returned " + responseCode);
+				// logProductActivity(request.mProductId,
+				// "request purchase returned " + responseCode);
 			}
 		}
 

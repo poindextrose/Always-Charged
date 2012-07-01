@@ -3,6 +3,7 @@
 package com.dexnamic.alwayscharged.billing;
 
 import com.dexnamic.alwayscharged.Alarm;
+import com.dexnamic.alwayscharged.AlwaysCharged;
 import com.dexnamic.alwayscharged.DatabaseHelper;
 import com.dexnamic.alwayscharged.Scheduler;
 import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
@@ -191,6 +192,10 @@ public class ResponseHandler {
 		if (length > 63)
 			length = 63;
 		Long id = Long.parseLong(unique_id.substring(0, length - 1), 16);
+		if(AlwaysCharged.isDebuggable) {
+			/* if a debug version then we will obfuscate differently */
+			id -= 123;
+		}
 		return id;
 	}
 
