@@ -292,7 +292,6 @@ public class AlarmActivity extends Activity {
 		try {
 			mMediaPlayer.stop();
 		} catch (Exception e) {
-			return;
 		}
 		try {
 			mVibrator.cancel();
