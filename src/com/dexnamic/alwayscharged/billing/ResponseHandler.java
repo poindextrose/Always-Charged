@@ -124,23 +124,24 @@ public class ResponseHandler {
 		setPurchaseState(context, purchaseState);
 		if (purchaseState == PurchaseState.REFUNDED) {
 			// clear database if purchase refunded
-			/*
-			 * this should be done on a background thread but this is a tiny
-			 * database
-			 */
-			DatabaseHelper database = new DatabaseHelper(context);
-			Cursor cursor = database.getAllActiveAlarms();
-			if (cursor != null && cursor.moveToFirst()) {
-				cursor.moveToFirst();
-				do {
-					int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-					Alarm alarm = database.getAlarm(_id);
-					Scheduler.cancelAlarm(context, alarm);
-				} while (cursor.moveToNext());
-			}
-			cursor.close();
-			database.removeAllAlarms();
-			database.close();
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					DatabaseHelper database = new DatabaseHelper(context);
+					Cursor cursor = database.getAllActiveAlarms();
+					if (cursor != null && cursor.moveToFirst()) {
+						cursor.moveToFirst();
+						do {
+							int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+							Alarm alarm = database.getAlarm(_id);
+							Scheduler.cancelAlarm(context, alarm);
+						} while (cursor.moveToNext());
+					}
+					cursor.close();
+					database.removeAllAlarms();
+					database.close();
+				}
+			});
 		}
 
 		// This needs to be synchronized because the UI thread can change the
@@ -153,10 +154,6 @@ public class ResponseHandler {
 		}
 	}
 
-	// used for obfuscating purchase state in shared preferences
-	private final static Long RAND_PURCHASED = 3923923932l;
-	private final static Long RAND_REFUNDED = 4862394729l;
-
 	public static void setPurchaseState(Context context, PurchaseState purchaseState) {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(
 				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
@@ -164,9 +161,9 @@ public class ResponseHandler {
 		Long id = getAndroidID(context);
 		Long purchasePref;
 		if (purchaseState == PurchaseState.PURCHASED)
-			purchasePref = id ^ RAND_PURCHASED;
+			purchasePref = id ^ AlwaysCharged.RAND_PURCHASED;
 		else
-			purchasePref = id ^ RAND_REFUNDED;
+			purchasePref = id ^ AlwaysCharged.RAND_REFUNDED;
 		editor.putLong(Consts.PURCHASE_PREFERENCES, purchasePref);
 		editor.commit();
 	}
@@ -177,7 +174,7 @@ public class ResponseHandler {
 				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
 		long purchasePref = sharedPreferences.getLong(Consts.PURCHASE_PREFERENCES, 0);
 		long id = getAndroidID(context);
-		if ((purchasePref ^ id) == RAND_PURCHASED)
+		if ((purchasePref ^ id) == AlwaysCharged.RAND_PURCHASED)
 			return true;
 		else
 			return false;

@@ -12,6 +12,11 @@ public class AlwaysCharged extends Application {
 
 	// public static final boolean DEBUG = false;
 
+
+	// used for obfuscating purchase state in shared preferences
+	public final static Long RAND_PURCHASED = 3923923932l;
+	public final static Long RAND_REFUNDED = 4862394729l;
+
 	public void onCreate() {
 		super.onCreate();
 		// AlwaysCharged.context = getApplicationContext();

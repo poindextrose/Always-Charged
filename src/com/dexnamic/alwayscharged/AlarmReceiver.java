@@ -38,6 +38,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 				if (action.equals(Scheduler.TYPE_SNOOZE)) {
 					Log.v(getClass().getSimpleName(), "onReceive(), Snooze alarm, id=" + id);
 					startAlarmService(context, action, alarm);
+					return;
+					// initial alarm received
+				} else if (action.contains(Scheduler.TYPE_ALARM)) {
+					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id);
 
 					// remove enabled from alarm if it does not repeat
 					if (alarm.getRepeats() == 0) {
@@ -48,11 +52,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 						database.close();
 						Log.v(getClass().getSimpleName(), "onReceive(), disable alarm, id=");
 					}
-
-					return;
-					// initial alarm received
-				} else if (action.contains(Scheduler.TYPE_ALARM)) {
-					Log.v(getClass().getSimpleName(), "onReceive(), TYPE_ALARM, id=" + id);
+					
 					// original single alarm
 					Scheduler.cancelSnooze(context);
 					Scheduler.resetRepeatCount(context, null);
