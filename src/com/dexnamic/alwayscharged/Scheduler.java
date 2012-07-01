@@ -74,8 +74,6 @@ public class Scheduler {
 					Calendar alarmCalendar = Calendar.getInstance();
 					alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 					alarmCalendar.set(Calendar.MINUTE, minute);
-					// real alarm needs lead time to measurement movement
-					alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
 					alarmCalendar.set(Calendar.SECOND, 0);
 					// Calendar: 1 = Sunday, 2 = Monday, ...
 					alarmCalendar.set(Calendar.DAY_OF_WEEK, ((day + 1) % 7) + 1);
@@ -83,6 +81,8 @@ public class Scheduler {
 						alarmCalendar.add(Calendar.WEEK_OF_YEAR, 1);
 					if (nearestAlarmCalendar == null || alarmCalendar.before(nearestAlarmCalendar))
 						nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
+					// real alarm needs lead time to measurement movement
+					alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
 					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, alarm, day);
 					alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 							alarmCalendar.getTimeInMillis(), week_ms, pendingIntent);
@@ -93,11 +93,11 @@ public class Scheduler {
 			Calendar alarmCalendar = Calendar.getInstance();
 			alarmCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 			alarmCalendar.set(Calendar.MINUTE, minute);
-			// real alarm needs lead time to measurement movement
-			alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
 			alarmCalendar.set(Calendar.SECOND, 0);
 			while (alarmCalendar.before(now))
 				alarmCalendar.add(Calendar.DAY_OF_WEEK, 1);
+			// real alarm needs lead time to measurement movement
+			alarmCalendar.add(Calendar.MINUTE, -snoozeTime);
 			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, alarm, -1);
 			alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
 					pendingIntent);
