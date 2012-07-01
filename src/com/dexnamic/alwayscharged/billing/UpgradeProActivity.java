@@ -29,7 +29,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,9 +85,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void onBillingSupported(boolean supported, String type) {
-			if (Consts.DEBUG) {
-				Log.i(TAG, "supported: " + supported);
-			}
+			Log.v(TAG, "supported: " + supported);
 			if (type == null || type.equals(Consts.ITEM_TYPE_INAPP)) {
 				if (supported) {
 					restoreDatabase();
@@ -103,9 +100,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 		@Override
 		public void onPurchaseStateChange(PurchaseState purchaseState, String itemId, int quantity,
 				long purchaseTime, String developerPayload) {
-			if (Consts.DEBUG) {
-				Log.i(TAG, "onPurchaseStateChange() itemId: " + itemId + " " + purchaseState);
-			}
+			Log.v(TAG, "onPurchaseStateChange() itemId: " + itemId + " " + purchaseState);
 
 			if (purchaseState == PurchaseState.PURCHASED) {
 				userUpgradeToPro();
@@ -116,21 +111,21 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
-			if (Consts.DEBUG) {
+			if (AlwaysCharged.isDebuggable) {
 				Log.d(TAG, request.mProductId + ": " + responseCode);
 			}
 			if (responseCode == ResponseCode.RESULT_OK) {
-				if (Consts.DEBUG) {
+				if (AlwaysCharged.isDebuggable) {
 					Log.i(TAG, "purchase was successfully sent to server");
 				}
 				logProductActivity(request.mProductId, "sending purchase request");
 			} else if (responseCode == ResponseCode.RESULT_USER_CANCELED) {
-				if (Consts.DEBUG) {
+				if (AlwaysCharged.isDebuggable) {
 					Log.i(TAG, "user canceled purchase");
 				}
 				logProductActivity(request.mProductId, "dismissed purchase dialog");
 			} else {
-				if (Consts.DEBUG) {
+				if (AlwaysCharged.isDebuggable) {
 					Log.i(TAG, "purchase failed");
 				}
 				logProductActivity(request.mProductId, "request purchase returned " + responseCode);
@@ -141,11 +136,11 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 		public void onRestoreTransactionsResponse(RestoreTransactions request,
 				ResponseCode responseCode) {
 			if (responseCode == ResponseCode.RESULT_OK) {
-				if (Consts.DEBUG) {
+				if (AlwaysCharged.isDebuggable) {
 					Log.d(TAG, "completed RestoreTransactions request");
 				}
 			} else {
-				if (Consts.DEBUG) {
+				if (AlwaysCharged.isDebuggable) {
 					Log.d(TAG, "RestoreTransactions error: " + responseCode);
 				}
 			}
@@ -174,13 +169,12 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	}
 
 	public void userUpgradeToPro() {
-		if (Consts.DEBUG) Log.v(TAG, "userUpgradeToPro()");
+		Log.v(TAG, "userUpgradeToPro()");
 		finish();
 	}
 
 	public void userDowngradedFromPro() {
-		if (Consts.DEBUG) Log.v(TAG, "userDowngradeFromPor()");
-
+		Log.v(TAG, "userDowngradeFromPor()");
 	}
 
 	/**
@@ -200,9 +194,7 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 		if (v == mBuyButton) {
 			if(AlwaysCharged.isDebuggable)
 				mProductID = "android.test.purchased";
-			if (Consts.DEBUG) {
-				Log.d(TAG, "buying: " + mItemName + " sku: " + mProductID);
-			}
+			Log.v(TAG, "buying: " + mItemName + " sku: " + mProductID);
 			if (!mBillingService.requestPurchase(mProductID, Consts.ITEM_TYPE_INAPP,
 					mDeveloperPayloadContents)) {
 				showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
@@ -262,9 +254,6 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 
 	private Dialog createDialog(int titleId, int messageId) {
 		String helpUrl = replaceLanguageAndRegion(getString(R.string.help_url));
-		if (Consts.DEBUG) {
-			Log.i(TAG, helpUrl);
-		}
 		final Uri helpUri = Uri.parse(helpUrl);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

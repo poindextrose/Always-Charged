@@ -19,3 +19,7 @@
 #   public *;
 #}
 -keep class com.android.vending.billing.**
+
+-assumenosideeffects class android.util.Log {
+    public static int v(...);
+}

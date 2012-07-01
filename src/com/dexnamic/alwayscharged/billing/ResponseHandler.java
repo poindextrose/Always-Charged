@@ -88,9 +88,7 @@ public class ResponseHandler {
 	 */
 	public static void buyPageIntentResponse(PendingIntent pendingIntent, Intent intent) {
 		if (sPurchaseObserver == null) {
-			if (Consts.DEBUG) {
-				Log.d(TAG, "UI is not running");
-			}
+			Log.v(TAG, "UI is not running");
 			return;
 		}
 		sPurchaseObserver.startBuyPageActivity(pendingIntent, intent);
@@ -192,7 +190,7 @@ public class ResponseHandler {
 		if (length > 63)
 			length = 63;
 		Long id = Long.parseLong(unique_id.substring(0, length - 1), 16);
-		if(AlwaysCharged.isDebuggable) {
+		if (AlwaysCharged.isDebuggable) {
 			/* if a debug version then we will obfuscate differently */
 			id -= 123;
 		}
@@ -238,7 +236,7 @@ public class ResponseHandler {
 	 */
 	public static void responseCodeReceived(Context context, RestoreTransactions request,
 			ResponseCode responseCode) {
-//		Log.v("ResponseHandler", "responseCodeReceived = " + responseCode);
+		// Log.v("ResponseHandler", "responseCodeReceived = " + responseCode);
 		if (responseCode == ResponseCode.RESULT_OK) {
 			// Update the shared preferences so that we don't perform
 			// a RestoreTransactions again.

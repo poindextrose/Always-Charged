@@ -17,7 +17,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -363,42 +362,13 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 		@Override
 		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
-			if (Consts.DEBUG) {
-				Log.d(TAG, request.mProductId + ": " + responseCode);
-			}
-			if (responseCode == ResponseCode.RESULT_OK) {
-				if (Consts.DEBUG) {
-					Log.i(TAG, "purchase was successfully sent to server");
-				}
-				// logProductActivity(request.mProductId,
-				// "sending purchase request");
-			} else if (responseCode == ResponseCode.RESULT_USER_CANCELED) {
-				if (Consts.DEBUG) {
-					Log.i(TAG, "user canceled purchase");
-				}
-				// logProductActivity(request.mProductId,
-				// "dismissed purchase dialog");
-			} else {
-				if (Consts.DEBUG) {
-					Log.i(TAG, "purchase failed");
-				}
-				// logProductActivity(request.mProductId,
-				// "request purchase returned " + responseCode);
-			}
+			Log.v(TAG, request.mProductId + ": " + responseCode);
 		}
 
 		@Override
 		public void onRestoreTransactionsResponse(RestoreTransactions request,
 				ResponseCode responseCode) {
-			if (responseCode == ResponseCode.RESULT_OK) {
-				if (Consts.DEBUG) {
-					Log.d(TAG, "completed RestoreTransactions request");
-				}
-			} else {
-				if (Consts.DEBUG) {
-					Log.d(TAG, "RestoreTransactions error: " + responseCode);
-				}
-			}
+			Log.v(TAG, "onRestoreTranscationReponse() responseCode=" + responseCode);
 		}
 	}
 
