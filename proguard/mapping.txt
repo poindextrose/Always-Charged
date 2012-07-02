@@ -8,14 +8,13 @@ com.android.vending.billing.IMarketBillingService$Stub$Proxy -> com.android.vend
     android.os.IBinder asBinder() -> asBinder
     android.os.Bundle sendBillingRequest(android.os.Bundle) -> a
 com.dexnamic.alwayscharged.AdvancedPreferences -> com.dexnamic.alwayscharged.AdvancedPreferences:
-    android.preference.ListPreference mListPreferenceSnooze -> b
-    android.preference.ListPreference mListPreferenceDuration -> c
-    android.preference.ListPreference mListPreferenceMotion -> d
-    java.lang.Boolean mHasPurchased -> e
-    android.preference.Preference$OnPreferenceChangeListener mOnPreferenceChangedListener -> a
+    android.preference.ListPreference mListPreferenceSnooze -> a
+    android.preference.ListPreference mListPreferenceDuration -> b
+    android.preference.ListPreference mListPreferenceMotion -> c
+    java.lang.Boolean mHasPurchased -> d
+    android.preference.Preference$OnPreferenceChangeListener mOnPreferenceChangedListener -> e
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
-    void upgradeToPro() -> a
     void onPause() -> onPause
     void setMotionToleranceSummary(java.lang.String) -> a
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
@@ -35,25 +34,24 @@ com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.b:
     java.lang.Integer repeats -> f
     java.lang.String ringtone -> g
     java.lang.Boolean vibrate -> h
-    com.dexnamic.alwayscharged.Alarm clone() -> a
     boolean equals(java.lang.Object) -> equals
     java.lang.String toString() -> toString
-    java.lang.String getLabel() -> b
+    java.lang.String getLabel() -> a
     void setLabel(java.lang.String) -> a
-    java.lang.Integer getHour() -> c
+    java.lang.Integer getHour() -> b
     void setHour(java.lang.Integer) -> a
-    java.lang.Integer getMinute() -> d
+    java.lang.Integer getMinute() -> c
     void setMinute(java.lang.Integer) -> b
-    java.lang.Integer getRepeats() -> e
+    java.lang.Integer getRepeats() -> d
     java.lang.Boolean getRepeats(java.lang.Integer) -> c
     void setRepeats(java.lang.Integer) -> d
-    java.lang.String getRingtone() -> f
+    java.lang.String getRingtone() -> e
     void setRingtone(java.lang.String) -> b
-    java.lang.Boolean getVibrate() -> g
+    java.lang.Boolean getVibrate() -> f
     void setVibrate(java.lang.Boolean) -> a
-    java.lang.Integer getID() -> h
+    java.lang.Integer getID() -> g
     void setID(java.lang.Integer) -> e
-    java.lang.Boolean getEnabled() -> i
+    java.lang.Boolean getEnabled() -> h
     void setEnabled(boolean) -> a
     java.lang.CharSequence getTime(android.content.Context) -> a
     java.lang.String repeatToString(int) -> a
@@ -61,32 +59,27 @@ com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.b:
     java.lang.String getRingerName(android.content.Context) -> b
     java.lang.Object clone() -> clone
 com.dexnamic.alwayscharged.AlarmActivity -> com.dexnamic.alwayscharged.AlarmActivity:
-    android.app.KeyguardManager$KeyguardLock mKeyguardLock -> c
-    android.media.MediaPlayer mMediaPlayer -> d
-    android.os.Vibrator mVibrator -> e
-    android.content.SharedPreferences mSettings -> f
-    com.dexnamic.alwayscharged.Alarm mAlarm -> g
-    long[] vibratePattern -> a
-    android.content.BroadcastReceiver mBroadcastReceiver -> b
+    android.app.KeyguardManager$KeyguardLock mKeyguardLock -> a
+    android.media.MediaPlayer mMediaPlayer -> b
+    android.os.Vibrator mVibrator -> c
+    android.content.SharedPreferences mSettings -> d
+    com.dexnamic.alwayscharged.Alarm mAlarm -> e
+    long[] vibratePattern -> f
+    android.content.BroadcastReceiver mBroadcastReceiver -> g
     android.os.Handler mHandler -> h
     android.content.DialogInterface$OnKeyListener mOnKeyListener -> i
-    java.util.Stack mVolume -> j
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onResume() -> onResume
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
     void onPause() -> onPause
     void onStop() -> onStop
-    void onDestroy() -> onDestroy
     void stopRingtone() -> a
     boolean repeatAlarm() -> b
-    void alarmFinished() -> c
     void access$0(com.dexnamic.alwayscharged.AlarmActivity) -> a
     com.dexnamic.alwayscharged.Alarm access$1(com.dexnamic.alwayscharged.AlarmActivity) -> b
-    java.util.Stack access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
-    android.media.MediaPlayer access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
-    android.os.Handler access$4(com.dexnamic.alwayscharged.AlarmActivity) -> e
-    android.content.SharedPreferences access$5(com.dexnamic.alwayscharged.AlarmActivity) -> f
+    android.media.MediaPlayer access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
+    android.content.SharedPreferences access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
 com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.c:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
@@ -103,40 +96,34 @@ com.dexnamic.alwayscharged.AlarmReceiver -> com.dexnamic.alwayscharged.AlarmRece
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     void startAlarmService(android.content.Context,java.lang.String,com.dexnamic.alwayscharged.Alarm) -> a
 com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmService:
-    float mMotionToleranceDeg -> k
-    long TIMEOUT_MS -> l
-    android.os.PowerManager$WakeLock mWakeLock -> a
-    android.os.PowerManager mPowerManager -> m
-    android.hardware.SensorManager mSensorManager -> n
-    android.content.SharedPreferences mSharedPreferences -> o
-    boolean wasSnooze -> p
-    com.dexnamic.alwayscharged.Alarm mAlarm -> b
-    android.hardware.Sensor mAccelerometer -> c
-    android.hardware.Sensor mMagneticField -> d
-    boolean mAccelRegistered -> e
-    boolean mMagneticRegistered -> f
-    boolean mAccelEventReceived -> g
-    boolean mMagneticEventReceived -> h
-    float[] mAccelValues -> i
-    float[] mMagneticValues -> j
-    boolean mStabilze -> q
-    android.os.Handler mHandler -> r
+    float mMotionToleranceDeg -> a
+    android.os.PowerManager mPowerManager -> b
+    android.hardware.SensorManager mSensorManager -> c
+    android.content.SharedPreferences mSharedPreferences -> d
+    boolean wasSnooze -> e
+    com.dexnamic.alwayscharged.Alarm mAlarm -> f
+    android.hardware.Sensor mAccelerometer -> g
+    android.hardware.Sensor mMagneticField -> h
+    boolean mAccelRegistered -> i
+    boolean mMagneticRegistered -> j
+    boolean mAccelEventReceived -> k
+    boolean mMagneticEventReceived -> l
+    float[] mAccelValues -> m
+    float[] mMagneticValues -> n
+    boolean mStabilze -> o
+    android.os.Handler mHandler -> p
     void onCreate() -> onCreate
     void onStart(android.content.Intent,int) -> onStart
     void onDestroy() -> onDestroy
     boolean screenOn() -> a
     boolean telephoneInUse() -> b
-    void startReadingSensors() -> c
     void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
     void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
-    void doAlarm() -> d
+    void doAlarm() -> c
     void doSnooze(int) -> a
-    void sensorsHaveBeenRead() -> e
     void checkDeviceOrientation(float[]) -> a
-    boolean getCurrentOrientation(float[]) -> b
-    void saveDeviceOrientation(float[]) -> c
-    void readDeviceOrientation(float[]) -> d
-    void stopReadingSensors() -> f
+    void saveDeviceOrientation(float[]) -> b
+    void stopReadingSensors() -> d
     android.os.IBinder onBind(android.content.Intent) -> onBind
     boolean access$0(com.dexnamic.alwayscharged.AlarmService) -> a
     void access$1(com.dexnamic.alwayscharged.AlarmService) -> b
@@ -145,9 +132,14 @@ com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmServi
 com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.g:
     com.dexnamic.alwayscharged.AlarmService this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
+com.dexnamic.alwayscharged.AlwaysCharged -> com.dexnamic.alwayscharged.AlwaysCharged:
+    boolean isDebuggable -> a
+    java.lang.Long RAND_PURCHASED -> b
+    java.lang.Long RAND_REFUNDED -> c
+    void onCreate() -> onCreate
 com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.h:
-    android.content.Context context -> b
-    java.lang.String CREATE_TABLE_ALARMS -> a
+    android.content.Context context -> a
+    java.lang.String CREATE_TABLE_ALARMS -> b
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
     void removeAllAlarms() -> a
@@ -175,19 +167,15 @@ com.dexnamic.alwayscharged.EditAlarmPreferenceActivity -> com.dexnamic.alwayscha
     void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
-    void setPreferences() -> a
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
     boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
-    void checkVolume() -> b
-    void cancelEdit() -> c
-    void deleteAlarm() -> d
-    void saveAlarm() -> e
+    void saveAlarm() -> a
     void onClick(android.view.View) -> onClick
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onBackPressed() -> onBackPressed
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    void enableAlarm() -> f
+    void enableAlarm() -> b
 com.dexnamic.alwayscharged.ListAlarmsActivity -> com.dexnamic.alwayscharged.ListAlarmsActivity:
     com.dexnamic.alwayscharged.DatabaseHelper dbHelper -> a
     android.widget.Button addButton -> b
@@ -202,19 +190,19 @@ com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged
     void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener access$0(com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor) -> a
 com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnItemClickListener -> com.dexnamic.alwayscharged.j:
-    int id -> b
-    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor this$0 -> a
+    int id -> a
+    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor this$0 -> b
     void onClick(android.view.View) -> onClick
 com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.dexnamic.alwayscharged.k:
     void alarmChecked(int,boolean) -> a
     void alarmSelected(int) -> a
 com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.MainPreferenceActivity:
-    android.preference.Preference mPreferenceAbout -> c
-    android.preference.Preference mPreferenceAdvanced -> d
-    android.preference.Preference mPreferenceUpgrade -> e
-    android.preference.Preference mPreferenceSetAlarm -> f
-    android.content.SharedPreferences mSettings -> a
-    android.content.SharedPreferences$Editor mEditor -> b
+    android.preference.Preference mPreferenceAbout -> b
+    android.preference.Preference mPreferenceAdvanced -> c
+    android.preference.Preference mPreferenceUpgrade -> d
+    android.preference.Preference mPreferenceSetAlarm -> e
+    android.content.SharedPreferences mSettings -> f
+    android.content.SharedPreferences$Editor mEditor -> a
     boolean mFirstInstance -> g
     android.os.Handler mHandler -> h
     java.lang.Boolean mHasPurchased -> i
@@ -224,31 +212,26 @@ com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.
     void onPause() -> onPause
     void onResume() -> onResume
     void onStop() -> onStop
-    void checkIfUserPurchasedUpgradeToPro() -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
-    void sendFeedbackEmail() -> b
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    android.app.AlertDialog$Builder aboutDialogBuilder() -> c
-    android.app.AlertDialog$Builder changelogDialogBuilder() -> d
-    void upgradeToPro() -> e
+    android.app.AlertDialog$Builder aboutDialogBuilder() -> a
+    void upgradeToPro() -> b
     void access$0(com.dexnamic.alwayscharged.MainPreferenceActivity) -> a
 com.dexnamic.alwayscharged.MainPreferenceActivity$1 -> com.dexnamic.alwayscharged.l:
     com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.MainPreferenceActivity$2 -> com.dexnamic.alwayscharged.m:
-    com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.MainPreferenceActivity$3 -> com.dexnamic.alwayscharged.n:
-    com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.o:
     com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
     void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
 com.dexnamic.alwayscharged.MyPrefsBackupAgent -> com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     void onCreate() -> onCreate
 com.dexnamic.alwayscharged.PowerReceiver -> com.dexnamic.alwayscharged.PowerReceiver:
@@ -257,33 +240,22 @@ com.dexnamic.alwayscharged.PowerSnoozeService -> com.dexnamic.alwayscharged.Powe
     void onStart(android.content.Intent,int) -> onStart
     android.os.IBinder onBind(android.content.Intent) -> onBind
 com.dexnamic.alwayscharged.R -> com.dexnamic.alwayscharged.p:
-com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.q:
-    int[] ListPreferenceMultiSelect -> ListPreferenceMultiSelect
-    int ListPreferenceMultiSelect_checkAll -> ListPreferenceMultiSelect_checkAll
-    int ListPreferenceMultiSelect_separator -> ListPreferenceMultiSelect_separator
-com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
-    void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.dexnamic.alwayscharged.Scheduler -> com.dexnamic.alwayscharged.r:
     android.os.PowerManager$WakeLock mWakeLock -> a
     int setDailyAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm,boolean) -> a
-    void notifyUserTimeUntilAlarm(android.content.Context,int) -> a
-    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> a
     void cancelSnooze(android.content.Context) -> a
     void cancelNotification(android.content.Context) -> b
     void snoozeAlarm(android.content.Context,int,int,com.dexnamic.alwayscharged.Alarm) -> a
-    android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> b
-    android.app.PendingIntent getPendingIntent_Snooze(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> a
-    void enablePowerSnooze(android.content.Context) -> c
-    void disablePowerSnooze(android.content.Context) -> d
-    void setPartialWakeLock(android.os.PowerManager) -> a
+    android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> a
+    void disablePowerSnooze(android.content.Context) -> c
     void releaseWakeLock() -> a
     void resetRepeatCount(android.content.Context,android.content.SharedPreferences) -> a
-    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> b
+    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> a
+com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.q:
+    int[] ListPreferenceMultiSelect -> a
+com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.dexnamic.alwayscharged.billing.BillingReceiver -> com.dexnamic.alwayscharged.billing.BillingReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-    void purchaseStateChanged(android.content.Context,java.lang.String,java.lang.String) -> a
-    void notify(android.content.Context,java.lang.String) -> a
-    void checkResponseCode(android.content.Context,long,int) -> a
 com.dexnamic.alwayscharged.billing.BillingService -> com.dexnamic.alwayscharged.billing.BillingService:
     com.android.vending.billing.IMarketBillingService mService -> a
     java.util.LinkedList mPendingRequests -> b
@@ -291,16 +263,12 @@ com.dexnamic.alwayscharged.billing.BillingService -> com.dexnamic.alwayscharged.
     void setContext(android.content.Context) -> a
     android.os.IBinder onBind(android.content.Intent) -> onBind
     void onStart(android.content.Intent,int) -> onStart
-    void handleCommand(android.content.Intent,int) -> a
     boolean bindToMarketBillingService() -> g
     boolean checkBillingSupported() -> a
     boolean requestPurchase(java.lang.String,java.lang.String,java.lang.String) -> a
     boolean restoreTransactions() -> b
     boolean confirmNotifications(int,java.lang.String[]) -> a
-    boolean getPurchaseInformation(int,java.lang.String[]) -> b
     void purchaseStateChanged(int,java.lang.String,java.lang.String) -> a
-    void checkResponseCode(long,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void runPendingRequests() -> h
     void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
     void unbind() -> c
@@ -310,9 +278,9 @@ com.dexnamic.alwayscharged.billing.BillingService -> com.dexnamic.alwayscharged.
     java.util.HashMap access$3() -> f
     void access$4(com.android.vending.billing.IMarketBillingService) -> a
 com.dexnamic.alwayscharged.billing.BillingService$BillingRequest -> com.dexnamic.alwayscharged.billing.a:
-    int mStartId -> c
-    long mRequestId -> a
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> b
+    int mStartId -> a
+    long mRequestId -> b
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> c
     int getStartId() -> a
     boolean runRequest() -> b
     boolean runIfConnected() -> c
@@ -322,32 +290,29 @@ com.dexnamic.alwayscharged.billing.BillingService$BillingRequest -> com.dexnamic
     android.os.Bundle makeRequestBundle(java.lang.String) -> a
     void logResponseCode(java.lang.String,android.os.Bundle) -> a
 com.dexnamic.alwayscharged.billing.BillingService$CheckBillingSupported -> com.dexnamic.alwayscharged.billing.b:
-    java.lang.String mProductType -> c
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
+    java.lang.String mProductType -> a
     long run() -> d
 com.dexnamic.alwayscharged.billing.BillingService$ConfirmNotifications -> com.dexnamic.alwayscharged.billing.c:
-    java.lang.String[] mNotifyIds -> c
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
+    java.lang.String[] mNotifyIds -> a
     long run() -> d
 com.dexnamic.alwayscharged.billing.BillingService$GetPurchaseInformation -> com.dexnamic.alwayscharged.billing.d:
-    long mNonce -> c
-    java.lang.String[] mNotifyIds -> d
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> e
+    long mNonce -> a
+    java.lang.String[] mNotifyIds -> b
     long run() -> d
     void onRemoteException(android.os.RemoteException) -> a
 com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase -> com.dexnamic.alwayscharged.billing.e:
-    java.lang.String mProductId -> c
-    java.lang.String mDeveloperPayload -> d
-    java.lang.String mProductType -> e
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> f
+    java.lang.String mProductId -> a
+    java.lang.String mDeveloperPayload -> b
+    java.lang.String mProductType -> c
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
     long run() -> d
     void responseCodeReceived(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     boolean runIfConnected() -> c
     boolean runRequest() -> b
     int getStartId() -> a
 com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions -> com.dexnamic.alwayscharged.billing.f:
-    long mNonce -> c
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
+    long mNonce -> a
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> b
     long run() -> d
     void onRemoteException(android.os.RemoteException) -> a
     void responseCodeReceived(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
@@ -360,24 +325,20 @@ com.dexnamic.alwayscharged.billing.Consts -> com.dexnamic.alwayscharged.billing.
     long BILLING_RESPONSE_INVALID_REQUEST_ID -> c
 com.dexnamic.alwayscharged.billing.Consts$PurchaseState -> com.dexnamic.alwayscharged.billing.h:
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState PURCHASED -> a
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState CANCELED -> b
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState REFUNDED -> c
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState CANCELED -> c
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState REFUNDED -> b
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState[] ENUM$VALUES -> d
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(int) -> a
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState[] values() -> values
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(java.lang.String) -> valueOf
 com.dexnamic.alwayscharged.billing.Consts$ResponseCode -> com.dexnamic.alwayscharged.billing.i:
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_OK -> a
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_USER_CANCELED -> b
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_SERVICE_UNAVAILABLE -> c
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_BILLING_UNAVAILABLE -> d
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ITEM_UNAVAILABLE -> e
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_DEVELOPER_ERROR -> f
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ERROR -> g
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_SERVICE_UNAVAILABLE -> d
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_BILLING_UNAVAILABLE -> e
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ITEM_UNAVAILABLE -> f
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_DEVELOPER_ERROR -> g
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ERROR -> c
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode[] ENUM$VALUES -> h
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(int) -> a
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode[] values() -> values
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(java.lang.String) -> valueOf
 com.dexnamic.alwayscharged.billing.PurchaseObserver -> com.dexnamic.alwayscharged.billing.j:
     android.app.Activity mActivity -> a
     android.os.Handler mHandler -> b
@@ -385,12 +346,11 @@ com.dexnamic.alwayscharged.billing.PurchaseObserver -> com.dexnamic.alwayscharge
     java.lang.Object[] mStartIntentSenderArgs -> d
     java.lang.Class[] START_INTENT_SENDER_SIG -> e
     void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
     void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void initCompatibilityLayer() -> a
+    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     void startBuyPageActivity(android.app.PendingIntent,android.content.Intent) -> a
-    void postPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> b
+    void postPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
 com.dexnamic.alwayscharged.billing.PurchaseObserver$1 -> com.dexnamic.alwayscharged.billing.k:
     com.dexnamic.alwayscharged.billing.PurchaseObserver this$0 -> a
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState val$purchaseState -> b
@@ -401,29 +361,28 @@ com.dexnamic.alwayscharged.billing.PurchaseObserver$1 -> com.dexnamic.alwayschar
     void run() -> run
 com.dexnamic.alwayscharged.billing.ResponseHandler -> com.dexnamic.alwayscharged.billing.l:
     com.dexnamic.alwayscharged.billing.PurchaseObserver sPurchaseObserver -> a
-    java.lang.Long RAND_PURCHASED -> b
-    java.lang.Long RAND_REFUNDED -> c
     void register(com.dexnamic.alwayscharged.billing.PurchaseObserver) -> a
-    void unregister(com.dexnamic.alwayscharged.billing.PurchaseObserver) -> b
+    void unregister$c9c8331() -> a
     void checkBillingSupportedResponse(boolean,java.lang.String) -> a
     void buyPageIntentResponse(android.app.PendingIntent,android.content.Intent) -> a
-    void purchaseResponse(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,java.lang.String,long,java.lang.String) -> a
-    void setPurchaseState(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState) -> a
+    void purchaseResponse$3fada1b2(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,long,java.lang.String) -> a
     java.lang.Boolean hasPurchased(android.content.Context) -> a
     long getAndroidID(android.content.Context) -> b
-    void responseCodeReceived(android.content.Context,com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void responseCodeReceived$795ab155(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     void responseCodeReceived(android.content.Context,com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-com.dexnamic.alwayscharged.billing.Security -> com.dexnamic.alwayscharged.billing.m:
+com.dexnamic.alwayscharged.billing.ResponseHandler$1 -> com.dexnamic.alwayscharged.billing.m:
+    android.content.Context val$context -> a
+    void run() -> run
+com.dexnamic.alwayscharged.billing.Security -> com.dexnamic.alwayscharged.billing.n:
     java.security.SecureRandom RANDOM -> a
     java.util.HashSet sKnownNonces -> b
     long generateNonce() -> a
     void removeNonce(long) -> a
-    boolean isNonceKnown(long) -> b
     java.util.ArrayList verifyPurchase(java.lang.String,java.lang.String) -> a
     java.security.PublicKey generatePublicKey(java.lang.String) -> a
     boolean verify(java.security.PublicKey,java.lang.String,java.lang.String) -> a
     java.lang.String decryptKey(java.lang.String,long) -> a
-com.dexnamic.alwayscharged.billing.Security$VerifiedPurchase -> com.dexnamic.alwayscharged.billing.n:
+com.dexnamic.alwayscharged.billing.Security$VerifiedPurchase -> com.dexnamic.alwayscharged.billing.o:
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState purchaseState -> a
     java.lang.String notificationId -> b
     java.lang.String productId -> c
@@ -449,38 +408,26 @@ com.dexnamic.alwayscharged.billing.UpgradeProActivity -> com.dexnamic.alwayschar
     void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
     android.app.Dialog createDialog(int,int) -> a
-    java.lang.String replaceLanguageAndRegion(java.lang.String) -> a
-    void setupWidgets() -> c
-    void prependLogEntry(java.lang.CharSequence) -> a
-    void logProductActivity(java.lang.String,java.lang.String) -> a
-    void restoreDatabase() -> d
     void access$0(com.dexnamic.alwayscharged.billing.UpgradeProActivity) -> a
     android.widget.Button access$1(com.dexnamic.alwayscharged.billing.UpgradeProActivity) -> b
     void access$2(com.dexnamic.alwayscharged.billing.UpgradeProActivity,java.lang.String,java.lang.String) -> a
-com.dexnamic.alwayscharged.billing.UpgradeProActivity$1 -> com.dexnamic.alwayscharged.billing.o:
+com.dexnamic.alwayscharged.billing.UpgradeProActivity$1 -> com.dexnamic.alwayscharged.billing.p:
     com.dexnamic.alwayscharged.billing.UpgradeProActivity this$0 -> a
     android.net.Uri val$helpUri -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.billing.UpgradeProActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.billing.p:
+com.dexnamic.alwayscharged.billing.UpgradeProActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.billing.q:
     com.dexnamic.alwayscharged.billing.UpgradeProActivity this$0 -> a
     void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
     void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
 com.dexnamic.alwayscharged.util.Base64 -> com.dexnamic.alwayscharged.a.a:
-    byte[] ALPHABET -> b
-    byte[] WEBSAFE_ALPHABET -> c
-    byte[] DECODABET -> d
-    byte[] WEBSAFE_DECODABET -> e
-    boolean $assertionsDisabled -> a
-    byte[] encode3to4(byte[],int,int,byte[],int,byte[]) -> a
+    byte[] ALPHABET -> a
+    byte[] DECODABET -> b
+    boolean $assertionsDisabled -> c
     java.lang.String encode(byte[]) -> a
-    java.lang.String encode(byte[],int,int,byte[],boolean) -> a
-    byte[] encode(byte[],int,int,byte[],int) -> a
     int decode4to3(byte[],int,byte[],int,byte[]) -> a
     byte[] decode(java.lang.String) -> a
-    byte[] decode(byte[],int,int) -> a
-    byte[] decode(byte[],int,int,byte[]) -> a
 com.dexnamic.alwayscharged.util.Base64DecoderException -> com.dexnamic.alwayscharged.a.b:
 com.dexnamic.android.preference.ListPreferenceMultiSelect -> com.dexnamic.android.preference.ListPreferenceMultiSelect:
     java.lang.String separator -> a
@@ -488,9 +435,6 @@ com.dexnamic.android.preference.ListPreferenceMultiSelect -> com.dexnamic.androi
     boolean[] mClickedDialogEntryIndices -> c
     void setEntries(java.lang.CharSequence[]) -> setEntries
     void onPrepareDialogBuilder(android.app.AlertDialog$Builder) -> onPrepareDialogBuilder
-    boolean isCheckAllValue(int) -> a
-    void checkAll(android.content.DialogInterface,boolean) -> a
-    java.lang.String[] parseStoredValue(java.lang.CharSequence) -> a
     void restoreCheckedEntries() -> a
     void onDialogClosed(boolean) -> onDialogClosed
     java.lang.String join(java.lang.Iterable,java.lang.String) -> a

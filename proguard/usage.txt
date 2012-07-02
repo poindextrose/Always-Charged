@@ -11,7 +11,6 @@ com.dexnamic.alwayscharged.Alarm:
     112:118:public void setRepeats(java.lang.Integer,java.lang.Boolean)
 com.dexnamic.alwayscharged.AlarmActivity:
     private static final int MSG_TIMEOUT
-    private static final int MSG_UP_VOLUME
     static final int DIALOG_ALERT_ID
 com.dexnamic.alwayscharged.AlarmReceiver:
     76:82:public static void startPowerSnoozeService(android.content.Context,com.dexnamic.alwayscharged.Alarm)
@@ -72,6 +71,8 @@ com.dexnamic.alwayscharged.R$layout
 com.dexnamic.alwayscharged.R$menu
 com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$styleable:
+    public static final int ListPreferenceMultiSelect_checkAll
+    public static final int ListPreferenceMultiSelect_separator
     169:169:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
@@ -85,12 +86,12 @@ com.dexnamic.alwayscharged.billing.BillingReceiver:
     private static final java.lang.String TAG
 com.dexnamic.alwayscharged.billing.BillingService:
     private static final java.lang.String TAG
-    503:503:public boolean checkBillingSupported(java.lang.String)
+    526:526:public boolean checkBillingSupported(java.lang.String)
 com.dexnamic.alwayscharged.billing.BillingService$CheckBillingSupported:
-    213:216:public BillingService$CheckBillingSupported(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
+    217:220:public BillingService$CheckBillingSupported(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
 com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase:
-    251:252:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
-    262:263:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String,java.lang.String)
+    258:259:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String)
+    272:273:public BillingService$RequestPurchase(com.dexnamic.alwayscharged.billing.BillingService,java.lang.String,java.lang.String)
 com.dexnamic.alwayscharged.billing.Consts:
     public static final java.lang.String MARKET_BILLING_SERVICE_ACTION
     public static final java.lang.String ACTION_CONFIRM_NOTIFICATION
@@ -117,8 +118,11 @@ com.dexnamic.alwayscharged.billing.Consts:
     public static final java.lang.String BILLING_RESPONSE_REQUEST_ID
     public static final java.lang.String ITEM_TYPE_INAPP
     public static final java.lang.String ITEM_TYPE_SUBSCRIPTION
-    public static final boolean DEBUG
     23:23:public Consts()
+com.dexnamic.alwayscharged.billing.Consts$PurchaseState:
+    1:1:public static com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(java.lang.String)
+com.dexnamic.alwayscharged.billing.Consts$ResponseCode:
+    1:1:public static com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(java.lang.String)
 com.dexnamic.alwayscharged.billing.PurchaseObserver:
     private static final java.lang.String TAG
 com.dexnamic.alwayscharged.billing.ResponseHandler:
