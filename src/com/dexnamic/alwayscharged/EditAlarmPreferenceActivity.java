@@ -85,6 +85,9 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		deleteButton.setOnClickListener(this);
 		okButton = (Button) findViewById(R.id.buttonOK);
 		okButton.setOnClickListener(this);
+		
+
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 
 	@Override
@@ -188,7 +191,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		if (chosenRingtone.length() > 0) {
 			AudioManager audioManager;
 			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-			if (audioManager.getStreamVolume(AudioManager.STREAM_RING) == 0) {
+			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
 				Toast.makeText(this, getString(R.string.checkVolume), Toast.LENGTH_LONG).show();
 			}
 		}

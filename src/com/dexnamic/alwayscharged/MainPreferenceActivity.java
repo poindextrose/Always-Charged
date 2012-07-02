@@ -130,7 +130,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		// Log.e(LOG_TAG, e.getMessage());
 		// }
 
-		setVolumeControlStream(AudioManager.STREAM_RING);
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 
 		if (savedInstanceState == null) // savedInstanceState is null during
 										// first instantiation of class

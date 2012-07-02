@@ -6,6 +6,7 @@ import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,6 +50,8 @@ public class ListAlarmsActivity extends ListActivity implements
 				cursor, // Give the cursor to the list adapter
 				this);
 		setListAdapter(adapter);
+		
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 
 	@Override

@@ -59,14 +59,6 @@ public class AlarmActivity extends Activity {
 
 		setContentView(R.layout.alert);
 
-		// stop alarm if user plugs in device
-		try {
-			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
-			IntentFilter intentPowerConnected = new IntentFilter(action);
-			registerReceiver(mBroadcastReceiver, intentPowerConnected);
-		} catch (Exception e) {
-		}
-
 		// set wallpaper as background
 		// try {
 		// Class<?> _WallpaperManager =
@@ -93,7 +85,8 @@ public class AlarmActivity extends Activity {
 
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		mSettings = PreferenceManager.getDefaultSharedPreferences(this);
-		mMediaPlayer = new MediaPlayer();
+		
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 
 	// received
@@ -128,7 +121,7 @@ public class AlarmActivity extends Activity {
 	};
 
 	private static final int MSG_TIMEOUT = 1;
-	private static final int MSG_UP_VOLUME = 2;
+//	private static final int MSG_UP_VOLUME = 2;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -137,21 +130,21 @@ public class AlarmActivity extends Activity {
 				if (repeatAlarm()) {
 					Scheduler.snoozeAlarm(AlarmActivity.this, 0, R.string.notify_retry, mAlarm);
 				}
-				removeMessages(MSG_UP_VOLUME);
+//				removeMessages(MSG_UP_VOLUME);
 				alarmFinished();
 				break;
-			case MSG_UP_VOLUME:
-				try {
-					Float volume = mVolume.pop();
-					if (volume != null) {
-						mMediaPlayer.pause();
-						mMediaPlayer.setVolume(volume, volume);
-						mMediaPlayer.start();
-						mHandler.sendMessageDelayed(msg, 1000);
-					}
-				} catch (Exception e) {
-				}
-				break;
+//			case MSG_UP_VOLUME:
+//				try {
+//					Float volume = mVolume.pop();
+//					if (volume != null) {
+//						mMediaPlayer.pause();
+//						mMediaPlayer.setVolume(volume, volume);
+//						mMediaPlayer.start();
+//						mHandler.sendMessageDelayed(msg, 1000);
+//					}
+//				} catch (Exception e) {
+//				}
+//				break;
 			}
 		}
 	};
@@ -169,7 +162,7 @@ public class AlarmActivity extends Activity {
 		}
 	};
 
-	private Stack<Float> mVolume = new Stack<Float>();
+//	private Stack<Float> mVolume = new Stack<Float>();
 
 	// private int mVolumeLevels;
 
@@ -177,20 +170,27 @@ public class AlarmActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
+		// stop alarm if user plugs in device
+		try {
+			String action = (String) Intent.class.getField("ACTION_POWER_CONNECTED").get(null);
+			IntentFilter intentPowerConnected = new IntentFilter(action);
+			registerReceiver(mBroadcastReceiver, intentPowerConnected);
+		} catch (Exception e) {
+		}
+
 		Bundle bundle = getIntent().getExtras();
 		mAlarm = (Alarm) bundle.getSerializable(Scheduler.TYPE_ALARM);
-
-		Log.v(getClass().getSimpleName(), "onStart(), alarm=" + mAlarm.toString());
 
 		String chosenRingtone = mAlarm.getRingtone();
 		// int maxVolume = 0;
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
+			mMediaPlayer = new MediaPlayer();
 			mMediaPlayer.setDataSource(this, uri);
-			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_RING);
-			for (int i = 1; i <= 8; i *= 2) {
-				mVolume.push(1 / (float) i);
-			}
+			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+//			for (int i = 1; i <= 8; i *= 2) {
+//				mVolume.push(1 / (float) i);
+//			}
 			// mVolumeLevels = mVolume.size();
 			// float volume = mVolume.pop();
 			// mMediaPlayer.setVolume(volume, volume);
@@ -272,18 +272,13 @@ public class AlarmActivity extends Activity {
 	protected void onStop() {
 		super.onStop();
 		stopRingtone();
-		mHandler.removeMessages(MSG_TIMEOUT);
-		try {
-			// mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
-			// mSaveVolume, 0);
-			mMediaPlayer.release();
-		} catch (Exception e) {
-		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+//		mHandler.removeMessages(MSG_TIMEOUT);
+//		try {
+//			// mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
+//			// mSaveVolume, 0);
+//			mMediaPlayer.release();
+//		} catch (Exception e) {
+//		}
 
 		unregisterReceiver(mBroadcastReceiver);
 	}
@@ -291,6 +286,7 @@ public class AlarmActivity extends Activity {
 	void stopRingtone() {
 		try {
 			mMediaPlayer.stop();
+			mMediaPlayer.release();
 		} catch (Exception e) {
 		}
 		try {
@@ -312,6 +308,7 @@ public class AlarmActivity extends Activity {
 	}
 
 	private void alarmFinished() {
+		stopRingtone();
 		finish();
 	}
 

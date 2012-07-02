@@ -7,6 +7,7 @@ import com.dexnamic.alwayscharged.billing.ResponseHandler;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -55,6 +56,8 @@ public class AdvancedPreferences extends PreferenceActivity implements
 
 		// mTestPref = ps.findPreference("test1");
 		// mTestPref.setOnPreferenceClickListener(this);
+		
+		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 
 	@Override
