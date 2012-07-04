@@ -132,6 +132,7 @@ com.dexnamic.alwayscharged.billing.Security:
     private static final java.lang.String KEY_FACTORY_ALGORITHM
     private static final java.lang.String SIGNATURE_ALGORITHM
     37:37:public Security()
+    289:299:public static java.lang.String encryptKey(java.lang.String,long)
 com.dexnamic.alwayscharged.billing.UpgradeProActivity:
     private static final java.lang.String TAG
     public static final java.lang.String DB_INITIALIZED

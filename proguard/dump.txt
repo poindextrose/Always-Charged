@@ -17751,7 +17751,7 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 270):
+Constant Pool (count = 272):
   - String []
   - String [Base64 decoding failed.]
   - String [Invalid key specification.]
@@ -17759,6 +17759,7 @@ Constant Pool (count = 270):
   - String [NoSuchAlgorithmException.]
   - String [Nonce not found: ]
   - String [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWn1qFoOOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZsfhGSlq+I605RDn89Ei17bQVV86bedEp8cpz0NN0L4ojoaueG1D1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfyTt96gq2Ps8K4aLcrHia1SEO97QG0nS9IWIYWL5NbJaheL2Si7z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcCgnS1rgjDivYlWXV39VoSeB59ToQ7AHcPRt0Q9D1mi1SRy7vZocc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQCFM2+lILNTj9A1nZ4E6l4VHsXQN9u7hcZVF84Fl3YigFwkGAwEB]
+  - String [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWpeHIDlES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCkb2zCodT5Nyvfgq7ZTl+xOzlU4tpTUYTrMaiVF5+JdvbaeS6IvjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4Z9CPoX01IO9LFJiFxSNr3porPVME06pB1DC1snS63bVAZZR2e8HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hGJ/bOhWa7oc6yxcGODZDc3nBG3n6VqDC1rz9/FVgk5nV4TKFw3egqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RsNJkppqTnYmVknB0RZ3p+y7J8+fU005/x8h4h8jEebP4QkGAwEB]
   - String [RSA]
   - String [SHA1withRSA]
   - String [Security]
@@ -17946,6 +17947,7 @@ Constant Pool (count = 270):
   - Utf8 [NoSuchAlgorithmException.]
   - Utf8 [Nonce not found: ]
   - Utf8 [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWn1qFoOOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZsfhGSlq+I605RDn89Ei17bQVV86bedEp8cpz0NN0L4ojoaueG1D1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfyTt96gq2Ps8K4aLcrHia1SEO97QG0nS9IWIYWL5NbJaheL2Si7z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcCgnS1rgjDivYlWXV39VoSeB59ToQ7AHcPRt0Q9D1mi1SRy7vZocc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQCFM2+lILNTj9A1nZ4E6l4VHsXQN9u7hcZVF84Fl3YigFwkGAwEB]
+  - Utf8 [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWpeHIDlES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCkb2zCodT5Nyvfgq7ZTl+xOzlU4tpTUYTrMaiVF5+JdvbaeS6IvjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4Z9CPoX01IO9LFJiFxSNr3porPVME06pB1DC1snS63bVAZZR2e8HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hGJ/bOhWa7oc6yxcGODZDc3nBG3n6VqDC1rz9/FVgk5nV4TKFw3egqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RsNJkppqTnYmVknB0RZ3p+y7J8+fU005/x8h4h8jEebP4QkGAwEB]
   - Utf8 [RSA]
   - Utf8 [SHA1withRSA]
   - Utf8 [Security]
@@ -18035,19 +18037,19 @@ Methods (count = 7):
       = static void <clinit>()
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 21, locals = 0, stack = 2):
-      [0] new #44
+      [0] new #45
         - Class [java/security/SecureRandom]
       [3] dup
-      [4] invokespecial #81
+      [4] invokespecial #82
         - Methodref [java/security/SecureRandom.<init> ()V]
-      [7] putstatic #57
+      [7] putstatic #58
         - Fieldref [com/dexnamic/alwayscharged/billing/n.a Ljava/security/SecureRandom;]
-      [10] new #50
+      [10] new #51
         - Class [java/util/HashSet]
       [13] dup
-      [14] invokespecial #90
+      [14] invokespecial #91
         - Methodref [java/util/HashSet.<init> ()V]
-      [17] putstatic #58
+      [17] putstatic #59
         - Fieldref [com/dexnamic/alwayscharged/billing/n.b Ljava/util/HashSet;]
       [20] return
       Code attribute exceptions (count = 0):
@@ -18057,17 +18059,17 @@ Methods (count = 7):
       = public static long a()
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 20, locals = 2, stack = 3):
-      [0] getstatic #57
+      [0] getstatic #58
         - Fieldref [com/dexnamic/alwayscharged/billing/n.a Ljava/security/SecureRandom;]
-      [3] invokevirtual #82
+      [3] invokevirtual #83
         - Methodref [java/security/SecureRandom.nextLong ()J]
       [6] lstore_0 v0
-      [7] getstatic #58
+      [7] getstatic #59
         - Fieldref [com/dexnamic/alwayscharged/billing/n.b Ljava/util/HashSet;]
       [10] lload_0 v0
-      [11] invokestatic #72
+      [11] invokestatic #73
         - Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
-      [14] invokevirtual #91
+      [14] invokevirtual #92
         - Methodref [java/util/HashSet.add (Ljava/lang/Object;)Z]
       [17] pop
       [18] lload_0 v0
@@ -18079,12 +18081,12 @@ Methods (count = 7):
       = public static void a(long)
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 12, locals = 2, stack = 3):
-      [0] getstatic #58
+      [0] getstatic #59
         - Fieldref [com/dexnamic/alwayscharged/billing/n.b Ljava/util/HashSet;]
       [3] lload_0 v0
-      [4] invokestatic #72
+      [4] invokestatic #73
         - Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
-      [7] invokevirtual #93
+      [7] invokevirtual #94
         - Methodref [java/util/HashSet.remove (Ljava/lang/Object;)Z]
       [10] pop
       [11] return
@@ -18094,325 +18096,348 @@ Methods (count = 7):
     Access flags: 0x9
       = public static java.util.ArrayList a(java.lang.String,java.lang.String)
     Class member attributes (count = 1):
-    - Code attribute instructions (code length = 333, locals = 21, stack = 10):
+    - Code attribute instructions (code length = 368, locals = 21, stack = 10):
       [0] aload_0 v0
       [1] ifnonnull +13 (target=14)
-      [4] ldc #10
+      [4] ldc #11
         - String [Security]
-      [6] ldc #13
+      [6] ldc #14
         - String [data is null]
-      [8] invokestatic #60
+      [8] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [11] pop
       [12] aconst_null
       [13] areturn
-      [14] new #39
+      [14] new #40
         - Class [java/lang/StringBuilder]
       [17] dup
-      [18] ldc #24
+      [18] ldc #25
         - String [signedData: ]
-      [20] invokespecial #75
+      [20] invokespecial #76
         - Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [23] aload_0 v0
-      [24] invokevirtual #77
+      [24] invokevirtual #78
         - Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [27] invokevirtual #78
+      [27] invokevirtual #79
         - Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [30] pop
       [31] iconst_0
       [32] istore_2 v2
       [33] aload_1 v1
-      [34] invokestatic #59
+      [34] invokestatic #60
         - Methodref [android/text/TextUtils.isEmpty (Ljava/lang/CharSequence;)Z]
-      [37] ifne +48 (target=85)
+      [37] ifne +77 (target=114)
       [40] ldc #7
         - String [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWn1qFoOOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZsfhGSlq+I605RDn89Ei17bQVV86bedEp8cpz0NN0L4ojoaueG1D1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfyTt96gq2Ps8K4aLcrHia1SEO97QG0nS9IWIYWL5NbJaheL2Si7z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcCgnS1rgjDivYlWXV39VoSeB59ToQ7AHcPRt0Q9D1mi1SRy7vZocc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQCFM2+lILNTj9A1nZ4E6l4VHsXQN9u7hcZVF84Fl3YigFwkGAwEB]
       [42] astore_3 v3
-      [43] lconst_0
-      [44] lstore v4
-      [46] aload_3 v3
-      [47] ldc2_w #54
+      [43] ldc #8
+        - String [RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWpeHIDlES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCkb2zCodT5Nyvfgq7ZTl+xOzlU4tpTUYTrMaiVF5+JdvbaeS6IvjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4Z9CPoX01IO9LFJiFxSNr3porPVME06pB1DC1snS63bVAZZR2e8HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hGJ/bOhWa7oc6yxcGODZDc3nBG3n6VqDC1rz9/FVgk5nV4TKFw3egqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RsNJkppqTnYmVknB0RZ3p+y7J8+fU005/x8h4h8jEebP4QkGAwEB]
+      [45] astore v4
+      [47] aload_3 v3
+      [48] ldc2_w #55
         - Long [98572098420]
-      [50] invokestatic #68
+      [51] invokestatic #69
         - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/lang/String;J)Ljava/lang/String;]
-      [53] invokestatic #67
+      [54] invokestatic #68
         - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/lang/String;)Ljava/security/PublicKey;]
-      [56] dup
-      [57] astore v6
-      [59] aload_0 v0
-      [60] aload_1 v1
-      [61] invokestatic #69
+      [57] dup
+      [58] astore v7
+      [60] aload_0 v0
+      [61] aload_1 v1
+      [62] invokestatic #70
         - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/security/PublicKey;Ljava/lang/String;Ljava/lang/String;)Z]
-      [64] istore_2 v2
-      [65] goto +6 (target=71)
-      [68] pop
-      [69] iconst_0
-      [70] istore_2 v2
-      [71] iload_2 v2
-      [72] ifne +13 (target=85)
-      [75] ldc #10
+      [65] istore_2 v2
+      [66] goto +6 (target=72)
+      [69] pop
+      [70] iconst_0
+      [71] istore_2 v2
+      [72] iload_2 v2
+      [73] ifne +27 (target=100)
+      [76] aload v4
+      [78] ldc2_w #55
+        - Long [98572098420]
+      [81] invokestatic #69
+        - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/lang/String;J)Ljava/lang/String;]
+      [84] invokestatic #68
+        - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/lang/String;)Ljava/security/PublicKey;]
+      [87] dup
+      [88] astore v7
+      [90] aload_0 v0
+      [91] aload_1 v1
+      [92] invokestatic #70
+        - Methodref [com/dexnamic/alwayscharged/billing/n.a (Ljava/security/PublicKey;Ljava/lang/String;Ljava/lang/String;)Z]
+      [95] istore_2 v2
+      [96] goto +4 (target=100)
+      [99] pop
+      [100] iload_2 v2
+      [101] ifne +13 (target=114)
+      [104] ldc #11
         - String [Security]
-      [77] ldc #22
+      [106] ldc #23
         - String [signature does not match data.]
-      [79] invokestatic #62
+      [108] invokestatic #63
         - Methodref [android/util/Log.w (Ljava/lang/String;Ljava/lang/String;)I]
-      [82] pop
-      [83] aconst_null
-      [84] areturn
-      [85] aconst_null
-      [86] astore v4
-      [88] iconst_0
-      [89] istore v5
-      [91] lconst_0
-      [92] lstore v6
-      [94] new #53
+      [111] pop
+      [112] aconst_null
+      [113] areturn
+      [114] aconst_null
+      [115] astore v4
+      [117] iconst_0
+      [118] istore_1 v1
+      [119] lconst_0
+      [120] lstore v6
+      [122] new #54
         - Class [org/json/JSONObject]
-      [97] dup
-      [98] aload_0 v0
-      [99] invokespecial #96
+      [125] dup
+      [126] aload_0 v0
+      [127] invokespecial #97
         - Methodref [org/json/JSONObject.<init> (Ljava/lang/String;)V]
-      [102] dup
-      [103] astore_3 v3
-      [104] ldc #15
+      [130] dup
+      [131] astore_3 v3
+      [132] ldc #16
         - String [nonce]
-      [106] invokevirtual #102
+      [134] invokevirtual #103
         - Methodref [org/json/JSONObject.optLong (Ljava/lang/String;)J]
-      [109] lstore v6
-      [111] aload_3 v3
-      [112] ldc #18
+      [137] lstore v6
+      [139] aload_3 v3
+      [140] ldc #19
         - String [orders]
-      [114] invokevirtual #101
+      [142] invokevirtual #102
         - Methodref [org/json/JSONObject.optJSONArray (Ljava/lang/String;)Lorg/json/JSONArray;]
-      [117] dup
-      [118] astore v4
-      [120] ifnull +16 (target=136)
-      [123] aload v4
-      [125] invokevirtual #95
+      [145] dup
+      [146] astore v4
+      [148] ifnull +15 (target=163)
+      [151] aload v4
+      [153] invokevirtual #96
         - Methodref [org/json/JSONArray.length ()I]
-      [128] istore v5
-      [130] goto +6 (target=136)
-      [133] pop
-      [134] aconst_null
-      [135] areturn
-      [136] lload v6
-      [138] lstore v19
-      [140] getstatic #58
+      [156] istore_1 v1
+      [157] goto +6 (target=163)
+      [160] pop
+      [161] aconst_null
+      [162] areturn
+      [163] lload v6
+      [165] lstore v19
+      [167] getstatic #59
         - Fieldref [com/dexnamic/alwayscharged/billing/n.b Ljava/util/HashSet;]
-      [143] lload v19
-      [145] invokestatic #72
+      [170] lload v19
+      [172] invokestatic #73
         - Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
-      [148] invokevirtual #92
+      [175] invokevirtual #93
         - Methodref [java/util/HashSet.contains (Ljava/lang/Object;)Z]
-      [151] ifne +28 (target=179)
-      [154] ldc #10
+      [178] ifne +28 (target=206)
+      [181] ldc #11
         - String [Security]
-      [156] new #39
+      [183] new #40
         - Class [java/lang/StringBuilder]
-      [159] dup
-      [160] ldc #6
+      [186] dup
+      [187] ldc #6
         - String [Nonce not found: ]
-      [162] invokespecial #75
+      [189] invokespecial #76
         - Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [165] lload v6
-      [167] invokevirtual #76
+      [192] lload v6
+      [194] invokevirtual #77
         - Methodref [java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;]
-      [170] invokevirtual #78
+      [197] invokevirtual #79
         - Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [173] invokestatic #62
+      [200] invokestatic #63
         - Methodref [android/util/Log.w (Ljava/lang/String;Ljava/lang/String;)I]
-      [176] pop
-      [177] aconst_null
-      [178] areturn
-      [179] new #49
+      [203] pop
+      [204] aconst_null
+      [205] areturn
+      [206] new #50
         - Class [java/util/ArrayList]
-      [182] dup
-      [183] invokespecial #88
+      [209] dup
+      [210] invokespecial #89
         - Methodref [java/util/ArrayList.<init> ()V]
-      [186] astore_0 v0
-      [187] iconst_0
-      [188] istore_1 v1
-      [189] goto +116 (target=305)
-      [192] aload v4
-      [194] iload_1 v1
-      [195] invokevirtual #94
+      [213] astore_0 v0
+      [214] iconst_0
+      [215] istore_3 v3
+      [216] goto +125 (target=341)
+      [219] aload v4
+      [221] iload_3 v3
+      [222] invokevirtual #95
         - Methodref [org/json/JSONArray.getJSONObject (I)Lorg/json/JSONObject;]
-      [198] dup
-      [199] astore_3 v3
-      [200] ldc #20
+      [225] dup
+      [226] astore v5
+      [228] ldc #21
         - String [purchaseState]
-      [202] invokevirtual #97
+      [230] invokevirtual #98
         - Methodref [org/json/JSONObject.getInt (Ljava/lang/String;)I]
-      [205] dup
-      [206] istore v8
-      [208] invokestatic #65
+      [233] dup
+      [234] istore v8
+      [236] invokestatic #66
         - Methodref [com/dexnamic/alwayscharged/billing/h.a (I)Lcom/dexnamic/alwayscharged/billing/h;]
-      [211] astore v8
-      [213] aload_3 v3
-      [214] ldc #19
+      [239] astore v8
+      [241] aload v5
+      [243] ldc #20
         - String [productId]
-      [216] invokevirtual #99
-        - Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [219] astore v9
-      [221] aload_3 v3
-      [222] ldc #21
-        - String [purchaseTime]
-      [224] invokevirtual #98
-        - Methodref [org/json/JSONObject.getLong (Ljava/lang/String;)J]
-      [227] lstore v14
-      [229] aload_3 v3
-      [230] ldc #17
-        - String [orderId]
-      [232] ldc #1
-        - String []
-      [234] invokevirtual #103
-        - Methodref [org/json/JSONObject.optString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [237] astore v10
-      [239] aconst_null
-      [240] astore v11
-      [242] aload_3 v3
-      [243] ldc #16
-        - String [notificationId]
       [245] invokevirtual #100
-        - Methodref [org/json/JSONObject.has (Ljava/lang/String;)Z]
-      [248] ifeq +11 (target=259)
-      [251] aload_3 v3
-      [252] ldc #16
-        - String [notificationId]
-      [254] invokevirtual #99
         - Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
-      [257] astore v11
-      [259] aload_3 v3
-      [260] ldc #14
-        - String [developerPayload]
-      [262] aconst_null
-      [263] invokevirtual #103
+      [248] astore v9
+      [250] aload v5
+      [252] ldc #22
+        - String [purchaseTime]
+      [254] invokevirtual #99
+        - Methodref [org/json/JSONObject.getLong (Ljava/lang/String;)J]
+      [257] lstore v14
+      [259] aload v5
+      [261] ldc #18
+        - String [orderId]
+      [263] ldc #1
+        - String []
+      [265] invokevirtual #104
         - Methodref [org/json/JSONObject.optString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [266] astore_3 v3
-      [267] aload v8
-      [269] getstatic #56
+      [268] astore v10
+      [270] aconst_null
+      [271] astore v11
+      [273] aload v5
+      [275] ldc #17
+        - String [notificationId]
+      [277] invokevirtual #101
+        - Methodref [org/json/JSONObject.has (Ljava/lang/String;)Z]
+      [280] ifeq +12 (target=292)
+      [283] aload v5
+      [285] ldc #17
+        - String [notificationId]
+      [287] invokevirtual #100
+        - Methodref [org/json/JSONObject.getString (Ljava/lang/String;)Ljava/lang/String;]
+      [290] astore v11
+      [292] aload v5
+      [294] ldc #15
+        - String [developerPayload]
+      [296] aconst_null
+      [297] invokevirtual #104
+        - Methodref [org/json/JSONObject.optString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
+      [300] astore v5
+      [302] aload v8
+      [304] getstatic #57
         - Fieldref [com/dexnamic/alwayscharged/billing/h.a Lcom/dexnamic/alwayscharged/billing/h;]
-      [272] ifacmpne +7 (target=279)
-      [275] iload_2 v2
-      [276] ifeq +26 (target=302)
-      [279] aload_0 v0
-      [280] new #32
+      [307] ifacmpne +7 (target=314)
+      [310] iload_2 v2
+      [311] ifeq +27 (target=338)
+      [314] aload_0 v0
+      [315] new #33
         - Class [com/dexnamic/alwayscharged/billing/o]
-      [283] dup
-      [284] aload v8
-      [286] aload v11
-      [288] aload v9
-      [290] aload v10
-      [292] lload v14
-      [294] aload_3 v3
-      [295] invokespecial #70
+      [318] dup
+      [319] aload v8
+      [321] aload v11
+      [323] aload v9
+      [325] aload v10
+      [327] lload v14
+      [329] aload v5
+      [331] invokespecial #71
         - Methodref [com/dexnamic/alwayscharged/billing/o.<init> (Lcom/dexnamic/alwayscharged/billing/h;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;)V]
-      [298] invokevirtual #89
+      [334] invokevirtual #90
         - Methodref [java/util/ArrayList.add (Ljava/lang/Object;)Z]
-      [301] pop
-      [302] iinc v1, 1
-      [305] iload_1 v1
-      [306] iload v5
-      [308] ificmplt -116 (target=192)
-      [311] goto +15 (target=326)
-      [314] astore_1 v1
-      [315] ldc #10
+      [337] pop
+      [338] iinc v3, 1
+      [341] iload_3 v3
+      [342] iload_1 v1
+      [343] ificmplt -124 (target=219)
+      [346] goto +15 (target=361)
+      [349] astore_3 v3
+      [350] ldc #11
         - String [Security]
-      [317] ldc #4
+      [352] ldc #4
         - String [JSON exception: ]
-      [319] aload_1 v1
-      [320] invokestatic #61
+      [354] aload_3 v3
+      [355] invokestatic #62
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I]
-      [323] pop
-      [324] aconst_null
-      [325] areturn
-      [326] lload v6
-      [328] invokestatic #66
+      [358] pop
+      [359] aconst_null
+      [360] areturn
+      [361] lload v6
+      [363] invokestatic #67
         - Methodref [com/dexnamic/alwayscharged/billing/n.a (J)V]
-      [331] aload_0 v0
-      [332] areturn
-      Code attribute exceptions (count = 3):
-      - ExceptionInfo (46 -> 65: 68):
+      [366] aload_0 v0
+      [367] areturn
+      Code attribute exceptions (count = 4):
+      - ExceptionInfo (47 -> 66: 69):
       - Class [java/lang/Exception]
-      - ExceptionInfo (94 -> 130: 133):
+      - ExceptionInfo (76 -> 96: 99):
+      - Class [java/lang/Exception]
+      - ExceptionInfo (122 -> 157: 160):
       - Class [org/json/JSONException]
-      - ExceptionInfo (187 -> 311: 314):
+      - ExceptionInfo (214 -> 346: 349):
       - Class [org/json/JSONException]
       Code attribute attributes (attribute count = 1):
-      - Stack map table attribute (count = 14):
+      - Stack map table attribute (count = 16):
         - [14] Var: ..., Stack: (empty)
-        - [68] Var: [a:java/lang/String], Stack: [a:java/lang/Exception]
-        - [71] Var: ...[T][i], Stack: (empty)
-        - [85] Var: ..., Stack: (empty)
-        - [133] Var: , Stack: [a:org/json/JSONException]
-        - [136] Var: [T][T][i][T][a:org/json/JSONArray][i][l], Stack: 
-        - [179] Var: ..., Stack: (empty)
-        - [192] Var: [a:java/util/ArrayList][i][i][T][a:org/json/JSONArray][i][l], Stack: 
-        - [259] Var: [a:java/util/ArrayList][i][i][a:org/json/JSONObject][a:org/json/JSONArray][i][l][a:com/dexnamic/alwayscharged/billing/h][a:java/lang/String][a:java/lang/String][a:java/lang/String][T][T][l], Stack: 
-        - [279] Var: [a:java/util/ArrayList][i][i][a:java/lang/String][a:org/json/JSONArray][i][l][a:com/dexnamic/alwayscharged/billing/h][a:java/lang/String][a:java/lang/String][a:java/lang/String][T][T][l], Stack: 
-        - [302] Var: [a:java/util/ArrayList][i][i][T][a:org/json/JSONArray][i][l], Stack: 
-        - [305] Var: ..., Stack: (empty)
-        - [314] Var: , Stack: [a:org/json/JSONException]
-        - [326] Var: [a:java/util/ArrayList][T][T][T][T][T][l], Stack: 
+        - [69] Var: [a:java/lang/String][a:java/lang/String][T][T][a:java/lang/String], Stack: [a:java/lang/Exception]
+        - [72] Var: [a:java/lang/String][a:java/lang/String][i][T][a:java/lang/String], Stack: 
+        - [99] Var: [a:java/lang/String][T][i], Stack: [a:java/lang/Exception]
+        - [100] Var: ..., Stack: (empty)
+        - [114] Var: ..., Stack: (empty)
+        - [160] Var: , Stack: [a:org/json/JSONException]
+        - [163] Var: [T][i][i][T][a:org/json/JSONArray][T][l], Stack: 
+        - [206] Var: ..., Stack: (empty)
+        - [219] Var: [a:java/util/ArrayList][i][i][i][a:org/json/JSONArray][T][l], Stack: 
+        - [292] Var: [a:java/util/ArrayList][i][i][i][a:org/json/JSONArray][a:org/json/JSONObject][l][a:com/dexnamic/alwayscharged/billing/h][a:java/lang/String][a:java/lang/String][a:java/lang/String][T][T][l], Stack: 
+        - [314] Var: [a:java/util/ArrayList][i][i][i][a:org/json/JSONArray][a:java/lang/String][l][a:com/dexnamic/alwayscharged/billing/h][a:java/lang/String][a:java/lang/String][a:java/lang/String][T][T][l], Stack: 
+        - [338] Var: [a:java/util/ArrayList][i][i][i][a:org/json/JSONArray][T][l], Stack: 
+        - [341] Var: ..., Stack: (empty)
+        - [349] Var: , Stack: [a:org/json/JSONException]
+        - [361] Var: [a:java/util/ArrayList][T][T][T][T][T][l], Stack: 
   - Method:       a(Ljava/lang/String;)Ljava/security/PublicKey;
     Access flags: 0xa
       = private static java.security.PublicKey a(java.lang.String)
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 70, locals = 2, stack = 4):
       [0] aload_0 v0
-      [1] invokestatic #63
+      [1] invokestatic #64
         - Methodref [com/dexnamic/alwayscharged/a/a.a (Ljava/lang/String;)[B]
       [4] astore_0 v0
-      [5] ldc #8
+      [5] ldc #9
         - String [RSA]
-      [7] invokestatic #80
+      [7] invokestatic #81
         - Methodref [java/security/KeyFactory.getInstance (Ljava/lang/String;)Ljava/security/KeyFactory;]
       [10] dup
       [11] astore_1 v1
-      [12] new #48
+      [12] new #49
         - Class [java/security/spec/X509EncodedKeySpec]
       [15] dup
       [16] aload_0 v0
-      [17] invokespecial #87
+      [17] invokespecial #88
         - Methodref [java/security/spec/X509EncodedKeySpec.<init> ([B)V]
-      [20] invokevirtual #79
+      [20] invokevirtual #80
         - Methodref [java/security/KeyFactory.generatePublic (Ljava/security/spec/KeySpec;)Ljava/security/PublicKey;]
       [23] areturn
       [24] astore_0 v0
-      [25] new #37
+      [25] new #38
         - Class [java/lang/RuntimeException]
       [28] dup
       [29] aload_0 v0
-      [30] invokespecial #73
+      [30] invokespecial #74
         - Methodref [java/lang/RuntimeException.<init> (Ljava/lang/Throwable;)V]
       [33] athrow
       [34] astore_0 v0
-      [35] ldc #10
+      [35] ldc #11
         - String [Security]
       [37] ldc #3
         - String [Invalid key specification.]
-      [39] invokestatic #60
+      [39] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [42] pop
-      [43] new #34
+      [43] new #35
         - Class [java/lang/IllegalArgumentException]
       [46] dup
       [47] aload_0 v0
-      [48] invokespecial #71
+      [48] invokespecial #72
         - Methodref [java/lang/IllegalArgumentException.<init> (Ljava/lang/Throwable;)V]
       [51] athrow
       [52] astore_0 v0
-      [53] ldc #10
+      [53] ldc #11
         - String [Security]
       [55] ldc #2
         - String [Base64 decoding failed.]
-      [57] invokestatic #60
+      [57] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [60] pop
-      [61] new #34
+      [61] new #35
         - Class [java/lang/IllegalArgumentException]
       [64] dup
       [65] aload_0 v0
-      [66] invokespecial #71
+      [66] invokespecial #72
         - Methodref [java/lang/IllegalArgumentException.<init> (Ljava/lang/Throwable;)V]
       [69] athrow
       Code attribute exceptions (count = 3):
@@ -18432,46 +18457,46 @@ Methods (count = 7):
       = private static boolean a(java.security.PublicKey,java.lang.String,java.lang.String)
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 106, locals = 4, stack = 3):
-      [0] new #39
+      [0] new #40
         - Class [java/lang/StringBuilder]
       [3] dup
-      [4] ldc #23
+      [4] ldc #24
         - String [signature: ]
-      [6] invokespecial #75
+      [6] invokespecial #76
         - Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [9] aload_2 v2
-      [10] invokevirtual #77
+      [10] invokevirtual #78
         - Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [13] invokevirtual #78
+      [13] invokevirtual #79
         - Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [16] pop
-      [17] ldc #9
+      [17] ldc #10
         - String [SHA1withRSA]
-      [19] invokestatic #83
+      [19] invokestatic #84
         - Methodref [java/security/Signature.getInstance (Ljava/lang/String;)Ljava/security/Signature;]
       [22] dup
       [23] astore_3 v3
       [24] aload_0 v0
-      [25] invokevirtual #84
+      [25] invokevirtual #85
         - Methodref [java/security/Signature.initVerify (Ljava/security/PublicKey;)V]
       [28] aload_3 v3
       [29] aload_1 v1
-      [30] invokevirtual #74
+      [30] invokevirtual #75
         - Methodref [java/lang/String.getBytes ()[B]
-      [33] invokevirtual #85
+      [33] invokevirtual #86
         - Methodref [java/security/Signature.update ([B)V]
       [36] aload_3 v3
       [37] aload_2 v2
-      [38] invokestatic #63
+      [38] invokestatic #64
         - Methodref [com/dexnamic/alwayscharged/a/a.a (Ljava/lang/String;)[B]
-      [41] invokevirtual #86
+      [41] invokevirtual #87
         - Methodref [java/security/Signature.verify ([B)Z]
       [44] ifne +13 (target=57)
-      [47] ldc #10
+      [47] ldc #11
         - String [Security]
-      [49] ldc #12
+      [49] ldc #13
         - String [Signature verification failed.]
-      [51] invokestatic #60
+      [51] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [54] pop
       [55] iconst_0
@@ -18479,38 +18504,38 @@ Methods (count = 7):
       [57] iconst_1
       [58] ireturn
       [59] pop
-      [60] ldc #10
+      [60] ldc #11
         - String [Security]
       [62] ldc #5
         - String [NoSuchAlgorithmException.]
-      [64] invokestatic #60
+      [64] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [67] pop
       [68] goto +36 (target=104)
       [71] pop
-      [72] ldc #10
+      [72] ldc #11
         - String [Security]
       [74] ldc #3
         - String [Invalid key specification.]
-      [76] invokestatic #60
+      [76] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [79] pop
       [80] goto +24 (target=104)
       [83] pop
-      [84] ldc #10
+      [84] ldc #11
         - String [Security]
-      [86] ldc #11
+      [86] ldc #12
         - String [Signature exception.]
-      [88] invokestatic #60
+      [88] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [91] pop
       [92] goto +12 (target=104)
       [95] pop
-      [96] ldc #10
+      [96] ldc #11
         - String [Security]
       [98] ldc #2
         - String [Base64 decoding failed.]
-      [100] invokestatic #60
+      [100] invokestatic #61
         - Methodref [android/util/Log.e (Ljava/lang/String;Ljava/lang/String;)I]
       [103] pop
       [104] iconst_0
@@ -18538,7 +18563,7 @@ Methods (count = 7):
     Class member attributes (count = 1):
     - Code attribute instructions (code length = 53, locals = 5, stack = 4):
       [0] aload_0 v0
-      [1] invokestatic #63
+      [1] invokestatic #64
         - Methodref [com/dexnamic/alwayscharged/a/a.a (Ljava/lang/String;)[B]
       [4] dup
       [5] astore_0 v0
@@ -18551,7 +18576,7 @@ Methods (count = 7):
       [13] iconst_0
       [14] istore_3 v3
       [15] goto +28 (target=43)
-      [18] ldc2_w #54
+      [18] ldc2_w #55
         - Long [98572098420]
       [21] iload_3 v3
       [22] bipush 64
@@ -18574,7 +18599,7 @@ Methods (count = 7):
       [44] iload_2 v2
       [45] ificmplt -27 (target=18)
       [48] aload_1 v1
-      [49] invokestatic #64
+      [49] invokestatic #65
         - Methodref [com/dexnamic/alwayscharged/a/a.a ([B)Ljava/lang/String;]
       [52] areturn
       Code attribute exceptions (count = 0):
