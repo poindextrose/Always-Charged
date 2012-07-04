@@ -128,7 +128,11 @@ public class Security {
 			 * Generally, encryption keys / passwords should only be kept in
 			 * memory long enough to perform the operation they need to perform.
 			 */
+			// public key for shawnpoindexter@gmail.com
 			String encryptedPublicKey = "RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWn1qFoOOzjnsRodkWX6OYvIxCoXBIeJGQZuAmgKyIZsfhGSlq+I605RDn89Ei17bQVV86bedEp8cpz0NN0L4ojoaueG1D1OpCu/8ZjFqtdfEAZja2fMsK6ri8uVqYhfyTt96gq2Ps8K4aLcrHia1SEO97QG0nS9IWIYWL5NbJaheL2Si7z+VxrOWpB1FmcwK+a+bvHdJ2aTkZrC/ugWcCgnS1rgjDivYlWXV39VoSeB59ToQ7AHcPRt0Q9D1mi1SRy7vZocc3SU8xzs4+ywe1slMcjLTC4533ily3IH/fQCFM2+lILNTj9A1nZ4E6l4VHsXQN9u7hcZVF84Fl3YigFwkGAwEB";
+			// public key for shawn@poindexter.us
+			String encryptedPublicKey2 = "RDjcTIfWa7/x6/7dWttqtFuo1mi3m8Lmw/u91G01WiwWpeHIDlES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCkb2zCodT5Nyvfgq7ZTl+xOzlU4tpTUYTrMaiVF5+JdvbaeS6IvjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4Z9CPoX01IO9LFJiFxSNr3porPVME06pB1DC1snS63bVAZZR2e8HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hGJ/bOhWa7oc6yxcGODZDc3nBG3n6VqDC1rz9/FVgk5nV4TKFw3egqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RsNJkppqTnYmVknB0RZ3p+y7J8+fU005/x8h4h8jEebP4QkGAwEB";
+
 			final long decryptionKey = 98572098420l;
 			PublicKey key;
 			try {
@@ -136,6 +140,13 @@ public class Security {
 				verified = Security.verify(key, signedData, signature);
 			} catch (Exception e) {
 				verified = false;
+			}
+			if(!verified) {
+				try {
+					key = Security.generatePublicKey(decryptKey(encryptedPublicKey2, decryptionKey));
+					verified = Security.verify(key, signedData, signature);
+				} catch (Exception e) {
+				}
 			}
 			if (!verified) {
 				Log.w(TAG, "signature does not match data.");
@@ -273,18 +284,18 @@ public class Security {
 		return Base64.encode(keyBytes);
 	}
 
-	// private static String encryptKey(String key, long scramble) {
-	//
-	// byte[] keyBytes = Base64.decode(key, Base64.DEFAULT);
-	//
-	// byte[] encryptedBytes = new byte[keyBytes.length];
-	//
-	// int lengthBytes = keyBytes.length;
-	// for(int i = 0; i < lengthBytes; i++) {
-	// byte temp = (byte) (scramble >> (i % Long.SIZE));
-	// encryptedBytes[i] = (byte) (keyBytes[i] ^ temp);
-	// }
-	//
-	// return Base64.encodeToString(encryptedBytes, Base64.DEFAULT);
-	// }
+	public static String encryptKey(String key, long scramble) throws Base64DecoderException {
+
+		byte[] keyBytes = Base64.decode(key);
+
+		byte[] encryptedBytes = new byte[keyBytes.length];
+
+		int lengthBytes = keyBytes.length;
+		for (int i = 0; i < lengthBytes; i++) {
+			byte temp = (byte) (scramble >> (i % Long.SIZE));
+			encryptedBytes[i] = (byte) (keyBytes[i] ^ temp);
+		}
+
+		return Base64.encode(encryptedBytes);
+	} 
 }

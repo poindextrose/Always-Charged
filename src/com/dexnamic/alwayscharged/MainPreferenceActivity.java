@@ -9,7 +9,6 @@ import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
 import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -141,6 +140,13 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		// mRestorePurchaseObserver = new RestorePurchaseObserver(this,
 		// mHandler);
 
+//		try {
+//			String encrypted = Security.encryptKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAruTKD1ES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCjJMEUSqlP7EZpWctjkzkKbpOJhGkK/VqEBjNY8WT8xCe6yX6orjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4YJsid5ZIljQmokPgf/4NZc+B4DW3igafuwcuf5JBqAeRBSQmW9HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hbCUGVKJBgzHhpqFdleAoxiNszRLPzG0kJcVBIjrXyLTD6jeHwnegqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RrfzT/TdlRuQjSR3iruhzFnhihn0Ztf0GexYXsFMpr3i9wIDAQAB", 98572098420l);
+//			Log.v("encrypted", encrypted);
+//		} catch (Base64DecoderException e) {
+//			e.printStackTrace();
+//		}
+		
 	}
 
 	@Override

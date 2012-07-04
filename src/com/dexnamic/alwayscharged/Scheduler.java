@@ -161,15 +161,6 @@ public class Scheduler {
 		cancelNotification(context);
 	}
 
-	// static void cancelAlarm(Context context, Intent intent) {
-	// PendingIntent pi = getPendingIntentUpdateCurrent(context, intent);
-	// AlarmManager alarmManager = (AlarmManager)
-	// context.getSystemService(Context.ALARM_SERVICE);
-	// alarmManager.cancel(pi);
-	//
-	// cancelNotification(context);
-	// }
-
 	static void cancelNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
