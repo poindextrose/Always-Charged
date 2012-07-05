@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class ListAlarmsCursorAdaptor extends SimpleCursorAdapter {
 	
+	private Context mContext;
+	
 	interface OnListClickListener {
 		abstract void alarmChecked(int id, boolean isChecked);
 		abstract void alarmSelected(int id);
@@ -20,6 +22,7 @@ public class ListAlarmsCursorAdaptor extends SimpleCursorAdapter {
 	public ListAlarmsCursorAdaptor(Context context, int layout, Cursor c, OnListClickListener onListClickListener) {
 		super(context, layout, c, new String[] { }, new int[] {});
 		this.onListClickListener = onListClickListener;
+		this.mContext = context;
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class ListAlarmsCursorAdaptor extends SimpleCursorAdapter {
         int repeat = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_REPEATS));
         TextView repeatTextView = (TextView) view.findViewById(R.id.alarm_repeat);
         if (repeatTextView != null) {
-        	String repeatString = Alarm.repeatToString(repeat);
+        	String repeatString = Alarm.repeatToString(mContext, repeat);
         	repeatTextView.setText(repeatString);
         }
     }

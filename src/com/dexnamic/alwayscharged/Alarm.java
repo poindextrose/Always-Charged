@@ -25,7 +25,7 @@ public class Alarm implements Serializable, Cloneable {
 	public Alarm() {
 		ID = -1;
 		setEnabled(false);
-		setLabel("my daily bedtime");
+		setLabel("");
 		setHour(21);
 		setMinute(30);
 		setRepeats(127); 
@@ -154,24 +154,24 @@ public class Alarm implements Serializable, Cloneable {
 		return formatTime(context, hour, minute);
 	}
 
-	public static String repeatToString(int repeat) {
+	public static String repeatToString(Context context, int repeat) {
 		StringBuffer repeatString = new StringBuffer();
 		if ((repeat & 1) == 1)
-			repeatString.append("Mon,");
+			repeatString.append(context.getString(R.string.mon) + ",");
 		if ((repeat >> 1 & 1) == 1)
-			repeatString.append("Tue,");
+			repeatString.append(context.getString(R.string.tue) + ",");
 		if ((repeat >> 2 & 1) == 1)
-			repeatString.append("Wed,");
+			repeatString.append(context.getString(R.string.wed) + ",");
 		if ((repeat >> 3 & 1) == 1)
-			repeatString.append("Thu,");
+			repeatString.append(context.getString(R.string.thu) + ",");
 		if ((repeat >> 4 & 1) == 1)
-			repeatString.append("Fri,");
+			repeatString.append(context.getString(R.string.fri) + ",");
 		if ((repeat >> 5 & 1) == 1)
-			repeatString.append("Sat,");
+			repeatString.append(context.getString(R.string.sat) + ",");
 		if ((repeat >> 6 & 1) == 1)
-			repeatString.append("Sun,");
+			repeatString.append(context.getString(R.string.sun) + ",");
 		if (repeatString.length() == 0)
-			repeatString.append("Never");
+			repeatString.append(context.getString(R.string.never));
 		else
 			repeatString.deleteCharAt(repeatString.length() - 1);
 		return repeatString.toString();

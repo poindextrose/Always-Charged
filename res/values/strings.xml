@@ -108,6 +108,15 @@ new features:\n
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
     <string name="purchase">Purchase</string>
+    
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="never">Never</string>
 
     <!-- Billing -->
     <string name="upgrade_pro">Upgrade to Pro</string>
@@ -124,5 +133,6 @@ new features:\n
      won\'t be able to make purchases.</string>
      <string name="check_purchase">Checking for previous purchases.</string>
      <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
+     <string name="pro_only">Pro only feature</string>
 
 </resources>

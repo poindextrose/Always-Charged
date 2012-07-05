@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -45,6 +46,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	private RingtonePreference mRingtonePreference;
 	private EditTextPreference mLabelPreference;
+
+	private Vibrator mVibrator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
+		
+		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 	}
 
 	@Override
@@ -124,7 +129,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mTimePreference.setSummary(mAlarm.getTime(this));
 
-		mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+		mRepeatPreference.setSummary(Alarm.repeatToString(this, mAlarm.getRepeats()));
 		StringBuffer checked = new StringBuffer();
 		// List<Integer> checkedIndicies = new ArrayList<Integer>();
 		for (Integer i = 0; i < 7; i++) {
@@ -152,6 +157,9 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		} else if (preference == mTimePreference) {
 			showDialog(TIME_DIALOG_ID);
 		} else if (preference == mVibrateCheckBox) {
+			if(mVibrateCheckBox.isChecked()) {
+				mVibrator.vibrate(500);
+			}
 			mAlarm.setVibrate(mVibrateCheckBox.isChecked());
 		}
 
@@ -171,7 +179,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 				repeat = repeat | (1 << Integer.parseInt(s));
 			}
 			mAlarm.setRepeats(repeat);
-			mRepeatPreference.setSummary(Alarm.repeatToString(mAlarm.getRepeats()));
+			mRepeatPreference.setSummary(Alarm.repeatToString(this, mAlarm.getRepeats()));
 			return true;
 		} else if (preference == mRingtonePreference) {
 			mAlarm.setRingtone((String) newValue);

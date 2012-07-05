@@ -130,7 +130,6 @@ public class ResponseHandler {
 					DatabaseHelper database = new DatabaseHelper(context);
 					Cursor cursor = database.getAllActiveAlarms();
 					if (cursor != null && cursor.moveToFirst()) {
-						cursor.moveToFirst();
 						do {
 							int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
 							Alarm alarm = database.getAlarm(_id);

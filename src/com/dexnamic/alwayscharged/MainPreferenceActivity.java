@@ -342,6 +342,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		PreferenceScreen ps = getPreferenceScreen();
 		ps.removePreference(mPreferenceUpgrade);
 		mPreferenceAdvanced.setEnabled(true);
+		mPreferenceAdvanced.setSummary("");
 	}
 
 	/**

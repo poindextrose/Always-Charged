@@ -10,7 +10,7 @@
         android:title="@string/set_alarm" />
     <Preference
         android:key="key_advanced"
-        android:summary=""
+        android:summary="@string/pro_only"
         android:title="@string/advanced_settings" />
     <Preference
         android:key="key_about"
