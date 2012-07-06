@@ -3,6 +3,10 @@
 
     <string name="app_name">Always Charged</string><string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
 \n
+v2.2\n
+- Added an option in Pro version to cancel alarm if your battery is above a set level.\n
+- Minor bug fixes.
+\n
 v2.1\n
 - Fixed sound on some devices including Android 4.1\n
 - Changed to alarm volume instead of ringer volume\n

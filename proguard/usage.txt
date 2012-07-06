@@ -13,7 +13,7 @@ com.dexnamic.alwayscharged.AlarmActivity:
     private static final int MSG_TIMEOUT
     static final int DIALOG_ALERT_ID
 com.dexnamic.alwayscharged.AlarmReceiver:
-    76:82:public static void startPowerSnoozeService(android.content.Context,com.dexnamic.alwayscharged.Alarm)
+    83:89:public static void startPowerSnoozeService(android.content.Context,com.dexnamic.alwayscharged.Alarm)
 com.dexnamic.alwayscharged.AlarmService:
     private static final int SENSOR_STABILZE_WAIT_TIME_MS
     private static final int MSG_TIMEOUT
@@ -73,7 +73,7 @@ com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$styleable:
     public static final int ListPreferenceMultiSelect_checkAll
     public static final int ListPreferenceMultiSelect_separator
-    169:169:public R$styleable()
+    187:187:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_ALARM

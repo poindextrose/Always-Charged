@@ -11,21 +11,16 @@ com.dexnamic.alwayscharged.AdvancedPreferences -> com.dexnamic.alwayscharged.Adv
     android.preference.ListPreference mListPreferenceSnooze -> a
     android.preference.ListPreference mListPreferenceDuration -> b
     android.preference.ListPreference mListPreferenceMotion -> c
-    java.lang.Boolean mHasPurchased -> d
-    android.preference.Preference$OnPreferenceChangeListener mOnPreferenceChangedListener -> e
+    android.preference.ListPreference mListPreferenceBattery -> d
+    java.lang.Boolean mHasPurchased -> e
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onPause() -> onPause
-    void setMotionToleranceSummary(java.lang.String) -> a
-    void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
-    android.preference.ListPreference access$0(com.dexnamic.alwayscharged.AdvancedPreferences) -> a
-    android.preference.ListPreference access$1(com.dexnamic.alwayscharged.AdvancedPreferences) -> b
-    android.preference.ListPreference access$2(com.dexnamic.alwayscharged.AdvancedPreferences) -> c
-    void access$3(com.dexnamic.alwayscharged.AdvancedPreferences,java.lang.String) -> a
-com.dexnamic.alwayscharged.AdvancedPreferences$1 -> com.dexnamic.alwayscharged.a:
-    com.dexnamic.alwayscharged.AdvancedPreferences this$0 -> a
     boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
-com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.b:
+    void setMotionToleranceSummary(java.lang.String) -> a
+    void setSkipBatterySummary(java.lang.String) -> b
+    void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
+com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.a:
     java.lang.Integer ID -> a
     java.lang.Boolean enabled -> b
     java.lang.String label -> c
@@ -54,7 +49,7 @@ com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.b:
     java.lang.Boolean getEnabled() -> h
     void setEnabled(boolean) -> a
     java.lang.CharSequence getTime(android.content.Context) -> a
-    java.lang.String repeatToString(int) -> a
+    java.lang.String repeatToString(android.content.Context,int) -> a
     java.lang.String formatTime(android.content.Context,int,int) -> a
     java.lang.String getRingerName(android.content.Context) -> b
     java.lang.Object clone() -> clone
@@ -79,17 +74,18 @@ com.dexnamic.alwayscharged.AlarmActivity -> com.dexnamic.alwayscharged.AlarmActi
     void access$0(com.dexnamic.alwayscharged.AlarmActivity) -> a
     com.dexnamic.alwayscharged.Alarm access$1(com.dexnamic.alwayscharged.AlarmActivity) -> b
     android.media.MediaPlayer access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
-    android.content.SharedPreferences access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
-com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.c:
+    android.os.Handler access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
+    android.content.SharedPreferences access$4(com.dexnamic.alwayscharged.AlarmActivity) -> e
+com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.b:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.dexnamic.alwayscharged.AlarmActivity$2 -> com.dexnamic.alwayscharged.d:
+com.dexnamic.alwayscharged.AlarmActivity$2 -> com.dexnamic.alwayscharged.c:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.dexnamic.alwayscharged.AlarmActivity$3 -> com.dexnamic.alwayscharged.e:
+com.dexnamic.alwayscharged.AlarmActivity$3 -> com.dexnamic.alwayscharged.d:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     boolean onKey(android.content.DialogInterface,int,android.view.KeyEvent) -> onKey
-com.dexnamic.alwayscharged.AlarmActivity$4 -> com.dexnamic.alwayscharged.f:
+com.dexnamic.alwayscharged.AlarmActivity$4 -> com.dexnamic.alwayscharged.e:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.AlarmReceiver -> com.dexnamic.alwayscharged.AlarmReceiver:
@@ -102,16 +98,17 @@ com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmServi
     android.content.SharedPreferences mSharedPreferences -> d
     boolean wasSnooze -> e
     com.dexnamic.alwayscharged.Alarm mAlarm -> f
-    android.hardware.Sensor mAccelerometer -> g
-    android.hardware.Sensor mMagneticField -> h
-    boolean mAccelRegistered -> i
-    boolean mMagneticRegistered -> j
-    boolean mAccelEventReceived -> k
-    boolean mMagneticEventReceived -> l
-    float[] mAccelValues -> m
-    float[] mMagneticValues -> n
-    boolean mStabilze -> o
-    android.os.Handler mHandler -> p
+    int mBatteryPct -> g
+    android.hardware.Sensor mAccelerometer -> h
+    android.hardware.Sensor mMagneticField -> i
+    boolean mAccelRegistered -> j
+    boolean mMagneticRegistered -> k
+    boolean mAccelEventReceived -> l
+    boolean mMagneticEventReceived -> m
+    float[] mAccelValues -> n
+    float[] mMagneticValues -> o
+    boolean mStabilze -> p
+    android.os.Handler mHandler -> q
     void onCreate() -> onCreate
     void onStart(android.content.Intent,int) -> onStart
     void onDestroy() -> onDestroy
@@ -129,7 +126,7 @@ com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmServi
     void access$1(com.dexnamic.alwayscharged.AlarmService) -> b
     void access$2(com.dexnamic.alwayscharged.AlarmService,int) -> a
     void access$3(com.dexnamic.alwayscharged.AlarmService,boolean) -> a
-com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.g:
+com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.f:
     com.dexnamic.alwayscharged.AlarmService this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dexnamic.alwayscharged.AlwaysCharged -> com.dexnamic.alwayscharged.AlwaysCharged:
@@ -137,7 +134,7 @@ com.dexnamic.alwayscharged.AlwaysCharged -> com.dexnamic.alwayscharged.AlwaysCha
     java.lang.Long RAND_PURCHASED -> b
     java.lang.Long RAND_REFUNDED -> c
     void onCreate() -> onCreate
-com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.h:
+com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.g:
     android.content.Context context -> a
     java.lang.String CREATE_TABLE_ALARMS -> b
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
@@ -163,6 +160,7 @@ com.dexnamic.alwayscharged.EditAlarmPreferenceActivity -> com.dexnamic.alwayscha
     android.widget.Button okButton -> j
     android.preference.RingtonePreference mRingtonePreference -> k
     android.preference.EditTextPreference mLabelPreference -> l
+    android.os.Vibrator mVibrator -> m
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onResume() -> onResume
@@ -185,15 +183,16 @@ com.dexnamic.alwayscharged.ListAlarmsActivity -> com.dexnamic.alwayscharged.List
     void alarmChecked(int,boolean) -> a
     void alarmSelected(int) -> a
     void onClick(android.view.View) -> onClick
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged.i:
-    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener onListClickListener -> a
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged.h:
+    android.content.Context mContext -> a
+    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener onListClickListener -> b
     void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener access$0(com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor) -> a
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnItemClickListener -> com.dexnamic.alwayscharged.j:
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnItemClickListener -> com.dexnamic.alwayscharged.i:
     int id -> a
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor this$0 -> b
     void onClick(android.view.View) -> onClick
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.dexnamic.alwayscharged.k:
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.dexnamic.alwayscharged.j:
     void alarmChecked(int,boolean) -> a
     void alarmSelected(int) -> a
 com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.MainPreferenceActivity:
@@ -219,14 +218,14 @@ com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.
     android.app.AlertDialog$Builder aboutDialogBuilder() -> a
     void upgradeToPro() -> b
     void access$0(com.dexnamic.alwayscharged.MainPreferenceActivity) -> a
-com.dexnamic.alwayscharged.MainPreferenceActivity$1 -> com.dexnamic.alwayscharged.l:
+com.dexnamic.alwayscharged.MainPreferenceActivity$1 -> com.dexnamic.alwayscharged.k:
     com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$2 -> com.dexnamic.alwayscharged.m:
+com.dexnamic.alwayscharged.MainPreferenceActivity$2 -> com.dexnamic.alwayscharged.l:
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$3 -> com.dexnamic.alwayscharged.n:
+com.dexnamic.alwayscharged.MainPreferenceActivity$3 -> com.dexnamic.alwayscharged.m:
     void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.o:
+com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.n:
     com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
     void onBillingSupported(boolean,java.lang.String) -> a
     void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
@@ -239,18 +238,19 @@ com.dexnamic.alwayscharged.PowerReceiver -> com.dexnamic.alwayscharged.PowerRece
 com.dexnamic.alwayscharged.PowerSnoozeService -> com.dexnamic.alwayscharged.PowerSnoozeService:
     void onStart(android.content.Intent,int) -> onStart
     android.os.IBinder onBind(android.content.Intent) -> onBind
-com.dexnamic.alwayscharged.R -> com.dexnamic.alwayscharged.p:
+com.dexnamic.alwayscharged.R -> com.dexnamic.alwayscharged.o:
     android.os.PowerManager$WakeLock mWakeLock -> a
     int setDailyAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm,boolean) -> a
     void cancelSnooze(android.content.Context) -> a
     void cancelNotification(android.content.Context) -> b
     void snoozeAlarm(android.content.Context,int,int,com.dexnamic.alwayscharged.Alarm) -> a
     android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> a
+    android.app.PendingIntent getPendingIntent_Snooze(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> a
     void disablePowerSnooze(android.content.Context) -> c
     void releaseWakeLock() -> a
     void resetRepeatCount(android.content.Context,android.content.SharedPreferences) -> a
-    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> a
-com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.q:
+    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> b
+com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.p:
     int[] ListPreferenceMultiSelect -> a
 com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
