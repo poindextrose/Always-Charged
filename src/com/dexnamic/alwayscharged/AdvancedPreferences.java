@@ -15,13 +15,14 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
 public class AdvancedPreferences extends PreferenceActivity implements
-		OnSharedPreferenceChangeListener
+		OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener
 // implements Preference.OnPreferenceClickListener
 {
 
 	private ListPreference mListPreferenceSnooze;
 	private ListPreference mListPreferenceDuration;
 	private ListPreference mListPreferenceMotion;
+	private ListPreference mListPreferenceBattery;
 	private Boolean mHasPurchased;
 
 	// private Preference mTestPref;
@@ -40,23 +41,32 @@ public class AdvancedPreferences extends PreferenceActivity implements
 				MainPreferenceActivity.KEY_SNOOZE_TIME_MIN, "***")
 				+ " "
 				+ getString(R.string.minutes));
-		mListPreferenceSnooze.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mListPreferenceSnooze.setOnPreferenceChangeListener(this);
 
 		mListPreferenceDuration = (ListPreference) ps
 				.findPreference(MainPreferenceActivity.KEY_DURATION);
 		mListPreferenceDuration.setSummary(settings.getString(MainPreferenceActivity.KEY_DURATION,
 				"***") + " " + getString(R.string.seconds));
-		mListPreferenceDuration.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mListPreferenceDuration.setOnPreferenceChangeListener(this);
 
 		mListPreferenceMotion = (ListPreference) ps
 				.findPreference(MainPreferenceActivity.KEY_MOTION_TOLERANCE);
 		setMotionToleranceSummary(settings.getString(MainPreferenceActivity.KEY_MOTION_TOLERANCE,
 				"***"));
-		mListPreferenceMotion.setOnPreferenceChangeListener(mOnPreferenceChangedListener);
+		mListPreferenceMotion.setOnPreferenceChangeListener(this);
+
+		{
+			String key = getString(R.string.key_skip_battery);
+			mListPreferenceBattery = (ListPreference) ps.findPreference(key);
+			String defaultBattery = getResources().getStringArray(
+					R.array.cancel_battery_entries)[0];
+			setSkipBatterySummary(settings.getString(key, defaultBattery));
+			mListPreferenceBattery.setOnPreferenceChangeListener(this);
+		}
 
 		// mTestPref = ps.findPreference("test1");
 		// mTestPref.setOnPreferenceClickListener(this);
-		
+
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 
@@ -77,6 +87,7 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		mListPreferenceDuration.setEnabled(true);
 		mListPreferenceMotion.setEnabled(true);
 		mListPreferenceSnooze.setEnabled(true);
+		mListPreferenceBattery.setEnabled(true);
 	}
 
 	@Override
@@ -88,24 +99,24 @@ public class AdvancedPreferences extends PreferenceActivity implements
 				this);
 	}
 
-	Preference.OnPreferenceChangeListener mOnPreferenceChangedListener = new Preference.OnPreferenceChangeListener() {
-		@Override
-		public boolean onPreferenceChange(Preference preference, Object newValue) {
-			// Toast.makeText(MainActivity.this, (String) newValue,
-			// Toast.LENGTH_LONG).show();
-			// Log.d("dexnamic", "newValue=" + (String)newValue);
-			if (preference == mListPreferenceSnooze) {
-				String minutes = AdvancedPreferences.this.getString(R.string.minutes);
-				mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
-			} else if (preference == mListPreferenceDuration) {
-				String seconds = AdvancedPreferences.this.getString(R.string.seconds);
-				mListPreferenceDuration.setSummary((String) newValue + " " + seconds);
-			} else if (preference == mListPreferenceMotion) {
-				setMotionToleranceSummary((String) newValue);
-			}
-			return true;
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		// Toast.makeText(MainActivity.this, (String) newValue,
+		// Toast.LENGTH_LONG).show();
+		// Log.d("dexnamic", "newValue=" + (String)newValue);
+		if (preference == mListPreferenceSnooze) {
+			String minutes = AdvancedPreferences.this.getString(R.string.minutes);
+			mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
+		} else if (preference == mListPreferenceDuration) {
+			String seconds = AdvancedPreferences.this.getString(R.string.seconds);
+			mListPreferenceDuration.setSummary((String) newValue + " " + seconds);
+		} else if (preference == mListPreferenceMotion) {
+			setMotionToleranceSummary((String) newValue);
+		} else if (preference == mListPreferenceBattery) {
+			setSkipBatterySummary((String) newValue);
 		}
-	};
+		return true;
+	}
 
 	private void setMotionToleranceSummary(String newSummary) {
 		int motionTolerance = Integer.parseInt(newSummary);
@@ -115,6 +126,17 @@ public class AdvancedPreferences extends PreferenceActivity implements
 			summary = (String) newSummary + " " + degrees;
 		}
 		mListPreferenceMotion.setSummary(summary);
+	}
+
+	private void setSkipBatterySummary(String value) {
+		String[] entries = getResources().getStringArray(R.array.cancel_battery_entries);
+		String[] entryValues = getResources().getStringArray(R.array.cancel_battery_entryValues);
+		for (int i = 0; i < entries.length; i++) {
+			if (entryValues[i].contentEquals(value)) {
+				mListPreferenceBattery.setSummary(entries[i]);
+				return;
+			}
+		}
 	}
 
 	@Override

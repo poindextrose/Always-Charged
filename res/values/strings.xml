@@ -117,6 +117,10 @@ new features:\n
     <string name="sat">Sat</string>
     <string name="sun">Sun</string>
     <string name="never">Never</string>
+    
+    <string name="cancel_battery">Skip alarm if battery charged</string>
+    <string name="skipped_alarm_battery">Alarm skipped. Battery</string>
+    <string name="percent">percent</string>
 
     <!-- Billing -->
     <string name="upgrade_pro">Upgrade to Pro</string>
@@ -134,5 +138,9 @@ new features:\n
      <string name="check_purchase">Checking for previous purchases.</string>
      <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
      <string name="pro_only">Pro only feature</string>
+     
+     <!-- Preference Keys -->
+     <string name="key_skip_battery">key_skip_battery</string>
+    <string name="default_skip_battery">0</string>
 
 </resources>

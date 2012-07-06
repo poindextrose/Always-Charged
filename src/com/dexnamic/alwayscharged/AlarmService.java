@@ -2,6 +2,9 @@ package com.dexnamic.alwayscharged;
 
 import java.lang.reflect.Method;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +14,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -50,6 +54,7 @@ public class AlarmService extends Service implements SensorEventListener {
 	}
 
 	Alarm mAlarm;
+	private int mBatteryPct;
 
 	@Override
 	public void onStart(Intent intent, int startId) {
@@ -75,6 +80,9 @@ public class AlarmService extends Service implements SensorEventListener {
 			Scheduler.releaseWakeLock();
 			return;
 		}
+		int level = intentBattery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+		int scale = intentBattery.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+		mBatteryPct = (int) (100.0 * level / (float) scale);
 
 		// if screen is on, snooze alarm
 		// if phone call is progress, snooze alarm
@@ -93,8 +101,11 @@ public class AlarmService extends Service implements SensorEventListener {
 		if (action != null && action.equals(Scheduler.TYPE_SNOOZE)) {
 			Log.v(this.getClass().getSimpleName(), "wasSnooze = true");
 			wasSnooze = true;
-		} else
+			if (shouldSkipAlarmIfBatteryCharged(this))
+				return;
+		} else {
 			wasSnooze = false;
+		}
 
 		if (mMotionToleranceDeg > 0)
 			startReadingSensors();
@@ -104,9 +115,52 @@ public class AlarmService extends Service implements SensorEventListener {
 				doAlarm();
 			} else {
 				Log.v(this.getClass().getSimpleName(), "motion detection disabled.  snoozing...");
-				doSnooze(R.string.notify_motion);
+				doSnooze(R.string.notify_init);
 			}
 		}
+	}
+
+	private boolean shouldSkipAlarmIfBatteryCharged(Context context) {
+
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		String value = settings.getString(context.getString(R.string.key_skip_battery),
+				context.getString(R.string.default_skip_battery));
+		Integer batteryCheck = Integer.valueOf(value);
+		Log.v(this.getClass().getSimpleName(), "batteryCheck=" + batteryCheck);
+		if (batteryCheck == 0)
+			return false;
+		
+		Log.v(this.getClass().getSimpleName(), "battery percent=" + mBatteryPct);
+		if (mBatteryPct >= batteryCheck) {
+			Log.v(this.getClass().getSimpleName(), "alarm cancel because battery level > "
+					+ batteryCheck);
+			// let them know with a notification
+
+			NotificationManager nm = (NotificationManager) context
+					.getSystemService(Context.NOTIFICATION_SERVICE);
+
+			String text = context.getString(R.string.skipped_alarm_battery) + " " + mBatteryPct
+					+ " " + context.getString(R.string.percent);
+			// Set the icon, scrolling text and timestamp
+			Notification notification = new Notification(R.drawable.ic_stat_notify, text,
+					System.currentTimeMillis());
+			// The PendingIntent to launch our activity if the user selects
+			// this
+			// notification
+			Intent intent = new Intent(context, MainPreferenceActivity.class);
+			PendingIntent npi = PendingIntent.getBroadcast(context, 0, intent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+			// Set the info for the views that show in the notification
+			// panel.
+			notification.setLatestEventInfo(context, context.getString(R.string.app_name), text,
+					npi);
+			// set notification to appear in "Ongoing" category
+			notification.flags = notification.flags | Notification.FLAG_AUTO_CANCEL;
+
+			nm.notify(Scheduler.NOTIFY_SNOOZE, notification);
+			return true;
+		} else
+			return false;
 	}
 
 	@Override
@@ -242,7 +296,8 @@ public class AlarmService extends Service implements SensorEventListener {
 				PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, this
 						.getClass().getName());
 		newWakeLock.setReferenceCounted(false);
-		String stringAlarmDuration = mSharedPreferences.getString(MainPreferenceActivity.KEY_DURATION, "30");
+		String stringAlarmDuration = mSharedPreferences.getString(
+				MainPreferenceActivity.KEY_DURATION, "30");
 		long alarmDuration = Long.parseLong(stringAlarmDuration);
 		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for
 															// duration of alarm

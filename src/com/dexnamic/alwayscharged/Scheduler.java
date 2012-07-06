@@ -34,7 +34,7 @@ public class Scheduler {
 	 * 
 	 * @param context
 	 *            - Application context
-	 * @param b 
+	 * @param b
 	 * @param hourOfDay
 	 *            - hour to set alarm (0-23)
 	 * @param minute
@@ -86,7 +86,6 @@ public class Scheduler {
 					PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, alarm, day);
 					alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 							alarmCalendar.getTimeInMillis(), week_ms, pendingIntent);
-					Log.v("", "setRepeating " + alarmCalendar.toString());
 				}
 			}
 		} else {
@@ -101,15 +100,12 @@ public class Scheduler {
 			PendingIntent pendingIntent = getPendingIntentUpdateCurrent(context, alarm, -1);
 			alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(),
 					pendingIntent);
-			Log.v("", "set " + alarmCalendar.toString());
 			nearestAlarmCalendar = (Calendar) alarmCalendar.clone();
 		}
 
 		int minutesUntilNextAlarm = 1 + (int) ((nearestAlarmCalendar.getTimeInMillis() - now
 				.getTimeInMillis()) / 1000 / 60);
-		// Toast.makeText(context, "Minutes = " + minutesUntilNextAlarm,
-		// Toast.LENGTH_LONG).show();
-		if(showToast)
+		if (showToast)
 			notifyUserTimeUntilAlarm(context, minutesUntilNextAlarm);
 
 		return minutesUntilNextAlarm;
@@ -152,8 +148,7 @@ public class Scheduler {
 
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(TYPE_SNOOZE);
-		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent pi = getPendingIntent_Snooze(context, null);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(pi);
 		Log.v("AlarmScheduler", "cancelSnooze()");
@@ -169,6 +164,9 @@ public class Scheduler {
 
 	static void snoozeAlarm(Context context, int snoozeTime_min, int reason_resource_id, Alarm alarm) {
 
+		Log.v("Scheduler",
+				"snoozeAlarm(), min=" + snoozeTime_min + ", reason="
+						+ context.getString(reason_resource_id));
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		String strMinutes = settings.getString(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,
 				context.getString(R.string.default_snooze_time));
@@ -182,7 +180,8 @@ public class Scheduler {
 		alarmManager.set(AlarmManager.RTC_WAKEUP, time_ms, pi);
 
 		// no need to notify user before alarm may go off...
-		if (reason_resource_id != R.string.notify_init) {
+//		if (reason_resource_id != R.string.notify_init) 
+		{
 			try {
 				NotificationManager nm = (NotificationManager) context
 						.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -225,7 +224,8 @@ public class Scheduler {
 	static PendingIntent getPendingIntent_Snooze(Context context, Alarm alarm) {
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.setAction(TYPE_SNOOZE);
-		intent.putExtra(TYPE_ALARM, alarm);
+		if (alarm != null)
+			intent.putExtra(TYPE_ALARM, alarm);
 		return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 	}

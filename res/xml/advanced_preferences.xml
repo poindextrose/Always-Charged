@@ -17,4 +17,11 @@
 		android:dialogTitle="@string/dialog_title_motion_tolerance"
 		android:defaultValue="@string/default_motion_tolerance"
 		android:enabled="false" />
+	<ListPreference android:key="@string/key_skip_battery"
+	    android:title="@string/cancel_battery"
+	    android:entries="@array/cancel_battery_entries"
+	    android:entryValues="@array/cancel_battery_entryValues"
+	    android:dialogTitle="@string/cancel_battery"
+	    android:defaultValue="@string/default_skip_battery"
+	    android:enabled="false" />
 </PreferenceScreen>

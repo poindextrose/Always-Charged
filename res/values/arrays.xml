@@ -41,6 +41,23 @@
         <item>8</item>
         <item>0</item>
     </string-array>
+    
+    <string-array name="cancel_battery_entries">
+        <item>No</item>
+        <item>90 percent</item>
+        <item>80 percent</item>
+        <item>70 percent</item>
+        <item>60 percent</item>
+        <item>50 percent</item>
+    </string-array>
+    <string-array name="cancel_battery_entryValues">
+        <item>0</item>
+        <item>90</item>
+        <item>80</item>
+        <item>70</item>
+        <item>60</item>
+        <item>50</item>
+    </string-array>
         
 	<string-array name="pref_days_of_week">
 		<item>Monday</item>

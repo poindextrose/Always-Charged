@@ -232,6 +232,7 @@ public class AlarmActivity extends Activity {
 			builder.setMessage(getString(R.string.alarm_message)).setCancelable(false)
 					.setPositiveButton(snoozeText, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
+							mHandler.removeMessages(MSG_TIMEOUT);
 							stopRingtone();
 							Scheduler.resetRepeatCount(AlarmActivity.this, mSettings);
 							Scheduler.snoozeAlarm(AlarmActivity.this, 0,
@@ -269,7 +270,6 @@ public class AlarmActivity extends Activity {
 	protected void onStop() {
 		super.onStop();
 		stopRingtone();
-//		mHandler.removeMessages(MSG_TIMEOUT);
 //		try {
 //			// mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
 //			// mSaveVolume, 0);
