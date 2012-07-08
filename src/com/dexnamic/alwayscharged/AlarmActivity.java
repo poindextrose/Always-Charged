@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -152,9 +154,9 @@ public class AlarmActivity extends Activity {
 
 		@Override
 		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-			if (mMediaPlayer.isPlaying()) {
+//			if (mMediaPlayer.isPlaying()) {
 				stopRingtone();
-			}
+//			}
 			return false;
 		}
 	};
@@ -183,6 +185,15 @@ public class AlarmActivity extends Activity {
 		try {
 			Uri uri = Uri.parse(chosenRingtone);
 			mMediaPlayer = new MediaPlayer();
+//			mMediaPlayer.setOnErrorListener(new OnErrorListener() {
+//				
+//				@Override
+//				public boolean onError(MediaPlayer mp, int what, int extra) {
+//					Log.e(this.getClass().getSimpleName(), "onError(), what="+what+", extra="+extra);
+//					mp.reset();
+//					return true;
+//				}
+//			});
 			mMediaPlayer.setDataSource(this, uri);
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
 //			for (int i = 1; i <= 8; i *= 2) {
