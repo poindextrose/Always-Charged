@@ -122,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		alarm.setRepeats(cursor.getInt(cursor.getColumnIndex(KEY_REPEATS)));
 		alarm.setRingtone(cursor.getString(cursor.getColumnIndex(KEY_RINGTONE)));
 		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE)) == 1);
+		cursor.close();
 		return alarm;
 	}
 	
