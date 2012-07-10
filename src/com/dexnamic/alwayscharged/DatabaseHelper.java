@@ -78,7 +78,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 		alarm.setID(id);
-		db.close();
 
 		if (id >= 0 && alarm.getEnabled()) {
 			Scheduler.setDailyAlarm(context, alarm, true);
@@ -125,12 +124,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		alarm.setVibrate(cursor.getInt(cursor.getColumnIndex(KEY_VIBRATE)) == 1);
 		return alarm;
 	}
+	
+	public void deleteAlarm(int id) {
+		Scheduler.cancelAlarm(context, getAlarm(id));	
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(id) });
+	}
 
 	public void deleteAlarm(Alarm alarm) {
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_ALARMS, KEY_ID + " = ?", new String[] { String.valueOf(alarm.getID()) });
-		db.close();
-		Scheduler.cancelAlarm(context, alarm);
+		deleteAlarm(alarm.getID());
 	}
 
 	public Cursor getAllAlarms() {

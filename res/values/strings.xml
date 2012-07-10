@@ -3,6 +3,9 @@
 
     <string name="app_name">Always Charged</string><string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
 \n
+v2.2.1\n
+- Added a long-click context menu to alarm list\n
+- Fixed a crash bug when hitting a key during alarm\n
 v2.2\n
 - Added an option in Pro version to cancel alarm if your battery is above a set level.\n
 - Minor bug fixes.
@@ -40,6 +43,7 @@ v1.1.1\n
     <string name="default_motion_tolerance">4</string>
     <string name="default_alarm_duration">20</string>
     <string name="enable_alarm">Enable Charge Reminder</string>
+    <string name="disable_alarm">Disable Charge Reminder</string>
     <string name="enable_alarm_summary">Sounds after bedtime only if phone is not charging and is motionless for 5 to 10 minutes</string>
     <string name="time">Time</string>
     <string name="repeat">Repeat</string>
@@ -141,10 +145,14 @@ new features:\n
      won\'t be able to make purchases.</string>
      <string name="check_purchase">Checking for previous purchases.</string>
      <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
-     <string name="pro_only">Pro only feature</string>
+     <string name="pro_only">Pro only features</string>
      
      <!-- Preference Keys -->
      <string name="key_skip_battery">key_skip_battery</string>
     <string name="default_skip_battery">0</string>
+    
+    <string name="edit_alarm">Edit Alarm</string>
+    
+    <string name="delete_alarm">Delete Alarm</string>
 
 </resources>

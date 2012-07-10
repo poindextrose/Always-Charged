@@ -73,7 +73,7 @@ com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$styleable:
     public static final int ListPreferenceMultiSelect_checkAll
     public static final int ListPreferenceMultiSelect_separator
-    187:187:public R$styleable()
+    194:194:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_ALARM

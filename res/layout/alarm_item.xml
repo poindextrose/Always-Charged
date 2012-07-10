@@ -25,9 +25,10 @@
         android:layout_alignBottom="@+id/checkbox_wrapper"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/checkbox_wrapper"
-        android:background="@drawable/layout_selector"
-        android:clickable="true"
-        android:padding="5dp" >
+	    android:background="@drawable/layout_selector"
+        android:padding="5dp"
+	    android:clickable="true"
+        android:longClickable="true" >
 
         <!--
             android:focusable="true"

@@ -73,9 +73,8 @@ com.dexnamic.alwayscharged.AlarmActivity -> com.dexnamic.alwayscharged.AlarmActi
     boolean repeatAlarm() -> b
     void access$0(com.dexnamic.alwayscharged.AlarmActivity) -> a
     com.dexnamic.alwayscharged.Alarm access$1(com.dexnamic.alwayscharged.AlarmActivity) -> b
-    android.media.MediaPlayer access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
-    android.os.Handler access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
-    android.content.SharedPreferences access$4(com.dexnamic.alwayscharged.AlarmActivity) -> e
+    android.os.Handler access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
+    android.content.SharedPreferences access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
 com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.b:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
@@ -144,6 +143,7 @@ com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.g:
     int updateAlarm(com.dexnamic.alwayscharged.Alarm) -> b
     android.content.ContentValues putValues(com.dexnamic.alwayscharged.Alarm) -> d
     com.dexnamic.alwayscharged.Alarm getAlarm(int) -> a
+    void deleteAlarm(int) -> b
     void deleteAlarm(com.dexnamic.alwayscharged.Alarm) -> c
     android.database.Cursor getAllAlarms() -> b
     android.database.Cursor getAllActiveAlarms() -> c
@@ -178,11 +178,14 @@ com.dexnamic.alwayscharged.ListAlarmsActivity -> com.dexnamic.alwayscharged.List
     com.dexnamic.alwayscharged.DatabaseHelper dbHelper -> a
     android.widget.Button addButton -> b
     android.database.Cursor cursor -> c
+    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor mAdapter -> d
     void onCreate(android.os.Bundle) -> onCreate
     void onDestroy() -> onDestroy
     void alarmChecked(int,boolean) -> a
     void alarmSelected(int) -> a
     void onClick(android.view.View) -> onClick
+    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
+    boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
 com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged.h:
     android.content.Context mContext -> a
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener onListClickListener -> b
