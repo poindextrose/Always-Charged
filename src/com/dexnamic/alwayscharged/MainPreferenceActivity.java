@@ -20,6 +20,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
@@ -228,6 +229,14 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		switch (item.getItemId()) {
 		case R.id.email_dev:
 			sendFeedbackEmail();
+			return true;
+		case R.id.change_log:
+			showDialog(CHANGELOG_DIALOG_ID);
+			return true;
+		case R.id.rate_app:
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("market://details?id=com.dexnamic.alwayscharged"));
+			startActivity(intent);
 			return true;
 		}
 

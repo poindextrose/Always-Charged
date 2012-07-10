@@ -154,5 +154,7 @@ new features:\n
     <string name="edit_alarm">Edit Alarm</string>
     
     <string name="delete_alarm">Delete Alarm</string>
+    
+    <string name="rate_app">Rate app</string>
 
 </resources>
