@@ -21,17 +21,7 @@ public class ResetAlarmsReceiver extends BroadcastReceiver {
 							&& intent.getDataString() != null && intent.getDataString().contains(
 							context.getPackageName()))
 					|| action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-				DatabaseHelper database = new DatabaseHelper(context);
-				Cursor cursor = database.getAllActiveAlarms();
-				if (cursor != null && cursor.moveToFirst()) {
-					do {
-						int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
-						Alarm alarm = database.getAlarm(_id);
-						Scheduler.setDailyAlarm(context, alarm, false);
-					} while (cursor.moveToNext());
-				}
-				cursor.close();
-				database.close();
+				Scheduler.resetAllEnabledAlarms(context);
 				return;
 			}
 		}

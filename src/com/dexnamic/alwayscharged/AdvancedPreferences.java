@@ -107,6 +107,7 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		if (preference == mListPreferenceSnooze) {
 			String minutes = AdvancedPreferences.this.getString(R.string.minutes);
 			mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
+			Scheduler.resetAllEnabledAlarms(this);
 		} else if (preference == mListPreferenceDuration) {
 			String seconds = AdvancedPreferences.this.getString(R.string.seconds);
 			mListPreferenceDuration.setSummary((String) newValue + " " + seconds);

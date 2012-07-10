@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -283,6 +284,21 @@ public class Scheduler {
 		}
 	}
 
+	public static void resetAllEnabledAlarms(Context context) {
+		cancelSnooze(context);
+		DatabaseHelper database = new DatabaseHelper(context);
+		Cursor cursor = database.getAllActiveAlarms();
+		if (cursor != null && cursor.moveToFirst()) {
+			do {
+				int _id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.KEY_ID));
+				Alarm alarm = database.getAlarm(_id);
+				Scheduler.setDailyAlarm(context, alarm, false);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		database.close();
+	}
+	
 	// static void disableAllAlarms(Context context) {
 	// cancelAlarm(context, AlarmScheduler.TYPE_ALARM);
 	// cancelAlarm(context, AlarmScheduler.TYPE_SNOOZE);
