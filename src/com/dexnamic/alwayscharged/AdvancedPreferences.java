@@ -24,6 +24,7 @@ public class AdvancedPreferences extends PreferenceActivity implements
 	private ListPreference mListPreferenceMotion;
 	private ListPreference mListPreferenceBattery;
 	private Boolean mHasPurchased;
+	private boolean mSnoozeWasChanged;
 
 	// private Preference mTestPref;
 
@@ -69,6 +70,13 @@ public class AdvancedPreferences extends PreferenceActivity implements
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		mSnoozeWasChanged = false;
+	}
 
 	@Override
 	protected void onResume() {
@@ -98,6 +106,14 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
 				this);
 	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		if(mSnoozeWasChanged)
+			Scheduler.resetAllEnabledAlarms(this);
+	}
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -107,7 +123,11 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		if (preference == mListPreferenceSnooze) {
 			String minutes = AdvancedPreferences.this.getString(R.string.minutes);
 			mListPreferenceSnooze.setSummary((String) newValue + " " + minutes);
-			Scheduler.resetAllEnabledAlarms(this);
+			/* we need to update all alarms when snooze time is changed
+			 * but the preference hasn't changed until after this method
+			 * completes so lets flag it so we reset the alarms in onStop()
+			 */
+			mSnoozeWasChanged = true;
 		} else if (preference == mListPreferenceDuration) {
 			String seconds = AdvancedPreferences.this.getString(R.string.seconds);
 			mListPreferenceDuration.setSummary((String) newValue + " " + seconds);
