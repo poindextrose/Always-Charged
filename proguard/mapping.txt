@@ -13,9 +13,12 @@ com.dexnamic.alwayscharged.AdvancedPreferences -> com.dexnamic.alwayscharged.Adv
     android.preference.ListPreference mListPreferenceMotion -> c
     android.preference.ListPreference mListPreferenceBattery -> d
     java.lang.Boolean mHasPurchased -> e
+    boolean mSnoozeWasChanged -> f
     void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
+    void onStop() -> onStop
     boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
     void setMotionToleranceSummary(java.lang.String) -> a
     void setSkipBatterySummary(java.lang.String) -> b
@@ -253,6 +256,7 @@ com.dexnamic.alwayscharged.R -> com.dexnamic.alwayscharged.o:
     void releaseWakeLock() -> a
     void resetRepeatCount(android.content.Context,android.content.SharedPreferences) -> a
     void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> b
+    void resetAllEnabledAlarms(android.content.Context) -> d
 com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.p:
     int[] ListPreferenceMultiSelect -> a
 com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
@@ -384,7 +388,6 @@ com.dexnamic.alwayscharged.billing.Security -> com.dexnamic.alwayscharged.billin
     java.util.ArrayList verifyPurchase(java.lang.String,java.lang.String) -> a
     java.security.PublicKey generatePublicKey(java.lang.String) -> a
     boolean verify(java.security.PublicKey,java.lang.String,java.lang.String) -> a
-    java.lang.String decryptKey(java.lang.String,long) -> a
 com.dexnamic.alwayscharged.billing.Security$VerifiedPurchase -> com.dexnamic.alwayscharged.billing.o:
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState purchaseState -> a
     java.lang.String notificationId -> b
@@ -425,10 +428,7 @@ com.dexnamic.alwayscharged.billing.UpgradeProActivity$UpgradePurchaseObserver ->
     void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
 com.dexnamic.alwayscharged.util.Base64 -> com.dexnamic.alwayscharged.a.a:
-    byte[] ALPHABET -> a
-    byte[] DECODABET -> b
-    boolean $assertionsDisabled -> c
-    java.lang.String encode(byte[]) -> a
+    byte[] DECODABET -> a
     int decode4to3(byte[],int,byte[],int,byte[]) -> a
     byte[] decode(java.lang.String) -> a
 com.dexnamic.alwayscharged.util.Base64DecoderException -> com.dexnamic.alwayscharged.a.b:

@@ -73,7 +73,7 @@ com.dexnamic.alwayscharged.R$string
 com.dexnamic.alwayscharged.R$styleable:
     public static final int ListPreferenceMultiSelect_checkAll
     public static final int ListPreferenceMultiSelect_separator
-    194:194:public R$styleable()
+    197:197:public R$styleable()
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_ALARM
@@ -81,7 +81,7 @@ com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_NOTIFY
     static final java.lang.String KEY_POWER_SNOOZE
     static final int NOTIFY_SNOOZE
-    17:17:public Scheduler()
+    18:18:public Scheduler()
 com.dexnamic.alwayscharged.billing.BillingReceiver:
     private static final java.lang.String TAG
 com.dexnamic.alwayscharged.billing.BillingService:
@@ -132,7 +132,8 @@ com.dexnamic.alwayscharged.billing.Security:
     private static final java.lang.String KEY_FACTORY_ALGORITHM
     private static final java.lang.String SIGNATURE_ALGORITHM
     37:37:public Security()
-    289:299:public static java.lang.String encryptKey(java.lang.String,long)
+    276:286:private static java.lang.String decryptKey(java.lang.String,long)
+    291:301:public static java.lang.String encryptKey(java.lang.String,long)
 com.dexnamic.alwayscharged.billing.UpgradeProActivity:
     private static final java.lang.String TAG
     public static final java.lang.String DB_INITIALIZED
@@ -145,7 +146,11 @@ com.dexnamic.alwayscharged.util.Base64:
     private static final byte NEW_LINE
     private static final byte WHITE_SPACE_ENC
     private static final byte EQUALS_SIGN_ENC
+    210:234:private static byte[] encode3to4(byte[],int,int,byte[],int,byte[])
+    247:247:public static java.lang.String encode(byte[])
     258:258:public static java.lang.String encodeWebSafe(byte[],boolean)
+    274:286:public static java.lang.String encode(byte[],int,int,byte[],boolean)
+    301:345:public static byte[] encode(byte[],int,int,byte[],int)
     431:432:public static byte[] decodeWebSafe(java.lang.String)
     445:445:public static byte[] decode(byte[])
     458:458:public static byte[] decodeWebSafe(byte[])
