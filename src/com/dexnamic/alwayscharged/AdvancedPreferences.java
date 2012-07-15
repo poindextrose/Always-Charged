@@ -16,7 +16,6 @@ import android.preference.PreferenceScreen;
 
 public class AdvancedPreferences extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener
-// implements Preference.OnPreferenceClickListener
 {
 
 	private ListPreference mListPreferenceSnooze;
@@ -24,9 +23,7 @@ public class AdvancedPreferences extends PreferenceActivity implements
 	private ListPreference mListPreferenceMotion;
 	private ListPreference mListPreferenceBattery;
 	private Boolean mHasPurchased;
-	private boolean mSnoozeWasChanged;
-
-	// private Preference mTestPref;
+	private Boolean mSnoozeWasChanged;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,39 +31,7 @@ public class AdvancedPreferences extends PreferenceActivity implements
 
 		addPreferencesFromResource(R.xml.advanced_preferences);
 
-		PreferenceScreen ps = getPreferenceScreen();
-		SharedPreferences settings = ps.getSharedPreferences();
-		mListPreferenceSnooze = (ListPreference) ps
-				.findPreference(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN);
-		mListPreferenceSnooze.setSummary(settings.getString(
-				MainPreferenceActivity.KEY_SNOOZE_TIME_MIN, "***")
-				+ " "
-				+ getString(R.string.minutes));
-		mListPreferenceSnooze.setOnPreferenceChangeListener(this);
-
-		mListPreferenceDuration = (ListPreference) ps
-				.findPreference(MainPreferenceActivity.KEY_DURATION);
-		mListPreferenceDuration.setSummary(settings.getString(MainPreferenceActivity.KEY_DURATION,
-				"***") + " " + getString(R.string.seconds));
-		mListPreferenceDuration.setOnPreferenceChangeListener(this);
-
-		mListPreferenceMotion = (ListPreference) ps
-				.findPreference(MainPreferenceActivity.KEY_MOTION_TOLERANCE);
-		setMotionToleranceSummary(settings.getString(MainPreferenceActivity.KEY_MOTION_TOLERANCE,
-				"***"));
-		mListPreferenceMotion.setOnPreferenceChangeListener(this);
-
-		{
-			String key = getString(R.string.key_skip_battery);
-			mListPreferenceBattery = (ListPreference) ps.findPreference(key);
-			String defaultBattery = getResources().getStringArray(
-					R.array.cancel_battery_entries)[0];
-			setSkipBatterySummary(settings.getString(key, defaultBattery));
-			mListPreferenceBattery.setOnPreferenceChangeListener(this);
-		}
-
-		// mTestPref = ps.findPreference("test1");
-		// mTestPref.setOnPreferenceClickListener(this);
+		configurePreferences();
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
@@ -174,6 +139,38 @@ public class AdvancedPreferences extends PreferenceActivity implements
 			dataChanged.invoke(backupManager, (Object[]) null);
 		} catch (Exception e) {
 		}
+	}
+
+	private void configurePreferences() {
+	
+		PreferenceScreen ps = getPreferenceScreen();
+		SharedPreferences settings = ps.getSharedPreferences();
+		mListPreferenceSnooze = (ListPreference) ps
+				.findPreference(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN);
+		mListPreferenceSnooze.setSummary(settings.getString(
+				MainPreferenceActivity.KEY_SNOOZE_TIME_MIN, "***")
+				+ " "
+				+ getString(R.string.minutes));
+		mListPreferenceSnooze.setOnPreferenceChangeListener(this);
+	
+		mListPreferenceDuration = (ListPreference) ps
+				.findPreference(MainPreferenceActivity.KEY_DURATION);
+		mListPreferenceDuration.setSummary(settings.getString(MainPreferenceActivity.KEY_DURATION,
+				"***") + " " + getString(R.string.seconds));
+		mListPreferenceDuration.setOnPreferenceChangeListener(this);
+	
+		mListPreferenceMotion = (ListPreference) ps
+				.findPreference(MainPreferenceActivity.KEY_MOTION_TOLERANCE);
+		setMotionToleranceSummary(settings.getString(MainPreferenceActivity.KEY_MOTION_TOLERANCE,
+				"***"));
+		mListPreferenceMotion.setOnPreferenceChangeListener(this);
+	
+		String key = getString(R.string.key_skip_battery);
+		mListPreferenceBattery = (ListPreference) ps.findPreference(key);
+		String defaultBattery = getResources().getStringArray(
+				R.array.cancel_battery_entries)[0];
+		setSkipBatterySummary(settings.getString(key, defaultBattery));
+		mListPreferenceBattery.setOnPreferenceChangeListener(this);
 	}
 
 	// @Override
