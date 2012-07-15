@@ -140,7 +140,7 @@ public class ResponseHandler {
 					database.removeAllAlarms();
 					database.close();
 				}
-			});
+			}).start();
 		}
 
 		// This needs to be synchronized because the UI thread can change the
