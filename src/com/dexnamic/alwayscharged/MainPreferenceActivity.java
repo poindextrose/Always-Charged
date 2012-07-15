@@ -42,7 +42,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
-	static final int UPGRADE_DIALOG_ID = 4;
 
 	static final String TAG = "MainPreferenceActivity";
 
@@ -137,16 +136,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
-
-		// mRestorePurchaseObserver = new RestorePurchaseObserver(this,
-		// mHandler);
-
-//		try {
-//			String encrypted = Security.encryptKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAruTKD1ES8RTVF1DwXZvGTuEn1A3uW0878lFrd7IlCjJMEUSqlP7EZpWctjkzkKbpOJhGkK/VqEBjNY8WT8xCe6yX6orjsG7sOLvlSyhMHVQF0kzBItGKopcXQmh2y4YJsid5ZIljQmokPgf/4NZc+B4DW3igafuwcuf5JBqAeRBSQmW9HQQVm1Xp0XgMo7narR5FcqOh7Z3h3YK6Bj0hbCUGVKJBgzHhpqFdleAoxiNszRLPzG0kJcVBIjrXyLTD6jeHwnegqloJui3yrv4mjoumd3Hhgn4cxlAJIwh1RrfzT/TdlRuQjSR3iruhzFnhihn0Ztf0GexYXsFMpr3i9wIDAQAB", 98572098420l);
-//			Log.v("encrypted", encrypted);
-//		} catch (Base64DecoderException e) {
-//			e.printStackTrace();
-//		}
 		
 	}
 
@@ -210,9 +199,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
 			intent.setClass(this, BillingService.class);
 			startService(intent);
-			// mBillingService = new BillingService();
-			// mBillingService.setContext(this);
-			// mBillingService.restoreTransactions();
 			Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -275,7 +261,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			Intent intent = new Intent(this, AdvancedPreferences.class);
 			startActivity(intent);
 		} else if (preference == mPreferenceUpgrade) {
-			// showDialog(UPGRADE_DIALOG_ID);
 			Intent intent = new Intent(this, UpgradeProActivity.class);
 			startActivity(intent);
 		} else if (preference == mPreferenceSetAlarm) {
@@ -309,10 +294,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 			builder = changelogDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
-		case UPGRADE_DIALOG_ID:
-			// builder = upgradeDialogBuilder();
-			// alertDialog = builder.create();
-			// return alertDialog;
 		}
 		return null;
 	}
