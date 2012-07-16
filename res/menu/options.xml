@@ -3,4 +3,6 @@
     <item android:id="@+id/email_dev" android:title="@string/feedback"></item>
     <item android:id="@+id/change_log" android:title="@string/changelog_title"></item>
     <item android:id="@+id/rate_app" android:title="@string/rate_app"></item>
+    <item android:id="@+id/advanced" android:title="@string/advanced_settings"></item>
+    <item android:id="@+id/about" android:title="@string/about"></item>
 </menu>

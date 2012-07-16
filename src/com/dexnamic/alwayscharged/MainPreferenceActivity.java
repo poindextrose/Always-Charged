@@ -189,11 +189,6 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 		}
 	}
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
-
 	private void checkIfUserPurchasedUpgradeToPro() {
 		if (!AlwaysCharged.isDebuggable) {
 			Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
@@ -228,7 +223,7 @@ public class MainPreferenceActivity extends PreferenceActivity implements
 
 		return super.onMenuItemSelected(featureId, item);
 	}
-
+	
 	private void sendFeedbackEmail() {
 		Intent i = new Intent(Intent.ACTION_SEND);
 		i.setType("text/plain");

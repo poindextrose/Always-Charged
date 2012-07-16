@@ -5,6 +5,13 @@
     android:orientation="vertical" >
 
     <Button
+        android:id="@+id/upgrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/upgrade_pro" />
+    
+    <Button
         android:id="@+id/add_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
