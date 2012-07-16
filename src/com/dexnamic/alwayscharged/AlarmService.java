@@ -49,7 +49,7 @@ public class AlarmService extends Service implements SensorEventListener {
 		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 		String stringMotionTolerance = mSharedPreferences.getString(
-				MainPreferenceActivity.KEY_MOTION_TOLERANCE, "4");
+				AdvancedPreferences.KEY_MOTION_TOLERANCE, "4");
 		mMotionToleranceDeg = Float.parseFloat(stringMotionTolerance);
 	}
 
@@ -147,7 +147,7 @@ public class AlarmService extends Service implements SensorEventListener {
 			// The PendingIntent to launch our activity if the user selects
 			// this
 			// notification
-			Intent intent = new Intent(context, MainPreferenceActivity.class);
+			Intent intent = new Intent(context, ListAlarmsActivity.class);
 			PendingIntent npi = PendingIntent.getBroadcast(context, 0, intent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
 			// Set the info for the views that show in the notification
@@ -297,7 +297,7 @@ public class AlarmService extends Service implements SensorEventListener {
 						.getClass().getName());
 		newWakeLock.setReferenceCounted(false);
 		String stringAlarmDuration = mSharedPreferences.getString(
-				MainPreferenceActivity.KEY_DURATION, "30");
+				AdvancedPreferences.KEY_DURATION, "30");
 		long alarmDuration = Long.parseLong(stringAlarmDuration);
 		newWakeLock.acquire(alarmDuration + TIMEOUT_MS); // acquire lock for
 															// duration of alarm

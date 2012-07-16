@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
 
+	public final static String KEY_REPEAT_COUNT = "key_repeat_count";
+	public static final int TIMES_TO_REPEAT = 2;
+	
 	private KeyguardManager.KeyguardLock mKeyguardLock;
 
 	private MediaPlayer mMediaPlayer;
@@ -218,7 +221,7 @@ public class AlarmActivity extends Activity {
 		}
 
 		Message msg = Message.obtain(mHandler, MSG_TIMEOUT);
-		String stringAlarmDuration = mSettings.getString(MainPreferenceActivity.KEY_DURATION, "30");
+		String stringAlarmDuration = mSettings.getString(AdvancedPreferences.KEY_DURATION, "30");
 		long alarmDuration_ms = Long.parseLong(stringAlarmDuration) * 1000;
 		mHandler.sendMessageDelayed(msg, alarmDuration_ms);
 
@@ -304,11 +307,11 @@ public class AlarmActivity extends Activity {
 	}
 
 	public boolean repeatAlarm() {
-		int count = mSettings.getInt(MainPreferenceActivity.KEY_REPEAT_COUNT, 0);
+		int count = mSettings.getInt(KEY_REPEAT_COUNT, 0);
 		SharedPreferences.Editor editor = mSettings.edit();
-		if (count < MainPreferenceActivity.TIMES_TO_REPEAT) {
+		if (count < TIMES_TO_REPEAT) {
 			count++;
-			editor.putInt(MainPreferenceActivity.KEY_REPEAT_COUNT, count);
+			editor.putInt(KEY_REPEAT_COUNT, count);
 			editor.commit();
 			return true;
 		}

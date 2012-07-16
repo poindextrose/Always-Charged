@@ -59,8 +59,8 @@ public class Scheduler {
 		// return 0;
 
 		int snoozeTime = Integer.parseInt(settings.getString(
-				MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,
-				settings.getString(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,
+				AdvancedPreferences.KEY_SNOOZE_TIME_MIN,
+				settings.getString(AdvancedPreferences.KEY_SNOOZE_TIME_MIN,
 						context.getString(R.string.default_snooze_time))));
 
 		Calendar now = Calendar.getInstance();
@@ -169,7 +169,7 @@ public class Scheduler {
 				"snoozeAlarm(), min=" + snoozeTime_min + ", reason="
 						+ context.getString(reason_resource_id));
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-		String strMinutes = settings.getString(MainPreferenceActivity.KEY_SNOOZE_TIME_MIN,
+		String strMinutes = settings.getString(AdvancedPreferences.KEY_SNOOZE_TIME_MIN,
 				context.getString(R.string.default_snooze_time));
 		int minutes = Integer.parseInt(strMinutes);
 		if (snoozeTime_min > 0)
@@ -274,7 +274,7 @@ public class Scheduler {
 		if (settings == null)
 			settings = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(MainPreferenceActivity.KEY_REPEAT_COUNT, 0);
+		editor.putInt(AlarmActivity.KEY_REPEAT_COUNT, 0);
 		editor.commit();
 	}
 

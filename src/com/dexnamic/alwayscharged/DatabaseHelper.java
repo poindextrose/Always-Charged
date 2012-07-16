@@ -16,6 +16,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	private static final String TABLE_ALARMS = "alarms";
+	
+
+	// hour & minute are legacy for upgrading from single alarm
+	// to multiple alarms stored in sqlite database
+	public final static String LEGACY_KEY_HOUR = "key_hour";
+	public final static String LEGACY_KEY_MINUTE = "key_minute";
 
 	// Contacts Table Columns names
 	public static final String KEY_ID = "_id";
@@ -45,8 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		Alarm alarm = new Alarm();
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-		int hour = sp.getInt(MainPreferenceActivity.KEY_HOUR, 21);
-		int minute = sp.getInt(MainPreferenceActivity.KEY_MINUTE, 45);
+		int hour = sp.getInt(LEGACY_KEY_HOUR, 21);
+		int minute = sp.getInt(LEGACY_KEY_MINUTE, 45);
 		alarm.setHour(hour);
 		alarm.setMinute(minute);
 		if(minute != 21 || minute != 45)
