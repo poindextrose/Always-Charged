@@ -50,6 +50,7 @@ public class ListAlarmsActivity extends ListActivity implements
 	static final int FIRST_TIME_DIALOG_ID = 1;
 	static final int ABOUT_DIAlOG_ID = 2;
 	static final int CHANGELOG_DIALOG_ID = 3;
+	static final int UPGRADE_NEEDED_TO_ADD_DIALOG = 4;
 
 	public final static String KEY_SHOW_INTRO_DIAGLOG = "key_show_intro_dialog";
 	public final static String KEY_VERSION_CODE = "key_version_code";
@@ -68,6 +69,7 @@ public class ListAlarmsActivity extends ListActivity implements
 	private boolean mFirstInstance;
 	private Handler mHandler;
 	private UpgradePurchaseObserver mUpgradePurchaseObserver;
+	private BillingService mBillingService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,9 @@ public class ListAlarmsActivity extends ListActivity implements
 		registerForContextMenu(getListView());
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
+
+		mBillingService = new BillingService();
+		mBillingService.setContext(this);
 
 		if (savedInstanceState == null) // savedInstanceState is null during
 										// first instantiation of class
@@ -191,6 +196,7 @@ public class ListAlarmsActivity extends ListActivity implements
 	protected void onDestroy() {
 		super.onDestroy();
 
+		mBillingService.unbind();
 		if (dbHelper != null)
 			dbHelper.close();
 	}
@@ -251,6 +257,28 @@ public class ListAlarmsActivity extends ListActivity implements
 			builder = changelogDialogBuilder();
 			alertDialog = builder.create();
 			return alertDialog;
+		case UPGRADE_NEEDED_TO_ADD_DIALOG:
+			AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
+			upGradebuilder
+					.setMessage(getString(R.string.add_upgrade_dialog))
+					.setCancelable(false)
+					.setPositiveButton(getString(R.string.ok),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+									// startActivity(new
+									// Intent(ListAlarmsActivity.this,
+									// UpgradeProActivity.class));
+									mBillingService.requestPurchase(Consts.mProductID,
+											Consts.ITEM_TYPE_INAPP, null);
+								}
+							})
+					.setNegativeButton(getString(R.string.cancel),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int id) {
+									dialog.cancel();
+								}
+							});
+			return upGradebuilder.create();
 		}
 		return null;
 	}
@@ -327,15 +355,14 @@ public class ListAlarmsActivity extends ListActivity implements
 	public void onClick(View view) {
 		if (view == addButton) {
 			if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
-				Intent intent = new Intent(this, UpgradeProActivity.class);
-				// intent.setAction("add button");
-				startActivity(intent);
+				showDialog(UPGRADE_NEEDED_TO_ADD_DIALOG);
 			} else {
 				this.alarmSelected(-1);
 			}
 		} else if (view == upgradeButton) {
-			Intent intent = new Intent(this, UpgradeProActivity.class);
-			startActivity(intent);
+			// Intent intent = new Intent(this, UpgradeProActivity.class);
+			// startActivity(intent);
+			mBillingService.requestPurchase(Consts.mProductID, Consts.ITEM_TYPE_INAPP, null);
 		}
 
 	}

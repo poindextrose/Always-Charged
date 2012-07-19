@@ -26,6 +26,9 @@ public class Consts {
 	// it is purposely made something misleading to discourage hackers
 	public static String PURCHASE_PREFERENCES = "debug_log";
 	public static String PURCHASE_RESTORED = "0";
+
+	public final static String mItemName = "Unlock Pro";
+	 public static String mProductID = "upgrade_pro";
 	
     // The response codes for a request, defined by Android Market.
     public enum ResponseCode {

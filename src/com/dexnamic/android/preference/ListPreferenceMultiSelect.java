@@ -12,6 +12,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 import android.widget.ListView;
@@ -190,5 +191,10 @@ public class ListPreferenceMultiSelect extends ListPreference {
 			}
 		}
 		return false;
+	}
+	
+	public void showDialog() {
+		showDialog(null);
+//		onClick();
 	}
 }

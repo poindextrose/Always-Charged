@@ -1,5 +1,7 @@
 package com.dexnamic.alwayscharged;
 
+import com.dexnamic.alwayscharged.billing.Consts;
+
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.util.Log;
@@ -22,8 +24,10 @@ public class AlwaysCharged extends Application {
 		// AlwaysCharged.context = getApplicationContext();
 
 		isDebuggable = (0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE));
-		if (isDebuggable)
+		if (isDebuggable) {
 			Log.d("AlwaysCharged", "isDebuggabled=" + isDebuggable);
+			Consts.mProductID = "android.test.purchased";
+		}
 	}
 
 	// public static Context getAppContext() {

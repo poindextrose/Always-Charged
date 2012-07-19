@@ -46,12 +46,6 @@ import java.util.Locale;
 public class UpgradeProActivity extends Activity implements OnClickListener {
 	private static final String TAG = "UpgradePro";
 
-	private String mItemName = "Unlock Pro";
-	 private String mProductID = "upgrade_pro";
-//	private String mProductID = "android.test.purchased";
-	// private String mProductID = "android.test.canceled";
-	// private String mProductID = "android.test.refunded";
-
 	/**
 	 * The SharedPreferences key for recording whether we initialized the
 	 * database. If false, then we perform a RestoreTransactions request to get
@@ -192,10 +186,8 @@ public class UpgradeProActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v == mBuyButton) {
-			if(AlwaysCharged.isDebuggable)
-				mProductID = "android.test.purchased";
-			Log.v(TAG, "buying: " + mItemName + " sku: " + mProductID);
-			if (!mBillingService.requestPurchase(mProductID, Consts.ITEM_TYPE_INAPP,
+			Log.v(TAG, "buying: " + Consts.mItemName + " sku: " + Consts.mProductID);
+			if (!mBillingService.requestPurchase(Consts.mProductID, Consts.ITEM_TYPE_INAPP,
 					mDeveloperPayloadContents)) {
 				showDialog(DIALOG_BILLING_NOT_SUPPORTED_ID);
 			}

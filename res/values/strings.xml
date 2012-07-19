@@ -125,6 +125,9 @@ new features:\n
     <string name="sat">Sat</string>
     <string name="sun">Sun</string>
     <string name="never">Never</string>
+    <string name="everyday">Everyday</string>
+    <string name="weekdays">Weekdays</string>
+    <string name="weekends">Weekends</string>
     
     <string name="cancel_battery">Skip alarm if battery charged</string>
     <string name="skipped_alarm_battery">Alarm skipped. Battery</string>
@@ -146,6 +149,7 @@ new features:\n
      <string name="check_purchase">Checking for previous purchases.</string>
      <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
      <string name="pro_only">Pro only features</string>
+     <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro</string>
      
      <!-- Preference Keys -->
      <string name="key_skip_battery">key_skip_battery</string>
