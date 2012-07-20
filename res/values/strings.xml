@@ -150,6 +150,7 @@ new features:\n
      <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
      <string name="pro_only">Pro only features</string>
      <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro</string>
+	 <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to Always Charged Pro</string>
      
      <!-- Preference Keys -->
      <string name="key_skip_battery">key_skip_battery</string>

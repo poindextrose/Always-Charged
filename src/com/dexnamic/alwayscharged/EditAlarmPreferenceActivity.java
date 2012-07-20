@@ -206,7 +206,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mAlarm.setVibrate(mVibrateCheckBox.isChecked());
 		} else if (preference == mRepeatPreference) {
 			if (ResponseHandler.hasPurchased(this) == false) {
-				showDialog(UPGRADE_NEEDED_TO_ADD_DIALOG);
+				showDialog(UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG);
 			} else {
 				mRepeatPreferenceMultiSelect.showDialog();
 			}
@@ -317,17 +317,17 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		enableAlarm();
 	}
 
-	static final int UPGRADE_NEEDED_TO_ADD_DIALOG = 4;
+	static final int UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG = 4;
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case TIME_DIALOG_ID:
 			return new TimePickerDialog(this, this, mAlarm.getHour(), mAlarm.getMinute(), false);
-		case UPGRADE_NEEDED_TO_ADD_DIALOG:
+		case UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG:
 			AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
 			upGradebuilder
-					.setMessage(getString(R.string.add_upgrade_dialog))
+					.setMessage(getString(R.string.change_repeat_dialog))
 					.setCancelable(false)
 					.setPositiveButton(getString(R.string.ok),
 							new DialogInterface.OnClickListener() {
