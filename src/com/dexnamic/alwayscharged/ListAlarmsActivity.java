@@ -258,29 +258,33 @@ public class ListAlarmsActivity extends ListActivity implements
 			alertDialog = builder.create();
 			return alertDialog;
 		case UPGRADE_NEEDED_TO_ADD_DIALOG:
-			AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
-			upGradebuilder
-					.setMessage(getString(R.string.add_upgrade_dialog))
-					.setCancelable(false)
-					.setPositiveButton(getString(R.string.ok),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int id) {
-									// startActivity(new
-									// Intent(ListAlarmsActivity.this,
-									// UpgradeProActivity.class));
-									mBillingService.requestPurchase(Consts.mProductID,
-											Consts.ITEM_TYPE_INAPP, null);
-								}
-							})
-					.setNegativeButton(getString(R.string.cancel),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int id) {
-									dialog.cancel();
-								}
-							});
-			return upGradebuilder.create();
+			return createUpgradeDialog(R.string.add_upgrade_dialog);
 		}
 		return null;
+	}
+	
+	AlertDialog createUpgradeDialog(int resid) {
+		AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
+		upGradebuilder
+				.setMessage(getString(resid))
+				.setCancelable(false)
+				.setPositiveButton(getString(R.string.ok),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// startActivity(new
+								// Intent(ListAlarmsActivity.this,
+								// UpgradeProActivity.class));
+								mBillingService.requestPurchase(Consts.mProductID,
+										Consts.ITEM_TYPE_INAPP, null);
+							}
+						})
+				.setNegativeButton(getString(R.string.cancel),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+		return upGradebuilder.create();
 	}
 
 	private AlertDialog.Builder aboutDialogBuilder() {

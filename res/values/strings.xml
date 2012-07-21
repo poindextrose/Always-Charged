@@ -95,6 +95,10 @@ forget, an alarm will sound, reminding you to charge your phone.\n\n
 This is not just a simple alarm.  It waits patiently and silently snoozes the alarm
 if you are using your phone, moving around, or already have it plugged in and charging.\n\n
 
+This is a free app with enough functionality to evaluate its usefulness. If you want to setup an alert
+to automatically repeat, set alerts for different times on different days, or change advanced settings,
+then you can upgrade to the Pro version inside the app.
+
 If you like or dislike something about this application, or you want to suggest a feature,
 please send me an email (press the menu button from the main screen).</string>
     <string name="upgrade_dialog">Please upgrade Always Charged to take advantage of
@@ -151,7 +155,8 @@ new features:\n
      <string name="pro_only">Pro only features</string>
      <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro</string>
 	 <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to Always Charged Pro</string>
-     
+	 <string name="advanced_upgrade_dialog">Changing advanced settings requires an upgrade to Always Charged Pro</string>
+	 
      <!-- Preference Keys -->
      <string name="key_skip_battery">key_skip_battery</string>
     <string name="default_skip_battery">0</string>

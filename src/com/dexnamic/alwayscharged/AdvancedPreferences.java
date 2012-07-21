@@ -3,16 +3,29 @@ package com.dexnamic.alwayscharged;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
+import com.dexnamic.alwayscharged.billing.BillingService;
+import com.dexnamic.alwayscharged.billing.Consts;
+import com.dexnamic.alwayscharged.billing.PurchaseObserver;
 import com.dexnamic.alwayscharged.billing.ResponseHandler;
+import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
+import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
+import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
+import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 
 public class AdvancedPreferences extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener
@@ -20,6 +33,10 @@ public class AdvancedPreferences extends PreferenceActivity implements
 	public final static String KEY_SNOOZE_TIME_MIN = "key_snooze";
 	public final static String KEY_DURATION = "key_alarm_duration";
 	public final static String KEY_MOTION_TOLERANCE = "key_motion_tolerance";
+	
+
+	static final int UPGRADE_NEEDED_FOR_ADVANCED_DIALOG = 5;
+	protected static boolean mRequestedPurchase;
 
 	private ListPreference mListPreferenceSnooze;
 	private ListPreference mListPreferenceDuration;
@@ -27,6 +44,9 @@ public class AdvancedPreferences extends PreferenceActivity implements
 	private ListPreference mListPreferenceBattery;
 	private Boolean mHasPurchased;
 	private Boolean mSnoozeWasChanged;
+	private BillingService mBillingService;
+	private Handler mHandler;
+	private UpgradePurchaseObserver mUpgradePurchaseObserver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +56,9 @@ public class AdvancedPreferences extends PreferenceActivity implements
 
 		configurePreferences();
 
+		mBillingService = new BillingService();
+		mBillingService.setContext(this);
+
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
 	}
 	
@@ -44,6 +67,10 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		super.onStart();
 		
 		mSnoozeWasChanged = false;
+
+		mHandler = new Handler();
+		mUpgradePurchaseObserver = new UpgradePurchaseObserver(mHandler);
+		ResponseHandler.register(mUpgradePurchaseObserver);
 	}
 
 	@Override
@@ -56,7 +83,11 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		mHasPurchased = ResponseHandler.hasPurchased(this);
 		if (mHasPurchased) {
 			upgradeToPro();
+		} else {
+			if(!mRequestedPurchase)
+				showDialog(UPGRADE_NEEDED_FOR_ADVANCED_DIALOG);
 		}
+		mRequestedPurchase = false;
 	}
 
 	private void upgradeToPro() {
@@ -73,6 +104,8 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		// Set up a listener whenever a key changes
 		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(
 				this);
+
+		ResponseHandler.unregister(mUpgradePurchaseObserver);
 	}
 	
 	@Override
@@ -81,6 +114,48 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		
 		if(mSnoozeWasChanged)
 			Scheduler.resetAllEnabledAlarms(this);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		mBillingService.unbind();
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		AlertDialog.Builder builder;
+		switch (id) {
+		case UPGRADE_NEEDED_FOR_ADVANCED_DIALOG:
+			return createUpgradeDialog(R.string.advanced_upgrade_dialog);
+		}
+		return null;
+	}
+	
+	AlertDialog createUpgradeDialog(int resid) {
+		AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
+		upGradebuilder
+				.setMessage(getString(resid))
+				.setCancelable(false)
+				.setPositiveButton(getString(R.string.ok),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// startActivity(new
+								// Intent(ListAlarmsActivity.this,
+								// UpgradeProActivity.class));
+								mBillingService.requestPurchase(Consts.mProductID,
+										Consts.ITEM_TYPE_INAPP, null);
+								AdvancedPreferences.mRequestedPurchase = true;
+							}
+						})
+				.setNegativeButton(getString(R.string.cancel),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+							}
+						});
+		return upGradebuilder.create();
 	}
 
 	@Override
@@ -185,5 +260,40 @@ public class AdvancedPreferences extends PreferenceActivity implements
 	// }
 	// return false;
 	// }
+
+	/**
+	 * A {@link PurchaseObserver} is used to get callbacks when Android Market
+	 * sends messages to this application so that we can update the UI.
+	 */
+	private class UpgradePurchaseObserver extends PurchaseObserver {
+		public UpgradePurchaseObserver(Handler handler) {
+			super(AdvancedPreferences.this, handler);
+		}
+
+		@Override
+		public void onBillingSupported(boolean supported, String type) {
+		}
+
+		@Override
+		public void onPurchaseStateChange(PurchaseState purchaseState, String itemId, int quantity,
+				long purchaseTime, String developerPayload) {
+
+			if (purchaseState == PurchaseState.PURCHASED) {
+				upgradeToPro();
+			}
+		}
+
+		@Override
+		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
+			Log.v("UpgradePurchaseObserver", request.mProductId + ": " + responseCode);
+		}
+
+		@Override
+		public void onRestoreTransactionsResponse(RestoreTransactions request,
+				ResponseCode responseCode) {
+			Log.v("UpgradePurchaseObserver", "onRestoreTranscationReponse() responseCode="
+					+ responseCode);
+		}
+	}
 
 }
