@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Always Charged</string><string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
+    <string name="app_name">Always Charged</string>
+    <string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
 \n
 v2.2.1\n
 - Added a long-click context menu to alarm list\n
@@ -36,8 +37,8 @@ v1.1.2\n
 v1.1.1\n
 - Fixed compatibility with Galaxy Nexus.\n
 - Updated developer name to Dr Poindexter\n</string>
-    
-<!--     <string name="app_name_no_spaces">AlwaysCharged</string> -->
+
+    <!-- <string name="app_name_no_spaces">AlwaysCharged</string> -->
     <string name="contact_email">developer@constructive-interference.com</string>
     <string name="default_snooze_time">5</string>
     <string name="default_motion_tolerance">4</string>
@@ -97,7 +98,7 @@ if you are using your phone, moving around, or already have it plugged in and ch
 
 This is a free app with enough functionality to evaluate its usefulness. If you want to setup an alert
 to automatically repeat, set alerts for different times on different days, or change advanced settings,
-then you can upgrade to the Pro version inside the app.
+then you can upgrade to the Pro version inside the app.\n\n
 
 If you like or dislike something about this application, or you want to suggest a feature,
 please send me an email (press the menu button from the main screen).</string>
@@ -120,7 +121,6 @@ new features:\n
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
     <string name="purchase">Purchase</string>
-    
     <string name="mon">Mon</string>
     <string name="tue">Tue</string>
     <string name="wed">Wed</string>
@@ -132,7 +132,6 @@ new features:\n
     <string name="everyday">Everyday</string>
     <string name="weekdays">Weekdays</string>
     <string name="weekends">Weekends</string>
-    
     <string name="cancel_battery">Skip alarm if battery charged</string>
     <string name="skipped_alarm_battery">Alarm skipped. Battery</string>
     <string name="percent">percent</string>
@@ -150,21 +149,23 @@ new features:\n
      Your version of Market may be out of date.
      You can continue to use this app but you
      won\'t be able to make purchases.</string>
-     <string name="check_purchase">Checking for previous purchases.</string>
-     <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
-     <string name="pro_only">Pro only features</string>
-     <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro</string>
-	 <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to Always Charged Pro</string>
-	 <string name="advanced_upgrade_dialog">Changing advanced settings requires an upgrade to Always Charged Pro</string>
-	 
-     <!-- Preference Keys -->
-     <string name="key_skip_battery">key_skip_battery</string>
+    <string name="check_purchase">Checking for previous purchases.</string>
+    <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
+    <string name="pro_only">Pro only features</string>
+    <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro.\n\n
+         
+         You can use the single, non-repeating alarm to test it out tonight.  If you think it is useful,
+         then please upgrade to set repating options and add additional alarms for a different bedtimes
+         throughout the week.</string>
+    <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to Always Charged Pro</string>
+    <string name="advanced_upgrade_dialog">Changing advanced settings requires an upgrade to Always Charged Pro</string>
+    <string name="trial_label"></string>
+
+    <!-- Preference Keys -->
+    <string name="key_skip_battery">key_skip_battery</string>
     <string name="default_skip_battery">0</string>
-    
     <string name="edit_alarm">Edit Alarm</string>
-    
     <string name="delete_alarm">Delete Alarm</string>
-    
     <string name="rate_app">Rate app</string>
 
 </resources>

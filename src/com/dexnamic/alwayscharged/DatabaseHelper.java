@@ -58,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if(minute != 21 || minute != 45)
 			alarm.setEnabled(true);
 		alarm.setRepeats(0);
+		alarm.setLabel(context.getString(R.string.trial_label));
 
 		int id = (int) db.insert(TABLE_ALARMS, null, putValues(alarm));
 
