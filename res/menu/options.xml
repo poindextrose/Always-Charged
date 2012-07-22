@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/email_dev" android:title="@string/feedback"></item>
-    <item android:id="@+id/change_log" android:title="@string/changelog_title"></item>
-    <item android:id="@+id/rate_app" android:title="@string/rate_app"></item>
-    <item android:id="@+id/advanced" android:title="@string/advanced_settings"></item>
-    <item android:id="@+id/about" android:title="@string/about"></item>
+
+    <item
+        android:id="@+id/upgrade"
+        android:showAsAction="ifRoom"
+        android:title="@string/upgrade">
+    </item>
+    <item
+        android:id="@+id/add_alarm"
+        android:icon="@drawable/add_alarm"
+        android:showAsAction="always"
+        android:title="@string/add">
+    </item>
+    <item
+        android:id="@+id/advanced"
+        android:icon="@drawable/settings"
+        android:showAsAction="always"
+        android:title="@string/advanced_settings">
+    </item>
+    <item
+        android:id="@+id/email_dev"
+        android:icon="@drawable/email"
+        android:showAsAction="ifRoom"
+        android:title="@string/feedback">
+    </item>
+    <item
+        android:id="@+id/rate_app"
+        android:icon="@drawable/ic_action_star"
+        android:showAsAction="ifRoom"
+        android:title="@string/rate_app">
+    </item>
+    <item
+        android:id="@+id/change_log"
+        android:title="@string/changelog_title">
+    </item>
+    <item
+        android:id="@+id/about"
+        android:title="@string/about">
+    </item>
+
 </menu>

@@ -12,6 +12,8 @@ import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
 import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -26,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.MenuItem;
 
 public class AdvancedPreferences extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener
@@ -60,6 +63,25 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		mBillingService.setContext(this);
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
+		
+		setupActionBar_API11();
+		setupActionBar_API14();
+	}
+
+
+	@TargetApi(11)
+	void setupActionBar_API11() {
+		if(android.os.Build.VERSION.SDK_INT >= 11) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
+	}
+	@TargetApi(14)
+	void setupActionBar_API14() {
+		if(android.os.Build.VERSION.SDK_INT >= 14) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setHomeButtonEnabled(true);
+		}
 	}
 	
 	@Override
@@ -121,6 +143,17 @@ public class AdvancedPreferences extends PreferenceActivity implements
 		super.onDestroy();
 
 		mBillingService.unbind();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	        	finish();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	@Override

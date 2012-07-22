@@ -10,6 +10,7 @@ import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
 import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -101,6 +102,11 @@ public class ListAlarmsActivity extends ListActivity implements
 			mFirstInstance = true;
 		else
 			mFirstInstance = false;
+
+		mHasPurchased = ResponseHandler.hasPurchased(this);
+		if (mHasPurchased) {
+			upgradeToPro();
+		}
 	}
 
 	private void fillData() {
@@ -168,14 +174,14 @@ public class ListAlarmsActivity extends ListActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		mHasPurchased = ResponseHandler.hasPurchased(this);
-		if (mHasPurchased) {
-			upgradeToPro();
-		}
 	}
 
+	@SuppressLint("NewApi")
 	private void upgradeToPro() {
+		mHasPurchased = true;
+		if(android.os.Build.VERSION.SDK_INT >= 11) {
+			invalidateOptionsMenu();
+		}
 		try {
 			ViewGroup viewGroup = (ViewGroup) upgradeButton.getParent();
 			viewGroup.removeView(upgradeButton);
@@ -205,22 +211,37 @@ public class ListAlarmsActivity extends ListActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.options, menu);
+		if(mHasPurchased)
+			menu.removeItem(R.id.upgrade);
+
+		if(android.os.Build.VERSION.SDK_INT < 11) {
+			menu.findItem(R.id.add_alarm).setIcon(null);
+			menu.findItem(R.id.advanced).setIcon(null);
+			menu.findItem(R.id.email_dev).setIcon(null);
+			menu.findItem(R.id.rate_app).setIcon(null);
+		}
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.upgrade:
+			doUpgrade();
+			return true;
+		case R.id.add_alarm:
+			addAlarm();
+			return true;
 		case R.id.email_dev:
 			sendFeedbackEmail();
-			return true;
-		case R.id.change_log:
-			showDialog(CHANGELOG_DIALOG_ID);
 			return true;
 		case R.id.rate_app:
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse("market://details?id=com.dexnamic.alwayscharged"));
 			startActivity(intent);
+			return true;
+		case R.id.change_log:
+			showDialog(CHANGELOG_DIALOG_ID);
 			return true;
 		case R.id.advanced:
 			startActivity(new Intent(this, AdvancedPreferences.class));
@@ -358,17 +379,25 @@ public class ListAlarmsActivity extends ListActivity implements
 	@Override
 	public void onClick(View view) {
 		if (view == addButton) {
-			if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
-				showDialog(UPGRADE_NEEDED_TO_ADD_DIALOG);
-			} else {
-				this.alarmSelected(-1);
-			}
+			addAlarm();
 		} else if (view == upgradeButton) {
-			// Intent intent = new Intent(this, UpgradeProActivity.class);
-			// startActivity(intent);
-			mBillingService.requestPurchase(Consts.mProductID, Consts.ITEM_TYPE_INAPP, null);
+			doUpgrade();
 		}
 
+	}
+	
+	private void doUpgrade() {
+		// Intent intent = new Intent(this, UpgradeProActivity.class);
+		// startActivity(intent);
+		mBillingService.requestPurchase(Consts.mProductID, Consts.ITEM_TYPE_INAPP, null);	
+	}
+	
+	private void addAlarm() {
+		if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
+			showDialog(UPGRADE_NEEDED_TO_ADD_DIALOG);
+		} else {
+			this.alarmSelected(-1);
+		}
 	}
 
 	@Override

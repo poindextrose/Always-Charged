@@ -12,12 +12,17 @@ import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
 import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
 import com.dexnamic.android.preference.ListPreferenceMultiSelect;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -31,9 +36,14 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -114,6 +124,13 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		deleteButton.setOnClickListener(this);
 		okButton = (Button) findViewById(R.id.buttonOK);
 		okButton.setOnClickListener(this);
+		
+		if(android.os.Build.VERSION.SDK_INT >= 11) {
+			ViewGroup viewGroup = (ViewGroup) cancelButton.getParent();
+			viewGroup.removeView(cancelButton);
+			viewGroup.removeView(deleteButton);
+			viewGroup.removeView(okButton);
+		}
 
 		if (ResponseHandler.hasPurchased(this) == false) {
 			mBillingService = new BillingService();
@@ -127,6 +144,34 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		mHandler = new Handler();
 		mUpgradePurchaseObserver = new UpgradePurchaseObserver(mHandler);
 		ResponseHandler.register(mUpgradePurchaseObserver);
+
+		setupActionBar_API11();
+		setupActionBar_API14();
+	}
+	
+	TextView mTextView;
+	
+	@TargetApi(11)
+	void setupActionBar_API11() {
+		if(android.os.Build.VERSION.SDK_INT >= 11) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+//			mTextView = new TextView(this);
+//			mTextView.setText("DONE");
+//			mTextView.setClickable(true);
+//			mTextView.setFocusable(true);
+//			mTextView.setOnClickListener(this);
+//			actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//			actionBar.setCustomView(mTextView);
+		}
+	}
+	
+	@TargetApi(14)
+	void setupActionBar_API14() {
+		if(android.os.Build.VERSION.SDK_INT >= 14) {
+			ActionBar actionBar = getActionBar();
+			actionBar.setHomeButtonEnabled(true);
+		}
 	}
 
 	@Override
@@ -164,6 +209,35 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		
 		if(mBillingService != null)
 			mBillingService.unbind();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.edit_options, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	        	saveAlarm();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.delete:
+			deleteAlarm();
+			return true;
+		}
+
+		return super.onMenuItemSelected(featureId, item);
 	}
 
 	private void setPreferences() {
@@ -279,6 +353,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		} else if (view == deleteButton) {
 			deleteAlarm();
 		} else if (view == okButton) {
+			saveAlarm();
+		} else if (mTextView != null && view == mTextView) {
 			saveAlarm();
 		}
 
