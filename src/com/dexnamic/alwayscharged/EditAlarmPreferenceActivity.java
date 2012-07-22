@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -52,17 +53,18 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		TimePickerDialog.OnTimeSetListener {
 
 	static final int TIME_DIALOG_ID = 0;
+	static final int UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG = 1;
+	private static final int REPEAT_MULTISELECT_DIALOG = 2;
 
 	private int mId;
 
 	private Alarm mAlarm;
-//	private Alarm mAlarmOriginal;
+	// private Alarm mAlarmOriginal;
 	private DatabaseHelper database;
 
 	private CheckBoxPreference mEnabledCheckBox;
 	private Preference mTimePreference;
 	private Preference mRepeatPreference;
-	private ListPreferenceMultiSelect mRepeatPreferenceMultiSelect;
 	private CheckBoxPreference mVibrateCheckBox;
 	private Button cancelButton, deleteButton, okButton;
 
@@ -73,9 +75,11 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 	private BillingService mBillingService;
 
-	private com.dexnamic.alwayscharged.EditAlarmPreferenceActivity.UpgradePurchaseObserver mUpgradePurchaseObserver;
+	private UpgradePurchaseObserver mUpgradePurchaseObserver;
 
 	private Handler mHandler;
+
+	boolean[] mCheckedItems;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,32 +93,25 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		PreferenceScreen ps = getPreferenceScreen();
 
-		mEnabledCheckBox = (CheckBoxPreference) ps.findPreference("key_checkbox");
+		mEnabledCheckBox = (CheckBoxPreference) ps
+				.findPreference("key_checkbox");
 		mEnabledCheckBox.setOnPreferenceClickListener(this);
 
 		mTimePreference = ps.findPreference("key_time");
 		mTimePreference.setOnPreferenceClickListener(this);
 
-		mRepeatPreferenceMultiSelect = new ListPreferenceMultiSelect(this);
-		ps.addPreference(mRepeatPreferenceMultiSelect);
-		mRepeatPreferenceMultiSelect.setEntries(R.array.pref_days_of_week);
-		mRepeatPreferenceMultiSelect.setEntryValues(R.array.pref_days_of_week_values);
-		mRepeatPreferenceMultiSelect.setKey("key_repeat_dialog");
-		mRepeatPreferenceMultiSelect.setDialogTitle(R.string.repeat);
-		mRepeatPreferenceMultiSelect.setOnPreferenceChangeListener(this);
 		mRepeatPreference = ps.findPreference("key_repeat");
-//		mRepeatPreference.setOnPreferenceChangeListener(this);
 		mRepeatPreference.setOnPreferenceClickListener(this);
-//		if(!ResponseHandler.hasPurchased(this))
-//			mRepeatPreference.setEnabled(false);
 
-		mRingtonePreference = (RingtonePreference) ps.findPreference("key_ringtone");
+		mRingtonePreference = (RingtonePreference) ps
+				.findPreference("key_ringtone");
 		mRingtonePreference.setOnPreferenceChangeListener(this);
 
 		mLabelPreference = (EditTextPreference) ps.findPreference("key_label");
 		mLabelPreference.setOnPreferenceChangeListener(this);
 
-		mVibrateCheckBox = (CheckBoxPreference) ps.findPreference("key_vibrate");
+		mVibrateCheckBox = (CheckBoxPreference) ps
+				.findPreference("key_vibrate");
 		mVibrateCheckBox.setOnPreferenceClickListener(this);
 		mVibrateCheckBox.setOnPreferenceChangeListener(this);
 
@@ -124,8 +121,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		deleteButton.setOnClickListener(this);
 		okButton = (Button) findViewById(R.id.buttonOK);
 		okButton.setOnClickListener(this);
-		
-		if(android.os.Build.VERSION.SDK_INT >= 11) {
+
+		if (android.os.Build.VERSION.SDK_INT >= 11) {
 			ViewGroup viewGroup = (ViewGroup) cancelButton.getParent();
 			viewGroup.removeView(cancelButton);
 			viewGroup.removeView(deleteButton);
@@ -138,37 +135,39 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		}
 
 		setVolumeControlStream(AudioManager.STREAM_ALARM);
-		
+
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		
+
 		mHandler = new Handler();
 		mUpgradePurchaseObserver = new UpgradePurchaseObserver(mHandler);
 		ResponseHandler.register(mUpgradePurchaseObserver);
 
+		mCheckedItems = new boolean[7];
+
 		setupActionBar_API11();
 		setupActionBar_API14();
 	}
-	
+
 	TextView mTextView;
-	
+
 	@TargetApi(11)
 	void setupActionBar_API11() {
-		if(android.os.Build.VERSION.SDK_INT >= 11) {
+		if (android.os.Build.VERSION.SDK_INT >= 11) {
 			ActionBar actionBar = getActionBar();
 			actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-//			mTextView = new TextView(this);
-//			mTextView.setText("DONE");
-//			mTextView.setClickable(true);
-//			mTextView.setFocusable(true);
-//			mTextView.setOnClickListener(this);
-//			actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//			actionBar.setCustomView(mTextView);
+			// mTextView = new TextView(this);
+			// mTextView.setText("DONE");
+			// mTextView.setClickable(true);
+			// mTextView.setFocusable(true);
+			// mTextView.setOnClickListener(this);
+			// actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+			// actionBar.setCustomView(mTextView);
 		}
 	}
-	
+
 	@TargetApi(14)
 	void setupActionBar_API14() {
-		if(android.os.Build.VERSION.SDK_INT >= 14) {
+		if (android.os.Build.VERSION.SDK_INT >= 14) {
 			ActionBar actionBar = getActionBar();
 			actionBar.setHomeButtonEnabled(true);
 		}
@@ -184,7 +183,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			mAlarm = database.getAlarm(mId);
 		else
 			mAlarm = new Alarm();
-//		mAlarmOriginal = (Alarm) mAlarm.clone();
+		// mAlarmOriginal = (Alarm) mAlarm.clone();
 	}
 
 	@Override
@@ -202,13 +201,18 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		if (database != null)
 			database.close();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
-		if(mBillingService != null)
+
+		if (mBillingService != null)
 			mBillingService.unbind();
+	}
+
+	void upgradeToPro() {
+
+
 	}
 
 	@Override
@@ -217,18 +221,18 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		inflater.inflate(R.menu.edit_options, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case android.R.id.home:
-	        	saveAlarm();
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			saveAlarm();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
-	
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
@@ -246,14 +250,15 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		mTimePreference.setSummary(mAlarm.getTime(this));
 
-		mRepeatPreference.setSummary(Alarm.repeatToString(this, mAlarm.getRepeats()));
+		mRepeatPreference.setSummary(Alarm.repeatToString(this,
+				mAlarm.getRepeats()));
 		StringBuffer checked = new StringBuffer();
 		// List<Integer> checkedIndicies = new ArrayList<Integer>();
 		for (Integer i = 0; i < 7; i++) {
 			if (mAlarm.getRepeats(i))
 				checked.append(i.toString() + ",");
 		}
-		mRepeatPreferenceMultiSelect.setValue(checked.toString());
+		// mRepeatPreferenceMultiSelect.setValue(checked.toString());
 
 		mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 		getPreferenceManager().getSharedPreferences().edit()
@@ -265,7 +270,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		mLabelPreference.setText(mAlarm.getLabel());
 
 	}
-	
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 
@@ -274,7 +279,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		} else if (preference == mTimePreference) {
 			showDialog(TIME_DIALOG_ID);
 		} else if (preference == mVibrateCheckBox) {
-			if(mVibrateCheckBox.isChecked()) {
+			if (mVibrateCheckBox.isChecked()) {
 				mVibrator.vibrate(500);
 			}
 			mAlarm.setVibrate(mVibrateCheckBox.isChecked());
@@ -282,7 +287,11 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			if (ResponseHandler.hasPurchased(this) == false) {
 				showDialog(UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG);
 			} else {
-				mRepeatPreferenceMultiSelect.showDialog();
+				// if(mRepeatPreferenceMultiSelect != null)
+				// mRepeatPreferenceMultiSelect.showDialog();
+				for (int i = 0; i < 7; i++)
+					mCheckedItems[i] = mAlarm.getRepeats(i);
+				showDialog(REPEAT_MULTISELECT_DIALOG);
 			}
 		}
 
@@ -294,17 +303,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 
 		enableAlarm();
 
-		if (preference == mRepeatPreferenceMultiSelect) {
-			@SuppressWarnings("unchecked")
-			ArrayList<String> results = (ArrayList<String>) newValue;
-			Integer repeat = 0;
-			for (String s : results) {
-				repeat = repeat | (1 << Integer.parseInt(s));
-			}
-			mAlarm.setRepeats(repeat);
-			mRepeatPreference.setSummary(Alarm.repeatToString(this, mAlarm.getRepeats()));
-			return true;
-		} else if (preference == mRingtonePreference) {
+		if (preference == mRingtonePreference) {
 			mAlarm.setRingtone((String) newValue);
 			mRingtonePreference.setSummary(mAlarm.getRingerName(this));
 			checkVolume();
@@ -323,7 +322,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 			AudioManager audioManager;
 			audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) == 0) {
-				Toast.makeText(this, getString(R.string.checkVolume), Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.checkVolume),
+						Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -363,7 +363,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
-				&& keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+				&& keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getRepeatCount() == 0) {
 			// Take care of calling this method on earlier versions of
 			// the platform where it doesn't exist.
 			onBackPressed();
@@ -379,8 +380,8 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		// platform.
 
 		// if alarm is not new and nothing change then no need to save again
-//		if(mId >= 0 && mAlarm.equals(mAlarmOriginal))
-//			finish();
+		// if(mId >= 0 && mAlarm.equals(mAlarmOriginal))
+		// finish();
 		saveAlarm();
 		return;
 	}
@@ -393,13 +394,12 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		enableAlarm();
 	}
 
-	static final int UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG = 4;
-
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case TIME_DIALOG_ID:
-			return new TimePickerDialog(this, this, mAlarm.getHour(), mAlarm.getMinute(), false);
+			return new TimePickerDialog(this, this, mAlarm.getHour(),
+					mAlarm.getMinute(), false);
 		case UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG:
 			AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
 			upGradebuilder
@@ -407,21 +407,61 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 					.setCancelable(false)
 					.setPositiveButton(getString(R.string.ok),
 							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int id) {
+								public void onClick(DialogInterface dialog,
+										int id) {
 									// startActivity(new
 									// Intent(ListAlarmsActivity.this,
 									// UpgradeProActivity.class));
-									mBillingService.requestPurchase(Consts.mProductID,
+									mBillingService.requestPurchase(
+											Consts.mProductID,
 											Consts.ITEM_TYPE_INAPP, null);
 								}
 							})
 					.setNegativeButton(getString(R.string.cancel),
 							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int id) {
+								public void onClick(DialogInterface dialog,
+										int id) {
 									dialog.cancel();
 								}
 							});
 			return upGradebuilder.create();
+		case REPEAT_MULTISELECT_DIALOG:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMultiChoiceItems(R.array.pref_days_of_week,
+					mCheckedItems, new OnMultiChoiceClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which,
+								boolean isChecked) {
+							mCheckedItems[which] = isChecked;
+						}
+					})
+					.setPositiveButton(R.string.ok,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									for (int i = 0; i < 7; i++)
+										mAlarm.setRepeats(i, mCheckedItems[i]);
+									mRepeatPreference.setSummary(Alarm
+											.repeatToString(
+													EditAlarmPreferenceActivity.this,
+													mAlarm.getRepeats()));
+								}
+							})
+					.setNegativeButton(getString(R.string.cancel),
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									for (int i = 0; i < 7; i++) {
+										mCheckedItems[i] = mAlarm.getRepeats(i);
+										((AlertDialog) dialog).getListView().setItemChecked(i, mAlarm.getRepeats(i));
+									}
+									dialog.cancel();
+								}
+							});
+			AlertDialog alertDialog = builder.create();
+			return alertDialog;
 		}
 		return null;
 	}
@@ -446,24 +486,28 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		}
 
 		@Override
-		public void onPurchaseStateChange(PurchaseState purchaseState, String itemId, int quantity,
-				long purchaseTime, String developerPayload) {
+		public void onPurchaseStateChange(PurchaseState purchaseState,
+				String itemId, int quantity, long purchaseTime,
+				String developerPayload) {
 
 			if (purchaseState == PurchaseState.PURCHASED) {
-//				upgradeToPro();
+				upgradeToPro();
 			}
 		}
 
 		@Override
-		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
-			Log.v("UpgradePurchaseObserver", request.mProductId + ": " + responseCode);
+		public void onRequestPurchaseResponse(RequestPurchase request,
+				ResponseCode responseCode) {
+			Log.v("UpgradePurchaseObserver", request.mProductId + ": "
+					+ responseCode);
 		}
 
 		@Override
 		public void onRestoreTransactionsResponse(RestoreTransactions request,
 				ResponseCode responseCode) {
-			Log.v("UpgradePurchaseObserver", "onRestoreTranscationReponse() responseCode="
-					+ responseCode);
+			Log.v("UpgradePurchaseObserver",
+					"onRestoreTranscationReponse() responseCode="
+							+ responseCode);
 		}
 	}
 }
