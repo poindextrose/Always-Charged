@@ -1,7 +1,5 @@
 package com.dexnamic.alwayscharged;
 
-import java.util.ArrayList;
-
 import com.dexnamic.alwayscharged.billing.BillingService;
 import com.dexnamic.alwayscharged.billing.Consts;
 import com.dexnamic.alwayscharged.billing.PurchaseObserver;
@@ -10,9 +8,7 @@ import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
 import com.dexnamic.alwayscharged.billing.Consts.ResponseCode;
-import com.dexnamic.android.preference.ListPreferenceMultiSelect;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -21,9 +17,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.Intent;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;

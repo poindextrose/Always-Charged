@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<ListPreference android:key="key_snooze" android:title="@string/snooze_time"
 		android:summary="" android:entries="@array/entries_snooze"
-		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/dialog_title_snooze"
+		android:entryValues="@array/entryvalues_snooze" android:dialogTitle="@string/snooze_time"
 		android:defaultValue="@string/default_snooze_time"
 		android:enabled="false" />
 	<ListPreference android:key="key_alarm_duration"

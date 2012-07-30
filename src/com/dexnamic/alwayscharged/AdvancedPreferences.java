@@ -158,7 +158,6 @@ public class AdvancedPreferences extends PreferenceActivity implements
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		AlertDialog.Builder builder;
 		switch (id) {
 		case UPGRADE_NEEDED_FOR_ADVANCED_DIALOG:
 			return createUpgradeDialog(R.string.advanced_upgrade_dialog);

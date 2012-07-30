@@ -4,7 +4,6 @@ import com.dexnamic.alwayscharged.billing.BillingService;
 import com.dexnamic.alwayscharged.billing.Consts;
 import com.dexnamic.alwayscharged.billing.PurchaseObserver;
 import com.dexnamic.alwayscharged.billing.ResponseHandler;
-import com.dexnamic.alwayscharged.billing.UpgradeProActivity;
 import com.dexnamic.alwayscharged.billing.BillingService.RequestPurchase;
 import com.dexnamic.alwayscharged.billing.BillingService.RestoreTransactions;
 import com.dexnamic.alwayscharged.billing.Consts.PurchaseState;
@@ -24,13 +23,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -41,7 +38,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewParent;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.Toast;
@@ -341,26 +337,14 @@ public class ListAlarmsActivity extends ListActivity implements
 
 	private void sendFeedbackEmail() {
 		Intent i = new Intent(Intent.ACTION_SEND);
-		i.setType("text/plain");
+		i.setType("text/html");
 		String contactEmail = getString(R.string.contact_email);
 		i.putExtra(Intent.EXTRA_EMAIL, new String[] { contactEmail });
 		String feedback = getString(R.string.feedback);
 		String appName = getString(R.string.app_name);
 		i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-		// i.putExtra(Intent.EXTRA_TEXT , "body of email");
-		Intent i2 = (Intent) i.clone();
-		try {
-			ComponentName cn = new ComponentName("com.google.android.gm",
-					"com.google.android.gm.ComposeActivityGmail");
-			i.setComponent(cn);
-			startActivity(i);
-		} catch (android.content.ActivityNotFoundException ex1) {
-			try {
-				startActivity(Intent.createChooser(i2, getString(R.string.sendmail)));
-			} catch (android.content.ActivityNotFoundException ex2) {
-				Toast.makeText(this, getString(R.string.noemail), Toast.LENGTH_SHORT).show();
-			}
-		}
+		
+		startActivity(Intent.createChooser(i, getString(R.string.feedback)));
 	}
 
 	@Override
@@ -413,6 +397,8 @@ public class ListAlarmsActivity extends ListActivity implements
 		} else {
 			menu.getItem(2).setTitle(R.string.enable_alarm);
 		}
+		
+		menu.setHeaderTitle(alarm.getTime(this));
 	}
 
 	@Override

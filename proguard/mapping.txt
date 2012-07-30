@@ -1,3 +1,750 @@
+android.support.v4.app.ActivityCompatHoneycomb -> android.support.v4.app.a:
+    void invalidateOptionsMenu(android.app.Activity) -> a
+android.support.v4.app.BackStackRecord -> android.support.v4.app.b:
+    android.support.v4.app.FragmentManagerImpl mManager -> a
+    android.support.v4.app.BackStackRecord$Op mHead -> b
+    android.support.v4.app.BackStackRecord$Op mTail -> c
+    int mNumOp -> d
+    int mEnterAnim -> e
+    int mExitAnim -> f
+    int mPopEnterAnim -> g
+    int mPopExitAnim -> h
+    int mTransition -> i
+    int mTransitionStyle -> j
+    boolean mAddToBackStack -> k
+    boolean mAllowAddToBackStack -> l
+    java.lang.String mName -> m
+    boolean mCommitted -> n
+    int mIndex -> o
+    int mBreadCrumbTitleRes -> p
+    java.lang.CharSequence mBreadCrumbTitleText -> q
+    int mBreadCrumbShortTitleRes -> r
+    java.lang.CharSequence mBreadCrumbShortTitleText -> s
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+    void addOp(android.support.v4.app.BackStackRecord$Op) -> a
+    void bumpBackStackNesting(int) -> a
+    void run() -> run
+    void popFromBackStack(boolean) -> a
+    java.lang.String getName() -> a
+android.support.v4.app.BackStackRecord$Op -> android.support.v4.app.c:
+    android.support.v4.app.BackStackRecord$Op next -> a
+    android.support.v4.app.BackStackRecord$Op prev -> b
+    int cmd -> c
+    android.support.v4.app.Fragment fragment -> d
+    int enterAnim -> e
+    int exitAnim -> f
+    int popEnterAnim -> g
+    int popExitAnim -> h
+    java.util.ArrayList removed -> i
+android.support.v4.app.BackStackState -> android.support.v4.app.BackStackState:
+    int[] mOps -> a
+    int mTransition -> b
+    int mTransitionStyle -> c
+    java.lang.String mName -> d
+    int mIndex -> e
+    int mBreadCrumbTitleRes -> f
+    java.lang.CharSequence mBreadCrumbTitleText -> g
+    int mBreadCrumbShortTitleRes -> h
+    java.lang.CharSequence mBreadCrumbShortTitleText -> i
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    android.support.v4.app.BackStackRecord instantiate(android.support.v4.app.FragmentManagerImpl) -> a
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+android.support.v4.app.BackStackState$1 -> android.support.v4.app.d:
+    android.support.v4.app.BackStackState createFromParcel(android.os.Parcel) -> a
+    android.support.v4.app.BackStackState[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.Fragment -> android.support.v4.app.Fragment:
+    java.util.HashMap sClassMap -> N
+    int mState -> a
+    android.view.View mAnimatingAway -> b
+    int mStateAfterAnimating -> c
+    android.os.Bundle mSavedFragmentState -> d
+    android.util.SparseArray mSavedViewState -> e
+    int mIndex -> f
+    java.lang.String mWho -> g
+    android.os.Bundle mArguments -> h
+    android.support.v4.app.Fragment mTarget -> i
+    int mTargetIndex -> j
+    int mTargetRequestCode -> k
+    boolean mAdded -> l
+    boolean mRemoving -> m
+    boolean mResumed -> n
+    boolean mFromLayout -> o
+    boolean mInLayout -> p
+    boolean mRestored -> q
+    int mBackStackNesting -> r
+    android.support.v4.app.FragmentManagerImpl mFragmentManager -> s
+    android.support.v4.app.FragmentActivity mActivity -> t
+    int mFragmentId -> u
+    int mContainerId -> v
+    java.lang.String mTag -> w
+    boolean mHidden -> x
+    boolean mDetached -> y
+    boolean mRetainInstance -> z
+    boolean mRetaining -> A
+    boolean mHasMenu -> B
+    boolean mMenuVisible -> C
+    boolean mCalled -> D
+    int mNextAnim -> E
+    android.view.ViewGroup mContainer -> F
+    android.view.View mView -> G
+    android.view.View mInnerView -> H
+    boolean mDeferStart -> I
+    boolean mUserVisibleHint -> J
+    android.support.v4.app.LoaderManagerImpl mLoaderManager -> K
+    boolean mLoadersStarted -> L
+    boolean mCheckedForLoaderManager -> M
+    android.support.v4.app.Fragment instantiate(android.content.Context,java.lang.String) -> a
+    android.support.v4.app.Fragment instantiate(android.content.Context,java.lang.String,android.os.Bundle) -> a
+    void restoreViewState() -> a
+    void setIndex(int) -> a
+    boolean isInBackStack() -> b
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+    android.support.v4.app.FragmentActivity getActivity() -> c
+    void onHiddenChanged(boolean) -> a
+    void onActivityResult(int,int,android.content.Intent) -> a
+    android.view.LayoutInflater getLayoutInflater(android.os.Bundle) -> a
+    void onInflate(android.app.Activity,android.util.AttributeSet,android.os.Bundle) -> a
+    void onAttach(android.app.Activity) -> a
+    android.view.animation.Animation onCreateAnimation(int,boolean,int) -> a
+    void onCreate(android.os.Bundle) -> b
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onViewCreated(android.view.View,android.os.Bundle) -> a
+    void onActivityCreated(android.os.Bundle) -> c
+    void onStart() -> d
+    void onResume() -> e
+    void onSaveInstanceState(android.os.Bundle) -> d
+    void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
+    void onPause() -> f
+    void onStop() -> g
+    void onLowMemory() -> onLowMemory
+    void onDestroyView() -> h
+    void onDestroy() -> i
+    void initState() -> j
+    void onDetach() -> k
+    void onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> a
+    void onPrepareOptionsMenu(android.view.Menu) -> a
+    void onDestroyOptionsMenu() -> l
+    boolean onOptionsItemSelected(android.view.MenuItem) -> a
+    void onOptionsMenuClosed(android.view.Menu) -> b
+    void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
+    boolean onContextItemSelected(android.view.MenuItem) -> b
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+    void performStart() -> m
+    void performStop() -> n
+    void performReallyStop() -> o
+    void performDestroyView() -> p
+android.support.v4.app.Fragment$InstantiationException -> android.support.v4.app.e:
+android.support.v4.app.Fragment$SavedState -> android.support.v4.app.Fragment$SavedState:
+    android.os.Bundle mState -> a
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+android.support.v4.app.Fragment$SavedState$1 -> android.support.v4.app.f:
+    android.support.v4.app.Fragment$SavedState createFromParcel(android.os.Parcel) -> a
+    android.support.v4.app.Fragment$SavedState[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.FragmentActivity -> android.support.v4.app.g:
+    android.os.Handler mHandler -> a
+    android.support.v4.app.FragmentManagerImpl mFragments -> b
+    boolean mCreated -> c
+    boolean mResumed -> d
+    boolean mStopped -> e
+    boolean mReallyStopped -> f
+    boolean mRetaining -> g
+    boolean mOptionsMenuInvalidated -> h
+    boolean mCheckedForLoaderManager -> i
+    boolean mLoadersStarted -> j
+    android.support.v4.util.SparseArrayCompat mAllLoaderManagers -> k
+    android.support.v4.app.LoaderManagerImpl mLoaderManager -> l
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void onBackPressed() -> onBackPressed
+    void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onCreatePanelMenu(int,android.view.Menu) -> onCreatePanelMenu
+    android.view.View onCreateView(java.lang.String,android.content.Context,android.util.AttributeSet) -> onCreateView
+    void onDestroy() -> onDestroy
+    boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    void onLowMemory() -> onLowMemory
+    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
+    void onPanelClosed(int,android.view.Menu) -> onPanelClosed
+    void onPause() -> onPause
+    void onResume() -> onResume
+    void onPostResume() -> onPostResume
+    void onResumeFragments() -> a
+    boolean onPreparePanel(int,android.view.View,android.view.Menu) -> onPreparePanel
+    java.lang.Object onRetainNonConfigurationInstance() -> onRetainNonConfigurationInstance
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    void onStart() -> onStart
+    void onStop() -> onStop
+    java.lang.Object onRetainCustomNonConfigurationInstance() -> b
+    void supportInvalidateOptionsMenu() -> c
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> dump
+    void doReallyStop(boolean) -> a
+    void onReallyStop() -> d
+    void onAttachFragment(android.support.v4.app.Fragment) -> a
+    void startActivityForResult(android.content.Intent,int) -> startActivityForResult
+    void invalidateSupportFragmentIndex(int) -> a
+    android.support.v4.app.LoaderManagerImpl getLoaderManager(int,boolean,boolean) -> a
+android.support.v4.app.FragmentActivity$FragmentTag -> android.support.v4.app.h:
+    int[] Fragment -> a
+android.support.v4.app.FragmentActivity$NonConfigurationInstances -> android.support.v4.app.i:
+    java.lang.Object activity -> a
+    java.lang.Object custom -> b
+    java.util.HashMap children -> c
+    java.util.ArrayList fragments -> d
+    android.support.v4.util.SparseArrayCompat loaders -> e
+android.support.v4.app.FragmentManager -> android.support.v4.app.j:
+android.support.v4.app.FragmentManager$OnBackStackChangedListener -> android.support.v4.app.k:
+    void onBackStackChanged() -> a
+android.support.v4.app.FragmentManagerImpl -> android.support.v4.app.l:
+    boolean DEBUG -> a
+    boolean HONEYCOMB -> b
+    java.util.ArrayList mPendingActions -> c
+    java.lang.Runnable[] mTmpActions -> d
+    boolean mExecutingActions -> e
+    java.util.ArrayList mActive -> f
+    java.util.ArrayList mAdded -> g
+    java.util.ArrayList mAvailIndices -> h
+    java.util.ArrayList mBackStack -> i
+    java.util.ArrayList mCreatedMenus -> j
+    java.util.ArrayList mBackStackIndices -> k
+    java.util.ArrayList mAvailBackStackIndices -> l
+    java.util.ArrayList mBackStackChangeListeners -> m
+    int mCurState -> n
+    android.support.v4.app.FragmentActivity mActivity -> o
+    boolean mNeedMenuInvalidate -> p
+    boolean mStateSaved -> q
+    boolean mDestroyed -> r
+    java.lang.String mNoTransactionsBecause -> s
+    boolean mHavePendingDeferredStart -> t
+    android.os.Bundle mStateBundle -> u
+    android.util.SparseArray mStateArray -> v
+    java.lang.Runnable mExecCommit -> w
+    android.view.animation.Interpolator DECELERATE_QUINT -> x
+    android.view.animation.Interpolator DECELERATE_CUBIC -> y
+    android.view.animation.Interpolator ACCELERATE_QUINT -> z
+    android.view.animation.Interpolator ACCELERATE_CUBIC -> A
+    boolean executePendingTransactions() -> a
+    boolean popBackStackImmediate() -> b
+    void putFragment(android.os.Bundle,java.lang.String,android.support.v4.app.Fragment) -> a
+    android.support.v4.app.Fragment getFragment(android.os.Bundle,java.lang.String) -> a
+    java.lang.String toString() -> toString
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+    android.view.animation.Animation makeOpenCloseAnimation(android.content.Context,float,float,float,float) -> a
+    android.view.animation.Animation makeFadeAnimation(android.content.Context,float,float) -> a
+    android.view.animation.Animation loadAnimation(android.support.v4.app.Fragment,int,boolean,int) -> a
+    void performPendingDeferredStart(android.support.v4.app.Fragment) -> a
+    void moveToState(android.support.v4.app.Fragment,int,int,int,boolean) -> a
+    void moveToState(android.support.v4.app.Fragment) -> b
+    void moveToState(int,boolean) -> a
+    void moveToState(int,int,int,boolean) -> a
+    void startPendingDeferredFragments() -> c
+    void makeActive(android.support.v4.app.Fragment) -> c
+    void makeInactive(android.support.v4.app.Fragment) -> d
+    void addFragment(android.support.v4.app.Fragment,boolean) -> a
+    void removeFragment(android.support.v4.app.Fragment,int,int) -> a
+    void hideFragment(android.support.v4.app.Fragment,int,int) -> b
+    void showFragment(android.support.v4.app.Fragment,int,int) -> c
+    void detachFragment(android.support.v4.app.Fragment,int,int) -> d
+    void attachFragment(android.support.v4.app.Fragment,int,int) -> e
+    android.support.v4.app.Fragment findFragmentById(int) -> a
+    android.support.v4.app.Fragment findFragmentByTag(java.lang.String) -> a
+    void checkStateLoss() -> r
+    void setBackStackIndex(int,android.support.v4.app.BackStackRecord) -> a
+    void freeBackStackIndex(int) -> b
+    boolean execPendingActions() -> d
+    void reportBackStackChanged() -> e
+    void addBackStackState(android.support.v4.app.BackStackRecord) -> a
+    boolean popBackStackState(android.os.Handler,java.lang.String,int,int) -> a
+    java.util.ArrayList retainNonConfig() -> f
+    void saveFragmentViewState(android.support.v4.app.Fragment) -> e
+    android.os.Bundle saveFragmentBasicState(android.support.v4.app.Fragment) -> f
+    android.os.Parcelable saveAllState() -> g
+    void restoreAllState(android.os.Parcelable,java.util.ArrayList) -> a
+    void attachActivity(android.support.v4.app.FragmentActivity) -> a
+    void noteStateNotSaved() -> h
+    void dispatchCreate() -> i
+    void dispatchActivityCreated() -> j
+    void dispatchStart() -> k
+    void dispatchResume() -> l
+    void dispatchPause() -> m
+    void dispatchStop() -> n
+    void dispatchReallyStop() -> o
+    void dispatchDestroy() -> p
+    void dispatchConfigurationChanged(android.content.res.Configuration) -> a
+    void dispatchLowMemory() -> q
+    boolean dispatchCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> a
+    boolean dispatchPrepareOptionsMenu(android.view.Menu) -> a
+    boolean dispatchOptionsItemSelected(android.view.MenuItem) -> a
+    boolean dispatchContextItemSelected(android.view.MenuItem) -> b
+    void dispatchOptionsMenuClosed(android.view.Menu) -> b
+    int reverseTransit(int) -> c
+    int transitToStyleIndex(int,boolean) -> b
+android.support.v4.app.FragmentManagerImpl$5 -> android.support.v4.app.m:
+    android.support.v4.app.Fragment val$fragment -> a
+    android.support.v4.app.FragmentManagerImpl this$0 -> b
+    void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
+    void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
+    void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
+android.support.v4.app.FragmentManagerState -> android.support.v4.app.FragmentManagerState:
+    android.support.v4.app.FragmentState[] mActive -> a
+    int[] mAdded -> b
+    android.support.v4.app.BackStackState[] mBackStack -> c
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+android.support.v4.app.FragmentManagerState$1 -> android.support.v4.app.n:
+    android.support.v4.app.FragmentManagerState createFromParcel(android.os.Parcel) -> a
+    android.support.v4.app.FragmentManagerState[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.FragmentState -> android.support.v4.app.FragmentState:
+    java.lang.String mClassName -> a
+    int mIndex -> b
+    boolean mFromLayout -> c
+    int mFragmentId -> d
+    int mContainerId -> e
+    java.lang.String mTag -> f
+    boolean mRetainInstance -> g
+    boolean mDetached -> h
+    android.os.Bundle mArguments -> i
+    android.os.Bundle mSavedFragmentState -> j
+    android.support.v4.app.Fragment mInstance -> k
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    android.support.v4.app.Fragment instantiate(android.support.v4.app.FragmentActivity) -> a
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+android.support.v4.app.FragmentState$1 -> android.support.v4.app.o:
+    android.support.v4.app.FragmentState createFromParcel(android.os.Parcel) -> a
+    android.support.v4.app.FragmentState[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.FragmentTransaction -> android.support.v4.app.p:
+android.support.v4.app.LoaderManager -> android.support.v4.app.q:
+    boolean hasRunningLoaders() -> a
+android.support.v4.app.LoaderManager$LoaderCallbacks -> android.support.v4.app.r:
+    android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
+    void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
+    void onLoaderReset(android.support.v4.content.Loader) -> a
+android.support.v4.app.LoaderManagerImpl -> android.support.v4.app.s:
+    boolean DEBUG -> a
+    android.support.v4.util.SparseArrayCompat mLoaders -> b
+    android.support.v4.util.SparseArrayCompat mInactiveLoaders -> c
+    android.support.v4.app.FragmentActivity mActivity -> d
+    boolean mStarted -> e
+    boolean mRetaining -> f
+    void updateActivity(android.support.v4.app.FragmentActivity) -> a
+    void doStart() -> b
+    void doStop() -> c
+    void doRetain() -> d
+    void finishRetain() -> e
+    void doReportNextStart() -> f
+    void doReportStart() -> g
+    void doDestroy() -> h
+    java.lang.String toString() -> toString
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+    boolean hasRunningLoaders() -> a
+android.support.v4.app.LoaderManagerImpl$LoaderInfo -> android.support.v4.app.t:
+    int mId -> a
+    android.os.Bundle mArgs -> b
+    android.support.v4.app.LoaderManager$LoaderCallbacks mCallbacks -> c
+    android.support.v4.content.Loader mLoader -> d
+    boolean mHaveData -> e
+    boolean mDeliveredData -> f
+    java.lang.Object mData -> g
+    boolean mStarted -> h
+    boolean mRetaining -> i
+    boolean mRetainingStarted -> j
+    boolean mReportNextStart -> k
+    boolean mDestroyed -> l
+    boolean mListenerRegistered -> m
+    android.support.v4.app.LoaderManagerImpl$LoaderInfo mPendingLoader -> n
+    android.support.v4.app.LoaderManagerImpl this$0 -> o
+    void start() -> a
+    void retain() -> b
+    void finishRetain() -> c
+    void reportStart() -> d
+    void stop() -> e
+    void destroy() -> f
+    void callOnLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
+    java.lang.String toString() -> toString
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+android.support.v4.app.NoSaveStateFrameLayout -> android.support.v4.app.u:
+    android.view.ViewGroup wrap(android.view.View) -> a
+    void dispatchSaveInstanceState(android.util.SparseArray) -> dispatchSaveInstanceState
+    void dispatchRestoreInstanceState(android.util.SparseArray) -> dispatchRestoreInstanceState
+android.support.v4.app.SuperNotCalledException -> android.support.v4.app.v:
+android.support.v4.content.Loader -> android.support.v4.a.a:
+    int mId -> a
+    android.support.v4.content.Loader$OnLoadCompleteListener mListener -> b
+    boolean mStarted -> c
+    boolean mAbandoned -> d
+    boolean mReset -> e
+    boolean mContentChanged -> f
+    void registerListener(int,android.support.v4.content.Loader$OnLoadCompleteListener) -> a
+    void unregisterListener(android.support.v4.content.Loader$OnLoadCompleteListener) -> a
+    void startLoading() -> a
+    void onStartLoading() -> b
+    void stopLoading() -> c
+    void onStopLoading() -> d
+    void reset() -> e
+    void onReset() -> f
+    java.lang.String dataToString(java.lang.Object) -> a
+    java.lang.String toString() -> toString
+    void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
+android.support.v4.content.Loader$OnLoadCompleteListener -> android.support.v4.a.b:
+android.support.v4.os.ParcelableCompat -> android.support.v4.b.a:
+    android.os.Parcelable$Creator newCreator(android.support.v4.os.ParcelableCompatCreatorCallbacks) -> a
+android.support.v4.os.ParcelableCompat$CompatCreator -> android.support.v4.b.b:
+    android.support.v4.os.ParcelableCompatCreatorCallbacks mCallbacks -> a
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+    java.lang.Object[] newArray(int) -> newArray
+android.support.v4.os.ParcelableCompatCreatorCallbacks -> android.support.v4.b.c:
+    java.lang.Object createFromParcel(android.os.Parcel,java.lang.ClassLoader) -> a
+    java.lang.Object[] newArray(int) -> a
+android.support.v4.os.ParcelableCompatCreatorHoneycombMR2 -> android.support.v4.b.d:
+    android.support.v4.os.ParcelableCompatCreatorCallbacks mCallbacks -> a
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+    java.lang.Object createFromParcel(android.os.Parcel,java.lang.ClassLoader) -> createFromParcel
+    java.lang.Object[] newArray(int) -> newArray
+android.support.v4.os.ParcelableCompatCreatorHoneycombMR2Stub -> android.support.v4.b.e:
+    android.os.Parcelable$Creator instantiate(android.support.v4.os.ParcelableCompatCreatorCallbacks) -> a
+android.support.v4.util.DebugUtils -> android.support.v4.c.a:
+    void buildShortClassTag(java.lang.Object,java.lang.StringBuilder) -> a
+android.support.v4.util.LogWriter -> android.support.v4.c.b:
+    java.lang.String mTag -> a
+    java.lang.StringBuilder mBuilder -> b
+    void close() -> close
+    void flush() -> flush
+    void write(char[],int,int) -> write
+    void flushBuilder() -> a
+android.support.v4.util.SparseArrayCompat -> android.support.v4.c.c:
+    java.lang.Object DELETED -> a
+    boolean mGarbage -> b
+    int[] mKeys -> c
+    java.lang.Object[] mValues -> d
+    int mSize -> e
+    java.lang.Object get(int) -> a
+    java.lang.Object get(int,java.lang.Object) -> a
+    void delete(int) -> b
+    void remove(int) -> c
+    void removeAt(int) -> d
+    void gc() -> c
+    void put(int,java.lang.Object) -> b
+    int size() -> a
+    int keyAt(int) -> e
+    java.lang.Object valueAt(int) -> f
+    void clear() -> b
+    int binarySearch(int[],int,int,int) -> a
+    int idealByteArraySize(int) -> g
+    int idealIntArraySize(int) -> h
+android.support.v4.view.KeyEventCompat -> android.support.v4.view.a:
+    android.support.v4.view.KeyEventCompat$KeyEventVersionImpl IMPL -> a
+    boolean hasModifiers(android.view.KeyEvent,int) -> a
+    boolean hasNoModifiers(android.view.KeyEvent) -> a
+android.support.v4.view.KeyEventCompat$BaseKeyEventVersionImpl -> android.support.v4.view.b:
+    int metaStateFilterDirectionalModifiers(int,int,int,int,int) -> a
+    int normalizeMetaState(int) -> a
+    boolean metaStateHasModifiers(int,int) -> a
+    boolean metaStateHasNoModifiers(int) -> b
+android.support.v4.view.KeyEventCompat$HoneycombKeyEventVersionImpl -> android.support.v4.view.c:
+    boolean metaStateHasModifiers(int,int) -> a
+    boolean metaStateHasNoModifiers(int) -> b
+android.support.v4.view.KeyEventCompat$KeyEventVersionImpl -> android.support.v4.view.d:
+    boolean metaStateHasModifiers(int,int) -> a
+    boolean metaStateHasNoModifiers(int) -> b
+android.support.v4.view.KeyEventCompatHoneycomb -> android.support.v4.view.e:
+    boolean metaStateHasModifiers(int,int) -> a
+    boolean metaStateHasNoModifiers(int) -> a
+android.support.v4.view.MotionEventCompat -> android.support.v4.view.f:
+    android.support.v4.view.MotionEventCompat$MotionEventVersionImpl IMPL -> a
+    int getActionIndex(android.view.MotionEvent) -> a
+    int findPointerIndex(android.view.MotionEvent,int) -> a
+    int getPointerId(android.view.MotionEvent,int) -> b
+    float getX(android.view.MotionEvent,int) -> c
+    float getY(android.view.MotionEvent,int) -> d
+android.support.v4.view.MotionEventCompat$BaseMotionEventVersionImpl -> android.support.v4.view.g:
+    int findPointerIndex(android.view.MotionEvent,int) -> a
+    int getPointerId(android.view.MotionEvent,int) -> b
+    float getX(android.view.MotionEvent,int) -> c
+    float getY(android.view.MotionEvent,int) -> d
+android.support.v4.view.MotionEventCompat$EclairMotionEventVersionImpl -> android.support.v4.view.h:
+    int findPointerIndex(android.view.MotionEvent,int) -> a
+    int getPointerId(android.view.MotionEvent,int) -> b
+    float getX(android.view.MotionEvent,int) -> c
+    float getY(android.view.MotionEvent,int) -> d
+android.support.v4.view.MotionEventCompat$MotionEventVersionImpl -> android.support.v4.view.i:
+    int findPointerIndex(android.view.MotionEvent,int) -> a
+    int getPointerId(android.view.MotionEvent,int) -> b
+    float getX(android.view.MotionEvent,int) -> c
+    float getY(android.view.MotionEvent,int) -> d
+android.support.v4.view.MotionEventCompatEclair -> android.support.v4.view.j:
+    int findPointerIndex(android.view.MotionEvent,int) -> a
+    int getPointerId(android.view.MotionEvent,int) -> b
+    float getX(android.view.MotionEvent,int) -> c
+    float getY(android.view.MotionEvent,int) -> d
+android.support.v4.view.PagerAdapter -> android.support.v4.view.k:
+    android.database.DataSetObservable mObservable -> a
+    int getCount() -> a
+    void startUpdate(android.view.ViewGroup) -> a
+    java.lang.Object instantiateItem(android.view.ViewGroup,int) -> a
+    void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> a
+    void setPrimaryItem(android.view.ViewGroup,int,java.lang.Object) -> b
+    void finishUpdate(android.view.ViewGroup) -> b
+    void startUpdate(android.view.View) -> a
+    java.lang.Object instantiateItem(android.view.View,int) -> a
+    void destroyItem(android.view.View,int,java.lang.Object) -> a
+    void setPrimaryItem(android.view.View,int,java.lang.Object) -> b
+    void finishUpdate(android.view.View) -> b
+    boolean isViewFromObject(android.view.View,java.lang.Object) -> a
+    android.os.Parcelable saveState() -> b
+    void restoreState(android.os.Parcelable,java.lang.ClassLoader) -> a
+    int getItemPosition(java.lang.Object) -> a
+    void registerDataSetObserver(android.database.DataSetObserver) -> a
+    void unregisterDataSetObserver(android.database.DataSetObserver) -> b
+    float getPageWidth(int) -> a
+android.support.v4.view.VelocityTrackerCompat -> android.support.v4.view.l:
+    android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl IMPL -> a
+    float getXVelocity(android.view.VelocityTracker,int) -> a
+android.support.v4.view.VelocityTrackerCompat$BaseVelocityTrackerVersionImpl -> android.support.v4.view.m:
+    float getXVelocity(android.view.VelocityTracker,int) -> a
+android.support.v4.view.VelocityTrackerCompat$HoneycombVelocityTrackerVersionImpl -> android.support.v4.view.n:
+    float getXVelocity(android.view.VelocityTracker,int) -> a
+android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl -> android.support.v4.view.o:
+    float getXVelocity(android.view.VelocityTracker,int) -> a
+android.support.v4.view.VelocityTrackerCompatHoneycomb -> android.support.v4.view.p:
+    float getXVelocity(android.view.VelocityTracker,int) -> a
+android.support.v4.view.ViewCompat -> android.support.v4.view.q:
+    android.support.v4.view.ViewCompat$ViewCompatImpl IMPL -> a
+    boolean canScrollHorizontally(android.view.View,int) -> a
+    int getOverScrollMode(android.view.View) -> a
+    void postInvalidateOnAnimation(android.view.View) -> b
+android.support.v4.view.ViewCompat$BaseViewCompatImpl -> android.support.v4.view.r:
+    boolean canScrollHorizontally(android.view.View,int) -> a
+    int getOverScrollMode(android.view.View) -> a
+    void postInvalidateOnAnimation(android.view.View) -> b
+    long getFrameTime() -> a
+android.support.v4.view.ViewCompat$GBViewCompatImpl -> android.support.v4.view.s:
+    int getOverScrollMode(android.view.View) -> a
+android.support.v4.view.ViewCompat$HCViewCompatImpl -> android.support.v4.view.t:
+    long getFrameTime() -> a
+android.support.v4.view.ViewCompat$ICSViewCompatImpl -> android.support.v4.view.u:
+    boolean canScrollHorizontally(android.view.View,int) -> a
+android.support.v4.view.ViewCompat$JBViewCompatImpl -> android.support.v4.view.v:
+    void postInvalidateOnAnimation(android.view.View) -> b
+android.support.v4.view.ViewCompat$ViewCompatImpl -> android.support.v4.view.w:
+    boolean canScrollHorizontally(android.view.View,int) -> a
+    int getOverScrollMode(android.view.View) -> a
+    void postInvalidateOnAnimation(android.view.View) -> b
+android.support.v4.view.ViewCompatGingerbread -> android.support.v4.view.x:
+    int getOverScrollMode(android.view.View) -> a
+android.support.v4.view.ViewCompatHC -> android.support.v4.view.y:
+    long getFrameTime() -> a
+android.support.v4.view.ViewCompatICS -> android.support.v4.view.z:
+    boolean canScrollHorizontally(android.view.View,int) -> a
+android.support.v4.view.ViewCompatJB -> android.support.v4.view.aa:
+    void postInvalidateOnAnimation(android.view.View) -> a
+android.support.v4.view.ViewPager -> android.support.v4.view.ViewPager:
+    int[] LAYOUT_ATTRS -> a
+    java.util.Comparator COMPARATOR -> b
+    android.view.animation.Interpolator sInterpolator -> c
+    java.util.ArrayList mItems -> d
+    android.support.v4.view.ViewPager$ItemInfo mTempItem -> e
+    android.graphics.Rect mTempRect -> f
+    android.support.v4.view.PagerAdapter mAdapter -> g
+    int mCurItem -> h
+    int mRestoredCurItem -> i
+    android.os.Parcelable mRestoredAdapterState -> j
+    java.lang.ClassLoader mRestoredClassLoader -> k
+    android.widget.Scroller mScroller -> l
+    android.support.v4.view.ViewPager$PagerObserver mObserver -> m
+    int mPageMargin -> n
+    android.graphics.drawable.Drawable mMarginDrawable -> o
+    int mTopPageBounds -> p
+    int mBottomPageBounds -> q
+    float mFirstOffset -> r
+    float mLastOffset -> s
+    int mChildWidthMeasureSpec -> t
+    int mChildHeightMeasureSpec -> u
+    boolean mInLayout -> v
+    boolean mScrollingCacheEnabled -> w
+    boolean mPopulatePending -> x
+    int mOffscreenPageLimit -> y
+    boolean mIsBeingDragged -> z
+    boolean mIsUnableToDrag -> A
+    int mDefaultGutterSize -> B
+    int mGutterSize -> C
+    int mTouchSlop -> D
+    float mInitialMotionX -> E
+    float mLastMotionX -> F
+    float mLastMotionY -> G
+    int mActivePointerId -> H
+    android.view.VelocityTracker mVelocityTracker -> I
+    int mMinimumVelocity -> J
+    int mMaximumVelocity -> K
+    int mFlingDistance -> L
+    int mCloseEnough -> M
+    boolean mFakeDragging -> N
+    android.support.v4.widget.EdgeEffectCompat mLeftEdge -> O
+    android.support.v4.widget.EdgeEffectCompat mRightEdge -> P
+    boolean mFirstLayout -> Q
+    boolean mNeedCalculatePageOffsets -> R
+    boolean mCalledSuper -> S
+    int mDecorChildCount -> T
+    android.support.v4.view.ViewPager$OnPageChangeListener mOnPageChangeListener -> U
+    android.support.v4.view.ViewPager$OnPageChangeListener mInternalPageChangeListener -> V
+    android.support.v4.view.ViewPager$OnAdapterChangeListener mAdapterChangeListener -> W
+    int mScrollState -> Z
+    void setScrollState(int) -> setScrollState
+    void setAdapter(android.support.v4.view.PagerAdapter) -> setAdapter
+    void removeNonDecorViews() -> f
+    android.support.v4.view.PagerAdapter getAdapter() -> getAdapter
+    void setOnAdapterChangeListener(android.support.v4.view.ViewPager$OnAdapterChangeListener) -> setOnAdapterChangeListener
+    void setCurrentItem(int) -> setCurrentItem
+    void setCurrentItem(int,boolean) -> a
+    int getCurrentItem() -> getCurrentItem
+    void setCurrentItemInternal(int,boolean,boolean) -> a
+    void setCurrentItemInternal(int,boolean,boolean,int) -> a
+    void setOnPageChangeListener(android.support.v4.view.ViewPager$OnPageChangeListener) -> setOnPageChangeListener
+    int getOffscreenPageLimit() -> getOffscreenPageLimit
+    void setOffscreenPageLimit(int) -> setOffscreenPageLimit
+    void setPageMargin(int) -> setPageMargin
+    int getPageMargin() -> getPageMargin
+    void setPageMarginDrawable(android.graphics.drawable.Drawable) -> setPageMarginDrawable
+    void setPageMarginDrawable(int) -> setPageMarginDrawable
+    boolean verifyDrawable(android.graphics.drawable.Drawable) -> verifyDrawable
+    void drawableStateChanged() -> drawableStateChanged
+    float distanceInfluenceForSnapDuration(float) -> a
+    void smoothScrollTo(int,int,int) -> a
+    android.support.v4.view.ViewPager$ItemInfo addNewItem(int,int) -> a
+    void dataSetChanged() -> a
+    void populate() -> b
+    void populate(int) -> a
+    void calculatePageOffsets(android.support.v4.view.ViewPager$ItemInfo,int,android.support.v4.view.ViewPager$ItemInfo) -> a
+    android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
+    void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
+    void addView(android.view.View,int,android.view.ViewGroup$LayoutParams) -> addView
+    android.support.v4.view.ViewPager$ItemInfo infoForChild(android.view.View) -> a
+    android.support.v4.view.ViewPager$ItemInfo infoForAnyChild(android.view.View) -> b
+    android.support.v4.view.ViewPager$ItemInfo infoForPosition(int) -> b
+    void onAttachedToWindow() -> onAttachedToWindow
+    void onMeasure(int,int) -> onMeasure
+    void onSizeChanged(int,int,int,int) -> onSizeChanged
+    void recomputeScrollPosition(int,int,int,int) -> a
+    void onLayout(boolean,int,int,int,int) -> onLayout
+    void computeScroll() -> computeScroll
+    boolean pageScrolled(int) -> d
+    void onPageScrolled(int,float,int) -> a
+    void completeScroll() -> g
+    boolean isGutterDrag(float,float) -> a
+    boolean onInterceptTouchEvent(android.view.MotionEvent) -> onInterceptTouchEvent
+    boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
+    boolean performDrag(float) -> b
+    android.support.v4.view.ViewPager$ItemInfo infoForCurrentScrollPosition() -> h
+    int determineTargetPage(int,float,int,int) -> a
+    void draw(android.graphics.Canvas) -> draw
+    void onDraw(android.graphics.Canvas) -> onDraw
+    void onSecondaryPointerUp(android.view.MotionEvent) -> a
+    void endDrag() -> i
+    void setScrollingCacheEnabled(boolean) -> setScrollingCacheEnabled
+    boolean canScroll(android.view.View,boolean,int,int,int) -> a
+    boolean dispatchKeyEvent(android.view.KeyEvent) -> dispatchKeyEvent
+    boolean executeKeyEvent(android.view.KeyEvent) -> a
+    boolean arrowScroll(int) -> c
+    android.graphics.Rect getChildRectInPagerCoordinates(android.graphics.Rect,android.view.View) -> a
+    boolean pageLeft() -> c
+    boolean pageRight() -> d
+    void addFocusables(java.util.ArrayList,int,int) -> addFocusables
+    void addTouchables(java.util.ArrayList) -> addTouchables
+    boolean onRequestFocusInDescendants(int,android.graphics.Rect) -> onRequestFocusInDescendants
+    boolean dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent) -> dispatchPopulateAccessibilityEvent
+    android.view.ViewGroup$LayoutParams generateDefaultLayoutParams() -> generateDefaultLayoutParams
+    android.view.ViewGroup$LayoutParams generateLayoutParams(android.view.ViewGroup$LayoutParams) -> generateLayoutParams
+    boolean checkLayoutParams(android.view.ViewGroup$LayoutParams) -> checkLayoutParams
+    android.view.ViewGroup$LayoutParams generateLayoutParams(android.util.AttributeSet) -> generateLayoutParams
+    int[] access$300() -> e
+android.support.v4.view.ViewPager$1 -> android.support.v4.view.ab:
+    int compare(android.support.v4.view.ViewPager$ItemInfo,android.support.v4.view.ViewPager$ItemInfo) -> a
+    int compare(java.lang.Object,java.lang.Object) -> compare
+android.support.v4.view.ViewPager$2 -> android.support.v4.view.ac:
+    float getInterpolation(float) -> getInterpolation
+android.support.v4.view.ViewPager$Decor -> android.support.v4.view.ad:
+android.support.v4.view.ViewPager$ItemInfo -> android.support.v4.view.ae:
+    java.lang.Object object -> a
+    int position -> b
+    boolean scrolling -> c
+    float widthFactor -> d
+    float offset -> e
+android.support.v4.view.ViewPager$LayoutParams -> android.support.v4.view.af:
+    boolean isDecor -> a
+    int gravity -> b
+    float widthFactor -> c
+    boolean needsMeasure -> d
+android.support.v4.view.ViewPager$OnAdapterChangeListener -> android.support.v4.view.ag:
+    void onAdapterChanged(android.support.v4.view.PagerAdapter,android.support.v4.view.PagerAdapter) -> a
+android.support.v4.view.ViewPager$OnPageChangeListener -> android.support.v4.view.ah:
+    void onPageScrolled(int,float,int) -> a
+    void onPageSelected(int) -> a
+    void onPageScrollStateChanged(int) -> b
+android.support.v4.view.ViewPager$PagerObserver -> android.support.v4.view.ai:
+    android.support.v4.view.ViewPager this$0 -> a
+    void onChanged() -> onChanged
+    void onInvalidated() -> onInvalidated
+android.support.v4.view.ViewPager$SavedState -> android.support.v4.view.ViewPager$SavedState:
+    int position -> a
+    android.os.Parcelable adapterState -> b
+    java.lang.ClassLoader loader -> c
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+    java.lang.String toString() -> toString
+android.support.v4.view.ViewPager$SavedState$1 -> android.support.v4.view.aj:
+    android.support.v4.view.ViewPager$SavedState createFromParcel(android.os.Parcel,java.lang.ClassLoader) -> b
+    android.support.v4.view.ViewPager$SavedState[] newArray(int) -> b
+    java.lang.Object[] newArray(int) -> a
+    java.lang.Object createFromParcel(android.os.Parcel,java.lang.ClassLoader) -> a
+android.support.v4.widget.EdgeEffectCompat -> android.support.v4.d.a:
+    java.lang.Object mEdgeEffect -> a
+    android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl IMPL -> b
+    void setSize(int,int) -> a
+    boolean isFinished() -> a
+    void finish() -> b
+    boolean onPull(float) -> a
+    boolean onRelease() -> c
+    boolean draw(android.graphics.Canvas) -> a
+android.support.v4.widget.EdgeEffectCompat$BaseEdgeEffectImpl -> android.support.v4.d.b:
+    void setSize(java.lang.Object,int,int) -> a
+    boolean isFinished(java.lang.Object) -> a
+    void finish(java.lang.Object) -> b
+    boolean onPull(java.lang.Object,float) -> a
+    boolean onRelease(java.lang.Object) -> c
+    boolean draw(java.lang.Object,android.graphics.Canvas) -> a
+android.support.v4.widget.EdgeEffectCompat$EdgeEffectIcsImpl -> android.support.v4.d.c:
+    void setSize(java.lang.Object,int,int) -> a
+    boolean isFinished(java.lang.Object) -> a
+    void finish(java.lang.Object) -> b
+    boolean onPull(java.lang.Object,float) -> a
+    boolean onRelease(java.lang.Object) -> c
+    boolean draw(java.lang.Object,android.graphics.Canvas) -> a
+android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl -> android.support.v4.d.d:
+    void setSize(java.lang.Object,int,int) -> a
+    boolean isFinished(java.lang.Object) -> a
+    void finish(java.lang.Object) -> b
+    boolean onPull(java.lang.Object,float) -> a
+    boolean onRelease(java.lang.Object) -> c
+    boolean draw(java.lang.Object,android.graphics.Canvas) -> a
+android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.d.e:
+    void setSize(java.lang.Object,int,int) -> a
+    boolean isFinished(java.lang.Object) -> a
+    void finish(java.lang.Object) -> b
+    boolean onPull(java.lang.Object,float) -> a
+    boolean onRelease(java.lang.Object) -> c
+    boolean draw(java.lang.Object,android.graphics.Canvas) -> a
 com.android.vending.billing.IMarketBillingService -> com.android.vending.billing.IMarketBillingService:
     android.os.Bundle sendBillingRequest(android.os.Bundle) -> a
 com.android.vending.billing.IMarketBillingService$Stub -> com.android.vending.billing.IMarketBillingService$Stub:
@@ -8,22 +755,47 @@ com.android.vending.billing.IMarketBillingService$Stub$Proxy -> com.android.vend
     android.os.IBinder asBinder() -> asBinder
     android.os.Bundle sendBillingRequest(android.os.Bundle) -> a
 com.dexnamic.alwayscharged.AdvancedPreferences -> com.dexnamic.alwayscharged.AdvancedPreferences:
-    android.preference.ListPreference mListPreferenceSnooze -> a
-    android.preference.ListPreference mListPreferenceDuration -> b
-    android.preference.ListPreference mListPreferenceMotion -> c
-    android.preference.ListPreference mListPreferenceBattery -> d
-    java.lang.Boolean mHasPurchased -> e
-    boolean mSnoozeWasChanged -> f
+    boolean mRequestedPurchase -> a
+    android.preference.ListPreference mListPreferenceSnooze -> b
+    android.preference.ListPreference mListPreferenceDuration -> c
+    android.preference.ListPreference mListPreferenceMotion -> d
+    android.preference.ListPreference mListPreferenceBattery -> e
+    java.lang.Boolean mHasPurchased -> f
+    java.lang.Boolean mSnoozeWasChanged -> g
+    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> h
+    android.os.Handler mHandler -> i
+    com.dexnamic.alwayscharged.AdvancedPreferences$UpgradePurchaseObserver mUpgradePurchaseObserver -> j
     void onCreate(android.os.Bundle) -> onCreate
+    void setupActionBar_API11() -> a
+    void setupActionBar_API14() -> b
     void onStart() -> onStart
     void onResume() -> onResume
+    void upgradeToPro() -> c
     void onPause() -> onPause
     void onStop() -> onStop
+    void onDestroy() -> onDestroy
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    android.app.AlertDialog createUpgradeDialog(int) -> a
     boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
     void setMotionToleranceSummary(java.lang.String) -> a
     void setSkipBatterySummary(java.lang.String) -> b
     void onSharedPreferenceChanged(android.content.SharedPreferences,java.lang.String) -> onSharedPreferenceChanged
-com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.a:
+    void configurePreferences() -> d
+    void access$0(com.dexnamic.alwayscharged.AdvancedPreferences) -> a
+    com.dexnamic.alwayscharged.billing.BillingService access$1(com.dexnamic.alwayscharged.AdvancedPreferences) -> b
+com.dexnamic.alwayscharged.AdvancedPreferences$1 -> com.dexnamic.alwayscharged.a:
+    com.dexnamic.alwayscharged.AdvancedPreferences this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.AdvancedPreferences$2 -> com.dexnamic.alwayscharged.b:
+    com.dexnamic.alwayscharged.AdvancedPreferences this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.AdvancedPreferences$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.c:
+    com.dexnamic.alwayscharged.AdvancedPreferences this$0 -> a
+    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.d:
     java.lang.Integer ID -> a
     java.lang.Boolean enabled -> b
     java.lang.String label -> c
@@ -32,24 +804,26 @@ com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.a:
     java.lang.Integer repeats -> f
     java.lang.String ringtone -> g
     java.lang.Boolean vibrate -> h
+    com.dexnamic.alwayscharged.Alarm clone() -> a
     boolean equals(java.lang.Object) -> equals
     java.lang.String toString() -> toString
-    java.lang.String getLabel() -> a
+    java.lang.String getLabel() -> b
     void setLabel(java.lang.String) -> a
-    java.lang.Integer getHour() -> b
+    java.lang.Integer getHour() -> c
     void setHour(java.lang.Integer) -> a
-    java.lang.Integer getMinute() -> c
+    java.lang.Integer getMinute() -> d
     void setMinute(java.lang.Integer) -> b
-    java.lang.Integer getRepeats() -> d
+    java.lang.Integer getRepeats() -> e
     java.lang.Boolean getRepeats(java.lang.Integer) -> c
     void setRepeats(java.lang.Integer) -> d
-    java.lang.String getRingtone() -> e
+    void setRepeats(java.lang.Integer,java.lang.Boolean) -> a
+    java.lang.String getRingtone() -> f
     void setRingtone(java.lang.String) -> b
-    java.lang.Boolean getVibrate() -> f
+    java.lang.Boolean getVibrate() -> g
     void setVibrate(java.lang.Boolean) -> a
-    java.lang.Integer getID() -> g
+    java.lang.Integer getID() -> h
     void setID(java.lang.Integer) -> e
-    java.lang.Boolean getEnabled() -> h
+    java.lang.Boolean getEnabled() -> i
     void setEnabled(boolean) -> a
     java.lang.CharSequence getTime(android.content.Context) -> a
     java.lang.String repeatToString(android.content.Context,int) -> a
@@ -57,13 +831,13 @@ com.dexnamic.alwayscharged.Alarm -> com.dexnamic.alwayscharged.a:
     java.lang.String getRingerName(android.content.Context) -> b
     java.lang.Object clone() -> clone
 com.dexnamic.alwayscharged.AlarmActivity -> com.dexnamic.alwayscharged.AlarmActivity:
-    android.app.KeyguardManager$KeyguardLock mKeyguardLock -> a
-    android.media.MediaPlayer mMediaPlayer -> b
-    android.os.Vibrator mVibrator -> c
-    android.content.SharedPreferences mSettings -> d
-    com.dexnamic.alwayscharged.Alarm mAlarm -> e
-    long[] vibratePattern -> f
-    android.content.BroadcastReceiver mBroadcastReceiver -> g
+    android.app.KeyguardManager$KeyguardLock mKeyguardLock -> c
+    android.media.MediaPlayer mMediaPlayer -> d
+    android.os.Vibrator mVibrator -> e
+    android.content.SharedPreferences mSettings -> f
+    com.dexnamic.alwayscharged.Alarm mAlarm -> g
+    long[] vibratePattern -> a
+    android.content.BroadcastReceiver mBroadcastReceiver -> b
     android.os.Handler mHandler -> h
     android.content.DialogInterface$OnKeyListener mOnKeyListener -> i
     void onCreate(android.os.Bundle) -> onCreate
@@ -74,61 +848,69 @@ com.dexnamic.alwayscharged.AlarmActivity -> com.dexnamic.alwayscharged.AlarmActi
     void onStop() -> onStop
     void stopRingtone() -> a
     boolean repeatAlarm() -> b
+    void alarmFinished() -> c
     void access$0(com.dexnamic.alwayscharged.AlarmActivity) -> a
     com.dexnamic.alwayscharged.Alarm access$1(com.dexnamic.alwayscharged.AlarmActivity) -> b
     android.os.Handler access$2(com.dexnamic.alwayscharged.AlarmActivity) -> c
     android.content.SharedPreferences access$3(com.dexnamic.alwayscharged.AlarmActivity) -> d
-com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.b:
+com.dexnamic.alwayscharged.AlarmActivity$1 -> com.dexnamic.alwayscharged.e:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.dexnamic.alwayscharged.AlarmActivity$2 -> com.dexnamic.alwayscharged.c:
+com.dexnamic.alwayscharged.AlarmActivity$2 -> com.dexnamic.alwayscharged.f:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.dexnamic.alwayscharged.AlarmActivity$3 -> com.dexnamic.alwayscharged.d:
+com.dexnamic.alwayscharged.AlarmActivity$3 -> com.dexnamic.alwayscharged.g:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     boolean onKey(android.content.DialogInterface,int,android.view.KeyEvent) -> onKey
-com.dexnamic.alwayscharged.AlarmActivity$4 -> com.dexnamic.alwayscharged.e:
+com.dexnamic.alwayscharged.AlarmActivity$4 -> com.dexnamic.alwayscharged.h:
     com.dexnamic.alwayscharged.AlarmActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.dexnamic.alwayscharged.AlarmReceiver -> com.dexnamic.alwayscharged.AlarmReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     void startAlarmService(android.content.Context,java.lang.String,com.dexnamic.alwayscharged.Alarm) -> a
 com.dexnamic.alwayscharged.AlarmService -> com.dexnamic.alwayscharged.AlarmService:
-    float mMotionToleranceDeg -> a
-    android.os.PowerManager mPowerManager -> b
-    android.hardware.SensorManager mSensorManager -> c
-    android.content.SharedPreferences mSharedPreferences -> d
-    boolean wasSnooze -> e
-    com.dexnamic.alwayscharged.Alarm mAlarm -> f
-    int mBatteryPct -> g
-    android.hardware.Sensor mAccelerometer -> h
-    android.hardware.Sensor mMagneticField -> i
-    boolean mAccelRegistered -> j
-    boolean mMagneticRegistered -> k
-    boolean mAccelEventReceived -> l
-    boolean mMagneticEventReceived -> m
-    float[] mAccelValues -> n
-    float[] mMagneticValues -> o
-    boolean mStabilze -> p
-    android.os.Handler mHandler -> q
+    float mMotionToleranceDeg -> k
+    long TIMEOUT_MS -> l
+    android.os.PowerManager$WakeLock mWakeLock -> a
+    android.os.PowerManager mPowerManager -> m
+    android.hardware.SensorManager mSensorManager -> n
+    android.content.SharedPreferences mSharedPreferences -> o
+    boolean wasSnooze -> p
+    com.dexnamic.alwayscharged.Alarm mAlarm -> b
+    int mBatteryPct -> q
+    android.hardware.Sensor mAccelerometer -> c
+    android.hardware.Sensor mMagneticField -> d
+    boolean mAccelRegistered -> e
+    boolean mMagneticRegistered -> f
+    boolean mAccelEventReceived -> g
+    boolean mMagneticEventReceived -> h
+    float[] mAccelValues -> i
+    float[] mMagneticValues -> j
+    boolean mStabilze -> r
+    android.os.Handler mHandler -> s
     void onCreate() -> onCreate
     void onStart(android.content.Intent,int) -> onStart
+    boolean shouldSkipAlarmIfBatteryCharged(android.content.Context) -> a
     void onDestroy() -> onDestroy
     boolean screenOn() -> a
     boolean telephoneInUse() -> b
+    void startReadingSensors() -> c
     void onSensorChanged(android.hardware.SensorEvent) -> onSensorChanged
     void onAccuracyChanged(android.hardware.Sensor,int) -> onAccuracyChanged
-    void doAlarm() -> c
+    void doAlarm() -> d
     void doSnooze(int) -> a
+    void sensorsHaveBeenRead() -> e
     void checkDeviceOrientation(float[]) -> a
-    void saveDeviceOrientation(float[]) -> b
-    void stopReadingSensors() -> d
+    boolean getCurrentOrientation(float[]) -> b
+    void saveDeviceOrientation(float[]) -> c
+    void readDeviceOrientation(float[]) -> d
+    void stopReadingSensors() -> f
     android.os.IBinder onBind(android.content.Intent) -> onBind
     boolean access$0(com.dexnamic.alwayscharged.AlarmService) -> a
     void access$1(com.dexnamic.alwayscharged.AlarmService) -> b
     void access$2(com.dexnamic.alwayscharged.AlarmService,int) -> a
     void access$3(com.dexnamic.alwayscharged.AlarmService,boolean) -> a
-com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.f:
+com.dexnamic.alwayscharged.AlarmService$1 -> com.dexnamic.alwayscharged.i:
     com.dexnamic.alwayscharged.AlarmService this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 com.dexnamic.alwayscharged.AlwaysCharged -> com.dexnamic.alwayscharged.AlwaysCharged:
@@ -136,9 +918,9 @@ com.dexnamic.alwayscharged.AlwaysCharged -> com.dexnamic.alwayscharged.AlwaysCha
     java.lang.Long RAND_PURCHASED -> b
     java.lang.Long RAND_REFUNDED -> c
     void onCreate() -> onCreate
-com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.g:
-    android.content.Context context -> a
-    java.lang.String CREATE_TABLE_ALARMS -> b
+com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.j:
+    android.content.Context context -> b
+    java.lang.String CREATE_TABLE_ALARMS -> a
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
     void removeAllAlarms() -> a
@@ -151,92 +933,141 @@ com.dexnamic.alwayscharged.DatabaseHelper -> com.dexnamic.alwayscharged.g:
     android.database.Cursor getAllAlarms() -> b
     android.database.Cursor getAllActiveAlarms() -> c
 com.dexnamic.alwayscharged.EditAlarmPreferenceActivity -> com.dexnamic.alwayscharged.EditAlarmPreferenceActivity:
-    int mId -> a
-    com.dexnamic.alwayscharged.Alarm mAlarm -> b
-    com.dexnamic.alwayscharged.DatabaseHelper database -> c
-    android.preference.CheckBoxPreference mEnabledCheckBox -> d
-    android.preference.Preference mTimePreference -> e
-    com.dexnamic.android.preference.ListPreferenceMultiSelect mRepeatPreference -> f
-    android.preference.CheckBoxPreference mVibrateCheckBox -> g
-    android.widget.Button cancelButton -> h
-    android.widget.Button deleteButton -> i
-    android.widget.Button okButton -> j
-    android.preference.RingtonePreference mRingtonePreference -> k
-    android.preference.EditTextPreference mLabelPreference -> l
-    android.os.Vibrator mVibrator -> m
+    int mId -> c
+    com.dexnamic.alwayscharged.Alarm mAlarm -> d
+    com.dexnamic.alwayscharged.DatabaseHelper database -> e
+    android.preference.CheckBoxPreference mEnabledCheckBox -> f
+    android.preference.Preference mTimePreference -> g
+    android.preference.Preference mRepeatPreference -> h
+    android.preference.CheckBoxPreference mVibrateCheckBox -> i
+    android.widget.Button cancelButton -> j
+    android.widget.Button deleteButton -> k
+    android.widget.Button okButton -> l
+    android.preference.RingtonePreference mRingtonePreference -> m
+    android.preference.EditTextPreference mLabelPreference -> n
+    android.os.Vibrator mVibrator -> o
+    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> p
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$UpgradePurchaseObserver mUpgradePurchaseObserver -> q
+    android.os.Handler mHandler -> r
+    boolean[] mCheckedItems -> a
+    android.widget.TextView mTextView -> b
     void onCreate(android.os.Bundle) -> onCreate
+    void setupActionBar_API11() -> a
+    void setupActionBar_API14() -> b
     void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
+    void onDestroy() -> onDestroy
+    void upgradeToPro() -> c
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
+    void setPreferences() -> d
     boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
     boolean onPreferenceChange(android.preference.Preference,java.lang.Object) -> onPreferenceChange
-    void saveAlarm() -> a
+    void checkVolume() -> e
+    void cancelEdit() -> f
+    void deleteAlarm() -> g
+    void saveAlarm() -> h
     void onClick(android.view.View) -> onClick
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onBackPressed() -> onBackPressed
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
     android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    void enableAlarm() -> b
+    void enableAlarm() -> i
+    com.dexnamic.alwayscharged.billing.BillingService access$0(com.dexnamic.alwayscharged.EditAlarmPreferenceActivity) -> a
+    com.dexnamic.alwayscharged.Alarm access$1(com.dexnamic.alwayscharged.EditAlarmPreferenceActivity) -> b
+    android.preference.Preference access$2(com.dexnamic.alwayscharged.EditAlarmPreferenceActivity) -> c
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$1 -> com.dexnamic.alwayscharged.k:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$2 -> com.dexnamic.alwayscharged.l:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$3 -> com.dexnamic.alwayscharged.m:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int,boolean) -> onClick
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$4 -> com.dexnamic.alwayscharged.n:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$5 -> com.dexnamic.alwayscharged.o:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.p:
+    com.dexnamic.alwayscharged.EditAlarmPreferenceActivity this$0 -> a
+    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
 com.dexnamic.alwayscharged.ListAlarmsActivity -> com.dexnamic.alwayscharged.ListAlarmsActivity:
     com.dexnamic.alwayscharged.DatabaseHelper dbHelper -> a
     android.widget.Button addButton -> b
     android.database.Cursor cursor -> c
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor mAdapter -> d
+    android.content.SharedPreferences mSharedPreferences -> e
+    android.content.SharedPreferences$Editor mEditor -> f
+    android.widget.Button upgradeButton -> g
+    java.lang.Boolean mHasPurchased -> h
+    boolean mFirstInstance -> i
+    android.os.Handler mHandler -> j
+    com.dexnamic.alwayscharged.ListAlarmsActivity$UpgradePurchaseObserver mUpgradePurchaseObserver -> k
+    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> l
     void onCreate(android.os.Bundle) -> onCreate
+    void fillData() -> a
+    void onStart() -> onStart
+    void onPause() -> onPause
+    void onResume() -> onResume
+    void upgradeToPro() -> b
+    void checkIfUserPurchasedUpgradeToPro() -> c
     void onDestroy() -> onDestroy
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
+    android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    android.app.AlertDialog createUpgradeDialog(int) -> a
+    android.app.AlertDialog$Builder aboutDialogBuilder() -> d
+    android.app.AlertDialog$Builder changelogDialogBuilder() -> e
+    void sendFeedbackEmail() -> f
     void alarmChecked(int,boolean) -> a
-    void alarmSelected(int) -> a
+    void alarmSelected(int) -> b
     void onClick(android.view.View) -> onClick
+    void doUpgrade() -> g
+    void addAlarm() -> h
     void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged.h:
+    void access$0(com.dexnamic.alwayscharged.ListAlarmsActivity) -> a
+    android.content.SharedPreferences$Editor access$1(com.dexnamic.alwayscharged.ListAlarmsActivity) -> b
+    com.dexnamic.alwayscharged.billing.BillingService access$2(com.dexnamic.alwayscharged.ListAlarmsActivity) -> c
+com.dexnamic.alwayscharged.ListAlarmsActivity$1 -> com.dexnamic.alwayscharged.q:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.ListAlarmsActivity$2 -> com.dexnamic.alwayscharged.r:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.ListAlarmsActivity$3 -> com.dexnamic.alwayscharged.s:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.ListAlarmsActivity$4 -> com.dexnamic.alwayscharged.t:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.ListAlarmsActivity$5 -> com.dexnamic.alwayscharged.u:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.dexnamic.alwayscharged.ListAlarmsActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.v:
+    com.dexnamic.alwayscharged.ListAlarmsActivity this$0 -> a
+    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
+    void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor -> com.dexnamic.alwayscharged.w:
     android.content.Context mContext -> a
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener onListClickListener -> b
     void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
     com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener access$0(com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor) -> a
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnItemClickListener -> com.dexnamic.alwayscharged.i:
-    int id -> a
-    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor this$0 -> b
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnItemClickListener -> com.dexnamic.alwayscharged.x:
+    int id -> b
+    com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor this$0 -> a
     void onClick(android.view.View) -> onClick
-com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.dexnamic.alwayscharged.j:
+com.dexnamic.alwayscharged.ListAlarmsCursorAdaptor$OnListClickListener -> com.dexnamic.alwayscharged.y:
     void alarmChecked(int,boolean) -> a
-    void alarmSelected(int) -> a
-com.dexnamic.alwayscharged.MainPreferenceActivity -> com.dexnamic.alwayscharged.MainPreferenceActivity:
-    android.preference.Preference mPreferenceAbout -> b
-    android.preference.Preference mPreferenceAdvanced -> c
-    android.preference.Preference mPreferenceUpgrade -> d
-    android.preference.Preference mPreferenceSetAlarm -> e
-    android.content.SharedPreferences mSettings -> f
-    android.content.SharedPreferences$Editor mEditor -> a
-    boolean mFirstInstance -> g
-    android.os.Handler mHandler -> h
-    java.lang.Boolean mHasPurchased -> i
-    com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver mUpgradePurchaseObserver -> j
-    void onCreate(android.os.Bundle) -> onCreate
-    void onStart() -> onStart
-    void onPause() -> onPause
-    void onResume() -> onResume
-    void onStop() -> onStop
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    boolean onMenuItemSelected(int,android.view.MenuItem) -> onMenuItemSelected
-    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
-    android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    android.app.AlertDialog$Builder aboutDialogBuilder() -> a
-    void upgradeToPro() -> b
-    void access$0(com.dexnamic.alwayscharged.MainPreferenceActivity) -> a
-com.dexnamic.alwayscharged.MainPreferenceActivity$1 -> com.dexnamic.alwayscharged.k:
-    com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$2 -> com.dexnamic.alwayscharged.l:
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$3 -> com.dexnamic.alwayscharged.m:
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.MainPreferenceActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.n:
-    com.dexnamic.alwayscharged.MainPreferenceActivity this$0 -> a
-    void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
-    void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void alarmSelected(int) -> b
 com.dexnamic.alwayscharged.MyPrefsBackupAgent -> com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     void onCreate() -> onCreate
 com.dexnamic.alwayscharged.PowerReceiver -> com.dexnamic.alwayscharged.PowerReceiver:
@@ -244,25 +1075,30 @@ com.dexnamic.alwayscharged.PowerReceiver -> com.dexnamic.alwayscharged.PowerRece
 com.dexnamic.alwayscharged.PowerSnoozeService -> com.dexnamic.alwayscharged.PowerSnoozeService:
     void onStart(android.content.Intent,int) -> onStart
     android.os.IBinder onBind(android.content.Intent) -> onBind
-com.dexnamic.alwayscharged.R -> com.dexnamic.alwayscharged.o:
+com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.dexnamic.alwayscharged.Scheduler -> com.dexnamic.alwayscharged.z:
     android.os.PowerManager$WakeLock mWakeLock -> a
     int setDailyAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm,boolean) -> a
+    void notifyUserTimeUntilAlarm(android.content.Context,int) -> a
+    void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> a
     void cancelSnooze(android.content.Context) -> a
     void cancelNotification(android.content.Context) -> b
     void snoozeAlarm(android.content.Context,int,int,com.dexnamic.alwayscharged.Alarm) -> a
-    android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> a
+    android.app.PendingIntent getPendingIntentUpdateCurrent(android.content.Context,com.dexnamic.alwayscharged.Alarm,int) -> b
     android.app.PendingIntent getPendingIntent_Snooze(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> a
-    void disablePowerSnooze(android.content.Context) -> c
+    void enablePowerSnooze(android.content.Context) -> c
+    void disablePowerSnooze(android.content.Context) -> d
+    void setPartialWakeLock(android.os.PowerManager) -> a
     void releaseWakeLock() -> a
     void resetRepeatCount(android.content.Context,android.content.SharedPreferences) -> a
     void cancelAlarm(android.content.Context,com.dexnamic.alwayscharged.Alarm) -> b
-    void resetAllEnabledAlarms(android.content.Context) -> d
-com.dexnamic.alwayscharged.R$styleable -> com.dexnamic.alwayscharged.p:
-    int[] ListPreferenceMultiSelect -> a
-com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
-    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    void resetAllEnabledAlarms(android.content.Context) -> e
 com.dexnamic.alwayscharged.billing.BillingReceiver -> com.dexnamic.alwayscharged.billing.BillingReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    void purchaseStateChanged(android.content.Context,java.lang.String,java.lang.String) -> a
+    void notify(android.content.Context,java.lang.String) -> a
+    void checkResponseCode(android.content.Context,long,int) -> a
 com.dexnamic.alwayscharged.billing.BillingService -> com.dexnamic.alwayscharged.billing.BillingService:
     com.android.vending.billing.IMarketBillingService mService -> a
     java.util.LinkedList mPendingRequests -> b
@@ -270,24 +1106,27 @@ com.dexnamic.alwayscharged.billing.BillingService -> com.dexnamic.alwayscharged.
     void setContext(android.content.Context) -> a
     android.os.IBinder onBind(android.content.Intent) -> onBind
     void onStart(android.content.Intent,int) -> onStart
-    boolean bindToMarketBillingService() -> g
-    boolean checkBillingSupported() -> a
+    void handleCommand(android.content.Intent,int) -> a
+    boolean bindToMarketBillingService() -> f
     boolean requestPurchase(java.lang.String,java.lang.String,java.lang.String) -> a
-    boolean restoreTransactions() -> b
+    boolean restoreTransactions() -> a
     boolean confirmNotifications(int,java.lang.String[]) -> a
+    boolean getPurchaseInformation(int,java.lang.String[]) -> b
     void purchaseStateChanged(int,java.lang.String,java.lang.String) -> a
+    void checkResponseCode(long,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void runPendingRequests() -> g
     void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
     void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
-    void unbind() -> c
+    void unbind() -> b
     boolean access$0(com.dexnamic.alwayscharged.billing.BillingService) -> a
-    java.util.LinkedList access$1() -> d
-    com.android.vending.billing.IMarketBillingService access$2() -> e
-    java.util.HashMap access$3() -> f
+    java.util.LinkedList access$1() -> c
+    com.android.vending.billing.IMarketBillingService access$2() -> d
+    java.util.HashMap access$3() -> e
     void access$4(com.android.vending.billing.IMarketBillingService) -> a
 com.dexnamic.alwayscharged.billing.BillingService$BillingRequest -> com.dexnamic.alwayscharged.billing.a:
-    int mStartId -> a
-    long mRequestId -> b
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> c
+    int mStartId -> c
+    long mRequestId -> a
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> b
     int getStartId() -> a
     boolean runRequest() -> b
     boolean runIfConnected() -> c
@@ -296,69 +1135,73 @@ com.dexnamic.alwayscharged.billing.BillingService$BillingRequest -> com.dexnamic
     void responseCodeReceived(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     android.os.Bundle makeRequestBundle(java.lang.String) -> a
     void logResponseCode(java.lang.String,android.os.Bundle) -> a
-com.dexnamic.alwayscharged.billing.BillingService$CheckBillingSupported -> com.dexnamic.alwayscharged.billing.b:
-    java.lang.String mProductType -> a
-    long run() -> d
-com.dexnamic.alwayscharged.billing.BillingService$ConfirmNotifications -> com.dexnamic.alwayscharged.billing.c:
-    java.lang.String[] mNotifyIds -> a
-    long run() -> d
-com.dexnamic.alwayscharged.billing.BillingService$GetPurchaseInformation -> com.dexnamic.alwayscharged.billing.d:
-    long mNonce -> a
-    java.lang.String[] mNotifyIds -> b
-    long run() -> d
-    void onRemoteException(android.os.RemoteException) -> a
-com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase -> com.dexnamic.alwayscharged.billing.e:
-    java.lang.String mProductId -> a
-    java.lang.String mDeveloperPayload -> b
-    java.lang.String mProductType -> c
+com.dexnamic.alwayscharged.billing.BillingService$ConfirmNotifications -> com.dexnamic.alwayscharged.billing.b:
+    java.lang.String[] mNotifyIds -> c
     com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
     long run() -> d
+com.dexnamic.alwayscharged.billing.BillingService$GetPurchaseInformation -> com.dexnamic.alwayscharged.billing.c:
+    long mNonce -> c
+    java.lang.String[] mNotifyIds -> d
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> e
+    long run() -> d
+    void onRemoteException(android.os.RemoteException) -> a
+com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase -> com.dexnamic.alwayscharged.billing.d:
+    java.lang.String mProductId -> c
+    java.lang.String mDeveloperPayload -> d
+    java.lang.String mProductType -> e
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> f
+    long run() -> d
     void responseCodeReceived(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     boolean runIfConnected() -> c
     boolean runRequest() -> b
     int getStartId() -> a
-com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions -> com.dexnamic.alwayscharged.billing.f:
-    long mNonce -> a
-    com.dexnamic.alwayscharged.billing.BillingService this$0 -> b
+com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions -> com.dexnamic.alwayscharged.billing.e:
+    long mNonce -> c
+    com.dexnamic.alwayscharged.billing.BillingService this$0 -> d
     long run() -> d
     void onRemoteException(android.os.RemoteException) -> a
     void responseCodeReceived(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     boolean runIfConnected() -> c
     boolean runRequest() -> b
     int getStartId() -> a
-com.dexnamic.alwayscharged.billing.Consts -> com.dexnamic.alwayscharged.billing.g:
+com.dexnamic.alwayscharged.billing.Consts -> com.dexnamic.alwayscharged.billing.f:
     java.lang.String PURCHASE_PREFERENCES -> a
     java.lang.String PURCHASE_RESTORED -> b
-    long BILLING_RESPONSE_INVALID_REQUEST_ID -> c
-com.dexnamic.alwayscharged.billing.Consts$PurchaseState -> com.dexnamic.alwayscharged.billing.h:
+    java.lang.String mProductID -> c
+    long BILLING_RESPONSE_INVALID_REQUEST_ID -> d
+com.dexnamic.alwayscharged.billing.Consts$PurchaseState -> com.dexnamic.alwayscharged.billing.g:
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState PURCHASED -> a
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState CANCELED -> c
-    com.dexnamic.alwayscharged.billing.Consts$PurchaseState REFUNDED -> b
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState CANCELED -> b
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState REFUNDED -> c
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState[] ENUM$VALUES -> d
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(int) -> a
-com.dexnamic.alwayscharged.billing.Consts$ResponseCode -> com.dexnamic.alwayscharged.billing.i:
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState[] values() -> values
+    com.dexnamic.alwayscharged.billing.Consts$PurchaseState valueOf(java.lang.String) -> valueOf
+com.dexnamic.alwayscharged.billing.Consts$ResponseCode -> com.dexnamic.alwayscharged.billing.h:
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_OK -> a
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_USER_CANCELED -> b
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_SERVICE_UNAVAILABLE -> d
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_BILLING_UNAVAILABLE -> e
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ITEM_UNAVAILABLE -> f
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_DEVELOPER_ERROR -> g
-    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ERROR -> c
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_SERVICE_UNAVAILABLE -> c
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_BILLING_UNAVAILABLE -> d
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ITEM_UNAVAILABLE -> e
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_DEVELOPER_ERROR -> f
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode RESULT_ERROR -> g
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode[] ENUM$VALUES -> h
     com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(int) -> a
-com.dexnamic.alwayscharged.billing.PurchaseObserver -> com.dexnamic.alwayscharged.billing.j:
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode[] values() -> values
+    com.dexnamic.alwayscharged.billing.Consts$ResponseCode valueOf(java.lang.String) -> valueOf
+com.dexnamic.alwayscharged.billing.PurchaseObserver -> com.dexnamic.alwayscharged.billing.i:
     android.app.Activity mActivity -> a
     android.os.Handler mHandler -> b
     java.lang.reflect.Method mStartIntentSender -> c
     java.lang.Object[] mStartIntentSenderArgs -> d
     java.lang.Class[] START_INTENT_SENDER_SIG -> e
-    void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
+    void onPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
     void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void onRestoreTransactionsResponse(com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void initCompatibilityLayer() -> a
     void startBuyPageActivity(android.app.PendingIntent,android.content.Intent) -> a
-    void postPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> a
-com.dexnamic.alwayscharged.billing.PurchaseObserver$1 -> com.dexnamic.alwayscharged.billing.k:
+    void postPurchaseStateChange(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,int,long,java.lang.String) -> b
+com.dexnamic.alwayscharged.billing.PurchaseObserver$1 -> com.dexnamic.alwayscharged.billing.j:
     com.dexnamic.alwayscharged.billing.PurchaseObserver this$0 -> a
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState val$purchaseState -> b
     java.lang.String val$itemId -> c
@@ -366,84 +1209,49 @@ com.dexnamic.alwayscharged.billing.PurchaseObserver$1 -> com.dexnamic.alwayschar
     long val$purchaseTime -> e
     java.lang.String val$developerPayload -> f
     void run() -> run
-com.dexnamic.alwayscharged.billing.ResponseHandler -> com.dexnamic.alwayscharged.billing.l:
+com.dexnamic.alwayscharged.billing.ResponseHandler -> com.dexnamic.alwayscharged.billing.k:
     com.dexnamic.alwayscharged.billing.PurchaseObserver sPurchaseObserver -> a
     void register(com.dexnamic.alwayscharged.billing.PurchaseObserver) -> a
-    void unregister$c9c8331() -> a
-    void checkBillingSupportedResponse(boolean,java.lang.String) -> a
+    void unregister(com.dexnamic.alwayscharged.billing.PurchaseObserver) -> b
     void buyPageIntentResponse(android.app.PendingIntent,android.content.Intent) -> a
-    void purchaseResponse$3fada1b2(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,long,java.lang.String) -> a
+    void purchaseResponse(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String,java.lang.String,long,java.lang.String) -> a
+    void setPurchaseState(android.content.Context,com.dexnamic.alwayscharged.billing.Consts$PurchaseState) -> a
     java.lang.Boolean hasPurchased(android.content.Context) -> a
     long getAndroidID(android.content.Context) -> b
-    void responseCodeReceived$795ab155(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
+    void responseCodeReceived(android.content.Context,com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
     void responseCodeReceived(android.content.Context,com.dexnamic.alwayscharged.billing.BillingService$RestoreTransactions,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-com.dexnamic.alwayscharged.billing.ResponseHandler$1 -> com.dexnamic.alwayscharged.billing.m:
+com.dexnamic.alwayscharged.billing.ResponseHandler$1 -> com.dexnamic.alwayscharged.billing.l:
     android.content.Context val$context -> a
     void run() -> run
-com.dexnamic.alwayscharged.billing.Security -> com.dexnamic.alwayscharged.billing.n:
+com.dexnamic.alwayscharged.billing.Security -> com.dexnamic.alwayscharged.billing.m:
     java.security.SecureRandom RANDOM -> a
     java.util.HashSet sKnownNonces -> b
     long generateNonce() -> a
     void removeNonce(long) -> a
+    boolean isNonceKnown(long) -> b
     java.util.ArrayList verifyPurchase(java.lang.String,java.lang.String) -> a
     java.security.PublicKey generatePublicKey(java.lang.String) -> a
     boolean verify(java.security.PublicKey,java.lang.String,java.lang.String) -> a
-com.dexnamic.alwayscharged.billing.Security$VerifiedPurchase -> com.dexnamic.alwayscharged.billing.o:
+    java.lang.String decryptKey(java.lang.String,long) -> a
+com.dexnamic.alwayscharged.billing.Security$VerifiedPurchase -> com.dexnamic.alwayscharged.billing.n:
     com.dexnamic.alwayscharged.billing.Consts$PurchaseState purchaseState -> a
     java.lang.String notificationId -> b
     java.lang.String productId -> c
     java.lang.String orderId -> d
     long purchaseTime -> e
     java.lang.String developerPayload -> f
-com.dexnamic.alwayscharged.billing.UpgradeProActivity -> com.dexnamic.alwayscharged.billing.UpgradeProActivity:
-    java.lang.String mItemName -> a
-    java.lang.String mProductID -> b
-    com.dexnamic.alwayscharged.billing.UpgradeProActivity$UpgradePurchaseObserver mPurchaseObserver -> c
-    android.os.Handler mHandler -> d
-    com.dexnamic.alwayscharged.billing.BillingService mBillingService -> e
-    android.widget.Button mBuyButton -> f
-    java.lang.String mDeveloperPayloadContents -> g
-    void onCreate(android.os.Bundle) -> onCreate
-    void userUpgradeToPro() -> a
-    void userDowngradedFromPro() -> b
-    void onStart() -> onStart
-    void onClick(android.view.View) -> onClick
-    void onPause() -> onPause
-    void onDestroy() -> onDestroy
-    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
-    android.app.Dialog onCreateDialog(int) -> onCreateDialog
-    android.app.Dialog createDialog(int,int) -> a
-    void access$0(com.dexnamic.alwayscharged.billing.UpgradeProActivity) -> a
-    android.widget.Button access$1(com.dexnamic.alwayscharged.billing.UpgradeProActivity) -> b
-    void access$2(com.dexnamic.alwayscharged.billing.UpgradeProActivity,java.lang.String,java.lang.String) -> a
-com.dexnamic.alwayscharged.billing.UpgradeProActivity$1 -> com.dexnamic.alwayscharged.billing.p:
-    com.dexnamic.alwayscharged.billing.UpgradeProActivity this$0 -> a
-    android.net.Uri val$helpUri -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.dexnamic.alwayscharged.billing.UpgradeProActivity$UpgradePurchaseObserver -> com.dexnamic.alwayscharged.billing.q:
-    com.dexnamic.alwayscharged.billing.UpgradeProActivity this$0 -> a
-    void onBillingSupported(boolean,java.lang.String) -> a
-    void onPurchaseStateChange$25f6e421(com.dexnamic.alwayscharged.billing.Consts$PurchaseState,java.lang.String) -> a
-    void onRequestPurchaseResponse(com.dexnamic.alwayscharged.billing.BillingService$RequestPurchase,com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
-    void onRestoreTransactionsResponse$4bfaf7a0(com.dexnamic.alwayscharged.billing.Consts$ResponseCode) -> a
 com.dexnamic.alwayscharged.util.Base64 -> com.dexnamic.alwayscharged.a.a:
-    byte[] DECODABET -> a
+    byte[] ALPHABET -> b
+    byte[] WEBSAFE_ALPHABET -> c
+    byte[] DECODABET -> d
+    byte[] WEBSAFE_DECODABET -> e
+    boolean $assertionsDisabled -> a
+    byte[] encode3to4(byte[],int,int,byte[],int,byte[]) -> a
+    java.lang.String encode(byte[]) -> a
+    java.lang.String encode(byte[],int,int,byte[],boolean) -> a
+    byte[] encode(byte[],int,int,byte[],int) -> a
     int decode4to3(byte[],int,byte[],int,byte[]) -> a
     byte[] decode(java.lang.String) -> a
+    byte[] decode(byte[],int,int) -> a
+    byte[] decode(byte[],int,int,byte[]) -> a
 com.dexnamic.alwayscharged.util.Base64DecoderException -> com.dexnamic.alwayscharged.a.b:
-com.dexnamic.android.preference.ListPreferenceMultiSelect -> com.dexnamic.android.preference.ListPreferenceMultiSelect:
-    java.lang.String separator -> a
-    java.lang.String checkAllKey -> b
-    boolean[] mClickedDialogEntryIndices -> c
-    void setEntries(java.lang.CharSequence[]) -> setEntries
-    void onPrepareDialogBuilder(android.app.AlertDialog$Builder) -> onPrepareDialogBuilder
-    void restoreCheckedEntries() -> a
-    void onDialogClosed(boolean) -> onDialogClosed
-    java.lang.String join(java.lang.Iterable,java.lang.String) -> a
-    boolean access$0(com.dexnamic.android.preference.ListPreferenceMultiSelect,int) -> a
-    void access$1(com.dexnamic.android.preference.ListPreferenceMultiSelect,android.content.DialogInterface,boolean) -> a
-    boolean[] access$2(com.dexnamic.android.preference.ListPreferenceMultiSelect) -> a
-com.dexnamic.android.preference.ListPreferenceMultiSelect$1 -> com.dexnamic.android.preference.a:
-    com.dexnamic.android.preference.ListPreferenceMultiSelect this$0 -> a
-    void onClick(android.content.DialogInterface,int,boolean) -> onClick
