@@ -631,8 +631,6 @@ com.dexnamic.alwayscharged.AlarmActivity:
     public static final int TIMES_TO_REPEAT
     private static final int MSG_TIMEOUT
     static final int DIALOG_ALERT_ID
-com.dexnamic.alwayscharged.AlarmReceiver:
-    76:82:public static void startPowerSnoozeService(android.content.Context,com.dexnamic.alwayscharged.Alarm)
 com.dexnamic.alwayscharged.AlarmService:
     private static final int SENSOR_STABILZE_WAIT_TIME_MS
     private static final int MSG_TIMEOUT
@@ -669,12 +667,10 @@ com.dexnamic.alwayscharged.ListAlarmsActivity:
     public static final java.lang.String KEY_SHOW_INTRO_DIAGLOG
     public static final java.lang.String KEY_VERSION_CODE
 com.dexnamic.alwayscharged.ListAlarmsActivity$UpgradePurchaseObserver:
-    452:452:public void onBillingSupported(boolean,java.lang.String)
+    463:463:public void onBillingSupported(boolean,java.lang.String)
 com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     static final java.lang.String PREFS
     static final java.lang.String PREFS_BACKUP_KEY
-com.dexnamic.alwayscharged.PowerSnoozeService:
-    public static android.os.PowerManager$WakeLock mWakeLock
 com.dexnamic.alwayscharged.R
 com.dexnamic.alwayscharged.R$array
 com.dexnamic.alwayscharged.R$attr
@@ -684,7 +680,6 @@ com.dexnamic.alwayscharged.R$id
 com.dexnamic.alwayscharged.R$layout
 com.dexnamic.alwayscharged.R$menu
 com.dexnamic.alwayscharged.R$string
-com.dexnamic.alwayscharged.R$styleable
 com.dexnamic.alwayscharged.R$xml
 com.dexnamic.alwayscharged.Scheduler:
     static final java.lang.String TYPE_ALARM

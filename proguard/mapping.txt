@@ -1072,9 +1072,6 @@ com.dexnamic.alwayscharged.MyPrefsBackupAgent -> com.dexnamic.alwayscharged.MyPr
     void onCreate() -> onCreate
 com.dexnamic.alwayscharged.PowerReceiver -> com.dexnamic.alwayscharged.PowerReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.dexnamic.alwayscharged.PowerSnoozeService -> com.dexnamic.alwayscharged.PowerSnoozeService:
-    void onStart(android.content.Intent,int) -> onStart
-    android.os.IBinder onBind(android.content.Intent) -> onBind
 com.dexnamic.alwayscharged.ResetAlarmsReceiver -> com.dexnamic.alwayscharged.ResetAlarmsReceiver:
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.dexnamic.alwayscharged.Scheduler -> com.dexnamic.alwayscharged.z:
