@@ -72,13 +72,13 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Scheduler.setPartialWakeLock(pm);
 	}
 
-	static public void startPowerSnoozeService(Context context, Alarm alarm) {
-		Intent intent = new Intent(context, PowerSnoozeService.class);
-		intent.putExtra(Scheduler.TYPE_ALARM, alarm);
-		context.startService(intent);
-
-		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		Scheduler.setPartialWakeLock(pm);
-	}
+//	static public void startPowerSnoozeService(Context context, Alarm alarm) {
+//		Intent intent = new Intent(context, PowerSnoozeService.class);
+//		intent.putExtra(Scheduler.TYPE_ALARM, alarm);
+//		context.startService(intent);
+//
+//		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+//		Scheduler.setPartialWakeLock(pm);
+//	}
 
 }

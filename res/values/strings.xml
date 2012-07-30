@@ -72,8 +72,6 @@ v1.1.1\n
     <string name="degrees">Degrees</string>
     <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
     <string name="feedback">Email Developer</string>
-    <string name="sendmail">Send mail</string>
-    <string name="noemail">There are no email clients installed.</string>
     <string name="alarm_message">Time to charge your phone!</string>
     <string name="snooze">Snooze</string>
     <string name="notify_init">Charge reminder.  Click to cancel.</string>
@@ -82,31 +80,17 @@ v1.1.1\n
     <string name="notify_phone">Auto-snooze (phone call).  Click to cancel.</string>
     <string name="notify_retry">Auto-snooze (retry).  Click to cancel.</string>
     <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
-    <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string>
-    <string name="checkVolume">Ringer volume is set to zero, press volume keys to adjust.</string>
-    <string name="upgrade_to_pro">Upgrade to Pro version</string>
+    <!-- <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string> -->
+    <string name="checkVolume">Alarm volume is set to zero, press volume keys to adjust.</string>
+    <!-- <string name="upgrade_to_pro">Upgrade to Pro version</string> -->
     <string name="upgrade_summary">Schedule alarm repeating schedule, advanced settings,
          and more…</string>
-    <string name="first_time_text">Have you ever forgotten to plug in your phone at night to find your
-phone\'s battery dead the next day?  If so, then <i>Always Charged</i> is for you.
-Just set the time to your regular bedtime, and if
-you remember to plug in your phone, nothing will happen.  However, if you
-forget, an alarm will sound, reminding you to charge your phone.\n\n
+    <string name="first_time_text">This app will detect if your phone is not charging, not in use, and not moving at bedtime. Then optionally sound and/or vibrate an alert to remind you that your phone needs charged so you do not wake up to a dead phone or low battery in the morning.\n\n
 
-This is not just a simple alarm.  It waits patiently and silently snoozes the alarm
-if you are using your phone, moving around, or already have it plugged in and charging.\n\n
+Note, the free version does not enable the repeating alarm, so to test it you will need to enable it each day manually until you upgrade to the pro version inside the app. This allows you to see that it works before upgrading.\n\n
 
-This is a free app with enough functionality to evaluate its usefulness. If you want to setup an alert
-to automatically repeat, set alerts for different times on different days, or change advanced settings,
-then you can upgrade to the Pro version inside the app.\n\n
-
-If you like or dislike something about this application, or you want to suggest a feature,
-please send me an email (press the menu button from the main screen).</string>
-    <string name="upgrade_dialog">Please upgrade Always Charged to take advantage of
-new features:\n
-  - Advanced Settings\n
-  - Multiple alarms\n
-  - Choose repeat schedule</string>
+It works best if you schedule the alarm for your normal bedtime.  If you want to schedule an alarm that repeats for more than one day, or a different bedtime for each day of the week you will need to upgrade to the pro version with an in-app purchase.  The Pro version also gives access to additional settings.</string>
+   
     <string name="close">Close</string>
     <string name="alarms">Charge Alarms</string>
     <string name="dontshowagain">Don\'t show again</string>
