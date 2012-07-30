@@ -1,0 +1,81 @@
+<resources>
+
+    <string name="app_name">"Siempre conectar"</string>
+    <string name="enable_alarm">"Permitir"</string>
+    <string name="disable_alarm">"Desactivar"</string>
+    <string name="time">"tiempo"</string>
+    <string name="repeat">"Repetir"</string>
+    <string name="ringtone">"Tono de alarma"</string>
+    <string name="vibrate">"Vibración"</string>
+    <string name="label">"Etiqueta"</string>
+    <string name="snooze_time">"Dormitar"</string>
+    <string name="dialog_title_snooze">"Dormitar"</string>
+    <string name="hour">"hora"</string>
+    <string name="hours">"horas"</string>
+    <string name="minute">"minuto"</string>
+    <string name="minutes">"minutos"</string>
+    <string name="seconds">"segundo"</string>
+    <string name="until_alarm">"hasta que la alarma"</string>
+    <string name="about">"Acerca de"</string>
+    <string name="silent">"Silencio"</string>
+    <string name="unknown">"Desconocido"</string>
+    <string name="advanced">"Avanzado"</string>
+    <string name="advanced_settings">"Configuración"</string>
+    <string name="alarm_duration">"Duración de la alarma"</string>
+    <string name="dialog_title_duration">"Duración de la alarma"</string>
+    <string name="motion_tolerance">"De sensibilidad de movimiento"</string>
+    <string name="dialog_title_motion_tolerance">"De sensibilidad de movimiento"</string>
+    <string name="disabled">"Discapacitado"</string>
+    <string name="degrees">"grados"</string>
+    <string name="notification_toast">"Haga clic en la notificación de despido de alarma para esta noche"</string>
+    <string name="feedback">"E-mail del desarrollador"</string>
+    <string name="alarm_message">"el momento de conectar!"</string>
+    <string name="snooze">"dormitar"</string>
+    <string name="notify_init">"Enchufe el recordatorio. Haga clic para cancelar."</string>
+    <string name="notify_motion">"Auto-dormitar de alarma (movimiento). Haga clic para cancelar."</string>
+    <string name="notify_screen">"Auto-dormitar (pantalla). Haga clic para cancelar."</string>
+    <string name="notify_phone">"Auto-dormitar (llamada telefónica). Haga clic para cancelar."</string>
+    <string name="notify_retry">"Auto-dormitar (reintento). Haga clic para cancelar."</string>
+    <string name="notify_snooze">"Alarma dormitaba. Haga clic para cancelar."</string>
+    <string name="checkVolume">"Volumen de la alarma se pone a cero, pulse las teclas de volumen para ajustar."</string>
+    <string name="first_time_text">"Si su teléfono o tableta no está conectado, no está en uso, y no se mueve a la hora de dormir, entonces esta aplicación te recordarle que debe enchufar antes de dormirse y despertarse a una batería baja o descargada. \n\n Funciona mejor si se programa la alarma de su hora normal de acostarse. Si desea programar una alarma que se repite por más de un día o una hora de acostarse diferente para cada día de la semana usted tendrá que actualizar a la versión profesional con una compra en aplicación. La versión profesional también da acceso a opciones adicionales.\n\nPor favor, hágamelo saber si alguna de las traducciones no están en inglés son malos."</string>
+    <string name="close">"Cerrar"</string>
+    <string name="dontshowagain">"No volver a mostrar"</string>
+    <string name="done">"concluido"</string>
+    <string name="default_ringtone">"Por Omisión"</string>
+    <string name="changelog_title">"Registro de Cambios"</string>
+    <string name="set_alarm">"Poner Alarma"</string>
+    <string name="add_alarm">"Agregar alarma"</string>
+    <string name="add">"añadir"</string>
+    <!-- alarm detail -->
+    <string name="alarm_detail">"Detalle de Alarma"</string>
+    <string name="cancel">"Cancelar"</string>
+    <string name="delete">"Suprimir"</string>
+    <string name="ok">"OK"</string>
+    <string name="mon">"Lun"</string>
+    <string name="tue">"Mar"</string>
+    <string name="wed">"Mié"</string>
+    <string name="thu">"Jue"</string>
+    <string name="fri">"Vie"</string>
+    <string name="sat">"Sab"</string>
+    <string name="sun">"Dom"</string>
+    <string name="never">"Nunca se repite"</string>
+    <string name="everyday">"diario"</string>
+    <string name="weekdays">"Días de la semana"</string>
+    <string name="weekends">"fines de semana"</string>
+    <string name="cancel_battery">"Salta la alarma si el nivel de la batería es"</string>
+    <string name="skipped_alarm_battery">"Alarma salta. Batería"</string>
+    <string name="percent">"Porcentaje"</string>
+
+    <!-- Billing -->
+    <string name="upgrade_pro">"Actualizar a Pro"</string>
+    <string name="upgrade">"Mejorar"</string>
+    <string name="check_purchase">"Comprobación de las compras anteriores."</string>
+    <string name="add_upgrade_dialog">"Adición de alarmas adicionales requiere una actualización a la versión profesional."</string>
+    <string name="change_repeat_dialog">"Cambio de la opción de repetición requiere una actualización a la versión profesional."</string>
+    <string name="advanced_upgrade_dialog">"Cambiar la configuración avanzada requiere una actualización a la versión profesional."</string>
+    
+    <!-- Defaults -->
+    <string name="first_label">"hora de acostarse"</string>
+
+</resources>

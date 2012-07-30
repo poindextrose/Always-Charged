@@ -1,7 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Always Charged</string>
+    <string name="app_name">Always Plug in</string>
+    <string name="enable_alarm">"Enable"</string>
+    <string name="disable_alarm">Disable</string>
+    <string name="time">Time</string>
+    <string name="repeat">Repeat</string>
+    <string name="ringtone">Alarm Tone</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="label">Label</string>
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+    <string name="seconds">seconds</string>
+    <string name="until_alarm">until alarm</string>
+    <string name="about">About</string>
+    <string name="silent">Silent</string>
+    <string name="unknown">Unknown</string>
+    <string name="advanced">Advanced</string>
+    <string name="advanced_settings">Settings</string>
+    <string name="alarm_duration">Alarm Duration</string>
+    <string name="dialog_title_duration">Alarm Duration</string>
+    <string name="motion_tolerance">Motion Sensitivity</string>
+    <string name="dialog_title_motion_tolerance">Motion Sensitivity</string>
+    <string name="disabled">Disabled</string>
+    <string name="degrees">Degrees</string>
+    <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
+    <string name="feedback">Email Developer</string>
+    <string name="alarm_message">Time to plug in!</string>
+    <string name="snooze">Snooze</string>
+    <string name="notify_init">Plug in reminder.  Click to cancel.</string>
+    <string name="notify_motion">Auto-snooze (movement).  Click to cancel.</string>
+    <string name="notify_screen">Auto-snooze (screen on).  Click to cancel.</string>
+    <string name="notify_phone">Auto-snooze (phone call).  Click to cancel.</string>
+    <string name="notify_retry">Auto-snooze (retry).  Click to cancel.</string>
+    <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
+    <string name="checkVolume">Alarm volume is set to zero, press volume keys to adjust.</string>
+    <string name="first_time_text">If your phone or tablet is not plugged in, not in use, and not moving at bedtime, then this app will remind you to plug in before you fall asleep and wake to a low or dead battery.\n\nIt works best if you schedule the alarm for your normal bedtime.  If you want to schedule an alarm that repeats for more than one day, or a different bedtime for each day of the week you will need to upgrade to the professional version with an in-app purchase.  The professional version also gives access to additional settings.\n\nPlease let me know if any of the non-English translations are bad.</string>
+    <string name="close">Close</string>
+    <string name="dontshowagain">Don\'t show again</string>
+    <string name="done">Done</string>
+    <string name="default_ringtone">Default</string>
+    <string name="changelog_title">Change Log</string>
+    <string name="set_alarm">Set alarms</string>
+    <string name="add_alarm">Add alarm</string>
+    <string name="add">Add</string>
+    <!-- alarm detail -->
+    <string name="alarm_detail">Alarm Detail</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="ok">OK</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="never">Never repeats</string>
+    <string name="everyday">Everyday</string>
+    <string name="weekdays">Weekdays</string>
+    <string name="weekends">Weekends</string>
+    <string name="cancel_battery">Skip alarm if battery level is</string>
+    <string name="skipped_alarm_battery">Alarm skipped. Battery</string>
+    <string name="percent">percent</string>
+
+    <!-- Billing -->
+    <string name="upgrade_pro">Upgrade to Pro</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="check_purchase">Checking for previous purchases.</string>
+    <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to the professional version.</string>
+    <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to the professional version.</string>
+    <string name="advanced_upgrade_dialog">Changing advanced settings requires an upgrade to the professional version.</string>
+    
+    <string name="first_label">bedtime</string>
+
+    <!-- ************* Do not localize to other languages below this line *************** -->
+    
+    <string name="contact_email">developer@constructive-interference.com</string>
+    
+    <!-- Defaults -->
+    <string name="default_snooze_time">5</string>
+    <string name="default_motion_tolerance">4</string>
+    <string name="default_alarm_duration">20</string>
+
+    <!-- Preference Keys -->
+    <string name="key_skip_battery">key_skip_battery</string>
+    <string name="default_skip_battery">0</string>
+    <string name="edit_alarm">Edit</string>
+    <string name="delete_alarm">Delete</string>
+    <string name="rate_app">Rate</string>
+
     <string name="changelog">More updates are coming soon.  Please keep sending me your suggestions!\n
 \n
 v2.3\n
@@ -39,115 +129,5 @@ v1.1.2\n
 v1.1.1\n
 - Fixed compatibility with Galaxy Nexus.\n
 - Updated developer name to Dr Poindexter\n</string>
-
-    <string name="contact_email">developer@constructive-interference.com</string>
-    <string name="default_snooze_time">5</string>
-    <string name="default_motion_tolerance">4</string>
-    <string name="default_alarm_duration">20</string>
-    <string name="enable_alarm">Enable</string>
-    <string name="disable_alarm">Disable</string>
-    <string name="time">Time</string>
-    <string name="repeat">Repeat</string>
-    <string name="ringtone">Alarm Tone</string>
-    <string name="vibrate">Vibrate</string>
-    <string name="label">Label</string>
-    <string name="snooze_time">Snooze Time</string>
-    <string name="dialog_title_snooze">Snooze Time</string>
-    <string name="hour">hour</string>
-    <string name="hours">hours</string>
-    <string name="minute">minute</string>
-    <string name="minutes">minutes</string>
-    <string name="seconds">seconds</string>
-    <string name="until_alarm">until alarm</string>
-    <string name="about">About</string>
-    <string name="silent">Silent</string>
-    <string name="unknown">Unknown</string>
-    <string name="advanced">Advanced</string>
-    <string name="advanced_settings">Settings</string>
-    <string name="alarm_duration">Alarm Duration</string>
-    <string name="dialog_title_duration">Alarm Duration</string>
-    <string name="motion_tolerance">Motion Sensitivity</string>
-    <string name="dialog_title_motion_tolerance">Motion Sensitivity</string>
-    <string name="disabled">Disabled</string>
-    <string name="degrees">Degrees</string>
-    <string name="notification_toast">Click notification to dismiss alarm for tonight</string>
-    <string name="feedback">Email Developer</string>
-    <string name="alarm_message">Time to charge your phone!</string>
-    <string name="snooze">Snooze</string>
-    <string name="notify_init">Charge reminder.  Click to cancel.</string>
-    <string name="notify_motion">Auto-snooze (movement).  Click to cancel.</string>
-    <string name="notify_screen">Auto-snooze (screen on).  Click to cancel.</string>
-    <string name="notify_phone">Auto-snooze (phone call).  Click to cancel.</string>
-    <string name="notify_retry">Auto-snooze (retry).  Click to cancel.</string>
-    <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
-    <!-- <string name="notify_power">Phone unplugged but still needs charged.  Click to cancel.</string> -->
-    <string name="checkVolume">Alarm volume is set to zero, press volume keys to adjust.</string>
-    <!-- <string name="upgrade_to_pro">Upgrade to Pro version</string> -->
-    <string name="upgrade_summary">Schedule alarm repeating schedule, advanced settings,
-         and more…</string>
-    <string name="first_time_text">This app will detect if your phone is not charging, not in use, and not moving at bedtime. Then optionally sound and/or vibrate an alert to remind you that your phone needs charged so you do not wake up to a dead phone or low battery in the morning.\n\n
-
-Note, the free version does not enable the repeating alarm, so to test it you will need to enable it each day manually until you upgrade to the pro version inside the app. This allows you to see that it works before upgrading.\n\n
-
-It works best if you schedule the alarm for your normal bedtime.  If you want to schedule an alarm that repeats for more than one day, or a different bedtime for each day of the week you will need to upgrade to the pro version with an in-app purchase.  The Pro version also gives access to additional settings.</string>
-   
-    <string name="close">Close</string>
-    <string name="alarms">Charge Alarms</string>
-    <string name="dontshowagain">Don\'t show again</string>
-    <string name="done">Done</string>
-    <string name="default_ringtone">Default</string>
-    <string name="changelog_title">Change Log</string>
-    <string name="set_alarm">Set alarms</string>
-    <string name="add_alarm">Add alarm</string>
-    <string name="add">Add</string>
-    <!-- alarm detail -->
-    <string name="alarm_detail">Alarm Detail</string>
-    <string name="turn_alarm_on">Turn alarm on</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
-    <string name="ok">OK</string>
-    <string name="mon">Mon</string>
-    <string name="tue">Tue</string>
-    <string name="wed">Wed</string>
-    <string name="thu">Thu</string>
-    <string name="fri">Fri</string>
-    <string name="sat">Sat</string>
-    <string name="sun">Sun</string>
-    <string name="never">Never repeats</string>
-    <string name="everyday">Everyday</string>
-    <string name="weekdays">Weekdays</string>
-    <string name="weekends">Weekends</string>
-    <string name="cancel_battery">Skip alarm if battery charged</string>
-    <string name="skipped_alarm_battery">Alarm skipped. Battery</string>
-    <string name="percent">percent</string>
-
-    <!-- Billing -->
-    <string name="upgrade_pro">Upgrade to Pro</string>
-    <string name="upgrade">Upgrade</string>
-    <string name="billing_not_supported_title">Can\'t make purchases</string>
-    <string name="billing_not_supported_message">The Market billing
-     service is not available at this time.  You can continue to use this app but you
-     won\'t be able to make purchases.</string>
-    <string name="learn_more">Learn more</string>
-    <string name="help_url" formatted="false">http://market.android.com/support/bin/answer.py?answer=1050566&amp;hl=%lang%&amp;dl=%region%</string>
-    <string name="cannot_connect_title">Can\'t connect to Market</string>
-    <string name="cannot_connect_message">This app cannot connect to Market.
-     Your version of Market may be out of date.
-     You can continue to use this app but you
-     won\'t be able to make purchases.</string>
-    <string name="check_purchase">Checking for previous purchases.</string>
-    <string name="downgrading">Pro upgrade has been refunded.  Disabling alarms.</string>
-    <string name="pro_only">Pro only features</string>
-    <string name="add_upgrade_dialog">Adding additional alarms requires an upgrade to Always Charged Pro.</string>
-    <string name="change_repeat_dialog">Changing the repeat option requires an upgrade to Always Charged Pro</string>
-    <string name="advanced_upgrade_dialog">Changing advanced settings requires an upgrade to Always Charged Pro</string>
-    <string name="first_label">bedtime</string>
-
-    <!-- Preference Keys -->
-    <string name="key_skip_battery">key_skip_battery</string>
-    <string name="default_skip_battery">0</string>
-    <string name="edit_alarm">Edit Alarm</string>
-    <string name="delete_alarm">Delete Alarm</string>
-    <string name="rate_app">Rate app</string>
 
 </resources>

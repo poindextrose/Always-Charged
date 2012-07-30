@@ -4,7 +4,6 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_checkbox"
-        android:summary="@string/turn_alarm_on"
         android:title="@string/enable_alarm" />
 
     <Preference
