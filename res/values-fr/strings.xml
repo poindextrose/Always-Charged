@@ -1,0 +1,77 @@
+<resources>
+
+    <string name="app_name">"Toujours Branchez"</string>
+    <string name="enable_alarm">"Activer"</string>
+    <string name="disable_alarm">"Désactiver"</string>
+    <string name="time">"Heure"</string>
+    <string name="repeat">"Répéter"</string>
+    <string name="ringtone">"Carillon Tonalité d'alarme"</string>
+    <string name="vibrate">"Vibreur"</string>
+    <string name="label">"Libellé"</string>
+    <string name="hour">"heure"</string>
+    <string name="hours">"heures"</string>
+    <string name="minute">"minute"</string>
+    <string name="minutes">"minutes"</string>
+    <string name="seconds">"secondes"</string>
+    <string name="until_alarm">"jusqu'à ce que l'alarme"</string>
+    <string name="about">"À propos"</string>
+    <string name="silent">"Silence"</string>
+    <string name="unknown">"Inconnu"</string>
+    <string name="advanced">"Avancé"</string>
+    <string name="advanced_settings">"Paramètres"</string>
+    <string name="alarm_duration">"Durée de l'alarme"</string>
+    <string name="dialog_title_duration">"Durée de l'alarme"</string>
+    <string name="motion_tolerance">"Sensibilité au mouvement"</string>
+    <string name="dialog_title_motion_tolerance">"Sensibilité au mouvement"</string>
+    <string name="disabled">"Désactivé"</string>
+    <string name="degrees">"Diplômes"</string>
+    <string name="notification_toast">"Cliquez sur la notification de rejeter d'alarme pour ce soir"</string>
+    <string name="feedback">"Développeur Email"</string>
+    <string name="alarm_message">"Il est temps de le brancher!"</string>
+    <string name="snooze">"Répéter"</string>
+    <string name="notify_init">"Branchez rappel. Cliquez ici pour annuler."</string>
+    <string name="notify_motion">"Auto-snooze (mouvement). Cliquez ici pour annuler."</string>
+    <string name="notify_screen">"Auto-répétition (écran). Cliquez ici pour annuler."</string>
+    <string name="notify_phone">"Auto-snooze (appel téléphonique). Cliquez ici pour annuler."</string>
+    <string name="notify_retry">"Auto-répétition (tentative). Cliquez ici pour annuler."</string>
+    <string name="notify_snooze">"Alarme de répétition. Cliquez ici pour annuler."</string>
+    <string name="checkVolume">"Volume de l'alarme est fixé à zéro, appuyez sur les touches de volume pour régler."</string>
+    <string name="first_time_text">"Si votre téléphone ou une tablette n'est pas branché, pas en cours d'utilisation, et ne bouge pas au moment du coucher, alors ce soft va vous rappeler de brancher avant de vous endormir et se réveiller à une batterie faible ou morte. \n\nIl fonctionne mieux si vous programmer l'alarme pour votre heure normale du coucher. Si vous souhaitez planifier une alarme qui se répète pour plus d'une journée, ou d'un coucher différent pour chaque jour de la semaine, vous devrez mettre à niveau vers la version professionnelle avec un achat In-App. La version professionnelle donne également accès à des paramètres supplémentaires. \n\nVeuillez me faire savoir si l'une des traductions non-anglais sont mauvais."</string>
+    <string name="close">"Fermer"</string>
+    <string name="dontshowagain">"Ne plus afficher"</string>
+    <string name="done">"Accepter"</string>
+    <string name="default_ringtone">"Par défaut"</string>
+    <string name="changelog_title">"Change Log"</string>
+    <string name="set_alarm">"Régler l'alarme"</string>
+    <string name="add_alarm">"Ajouter alarme"</string>
+    <string name="add">"Ajouter"</string>
+    <!-- alarm detail -->
+    <string name="alarm_detail">"Détail d'alarme"</string>
+    <string name="cancel">"Annuler"</string>
+    <string name="delete">"Supprimer"</string>
+    <string name="ok">"OK"</string>
+    <string name="mon">"Lun"</string>
+    <string name="tue">"Mar"</string>
+    <string name="wed">"Mer"</string>
+    <string name="thu">"Jeu."</string>
+    <string name="fri">"Ven"</string>
+    <string name="sat">"Sam"</string>
+    <string name="sun">"Dim"</string>
+    <string name="never">"Ne se répète jamais"</string>
+    <string name="everyday">"Tous les jours"</string>
+    <string name="weekdays">"Tous les jours de la semaine"</string>
+    <string name="weekends">"Week-ends"</string>
+    <string name="cancel_battery">"Passer d'alarme si le niveau de batterie est"</string>
+    <string name="skipped_alarm_battery">"Alarme sauté. Batterie"</string>
+    <string name="percent">"pour cent"</string>
+
+    <!-- Billing -->
+    <string name="upgrade_pro">"Mise à niveau Pro"</string>
+    <string name="upgrade">"Mettre à niveau"</string>
+    <string name="check_purchase">"Vérification des achats antérieurs."</string>
+    <string name="add_upgrade_dialog">"Ajout des alarmes supplémentaires nécessite une mise à niveau vers la version professionnelle."</string>
+    <string name="change_repeat_dialog">"Modification de l'option de répétition nécessite une mise à niveau vers la version professionnelle."</string>
+    <string name="advanced_upgrade_dialog">"Modification des paramètres avancés nécessite une mise à niveau vers la version professionnelle."</string>
+    
+    <string name="first_label">"heure du coucher"</string>
+</resources>
