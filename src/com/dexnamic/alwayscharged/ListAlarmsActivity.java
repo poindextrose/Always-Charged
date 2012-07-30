@@ -37,7 +37,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.view.View.OnClickListener;
+import android.view.ViewParent;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.Toast;
@@ -75,16 +77,23 @@ public class ListAlarmsActivity extends ListActivity implements
 		setContentView(R.layout.alarm_list);
 
 		addButton = (Button) findViewById(R.id.add_alarm);
-		addButton.setOnClickListener(this);
-
 		upgradeButton = (Button) findViewById(R.id.upgrade);
-		upgradeButton.setOnClickListener(this);
+
+		if (android.os.Build.VERSION.SDK_INT >= 11) {
+			ViewManager viewManager = (ViewManager) addButton.getParent();
+			viewManager.removeView(addButton);
+			viewManager.removeView(upgradeButton);
+		} else {
+			addButton.setOnClickListener(this);
+			upgradeButton.setOnClickListener(this);
+		}
 
 		dbHelper = new DatabaseHelper(this);
 
 		fillData();
 
-		mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		mSharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		mEditor = mSharedPreferences.edit();
 
 		registerForContextMenu(getListView());
@@ -134,9 +143,11 @@ public class ListAlarmsActivity extends ListActivity implements
 		// display a change log if the user just upgraded this application
 		try {
 			PackageManager pm = getPackageManager();
-			PackageInfo packageInfo = pm.getPackageInfo(this.getPackageName(), 0);
+			PackageInfo packageInfo = pm.getPackageInfo(this.getPackageName(),
+					0);
 			if (mFirstInstance
-					&& (packageInfo.versionCode > mSharedPreferences.getInt(KEY_VERSION_CODE, 0))) {
+					&& (packageInfo.versionCode > mSharedPreferences.getInt(
+							KEY_VERSION_CODE, 0))) {
 				mEditor.putInt(KEY_VERSION_CODE, packageInfo.versionCode);
 				mEditor.commit();
 				showDialog(CHANGELOG_DIALOG_ID);
@@ -144,14 +155,15 @@ public class ListAlarmsActivity extends ListActivity implements
 		} catch (NameNotFoundException e) {
 		}
 
-		SharedPreferences prefs = getSharedPreferences(Consts.PURCHASE_PREFERENCES,
-				Context.MODE_PRIVATE);
+		SharedPreferences prefs = getSharedPreferences(
+				Consts.PURCHASE_PREFERENCES, Context.MODE_PRIVATE);
 		if (!prefs.getBoolean(Consts.PURCHASE_RESTORED, false)) {
 			checkIfUserPurchasedUpgradeToPro();
 		}
 
 		// if app is starting for the first time
-		if (mFirstInstance && mSharedPreferences.getBoolean(KEY_SHOW_INTRO_DIAGLOG, true)) {
+		if (mFirstInstance
+				&& mSharedPreferences.getBoolean(KEY_SHOW_INTRO_DIAGLOG, true)) {
 
 			showDialog(FIRST_TIME_DIALOG_ID);
 		}
@@ -176,7 +188,7 @@ public class ListAlarmsActivity extends ListActivity implements
 	@SuppressLint("NewApi")
 	private void upgradeToPro() {
 		mHasPurchased = true;
-		if(android.os.Build.VERSION.SDK_INT >= 11) {
+		if (android.os.Build.VERSION.SDK_INT >= 11) {
 			invalidateOptionsMenu();
 		}
 		try {
@@ -191,7 +203,8 @@ public class ListAlarmsActivity extends ListActivity implements
 			Intent intent = new Intent(Consts.ACTION_RESTORE_TRANSACTIONS);
 			intent.setClass(this, BillingService.class);
 			startService(intent);
-			Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.check_purchase, Toast.LENGTH_LONG)
+					.show();
 		}
 	}
 
@@ -208,10 +221,10 @@ public class ListAlarmsActivity extends ListActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.options, menu);
-		if(mHasPurchased)
+		if (mHasPurchased)
 			menu.removeItem(R.id.upgrade);
 
-		if(android.os.Build.VERSION.SDK_INT < 11) {
+		if (android.os.Build.VERSION.SDK_INT < 11) {
 			menu.findItem(R.id.add_alarm).setIcon(null);
 			menu.findItem(R.id.advanced).setIcon(null);
 			menu.findItem(R.id.email_dev).setIcon(null);
@@ -234,7 +247,8 @@ public class ListAlarmsActivity extends ListActivity implements
 			return true;
 		case R.id.rate_app:
 			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("market://details?id=com.dexnamic.alwayscharged"));
+			intent.setData(Uri
+					.parse("market://details?id=com.dexnamic.alwayscharged"));
 			startActivity(intent);
 			return true;
 		case R.id.change_log:
@@ -280,7 +294,7 @@ public class ListAlarmsActivity extends ListActivity implements
 		}
 		return null;
 	}
-	
+
 	AlertDialog createUpgradeDialog(int resid) {
 		AlertDialog.Builder upGradebuilder = new AlertDialog.Builder(this);
 		upGradebuilder
@@ -292,7 +306,8 @@ public class ListAlarmsActivity extends ListActivity implements
 								// startActivity(new
 								// Intent(ListAlarmsActivity.this,
 								// UpgradeProActivity.class));
-								mBillingService.requestPurchase(Consts.mProductID,
+								mBillingService.requestPurchase(
+										Consts.mProductID,
 										Consts.ITEM_TYPE_INAPP, null);
 							}
 						})
@@ -312,11 +327,12 @@ public class ListAlarmsActivity extends ListActivity implements
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.app_name));
-		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		builder.setPositiveButton(getString(R.string.close),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
 		return builder;
 	}
 
@@ -327,11 +343,12 @@ public class ListAlarmsActivity extends ListActivity implements
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(layout);
 		builder.setTitle(getString(R.string.changelog_title));
-		builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+		builder.setPositiveButton(getString(R.string.close),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
 		return builder;
 	}
 
@@ -343,7 +360,7 @@ public class ListAlarmsActivity extends ListActivity implements
 		String feedback = getString(R.string.feedback);
 		String appName = getString(R.string.app_name);
 		i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-		
+
 		startActivity(Intent.createChooser(i, getString(R.string.feedback)));
 	}
 
@@ -370,15 +387,17 @@ public class ListAlarmsActivity extends ListActivity implements
 		}
 
 	}
-	
+
 	private void doUpgrade() {
 		// Intent intent = new Intent(this, UpgradeProActivity.class);
 		// startActivity(intent);
-		mBillingService.requestPurchase(Consts.mProductID, Consts.ITEM_TYPE_INAPP, null);	
+		mBillingService.requestPurchase(Consts.mProductID,
+				Consts.ITEM_TYPE_INAPP, null);
 	}
-	
+
 	private void addAlarm() {
-		if (ResponseHandler.hasPurchased(this) == false && cursor.getCount() > 0) {
+		if (ResponseHandler.hasPurchased(this) == false
+				&& cursor.getCount() > 0) {
 			showDialog(UPGRADE_NEEDED_TO_ADD_DIALOG);
 		} else {
 			this.alarmSelected(-1);
@@ -386,7 +405,8 @@ public class ListAlarmsActivity extends ListActivity implements
 	}
 
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.context_menu, menu);
@@ -397,13 +417,14 @@ public class ListAlarmsActivity extends ListActivity implements
 		} else {
 			menu.getItem(2).setTitle(R.string.enable_alarm);
 		}
-		
+
 		menu.setHeaderTitle(alarm.getTime(this));
 	}
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
 		// Toast.makeText(this,
 		// "info.id="+info.id+", info.positino="+info.position,
 		// Toast.LENGTH_SHORT).show();
@@ -442,8 +463,9 @@ public class ListAlarmsActivity extends ListActivity implements
 		}
 
 		@Override
-		public void onPurchaseStateChange(PurchaseState purchaseState, String itemId, int quantity,
-				long purchaseTime, String developerPayload) {
+		public void onPurchaseStateChange(PurchaseState purchaseState,
+				String itemId, int quantity, long purchaseTime,
+				String developerPayload) {
 
 			if (purchaseState == PurchaseState.PURCHASED) {
 				upgradeToPro();
@@ -451,15 +473,18 @@ public class ListAlarmsActivity extends ListActivity implements
 		}
 
 		@Override
-		public void onRequestPurchaseResponse(RequestPurchase request, ResponseCode responseCode) {
-			Log.v("UpgradePurchaseObserver", request.mProductId + ": " + responseCode);
+		public void onRequestPurchaseResponse(RequestPurchase request,
+				ResponseCode responseCode) {
+			Log.v("UpgradePurchaseObserver", request.mProductId + ": "
+					+ responseCode);
 		}
 
 		@Override
 		public void onRestoreTransactionsResponse(RestoreTransactions request,
 				ResponseCode responseCode) {
-			Log.v("UpgradePurchaseObserver", "onRestoreTranscationReponse() responseCode="
-					+ responseCode);
+			Log.v("UpgradePurchaseObserver",
+					"onRestoreTranscationReponse() responseCode="
+							+ responseCode);
 		}
 	}
 }

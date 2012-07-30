@@ -80,7 +80,7 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.alarm_detail);
-		addPreferencesFromResource(R.xml.alarm_detail);
+		addPreferencesFromResource(R.xml.alarm_detail_preferences);
 
 		Bundle extras = getIntent().getExtras();
 		mId = extras.getInt("id");

@@ -106,7 +106,6 @@ It works best if you schedule the alarm for your normal bedtime.  If you want to
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
-    <string name="purchase">Purchase</string>
     <string name="mon">Mon</string>
     <string name="tue">Tue</string>
     <string name="wed">Wed</string>

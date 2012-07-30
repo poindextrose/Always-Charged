@@ -4,25 +4,34 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/upgrade"
+    <LinearLayout
+        android:id="@+id/upgrade_and_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/upgrade_pro"
-        android:visibility="gone" />
-    <Button
-        android:id="@+id/add_alarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/add_alarm"
-        android:visibility="gone" />
+        android:layout_height="wrap_content" >
 
-     <ListView android:id="@android:id/list"
-               android:layout_width="match_parent"
-               android:layout_height="0dip"
-               android:layout_weight="1"
-               android:drawSelectorOnTop="false"/>
+        <Button
+            android:id="@+id/upgrade"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/upgrade_pro"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/add_alarm"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/add_alarm"
+            android:layout_weight="1"
+             />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false" />
 
 </LinearLayout>

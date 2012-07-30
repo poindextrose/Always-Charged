@@ -45,13 +45,15 @@
         </activity>
         <activity
             android:name=".EditAlarmPreferenceActivity"
-            android:label="@string/done"
-            android:icon="@drawable/navigation_accept" >
+            android:icon="@drawable/navigation_accept"
+            android:label="@string/done" >
         </activity>
-        <!-- <activity
+        <!--
+        <activity
             android:name=".ListAlarmsActivity"
             android:label="@string/set_alarm" >
-        </activity> -->
+        </activity>
+        -->
 
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".PowerReceiver" >
@@ -91,12 +93,6 @@
                 <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name=".billing.UpgradeProActivity"
-            android:label="@string/upgrade_pro" >
-        </activity>
-        <!--  -->
     </application>
 
 </manifest>
