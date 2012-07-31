@@ -658,7 +658,7 @@ com.dexnamic.alwayscharged.EditAlarmPreferenceActivity:
     static final int UPGRADE_NEEDED_TO_SET_REPEAT_DIALOG
     private static final int REPEAT_MULTISELECT_DIALOG
 com.dexnamic.alwayscharged.EditAlarmPreferenceActivity$UpgradePurchaseObserver:
-    480:480:public void onBillingSupported(boolean,java.lang.String)
+    490:490:public void onBillingSupported(boolean,java.lang.String)
 com.dexnamic.alwayscharged.ListAlarmsActivity:
     static final int FIRST_TIME_DIALOG_ID
     static final int ABOUT_DIAlOG_ID
@@ -667,7 +667,7 @@ com.dexnamic.alwayscharged.ListAlarmsActivity:
     public static final java.lang.String KEY_SHOW_INTRO_DIAGLOG
     public static final java.lang.String KEY_VERSION_CODE
 com.dexnamic.alwayscharged.ListAlarmsActivity$UpgradePurchaseObserver:
-    463:463:public void onBillingSupported(boolean,java.lang.String)
+    459:459:public void onBillingSupported(boolean,java.lang.String)
 com.dexnamic.alwayscharged.MyPrefsBackupAgent:
     static final java.lang.String PREFS
     static final java.lang.String PREFS_BACKUP_KEY

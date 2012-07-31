@@ -32047,12 +32047,12 @@ Constant Pool (count = 344):
   + Integer [2131034119]
   + Integer [2131165195]
   + Integer [2131165196]
-  + Integer [2131165207]
-  + Integer [2131165208]
-  + Integer [2131165230]
-  + Integer [2131165232]
-  + Integer [2131165252]
-  + Integer [2131165258]
+  + Integer [2131165204]
+  + Integer [2131165205]
+  + Integer [2131165224]
+  + Integer [2131165226]
+  + Integer [2131165245]
+  + Integer [2131165251]
   + String [ ]
   + String [***]
   + String [android.app.backup.BackupManager]
@@ -32739,7 +32739,7 @@ Methods (count = 20):
         default: offset = 26, target = 27
       [20] aload_0 v0
       [21] ldc #10
-        + Integer [2131165252]
+        + Integer [2131165245]
       [23] invokevirtual #84
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.a (I)Landroid/app/AlertDialog;]
       [26] areturn
@@ -32774,7 +32774,7 @@ Methods (count = 20):
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [22] aload_0 v0
       [23] ldc #9
-        + Integer [2131165232]
+        + Integer [2131165226]
       [25] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [28] new #34
@@ -32787,7 +32787,7 @@ Methods (count = 20):
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [39] aload_0 v0
       [40] ldc #8
-        + Integer [2131165230]
+        + Integer [2131165224]
       [42] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [45] new #35
@@ -32931,7 +32931,7 @@ Methods (count = 20):
       [4] istore_2 v2
       [5] aload_0 v0
       [6] ldc #6
-        + Integer [2131165207]
+        + Integer [2131165204]
       [8] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [11] astore_3 v3
@@ -32939,7 +32939,7 @@ Methods (count = 20):
       [13] ifle +36 (target=49)
       [16] aload_0 v0
       [17] ldc #7
-        + Integer [2131165208]
+        + Integer [2131165205]
       [19] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [22] astore v4
@@ -33217,7 +33217,7 @@ Methods (count = 20):
         + Methodref [android/preference/ListPreference.setOnPreferenceChangeListener (Landroid/preference/Preference$OnPreferenceChangeListener;)V]
       [175] aload_0 v0
       [176] ldc #11
-        + Integer [2131165258]
+        + Integer [2131165251]
       [178] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [181] astore_3 v3
@@ -33650,18 +33650,18 @@ Interfaces (count = 2):
 
 Constant Pool (count = 235):
   + Integer [2131165200]
-  + Integer [2131165224]
+  + Integer [2131165220]
+  + Integer [2131165227]
+  + Integer [2131165228]
+  + Integer [2131165229]
+  + Integer [2131165230]
+  + Integer [2131165231]
+  + Integer [2131165232]
   + Integer [2131165233]
   + Integer [2131165234]
   + Integer [2131165235]
   + Integer [2131165236]
   + Integer [2131165237]
-  + Integer [2131165238]
-  + Integer [2131165239]
-  + Integer [2131165240]
-  + Integer [2131165241]
-  + Integer [2131165242]
-  + Integer [2131165243]
   + String []
   + String [ am]
   + String [ pm]
@@ -34452,7 +34452,7 @@ Methods (count = 27):
     Access flags: 0x9
       = public static java.lang.String a(android.content.Context,int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 358, locals = 3, stack = 5):
+    + Code attribute instructions (code length = 349, locals = 3, stack = 5):
       [0] new #40
         + Class [java/lang/StringBuffer]
       [3] dup
@@ -34461,280 +34461,274 @@ Methods (count = 27):
       [7] astore_2 v2
       [8] iload_1 v1
       [9] bipush 127
-      [11] iand
-      [12] bipush 127
-      [14] ificmpne +10 (target=24)
-      [17] aload_0 v0
-      [18] ldc #11
-        + Integer [2131165241]
-      [20] invokevirtual #51
-        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [23] areturn
-      [24] iload_1 v1
-      [25] bipush 31
-      [27] iand
-      [28] bipush 31
-      [30] ificmpne +10 (target=40)
-      [33] aload_0 v0
-      [34] ldc #12
-        + Integer [2131165242]
-      [36] invokevirtual #51
-        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [39] areturn
-      [40] iload_1 v1
-      [41] bipush 96
-      [43] iand
-      [44] bipush 96
-      [46] ificmpne +10 (target=56)
-      [49] aload_0 v0
-      [50] ldc #13
-        + Integer [2131165243]
-      [52] invokevirtual #51
-        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [55] areturn
-      [56] iload_1 v1
-      [57] iconst_1
-      [58] iand
-      [59] iconst_1
-      [60] ificmpne +32 (target=92)
-      [63] aload_2 v2
-      [64] new #41
-        + Class [java/lang/StringBuilder]
-      [67] dup
-      [68] aload_0 v0
-      [69] ldc #3
-        + Integer [2131165233]
-      [71] invokevirtual #51
-        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [74] invokestatic #84
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [77] invokespecial #90
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [80] ldc #19
-        + String [,]
-      [82] invokevirtual #92
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [85] invokevirtual #93
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [88] invokevirtual #86
-        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [91] pop
-      [92] iload_1 v1
-      [93] iconst_1
-      [94] ishr
-      [95] iconst_1
-      [96] iand
-      [97] iconst_1
-      [98] ificmpne +32 (target=130)
-      [101] aload_2 v2
-      [102] new #41
-        + Class [java/lang/StringBuilder]
-      [105] dup
-      [106] aload_0 v0
-      [107] ldc #4
-        + Integer [2131165234]
-      [109] invokevirtual #51
-        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [112] invokestatic #84
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [115] invokespecial #90
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [118] ldc #19
-        + String [,]
-      [120] invokevirtual #92
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [123] invokevirtual #93
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [126] invokevirtual #86
-        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [129] pop
-      [130] iload_1 v1
-      [131] iconst_2
-      [132] ishr
-      [133] iconst_1
-      [134] iand
-      [135] iconst_1
-      [136] ificmpne +32 (target=168)
-      [139] aload_2 v2
-      [140] new #41
-        + Class [java/lang/StringBuilder]
-      [143] dup
-      [144] aload_0 v0
-      [145] ldc #5
+      [11] ificmpne +10 (target=21)
+      [14] aload_0 v0
+      [15] ldc #11
         + Integer [2131165235]
-      [147] invokevirtual #51
+      [17] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [150] invokestatic #84
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [153] invokespecial #90
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [156] ldc #19
-        + String [,]
-      [158] invokevirtual #92
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [161] invokevirtual #93
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [164] invokevirtual #86
-        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [167] pop
-      [168] iload_1 v1
-      [169] iconst_3
-      [170] ishr
-      [171] iconst_1
-      [172] iand
-      [173] iconst_1
-      [174] ificmpne +32 (target=206)
-      [177] aload_2 v2
-      [178] new #41
-        + Class [java/lang/StringBuilder]
-      [181] dup
-      [182] aload_0 v0
-      [183] ldc #6
+      [20] areturn
+      [21] iload_1 v1
+      [22] bipush 31
+      [24] ificmpne +10 (target=34)
+      [27] aload_0 v0
+      [28] ldc #12
         + Integer [2131165236]
-      [185] invokevirtual #51
+      [30] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [188] invokestatic #84
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [191] invokespecial #90
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [194] ldc #19
-        + String [,]
-      [196] invokevirtual #92
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [199] invokevirtual #93
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [202] invokevirtual #86
-        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [205] pop
-      [206] iload_1 v1
-      [207] iconst_4
-      [208] ishr
-      [209] iconst_1
-      [210] iand
-      [211] iconst_1
-      [212] ificmpne +32 (target=244)
-      [215] aload_2 v2
-      [216] new #41
-        + Class [java/lang/StringBuilder]
-      [219] dup
-      [220] aload_0 v0
-      [221] ldc #7
+      [33] areturn
+      [34] iload_1 v1
+      [35] bipush 96
+      [37] ificmpne +10 (target=47)
+      [40] aload_0 v0
+      [41] ldc #13
         + Integer [2131165237]
-      [223] invokevirtual #51
+      [43] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [226] invokestatic #84
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [229] invokespecial #90
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [232] ldc #19
-        + String [,]
-      [234] invokevirtual #92
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [237] invokevirtual #93
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [240] invokevirtual #86
-        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [243] pop
-      [244] iload_1 v1
-      [245] iconst_5
-      [246] ishr
-      [247] iconst_1
-      [248] iand
-      [249] iconst_1
-      [250] ificmpne +32 (target=282)
-      [253] aload_2 v2
-      [254] new #41
+      [46] areturn
+      [47] iload_1 v1
+      [48] iconst_1
+      [49] iand
+      [50] iconst_1
+      [51] ificmpne +32 (target=83)
+      [54] aload_2 v2
+      [55] new #41
         + Class [java/lang/StringBuilder]
-      [257] dup
-      [258] aload_0 v0
-      [259] ldc #8
-        + Integer [2131165238]
-      [261] invokevirtual #51
+      [58] dup
+      [59] aload_0 v0
+      [60] ldc #3
+        + Integer [2131165227]
+      [62] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [264] invokestatic #84
+      [65] invokestatic #84
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [267] invokespecial #90
+      [68] invokespecial #90
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [270] ldc #19
+      [71] ldc #19
         + String [,]
-      [272] invokevirtual #92
+      [73] invokevirtual #92
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [275] invokevirtual #93
+      [76] invokevirtual #93
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [278] invokevirtual #86
+      [79] invokevirtual #86
         + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [281] pop
-      [282] iload_1 v1
-      [283] bipush 6
-      [285] ishr
-      [286] iconst_1
-      [287] iand
-      [288] iconst_1
-      [289] ificmpne +32 (target=321)
-      [292] aload_2 v2
-      [293] new #41
+      [82] pop
+      [83] iload_1 v1
+      [84] iconst_1
+      [85] ishr
+      [86] iconst_1
+      [87] iand
+      [88] iconst_1
+      [89] ificmpne +32 (target=121)
+      [92] aload_2 v2
+      [93] new #41
         + Class [java/lang/StringBuilder]
-      [296] dup
-      [297] aload_0 v0
-      [298] ldc #9
-        + Integer [2131165239]
-      [300] invokevirtual #51
+      [96] dup
+      [97] aload_0 v0
+      [98] ldc #4
+        + Integer [2131165228]
+      [100] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [303] invokestatic #84
+      [103] invokestatic #84
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [306] invokespecial #90
+      [106] invokespecial #90
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [309] ldc #19
+      [109] ldc #19
         + String [,]
-      [311] invokevirtual #92
+      [111] invokevirtual #92
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [314] invokevirtual #93
+      [114] invokevirtual #93
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [317] invokevirtual #86
+      [117] invokevirtual #86
         + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [320] pop
-      [321] aload_2 v2
-      [322] invokevirtual #88
-        + Methodref [java/lang/StringBuffer.length ()I]
-      [325] ifne +17 (target=342)
-      [328] aload_2 v2
-      [329] aload_0 v0
-      [330] ldc #10
-        + Integer [2131165240]
-      [332] invokevirtual #51
+      [120] pop
+      [121] iload_1 v1
+      [122] iconst_2
+      [123] ishr
+      [124] iconst_1
+      [125] iand
+      [126] iconst_1
+      [127] ificmpne +32 (target=159)
+      [130] aload_2 v2
+      [131] new #41
+        + Class [java/lang/StringBuilder]
+      [134] dup
+      [135] aload_0 v0
+      [136] ldc #5
+        + Integer [2131165229]
+      [138] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [335] invokevirtual #86
+      [141] invokestatic #84
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [144] invokespecial #90
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [147] ldc #19
+        + String [,]
+      [149] invokevirtual #92
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [152] invokevirtual #93
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [155] invokevirtual #86
         + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
-      [338] pop
-      [339] goto +14 (target=353)
-      [342] aload_2 v2
-      [343] aload_2 v2
-      [344] invokevirtual #88
+      [158] pop
+      [159] iload_1 v1
+      [160] iconst_3
+      [161] ishr
+      [162] iconst_1
+      [163] iand
+      [164] iconst_1
+      [165] ificmpne +32 (target=197)
+      [168] aload_2 v2
+      [169] new #41
+        + Class [java/lang/StringBuilder]
+      [172] dup
+      [173] aload_0 v0
+      [174] ldc #6
+        + Integer [2131165230]
+      [176] invokevirtual #51
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [179] invokestatic #84
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [182] invokespecial #90
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [185] ldc #19
+        + String [,]
+      [187] invokevirtual #92
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [190] invokevirtual #93
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [193] invokevirtual #86
+        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
+      [196] pop
+      [197] iload_1 v1
+      [198] iconst_4
+      [199] ishr
+      [200] iconst_1
+      [201] iand
+      [202] iconst_1
+      [203] ificmpne +32 (target=235)
+      [206] aload_2 v2
+      [207] new #41
+        + Class [java/lang/StringBuilder]
+      [210] dup
+      [211] aload_0 v0
+      [212] ldc #7
+        + Integer [2131165231]
+      [214] invokevirtual #51
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [217] invokestatic #84
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [220] invokespecial #90
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [223] ldc #19
+        + String [,]
+      [225] invokevirtual #92
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [228] invokevirtual #93
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [231] invokevirtual #86
+        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
+      [234] pop
+      [235] iload_1 v1
+      [236] iconst_5
+      [237] ishr
+      [238] iconst_1
+      [239] iand
+      [240] iconst_1
+      [241] ificmpne +32 (target=273)
+      [244] aload_2 v2
+      [245] new #41
+        + Class [java/lang/StringBuilder]
+      [248] dup
+      [249] aload_0 v0
+      [250] ldc #8
+        + Integer [2131165232]
+      [252] invokevirtual #51
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [255] invokestatic #84
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [258] invokespecial #90
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [261] ldc #19
+        + String [,]
+      [263] invokevirtual #92
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [266] invokevirtual #93
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [269] invokevirtual #86
+        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
+      [272] pop
+      [273] iload_1 v1
+      [274] bipush 6
+      [276] ishr
+      [277] iconst_1
+      [278] iand
+      [279] iconst_1
+      [280] ificmpne +32 (target=312)
+      [283] aload_2 v2
+      [284] new #41
+        + Class [java/lang/StringBuilder]
+      [287] dup
+      [288] aload_0 v0
+      [289] ldc #9
+        + Integer [2131165233]
+      [291] invokevirtual #51
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [294] invokestatic #84
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [297] invokespecial #90
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [300] ldc #19
+        + String [,]
+      [302] invokevirtual #92
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [305] invokevirtual #93
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [308] invokevirtual #86
+        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
+      [311] pop
+      [312] aload_2 v2
+      [313] invokevirtual #88
         + Methodref [java/lang/StringBuffer.length ()I]
-      [347] iconst_1
-      [348] isub
-      [349] invokevirtual #87
+      [316] ifne +17 (target=333)
+      [319] aload_2 v2
+      [320] aload_0 v0
+      [321] ldc #10
+        + Integer [2131165234]
+      [323] invokevirtual #51
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [326] invokevirtual #86
+        + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
+      [329] pop
+      [330] goto +14 (target=344)
+      [333] aload_2 v2
+      [334] aload_2 v2
+      [335] invokevirtual #88
+        + Methodref [java/lang/StringBuffer.length ()I]
+      [338] iconst_1
+      [339] isub
+      [340] invokevirtual #87
         + Methodref [java/lang/StringBuffer.deleteCharAt (I)Ljava/lang/StringBuffer;]
-      [352] pop
-      [353] aload_2 v2
-      [354] invokevirtual #89
+      [343] pop
+      [344] aload_2 v2
+      [345] invokevirtual #89
         + Methodref [java/lang/StringBuffer.toString ()Ljava/lang/String;]
-      [357] areturn
+      [348] areturn
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 12):
-        - [24] Var: ...[a:java/lang/StringBuffer], Stack: (empty)
-        - [40] Var: ..., Stack: (empty)
-        - [56] Var: ..., Stack: (empty)
-        - [92] Var: ..., Stack: (empty)
-        - [130] Var: ..., Stack: (empty)
-        - [168] Var: ..., Stack: (empty)
-        - [206] Var: ..., Stack: (empty)
-        - [244] Var: ..., Stack: (empty)
-        - [282] Var: ..., Stack: (empty)
-        - [321] Var: ..., Stack: (empty)
-        - [342] Var: ..., Stack: (empty)
-        - [353] Var: ..., Stack: (empty)
+        - [21] Var: ...[a:java/lang/StringBuffer], Stack: (empty)
+        - [34] Var: ..., Stack: (empty)
+        - [47] Var: ..., Stack: (empty)
+        - [83] Var: ..., Stack: (empty)
+        - [121] Var: ..., Stack: (empty)
+        - [159] Var: ..., Stack: (empty)
+        - [197] Var: ..., Stack: (empty)
+        - [235] Var: ..., Stack: (empty)
+        - [273] Var: ..., Stack: (empty)
+        - [312] Var: ..., Stack: (empty)
+        - [333] Var: ..., Stack: (empty)
+        - [344] Var: ..., Stack: (empty)
   + Method:       a(Landroid/content/Context;II)Ljava/lang/String;
     Access flags: 0x9
       = public static java.lang.String a(android.content.Context,int,int)
@@ -34864,7 +34858,7 @@ Methods (count = 27):
       [21] astore_3 v3
       [22] aload_1 v1
       [23] ldc #2
-        + Integer [2131165224]
+        + Integer [2131165220]
       [25] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [28] astore_2 v2
@@ -34935,8 +34929,8 @@ Interfaces (count = 0):
 Constant Pool (count = 337):
   + Integer [2130903043]
   + Integer [2131165184]
-  + Integer [2131165211]
-  + Integer [2131165212]
+  + Integer [2131165207]
+  + Integer [2131165208]
   + String [30]
   + String [ACTION_POWER_CONNECTED]
   + String [FLAG_SHOW_WHEN_LOCKED]
@@ -35679,7 +35673,7 @@ Methods (count = 15):
         default: offset = 80, target = 81
       [20] aload_0 v0
       [21] ldc #4
-        + Integer [2131165212]
+        + Integer [2131165208]
       [23] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.getString (I)Ljava/lang/String;]
       [26] astore_2 v2
@@ -35693,7 +35687,7 @@ Methods (count = 15):
       [36] aload_3 v3
       [37] aload_0 v0
       [38] ldc #3
-        + Integer [2131165211]
+        + Integer [2131165207]
       [40] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.getString (I)Ljava/lang/String;]
       [43] invokevirtual #68
@@ -35923,7 +35917,7 @@ _____________________________________________________________________
 Interfaces (count = 0):
 
 Constant Pool (count = 75):
-  + Integer [2131165216]
+  + Integer [2131165212]
   + String [ACTION_POWER_CONNECTED]
   + String [android.intent.action.BATTERY_CHANGED]
   + String [android.intent.action.PHONE_STATE]
@@ -36067,7 +36061,7 @@ Methods (count = 2):
         + Fieldref [com/dexnamic/alwayscharged/e.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
       [64] iconst_0
       [65] ldc #1
-        + Integer [2131165216]
+        + Integer [2131165212]
       [67] aload_0 v0
       [68] getfield #16
         + Fieldref [com/dexnamic/alwayscharged/e.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
@@ -36134,7 +36128,7 @@ _____________________________________________________________________
 Interfaces (count = 0):
 
 Constant Pool (count = 41):
-  + Integer [2131165217]
+  + Integer [2131165213]
   + Class [android/os/Handler]
   + Class [android/os/Message]
   + Class [com/dexnamic/alwayscharged/AlarmActivity]
@@ -36218,7 +36212,7 @@ Methods (count = 2):
         + Fieldref [com/dexnamic/alwayscharged/f.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
       [38] iconst_0
       [39] ldc #1
-        + Integer [2131165217]
+        + Integer [2131165213]
       [41] aload_0 v0
       [42] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/f.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
@@ -36325,26 +36319,21 @@ _____________________________________________________________________
 Interfaces (count = 1):
   + Class [android/content/DialogInterface$OnClickListener]
 
-Constant Pool (count = 66):
-  + Integer [2131165209]
-  + Integer [2131165218]
+Constant Pool (count = 52):
+  + Integer [2131165214]
   + Class [android/content/DialogInterface$OnClickListener]
   + Class [android/os/Handler]
-  + Class [android/widget/Toast]
   + Class [com/dexnamic/alwayscharged/AlarmActivity]
   + Class [com/dexnamic/alwayscharged/h]
   + Class [com/dexnamic/alwayscharged/z]
   + Class [java/lang/Object]
   + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
   + Methodref [android/os/Handler.removeMessages (I)V]
-  + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-  + Methodref [android/widget/Toast.show ()V]
   + Methodref [com/dexnamic/alwayscharged/AlarmActivity.a ()V]
   + Methodref [com/dexnamic/alwayscharged/AlarmActivity.a (Lcom/dexnamic/alwayscharged/AlarmActivity;)V]
   + Methodref [com/dexnamic/alwayscharged/AlarmActivity.b (Lcom/dexnamic/alwayscharged/AlarmActivity;)Lcom/dexnamic/alwayscharged/d;]
   + Methodref [com/dexnamic/alwayscharged/AlarmActivity.c (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/os/Handler;]
   + Methodref [com/dexnamic/alwayscharged/AlarmActivity.d (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/content/SharedPreferences;]
-  + Methodref [com/dexnamic/alwayscharged/AlarmActivity.getString (I)Ljava/lang/String;]
   + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;IILcom/dexnamic/alwayscharged/d;)V]
   + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Landroid/content/SharedPreferences;)V]
   + Methodref [java/lang/Object.<init> ()V]
@@ -36357,16 +36346,11 @@ Constant Pool (count = 66):
   + NameAndType [b (Lcom/dexnamic/alwayscharged/AlarmActivity;)Lcom/dexnamic/alwayscharged/d;]
   + NameAndType [c (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/os/Handler;]
   + NameAndType [d (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/content/SharedPreferences;]
-  + NameAndType [getString (I)Ljava/lang/String;]
-  + NameAndType [makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
   + NameAndType [removeMessages (I)V]
-  + NameAndType [show ()V]
   + Utf8 [()V]
-  + Utf8 [(I)Ljava/lang/String;]
   + Utf8 [(I)V]
   + Utf8 [(Landroid/content/Context;IILcom/dexnamic/alwayscharged/d;)V]
   + Utf8 [(Landroid/content/Context;Landroid/content/SharedPreferences;)V]
-  + Utf8 [(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
   + Utf8 [(Landroid/content/DialogInterface;I)V]
   + Utf8 [(Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/content/SharedPreferences;]
   + Utf8 [(Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/os/Handler;]
@@ -36378,19 +36362,15 @@ Constant Pool (count = 66):
   + Utf8 [a]
   + Utf8 [android/content/DialogInterface$OnClickListener]
   + Utf8 [android/os/Handler]
-  + Utf8 [android/widget/Toast]
   + Utf8 [b]
   + Utf8 [c]
   + Utf8 [com/dexnamic/alwayscharged/AlarmActivity]
   + Utf8 [com/dexnamic/alwayscharged/h]
   + Utf8 [com/dexnamic/alwayscharged/z]
   + Utf8 [d]
-  + Utf8 [getString]
   + Utf8 [java/lang/Object]
-  + Utf8 [makeText]
   + Utf8 [onClick]
   + Utf8 [removeMessages]
-  + Utf8 [show]
 
 Fields (count = 1):
   + Field:        a Lcom/dexnamic/alwayscharged/AlarmActivity;
@@ -36405,10 +36385,10 @@ Methods (count = 2):
     + Code attribute instructions (code length = 10, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] putfield #10
+      [2] putfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
       [5] aload_0 v0
-      [6] invokespecial #22
+      [6] invokespecial #17
         + Methodref [java/lang/Object.<init> ()V]
       [9] return
       Code attribute exceptions (count = 0):
@@ -36417,64 +36397,49 @@ Methods (count = 2):
     Access flags: 0x1
       = public void onClick(android.content.DialogInterface,int)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 77, locals = 3, stack = 4):
+    + Code attribute instructions (code length = 57, locals = 3, stack = 4):
       [0] aload_0 v0
-      [1] getfield #10
+      [1] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [4] invokestatic #17
+      [4] invokestatic #13
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.c (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/os/Handler;]
       [7] iconst_1
-      [8] invokevirtual #11
+      [8] invokevirtual #9
         + Methodref [android/os/Handler.removeMessages (I)V]
       [11] aload_0 v0
-      [12] getfield #10
+      [12] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [15] invokevirtual #14
+      [15] invokevirtual #10
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.a ()V]
       [18] aload_0 v0
-      [19] getfield #10
+      [19] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
       [22] aload_0 v0
-      [23] getfield #10
+      [23] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [26] invokestatic #18
+      [26] invokestatic #14
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.d (Lcom/dexnamic/alwayscharged/AlarmActivity;)Landroid/content/SharedPreferences;]
-      [29] invokestatic #21
+      [29] invokestatic #16
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Landroid/content/SharedPreferences;)V]
       [32] aload_0 v0
-      [33] getfield #10
+      [33] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
       [36] iconst_0
-      [37] ldc #2
-        + Integer [2131165218]
+      [37] ldc #1
+        + Integer [2131165214]
       [39] aload_0 v0
-      [40] getfield #10
+      [40] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [43] invokestatic #16
+      [43] invokestatic #12
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.b (Lcom/dexnamic/alwayscharged/AlarmActivity;)Lcom/dexnamic/alwayscharged/d;]
-      [46] invokestatic #20
+      [46] invokestatic #15
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;IILcom/dexnamic/alwayscharged/d;)V]
       [49] aload_0 v0
-      [50] getfield #10
+      [50] getfield #8
         + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [53] aload_0 v0
-      [54] getfield #10
-        + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [57] ldc #1
-        + Integer [2131165209]
-      [59] invokevirtual #19
-        + Methodref [com/dexnamic/alwayscharged/AlarmActivity.getString (I)Ljava/lang/String;]
-      [62] iconst_1
-      [63] invokestatic #12
-        + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [66] invokevirtual #13
-        + Methodref [android/widget/Toast.show ()V]
-      [69] aload_0 v0
-      [70] getfield #10
-        + Fieldref [com/dexnamic/alwayscharged/h.a Lcom/dexnamic/alwayscharged/AlarmActivity;]
-      [73] invokestatic #15
+      [53] invokestatic #11
         + Methodref [com/dexnamic/alwayscharged/AlarmActivity.a (Lcom/dexnamic/alwayscharged/AlarmActivity;)V]
-      [76] return
+      [56] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
 
@@ -36901,14 +36866,14 @@ Constant Pool (count = 554):
   + Integer [268435462]
   + Integer [2130837509]
   + Integer [2131165184]
-  + Integer [2131165213]
-  + Integer [2131165214]
-  + Integer [2131165215]
-  + Integer [2131165216]
-  + Integer [2131165245]
-  + Integer [2131165246]
-  + Integer [2131165258]
-  + Integer [2131165259]
+  + Integer [2131165209]
+  + Integer [2131165210]
+  + Integer [2131165211]
+  + Integer [2131165212]
+  + Integer [2131165239]
+  + Integer [2131165240]
+  + Integer [2131165251]
+  + Integer [2131165252]
   + Float [9.80665]
   + Float [30.0]
   + Float [180.0]
@@ -37729,7 +37694,7 @@ Methods (count = 23):
       [173] pop
       [174] aload_0 v0
       [175] ldc #8
-        + Integer [2131165215]
+        + Integer [2131165211]
       [177] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [180] return
@@ -37749,7 +37714,7 @@ Methods (count = 23):
       [200] pop
       [201] aload_0 v0
       [202] ldc #9
-        + Integer [2131165216]
+        + Integer [2131165212]
       [204] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [207] return
@@ -37829,7 +37794,7 @@ Methods (count = 23):
       [316] pop
       [317] aload_0 v0
       [318] ldc #6
-        + Integer [2131165213]
+        + Integer [2131165209]
       [320] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [323] return
@@ -37856,12 +37821,12 @@ Methods (count = 23):
       [5] aload_2 v2
       [6] aload_1 v1
       [7] ldc #12
-        + Integer [2131165258]
+        + Integer [2131165251]
       [9] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [12] aload_1 v1
       [13] ldc #13
-        + Integer [2131165259]
+        + Integer [2131165252]
       [15] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [18] invokeinterface #212
@@ -37959,7 +37924,7 @@ Methods (count = 23):
       [152] dup
       [153] aload_1 v1
       [154] ldc #10
-        + Integer [2131165245]
+        + Integer [2131165239]
       [156] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [159] invokestatic #201
@@ -37981,7 +37946,7 @@ Methods (count = 23):
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [182] aload_1 v1
       [183] ldc #11
-        + Integer [2131165246]
+        + Integer [2131165240]
       [185] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [188] invokevirtual #206
@@ -38292,7 +38257,7 @@ Methods (count = 23):
       [200] pop
       [201] aload_0 v0
       [202] ldc #6
-        + Integer [2131165213]
+        + Integer [2131165209]
       [204] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [207] return
@@ -38589,7 +38554,7 @@ Methods (count = 23):
       [55] goto +9 (target=64)
       [58] aload_0 v0
       [59] ldc #6
-        + Integer [2131165213]
+        + Integer [2131165209]
       [61] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [64] aload_0 v0
@@ -38617,7 +38582,7 @@ Methods (count = 23):
       [96] pop
       [97] aload_0 v0
       [98] ldc #6
-        + Integer [2131165213]
+        + Integer [2131165209]
       [100] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [103] return
@@ -38720,7 +38685,7 @@ Methods (count = 23):
       [123] pop
       [124] aload_0 v0
       [125] ldc #7
-        + Integer [2131165214]
+        + Integer [2131165210]
       [127] invokespecial #169
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (I)V]
       [130] goto +20 (target=150)
@@ -39011,7 +38976,7 @@ _____________________________________________________________________
 Interfaces (count = 0):
 
 Constant Pool (count = 63):
-  + Integer [2131165213]
+  + Integer [2131165209]
   + String [sensors have stabalized]
   + String [unable to read sensors. do alarm]
   + String [unable to read sensors. snooze until alarm time]
@@ -39143,7 +39108,7 @@ Methods (count = 2):
       [75] getfield #13
         + Fieldref [com/dexnamic/alwayscharged/i.a Lcom/dexnamic/alwayscharged/AlarmService;]
       [78] ldc #1
-        + Integer [2131165213]
+        + Integer [2131165209]
       [80] invokestatic #17
         + Methodref [com/dexnamic/alwayscharged/AlarmService.a (Lcom/dexnamic/alwayscharged/AlarmService;I)V]
       [83] goto +24 (target=107)
@@ -39374,7 +39339,7 @@ _____________________________________________________________________
 Interfaces (count = 0):
 
 Constant Pool (count = 242):
-  + Integer [2131165253]
+  + Integer [2131165246]
   + String [1]
   + String [CREATE TABLE alarms(_id INTEGER PRIMARY KEY,enabled INTEGER,label TEXT,hour INTEGER,minute INTEGER,repeats INTEGER,ringtone TEXT,vibrate INTEGER)]
   + String [DROP TABLE IF EXISTS alarms]
@@ -39720,7 +39685,7 @@ Methods (count = 12):
       [95] getfield #34
         + Fieldref [com/dexnamic/alwayscharged/j.b Landroid/content/Context;]
       [98] ldc #1
-        + Integer [2131165253]
+        + Integer [2131165246]
       [100] invokevirtual #39
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [103] invokevirtual #52
@@ -40296,19 +40261,20 @@ Interfaces (count = 4):
   + Class [android/preference/Preference$OnPreferenceClickListener]
   + Class [android/view/View$OnClickListener]
 
-Constant Pool (count = 556):
+Constant Pool (count = 569):
   + Integer [2130903040]
   + Integer [2130968577]
   + Integer [2131034120]
-  + Integer [2131165219]
-  + Integer [2131165230]
-  + Integer [2131165232]
-  + Integer [2131165251]
+  + Integer [2131165215]
+  + Integer [2131165224]
+  + Integer [2131165226]
+  + Integer [2131165244]
   + Integer [2131230721]
   + Integer [2131296257]
   + Integer [2131296258]
   + Integer [2131296259]
   + String [,]
+  + String [alarm]
   + String [audio]
   + String [id]
   + String [key_checkbox]
@@ -40396,6 +40362,8 @@ Constant Pool (count = 556):
   + Methodref [android/content/Intent.getExtras ()Landroid/os/Bundle;]
   + Methodref [android/media/AudioManager.getStreamVolume (I)I]
   + Methodref [android/os/Bundle.getInt (Ljava/lang/String;)I]
+  + Methodref [android/os/Bundle.getSerializable (Ljava/lang/String;)Ljava/io/Serializable;]
+  + Methodref [android/os/Bundle.putSerializable (Ljava/lang/String;Ljava/io/Serializable;)V]
   + Methodref [android/os/Handler.<init> ()V]
   + Methodref [android/os/Vibrator.vibrate (J)V]
   + Methodref [android/preference/CheckBoxPreference.isChecked ()Z]
@@ -40415,6 +40383,7 @@ Constant Pool (count = 556):
   + Methodref [android/preference/PreferenceActivity.onOptionsItemSelected (Landroid/view/MenuItem;)Z]
   + Methodref [android/preference/PreferenceActivity.onPause ()V]
   + Methodref [android/preference/PreferenceActivity.onResume ()V]
+  + Methodref [android/preference/PreferenceActivity.onSaveInstanceState (Landroid/os/Bundle;)V]
   + Methodref [android/preference/PreferenceActivity.onStart ()V]
   + Methodref [android/preference/PreferenceManager.getSharedPreferences ()Landroid/content/SharedPreferences;]
   + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
@@ -40566,6 +40535,7 @@ Constant Pool (count = 556):
   + NameAndType [getPreferenceManager ()Landroid/preference/PreferenceManager;]
   + NameAndType [getPreferenceScreen ()Landroid/preference/PreferenceScreen;]
   + NameAndType [getRepeatCount ()I]
+  + NameAndType [getSerializable (Ljava/lang/String;)Ljava/io/Serializable;]
   + NameAndType [getSharedPreferences ()Landroid/content/SharedPreferences;]
   + NameAndType [getStreamVolume (I)I]
   + NameAndType [getString (I)Ljava/lang/String;]
@@ -40594,8 +40564,10 @@ Constant Pool (count = 556):
   + NameAndType [onOptionsItemSelected (Landroid/view/MenuItem;)Z]
   + NameAndType [onPause ()V]
   + NameAndType [onResume ()V]
+  + NameAndType [onSaveInstanceState (Landroid/os/Bundle;)V]
   + NameAndType [onStart ()V]
   + NameAndType [p Lcom/dexnamic/alwayscharged/billing/BillingService;]
+  + NameAndType [putSerializable (Ljava/lang/String;Ljava/io/Serializable;)V]
   + NameAndType [putString (Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;]
   + NameAndType [q Lcom/dexnamic/alwayscharged/p;]
   + NameAndType [r Landroid/os/Handler;]
@@ -40687,10 +40659,12 @@ Constant Pool (count = 556):
   + Utf8 [(Ljava/lang/Integer;)V]
   + Utf8 [(Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)I]
+  + Utf8 [(Ljava/lang/String;)Ljava/io/Serializable;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/Object;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuffer;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
+  + Utf8 [(Ljava/lang/String;Ljava/io/Serializable;)V]
   + Utf8 [(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;]
   + Utf8 [(Z)Landroid/app/AlertDialog$Builder;]
   + Utf8 [(Z)Ljava/lang/Boolean;]
@@ -40716,6 +40690,7 @@ Constant Pool (count = 556):
   + Utf8 [[Z]
   + Utf8 [a]
   + Utf8 [addPreferencesFromResource]
+  + Utf8 [alarm]
   + Utf8 [android/app/ActionBar]
   + Utf8 [android/app/AlertDialog$Builder]
   + Utf8 [android/app/TimePickerDialog]
@@ -40781,6 +40756,7 @@ Constant Pool (count = 556):
   + Utf8 [getPreferenceManager]
   + Utf8 [getPreferenceScreen]
   + Utf8 [getRepeatCount]
+  + Utf8 [getSerializable]
   + Utf8 [getSharedPreferences]
   + Utf8 [getStreamVolume]
   + Utf8 [getString]
@@ -40823,9 +40799,11 @@ Constant Pool (count = 556):
   + Utf8 [onPreferenceChange]
   + Utf8 [onPreferenceClick]
   + Utf8 [onResume]
+  + Utf8 [onSaveInstanceState]
   + Utf8 [onStart]
   + Utf8 [onTimeSet]
   + Utf8 [p]
+  + Utf8 [putSerializable]
   + Utf8 [putString]
   + Utf8 [q]
   + Utf8 [r]
@@ -40908,14 +40886,14 @@ Fields (count = 18):
     Access flags: 0x0
       = android.widget.TextView b
 
-Methods (count = 28):
+Methods (count = 29):
   - Method:       <init>()V
     Access flags: 0x1
       = public EditAlarmPreferenceActivity()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #112
+      [1] invokespecial #115
         + Methodref [android/preference/PreferenceActivity.<init> ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -40924,308 +40902,358 @@ Methods (count = 28):
     Access flags: 0x4
       = protected void onCreate(android.os.Bundle)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 376, locals = 5, stack = 5):
+    + Code attribute instructions (code length = 444, locals = 5, stack = 5):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #113
+      [2] invokespecial #116
         + Methodref [android/preference/PreferenceActivity.onCreate (Landroid/os/Bundle;)V]
       [5] aload_0 v0
       [6] ldc #1
         + Integer [2130903040]
-      [8] invokevirtual #151
+      [8] invokevirtual #155
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.setContentView (I)V]
       [11] aload_0 v0
       [12] ldc #2
         + Integer [2130968577]
-      [14] invokevirtual #133
+      [14] invokevirtual #137
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.addPreferencesFromResource (I)V]
       [17] aload_0 v0
-      [18] invokevirtual #142
+      [18] invokevirtual #146
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getIntent ()Landroid/content/Intent;]
-      [21] invokevirtual #98
+      [21] invokevirtual #99
         + Methodref [android/content/Intent.getExtras ()Landroid/os/Bundle;]
       [24] astore_2 v2
       [25] aload_0 v0
       [26] aload_2 v2
-      [27] ldc #14
+      [27] ldc #15
         + String [id]
-      [29] invokevirtual #100
+      [29] invokevirtual #101
         + Methodref [android/os/Bundle.getInt (Ljava/lang/String;)I]
-      [32] putfield #71
+      [32] putfield #72
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
       [35] aload_0 v0
-      [36] invokevirtual #145
+      [36] invokevirtual #149
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getPreferenceScreen ()Landroid/preference/PreferenceScreen;]
       [39] astore_3 v3
       [40] aload_0 v0
       [41] aload_3 v3
-      [42] ldc #15
+      [42] ldc #16
         + String [key_checkbox]
-      [44] invokevirtual #122
+      [44] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [47] checkcast #34
+      [47] checkcast #35
         + Class [android/preference/CheckBoxPreference]
-      [50] putfield #74
+      [50] putfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
       [53] aload_0 v0
-      [54] getfield #74
+      [54] getfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
       [57] aload_0 v0
-      [58] invokevirtual #106
+      [58] invokevirtual #109
         + Methodref [android/preference/CheckBoxPreference.setOnPreferenceClickListener (Landroid/preference/Preference$OnPreferenceClickListener;)V]
       [61] aload_0 v0
       [62] aload_3 v3
-      [63] ldc #19
+      [63] ldc #20
         + String [key_time]
-      [65] invokevirtual #122
+      [65] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [68] putfield #75
+      [68] putfield #76
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g Landroid/preference/Preference;]
       [71] aload_0 v0
-      [72] getfield #75
+      [72] getfield #76
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g Landroid/preference/Preference;]
       [75] aload_0 v0
-      [76] invokevirtual #110
+      [76] invokevirtual #113
         + Methodref [android/preference/Preference.setOnPreferenceClickListener (Landroid/preference/Preference$OnPreferenceClickListener;)V]
       [79] aload_0 v0
       [80] aload_3 v3
-      [81] ldc #17
+      [81] ldc #18
         + String [key_repeat]
-      [83] invokevirtual #122
+      [83] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [86] putfield #76
+      [86] putfield #77
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h Landroid/preference/Preference;]
       [89] aload_0 v0
-      [90] getfield #76
+      [90] getfield #77
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h Landroid/preference/Preference;]
       [93] aload_0 v0
-      [94] invokevirtual #110
+      [94] invokevirtual #113
         + Methodref [android/preference/Preference.setOnPreferenceClickListener (Landroid/preference/Preference$OnPreferenceClickListener;)V]
       [97] aload_0 v0
       [98] aload_3 v3
-      [99] ldc #18
+      [99] ldc #19
         + String [key_ringtone]
-      [101] invokevirtual #122
+      [101] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [104] checkcast #42
+      [104] checkcast #43
         + Class [android/preference/RingtonePreference]
-      [107] putfield #81
+      [107] putfield #82
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.m Landroid/preference/RingtonePreference;]
       [110] aload_0 v0
-      [111] getfield #81
+      [111] getfield #82
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.m Landroid/preference/RingtonePreference;]
       [114] aload_0 v0
-      [115] invokevirtual #123
+      [115] invokevirtual #127
         + Methodref [android/preference/RingtonePreference.setOnPreferenceChangeListener (Landroid/preference/Preference$OnPreferenceChangeListener;)V]
       [118] aload_0 v0
       [119] aload_3 v3
-      [120] ldc #16
+      [120] ldc #17
         + String [key_label]
-      [122] invokevirtual #122
+      [122] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [125] checkcast #35
+      [125] checkcast #36
         + Class [android/preference/EditTextPreference]
-      [128] putfield #82
+      [128] putfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [131] aload_0 v0
-      [132] getfield #82
+      [132] getfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [135] aload_0 v0
-      [136] invokevirtual #107
+      [136] invokevirtual #110
         + Methodref [android/preference/EditTextPreference.setOnPreferenceChangeListener (Landroid/preference/Preference$OnPreferenceChangeListener;)V]
       [139] aload_0 v0
       [140] aload_3 v3
-      [141] ldc #20
+      [141] ldc #21
         + String [key_vibrate]
-      [143] invokevirtual #122
+      [143] invokevirtual #126
         + Methodref [android/preference/PreferenceScreen.findPreference (Ljava/lang/CharSequence;)Landroid/preference/Preference;]
-      [146] checkcast #34
+      [146] checkcast #35
         + Class [android/preference/CheckBoxPreference]
-      [149] putfield #77
+      [149] putfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
       [152] aload_0 v0
-      [153] getfield #77
+      [153] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
       [156] aload_0 v0
-      [157] invokevirtual #106
+      [157] invokevirtual #109
         + Methodref [android/preference/CheckBoxPreference.setOnPreferenceClickListener (Landroid/preference/Preference$OnPreferenceClickListener;)V]
       [160] aload_0 v0
-      [161] getfield #77
+      [161] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
       [164] aload_0 v0
-      [165] invokevirtual #105
+      [165] invokevirtual #108
         + Methodref [android/preference/CheckBoxPreference.setOnPreferenceChangeListener (Landroid/preference/Preference$OnPreferenceChangeListener;)V]
       [168] aload_0 v0
       [169] aload_0 v0
       [170] ldc #9
         + Integer [2131296257]
-      [172] invokevirtual #138
+      [172] invokevirtual #142
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.findViewById (I)Landroid/view/View;]
-      [175] checkcast #48
+      [175] checkcast #49
         + Class [android/widget/Button]
-      [178] putfield #78
+      [178] putfield #79
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.j Landroid/widget/Button;]
       [181] aload_0 v0
-      [182] getfield #78
+      [182] getfield #79
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.j Landroid/widget/Button;]
       [185] aload_0 v0
-      [186] invokevirtual #129
+      [186] invokevirtual #133
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [189] aload_0 v0
       [190] aload_0 v0
       [191] ldc #10
         + Integer [2131296258]
-      [193] invokevirtual #138
+      [193] invokevirtual #142
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.findViewById (I)Landroid/view/View;]
-      [196] checkcast #48
+      [196] checkcast #49
         + Class [android/widget/Button]
-      [199] putfield #79
+      [199] putfield #80
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.k Landroid/widget/Button;]
       [202] aload_0 v0
-      [203] getfield #79
+      [203] getfield #80
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.k Landroid/widget/Button;]
       [206] aload_0 v0
-      [207] invokevirtual #129
+      [207] invokevirtual #133
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [210] aload_0 v0
       [211] aload_0 v0
       [212] ldc #11
         + Integer [2131296259]
-      [214] invokevirtual #138
+      [214] invokevirtual #142
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.findViewById (I)Landroid/view/View;]
-      [217] checkcast #48
+      [217] checkcast #49
         + Class [android/widget/Button]
-      [220] putfield #80
+      [220] putfield #81
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.l Landroid/widget/Button;]
       [223] aload_0 v0
-      [224] getfield #80
+      [224] getfield #81
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.l Landroid/widget/Button;]
       [227] aload_0 v0
-      [228] invokevirtual #129
+      [228] invokevirtual #133
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
-      [231] getstatic #68
+      [231] getstatic #69
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [234] bipush 11
       [236] ificmplt +42 (target=278)
       [239] aload_0 v0
-      [240] getfield #78
+      [240] getfield #79
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.j Landroid/widget/Button;]
-      [243] invokevirtual #128
+      [243] invokevirtual #132
         + Methodref [android/widget/Button.getParent ()Landroid/view/ViewParent;]
-      [246] checkcast #47
+      [246] checkcast #48
         + Class [android/view/ViewGroup]
       [249] astore v4
       [251] aload v4
       [253] aload_0 v0
-      [254] getfield #78
+      [254] getfield #79
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.j Landroid/widget/Button;]
-      [257] invokevirtual #127
+      [257] invokevirtual #131
         + Methodref [android/view/ViewGroup.removeView (Landroid/view/View;)V]
       [260] aload v4
       [262] aload_0 v0
-      [263] getfield #79
+      [263] getfield #80
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.k Landroid/widget/Button;]
-      [266] invokevirtual #127
+      [266] invokevirtual #131
         + Methodref [android/view/ViewGroup.removeView (Landroid/view/View;)V]
       [269] aload v4
       [271] aload_0 v0
-      [272] getfield #80
+      [272] getfield #81
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.l Landroid/widget/Button;]
-      [275] invokevirtual #127
+      [275] invokevirtual #131
         + Methodref [android/view/ViewGroup.removeView (Landroid/view/View;)V]
       [278] aload_0 v0
-      [279] invokestatic #157
+      [279] invokestatic #161
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Landroid/content/Context;)Ljava/lang/Boolean;]
-      [282] invokevirtual #190
+      [282] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [285] ifne +22 (target=307)
       [288] aload_0 v0
-      [289] new #51
+      [289] new #52
         + Class [com/dexnamic/alwayscharged/billing/BillingService]
       [292] dup
-      [293] invokespecial #154
+      [293] invokespecial #158
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.<init> ()V]
-      [296] putfield #84
+      [296] putfield #85
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.p Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [299] aload_0 v0
-      [300] getfield #84
+      [300] getfield #85
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.p Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [303] aload_0 v0
-      [304] invokevirtual #155
+      [304] invokevirtual #159
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.a (Landroid/content/Context;)V]
       [307] aload_0 v0
       [308] iconst_4
-      [309] invokevirtual #152
+      [309] invokevirtual #156
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.setVolumeControlStream (I)V]
       [312] aload_0 v0
       [313] aload_0 v0
-      [314] ldc #21
+      [314] ldc #22
         + String [vibrator]
-      [316] invokevirtual #147
+      [316] invokevirtual #151
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [319] checkcast #33
+      [319] checkcast #34
         + Class [android/os/Vibrator]
-      [322] putfield #83
+      [322] putfield #84
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.o Landroid/os/Vibrator;]
       [325] aload_0 v0
-      [326] new #32
+      [326] new #33
         + Class [android/os/Handler]
       [329] dup
-      [330] invokespecial #101
+      [330] invokespecial #104
         + Methodref [android/os/Handler.<init> ()V]
-      [333] putfield #86
+      [333] putfield #87
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.r Landroid/os/Handler;]
       [336] aload_0 v0
-      [337] new #60
+      [337] new #61
         + Class [com/dexnamic/alwayscharged/p]
       [340] dup
       [341] aload_0 v0
       [342] aload_0 v0
-      [343] getfield #86
+      [343] getfield #87
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.r Landroid/os/Handler;]
-      [346] invokespecial #189
+      [346] invokespecial #193
         + Methodref [com/dexnamic/alwayscharged/p.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;Landroid/os/Handler;)V]
-      [349] putfield #85
+      [349] putfield #86
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.q Lcom/dexnamic/alwayscharged/p;]
       [352] aload_0 v0
-      [353] getfield #85
+      [353] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.q Lcom/dexnamic/alwayscharged/p;]
-      [356] invokestatic #158
+      [356] invokestatic #162
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Lcom/dexnamic/alwayscharged/billing/i;)V]
       [359] aload_0 v0
       [360] bipush 7
       [362] newarray 4
-      [364] putfield #69
+      [364] putfield #70
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.a [Z]
       [367] aload_0 v0
-      [368] invokevirtual #132
+      [368] new #55
+        + Class [com/dexnamic/alwayscharged/j]
+      [371] dup
+      [372] aload_0 v0
+      [373] invokespecial #182
+        + Methodref [com/dexnamic/alwayscharged/j.<init> (Landroid/content/Context;)V]
+      [376] putfield #74
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
+      [379] aload_0 v0
+      [380] getfield #72
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
+      [383] iflt +41 (target=424)
+      [386] aload_1 v1
+      [387] ifnull +19 (target=406)
+      [390] aload_0 v0
+      [391] aload_1 v1
+      [392] ldc #13
+        + String [alarm]
+      [394] invokevirtual #102
+        + Methodref [android/os/Bundle.getSerializable (Ljava/lang/String;)Ljava/io/Serializable;]
+      [397] checkcast #54
+        + Class [com/dexnamic/alwayscharged/d]
+      [400] putfield #73
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
+      [403] goto +32 (target=435)
+      [406] aload_0 v0
+      [407] aload_0 v0
+      [408] getfield #74
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
+      [411] aload_0 v0
+      [412] getfield #72
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
+      [415] invokevirtual #183
+        + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
+      [418] putfield #73
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
+      [421] goto +14 (target=435)
+      [424] aload_0 v0
+      [425] new #54
+        + Class [com/dexnamic/alwayscharged/d]
+      [428] dup
+      [429] invokespecial #164
+        + Methodref [com/dexnamic/alwayscharged/d.<init> ()V]
+      [432] putfield #73
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
+      [435] aload_0 v0
+      [436] invokevirtual #136
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.a ()V]
-      [371] aload_0 v0
-      [372] invokevirtual #134
+      [439] aload_0 v0
+      [440] invokevirtual #138
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.b ()V]
-      [375] return
+      [443] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
-      + Stack map table attribute (count = 2):
+      + Stack map table attribute (count = 6):
         - [278] Var: ...[a:android/os/Bundle][a:android/preference/PreferenceScreen], Stack: (empty)
         - [307] Var: ..., Stack: (empty)
+        - [406] Var: ..., Stack: (empty)
+        - [421] Var: ..., Stack: (empty)
+        - [424] Var: ..., Stack: (empty)
+        - [435] Var: ..., Stack: (empty)
   + Method:       a()V
     Access flags: 0x0
       = void a()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 21, locals = 2, stack = 3):
-      [0] getstatic #68
+      [0] getstatic #69
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [3] bipush 11
       [5] ificmplt +15 (target=20)
       [8] aload_0 v0
-      [9] invokevirtual #141
+      [9] invokevirtual #145
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getActionBar ()Landroid/app/ActionBar;]
       [12] astore_1 v1
       [13] aload_1 v1
       [14] iconst_0
       [15] bipush 8
-      [17] invokevirtual #87
+      [17] invokevirtual #88
         + Methodref [android/app/ActionBar.setDisplayOptions (II)V]
       [20] return
       Code attribute exceptions (count = 0):
@@ -41237,17 +41265,17 @@ Methods (count = 28):
       = void b()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 19, locals = 2, stack = 2):
-      [0] getstatic #68
+      [0] getstatic #69
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [3] bipush 14
       [5] ificmplt +13 (target=18)
       [8] aload_0 v0
-      [9] invokevirtual #141
+      [9] invokevirtual #145
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getActionBar ()Landroid/app/ActionBar;]
       [12] astore_1 v1
       [13] aload_1 v1
       [14] iconst_1
-      [15] invokevirtual #88
+      [15] invokevirtual #89
         + Methodref [android/app/ActionBar.setHomeButtonEnabled (Z)V]
       [18] return
       Code attribute exceptions (count = 0):
@@ -41258,59 +41286,23 @@ Methods (count = 28):
     Access flags: 0x4
       = protected void onStart()
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 53, locals = 1, stack = 4):
+    + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #120
+      [1] invokespecial #124
         + Methodref [android/preference/PreferenceActivity.onStart ()V]
-      [4] aload_0 v0
-      [5] new #54
-        + Class [com/dexnamic/alwayscharged/j]
-      [8] dup
-      [9] aload_0 v0
-      [10] invokespecial #178
-        + Methodref [com/dexnamic/alwayscharged/j.<init> (Landroid/content/Context;)V]
-      [13] putfield #73
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
-      [16] aload_0 v0
-      [17] getfield #71
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
-      [20] iflt +21 (target=41)
-      [23] aload_0 v0
-      [24] aload_0 v0
-      [25] getfield #73
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
-      [28] aload_0 v0
-      [29] getfield #71
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
-      [32] invokevirtual #179
-        + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
-      [35] putfield #72
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [38] goto +14 (target=52)
-      [41] aload_0 v0
-      [42] new #53
-        + Class [com/dexnamic/alwayscharged/d]
-      [45] dup
-      [46] invokespecial #160
-        + Methodref [com/dexnamic/alwayscharged/d.<init> ()V]
-      [49] putfield #72
-        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [52] return
+      [4] return
       Code attribute exceptions (count = 0):
-      Code attribute attributes (attribute count = 1):
-      + Stack map table attribute (count = 2):
-        - [41] Var: ..., Stack: (empty)
-        - [52] Var: ..., Stack: (empty)
+      Code attribute attributes (attribute count = 0):
   + Method:       onResume()V
     Access flags: 0x4
       = protected void onResume()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 9, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #119
+      [1] invokespecial #122
         + Methodref [android/preference/PreferenceActivity.onResume ()V]
       [4] aload_0 v0
-      [5] invokespecial #135
+      [5] invokespecial #139
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d ()V]
       [8] return
       Code attribute exceptions (count = 0):
@@ -41321,43 +41313,63 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 26, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #118
+      [1] invokespecial #121
         + Methodref [android/preference/PreferenceActivity.onPause ()V]
       [4] aload_0 v0
-      [5] getfield #85
+      [5] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.q Lcom/dexnamic/alwayscharged/p;]
-      [8] invokestatic #159
+      [8] invokestatic #163
         + Methodref [com/dexnamic/alwayscharged/billing/k.b (Lcom/dexnamic/alwayscharged/billing/i;)V]
       [11] aload_0 v0
-      [12] getfield #73
+      [12] getfield #74
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
       [15] ifnull +10 (target=25)
       [18] aload_0 v0
-      [19] getfield #73
+      [19] getfield #74
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
-      [22] invokevirtual #183
+      [22] invokevirtual #187
         + Methodref [com/dexnamic/alwayscharged/j.close ()V]
       [25] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 1):
         - [25] Var: ..., Stack: (empty)
+  + Method:       onSaveInstanceState(Landroid/os/Bundle;)V
+    Access flags: 0x4
+      = protected void onSaveInstanceState(android.os.Bundle)
+    Class member attributes (count = 1):
+    + Code attribute instructions (code length = 16, locals = 2, stack = 3):
+      [0] aload_0 v0
+      [1] aload_1 v1
+      [2] invokespecial #123
+        + Methodref [android/preference/PreferenceActivity.onSaveInstanceState (Landroid/os/Bundle;)V]
+      [5] aload_1 v1
+      [6] ldc #13
+        + String [alarm]
+      [8] aload_0 v0
+      [9] getfield #73
+        + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
+      [12] invokevirtual #103
+        + Methodref [android/os/Bundle.putSerializable (Ljava/lang/String;Ljava/io/Serializable;)V]
+      [15] return
+      Code attribute exceptions (count = 0):
+      Code attribute attributes (attribute count = 0):
   + Method:       onDestroy()V
     Access flags: 0x4
       = protected void onDestroy()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 19, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #114
+      [1] invokespecial #117
         + Methodref [android/preference/PreferenceActivity.onDestroy ()V]
       [4] aload_0 v0
-      [5] getfield #84
+      [5] getfield #85
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.p Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [8] ifnull +10 (target=18)
       [11] aload_0 v0
-      [12] getfield #84
+      [12] getfield #85
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.p Lcom/dexnamic/alwayscharged/billing/BillingService;]
-      [15] invokevirtual #156
+      [15] invokevirtual #160
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.b ()V]
       [18] return
       Code attribute exceptions (count = 0):
@@ -41378,14 +41390,14 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 14, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] invokevirtual #143
+      [1] invokevirtual #147
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getMenuInflater ()Landroid/view/MenuInflater;]
       [4] astore_2 v2
       [5] aload_2 v2
       [6] ldc #8
         + Integer [2131230721]
       [8] aload_1 v1
-      [9] invokevirtual #126
+      [9] invokevirtual #130
         + Methodref [android/view/MenuInflater.inflate (ILandroid/view/Menu;)V]
       [12] iconst_1
       [13] ireturn
@@ -41397,19 +41409,19 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 36, locals = 2, stack = 2):
       [0] aload_1 v1
-      [1] invokeinterface #205
+      [1] invokeinterface #209
         + InterfaceMethodref [android/view/MenuItem.getItemId ()I]
       [6] tableswitch (1 offsets, default=24) (target=30)
         16908332: offset = 18, target = 24
         default: offset = 24, target = 30
       [24] aload_0 v0
-      [25] invokespecial #148
+      [25] invokespecial #152
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h ()V]
       [28] iconst_1
       [29] ireturn
       [30] aload_0 v0
       [31] aload_1 v1
-      [32] invokespecial #117
+      [32] invokespecial #120
         + Methodref [android/preference/PreferenceActivity.onOptionsItemSelected (Landroid/view/MenuItem;)Z]
       [35] ireturn
       Code attribute exceptions (count = 0):
@@ -41423,20 +41435,20 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 37, locals = 3, stack = 3):
       [0] aload_2 v2
-      [1] invokeinterface #205
+      [1] invokeinterface #209
         + InterfaceMethodref [android/view/MenuItem.getItemId ()I]
       [6] tableswitch (1 offsets, default=24) (target=30)
         2131296276: offset = 18, target = 24
         default: offset = 24, target = 30
       [24] aload_0 v0
-      [25] invokespecial #140
+      [25] invokespecial #144
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g ()V]
       [28] iconst_1
       [29] ireturn
       [30] aload_0 v0
       [31] iload_1 v1
       [32] aload_2 v2
-      [33] invokespecial #116
+      [33] invokespecial #119
         + Methodref [android/preference/PreferenceActivity.onMenuItemSelected (ILandroid/view/MenuItem;)Z]
       [36] ireturn
       Code attribute exceptions (count = 0):
@@ -41450,157 +41462,157 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 222, locals = 3, stack = 4):
       [0] aload_0 v0
-      [1] getfield #74
+      [1] getfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
       [4] aload_0 v0
-      [5] getfield #72
+      [5] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [8] invokevirtual #177
+      [8] invokevirtual #181
         + Methodref [com/dexnamic/alwayscharged/d.i ()Ljava/lang/Boolean;]
-      [11] invokevirtual #190
+      [11] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
-      [14] invokevirtual #104
+      [14] invokevirtual #107
         + Methodref [android/preference/CheckBoxPreference.setChecked (Z)V]
       [17] aload_0 v0
-      [18] getfield #75
+      [18] getfield #76
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g Landroid/preference/Preference;]
       [21] aload_0 v0
-      [22] getfield #72
+      [22] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [25] aload_0 v0
-      [26] invokevirtual #161
+      [26] invokevirtual #165
         + Methodref [com/dexnamic/alwayscharged/d.a (Landroid/content/Context;)Ljava/lang/CharSequence;]
-      [29] invokevirtual #111
+      [29] invokevirtual #114
         + Methodref [android/preference/Preference.setSummary (Ljava/lang/CharSequence;)V]
       [32] aload_0 v0
-      [33] getfield #76
+      [33] getfield #77
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h Landroid/preference/Preference;]
       [36] aload_0 v0
       [37] aload_0 v0
-      [38] getfield #72
+      [38] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [41] invokevirtual #174
+      [41] invokevirtual #178
         + Methodref [com/dexnamic/alwayscharged/d.e ()Ljava/lang/Integer;]
-      [44] invokevirtual #192
+      [44] invokevirtual #196
         + Methodref [java/lang/Integer.intValue ()I]
-      [47] invokestatic #162
+      [47] invokestatic #166
         + Methodref [com/dexnamic/alwayscharged/d.a (Landroid/content/Context;I)Ljava/lang/String;]
-      [50] invokevirtual #111
+      [50] invokevirtual #114
         + Methodref [android/preference/Preference.setSummary (Ljava/lang/CharSequence;)V]
-      [53] new #64
+      [53] new #65
         + Class [java/lang/StringBuffer]
       [56] dup
-      [57] invokespecial #197
+      [57] invokespecial #201
         + Methodref [java/lang/StringBuffer.<init> ()V]
       [60] astore_1 v1
       [61] iconst_0
-      [62] invokestatic #194
+      [62] invokestatic #198
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [65] astore_2 v2
       [66] goto +54 (target=120)
       [69] aload_0 v0
-      [70] getfield #72
+      [70] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [73] aload_2 v2
-      [74] invokevirtual #172
+      [74] invokevirtual #176
         + Methodref [com/dexnamic/alwayscharged/d.c (Ljava/lang/Integer;)Ljava/lang/Boolean;]
-      [77] invokevirtual #190
+      [77] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [80] ifeq +30 (target=110)
       [83] aload_1 v1
-      [84] new #65
+      [84] new #66
         + Class [java/lang/StringBuilder]
       [87] dup
       [88] aload_2 v2
-      [89] invokevirtual #193
+      [89] invokevirtual #197
         + Methodref [java/lang/Integer.toString ()Ljava/lang/String;]
-      [92] invokestatic #196
+      [92] invokestatic #200
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [95] invokespecial #199
+      [95] invokespecial #203
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [98] ldc #12
         + String [,]
-      [100] invokevirtual #200
+      [100] invokevirtual #204
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [103] invokevirtual #201
+      [103] invokevirtual #205
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [106] invokevirtual #198
+      [106] invokevirtual #202
         + Methodref [java/lang/StringBuffer.append (Ljava/lang/String;)Ljava/lang/StringBuffer;]
       [109] pop
       [110] aload_2 v2
-      [111] invokevirtual #192
+      [111] invokevirtual #196
         + Methodref [java/lang/Integer.intValue ()I]
       [114] iconst_1
       [115] iadd
-      [116] invokestatic #194
+      [116] invokestatic #198
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [119] astore_2 v2
       [120] aload_2 v2
-      [121] invokevirtual #192
+      [121] invokevirtual #196
         + Methodref [java/lang/Integer.intValue ()I]
       [124] bipush 7
       [126] ificmplt -57 (target=69)
       [129] aload_0 v0
-      [130] getfield #81
+      [130] getfield #82
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.m Landroid/preference/RingtonePreference;]
       [133] aload_0 v0
-      [134] getfield #72
+      [134] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [137] aload_0 v0
-      [138] invokevirtual #168
+      [138] invokevirtual #172
         + Methodref [com/dexnamic/alwayscharged/d.b (Landroid/content/Context;)Ljava/lang/String;]
-      [141] invokevirtual #124
+      [141] invokevirtual #128
         + Methodref [android/preference/RingtonePreference.setSummary (Ljava/lang/CharSequence;)V]
       [144] aload_0 v0
-      [145] invokevirtual #144
+      [145] invokevirtual #148
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getPreferenceManager ()Landroid/preference/PreferenceManager;]
-      [148] invokevirtual #121
+      [148] invokevirtual #125
         + Methodref [android/preference/PreferenceManager.getSharedPreferences ()Landroid/content/SharedPreferences;]
-      [151] invokeinterface #202
+      [151] invokeinterface #206
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
-      [156] ldc #18
+      [156] ldc #19
         + String [key_ringtone]
       [158] aload_0 v0
-      [159] getfield #72
+      [159] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [162] invokevirtual #175
+      [162] invokevirtual #179
         + Methodref [com/dexnamic/alwayscharged/d.f ()Ljava/lang/String;]
-      [165] invokeinterface #204
+      [165] invokeinterface #208
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putString (Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;]
-      [170] invokeinterface #203
+      [170] invokeinterface #207
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [175] pop
       [176] aload_0 v0
-      [177] getfield #77
+      [177] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
       [180] aload_0 v0
-      [181] getfield #72
+      [181] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [184] invokevirtual #176
+      [184] invokevirtual #180
         + Methodref [com/dexnamic/alwayscharged/d.g ()Ljava/lang/Boolean;]
-      [187] invokevirtual #190
+      [187] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
-      [190] invokevirtual #104
+      [190] invokevirtual #107
         + Methodref [android/preference/CheckBoxPreference.setChecked (Z)V]
       [193] aload_0 v0
-      [194] getfield #82
+      [194] getfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [197] aload_0 v0
-      [198] getfield #72
+      [198] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [201] invokevirtual #167
+      [201] invokevirtual #171
         + Methodref [com/dexnamic/alwayscharged/d.b ()Ljava/lang/String;]
-      [204] invokevirtual #108
+      [204] invokevirtual #111
         + Methodref [android/preference/EditTextPreference.setSummary (Ljava/lang/CharSequence;)V]
       [207] aload_0 v0
-      [208] getfield #82
+      [208] getfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [211] aload_0 v0
-      [212] getfield #72
+      [212] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [215] invokevirtual #167
+      [215] invokevirtual #171
         + Methodref [com/dexnamic/alwayscharged/d.b ()Ljava/lang/String;]
-      [218] invokevirtual #109
+      [218] invokevirtual #112
         + Methodref [android/preference/EditTextPreference.setText (Ljava/lang/String;)V]
       [221] return
       Code attribute exceptions (count = 0):
@@ -41616,93 +41628,93 @@ Methods (count = 28):
     + Code attribute instructions (code length = 156, locals = 3, stack = 4):
       [0] aload_1 v1
       [1] aload_0 v0
-      [2] getfield #74
+      [2] getfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
       [5] ifacmpne +20 (target=25)
       [8] aload_0 v0
-      [9] getfield #72
+      [9] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [12] aload_0 v0
-      [13] getfield #74
+      [13] getfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
-      [16] invokevirtual #103
+      [16] invokevirtual #106
         + Methodref [android/preference/CheckBoxPreference.isChecked ()Z]
-      [19] invokevirtual #166
+      [19] invokevirtual #170
         + Methodref [com/dexnamic/alwayscharged/d.a (Z)V]
       [22] goto +132 (target=154)
       [25] aload_1 v1
       [26] aload_0 v0
-      [27] getfield #75
+      [27] getfield #76
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g Landroid/preference/Preference;]
       [30] ifacmpne +11 (target=41)
       [33] aload_0 v0
       [34] iconst_0
-      [35] invokevirtual #153
+      [35] invokevirtual #157
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.showDialog (I)V]
       [38] goto +116 (target=154)
       [41] aload_1 v1
       [42] aload_0 v0
-      [43] getfield #77
+      [43] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
       [46] ifacmpne +43 (target=89)
       [49] aload_0 v0
-      [50] getfield #77
+      [50] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
-      [53] invokevirtual #103
+      [53] invokevirtual #106
         + Methodref [android/preference/CheckBoxPreference.isChecked ()Z]
       [56] ifeq +13 (target=69)
       [59] aload_0 v0
-      [60] getfield #83
+      [60] getfield #84
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.o Landroid/os/Vibrator;]
-      [63] ldc2_w #66
+      [63] ldc2_w #67
         + Long [500]
-      [66] invokevirtual #102
+      [66] invokevirtual #105
         + Methodref [android/os/Vibrator.vibrate (J)V]
       [69] aload_0 v0
-      [70] getfield #72
+      [70] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [73] aload_0 v0
-      [74] getfield #77
+      [74] getfield #78
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i Landroid/preference/CheckBoxPreference;]
-      [77] invokevirtual #103
+      [77] invokevirtual #106
         + Methodref [android/preference/CheckBoxPreference.isChecked ()Z]
-      [80] invokestatic #191
+      [80] invokestatic #195
         + Methodref [java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;]
-      [83] invokevirtual #163
+      [83] invokevirtual #167
         + Methodref [com/dexnamic/alwayscharged/d.a (Ljava/lang/Boolean;)V]
       [86] goto +68 (target=154)
       [89] aload_1 v1
       [90] aload_0 v0
-      [91] getfield #76
+      [91] getfield #77
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h Landroid/preference/Preference;]
       [94] ifacmpne +60 (target=154)
       [97] aload_0 v0
-      [98] invokestatic #157
+      [98] invokestatic #161
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Landroid/content/Context;)Ljava/lang/Boolean;]
-      [101] invokevirtual #190
+      [101] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [104] ifne +11 (target=115)
       [107] aload_0 v0
       [108] iconst_1
-      [109] invokevirtual #153
+      [109] invokevirtual #157
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.showDialog (I)V]
       [112] goto +42 (target=154)
       [115] iconst_0
       [116] istore_2 v2
       [117] goto +26 (target=143)
       [120] aload_0 v0
-      [121] getfield #69
+      [121] getfield #70
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.a [Z]
       [124] iload_2 v2
       [125] aload_0 v0
-      [126] getfield #72
+      [126] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [129] iload_2 v2
-      [130] invokestatic #194
+      [130] invokestatic #198
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
-      [133] invokevirtual #172
+      [133] invokevirtual #176
         + Methodref [com/dexnamic/alwayscharged/d.c (Ljava/lang/Integer;)Ljava/lang/Boolean;]
-      [136] invokevirtual #190
+      [136] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [139] bastore
       [140] iinc v2, 1
@@ -41711,7 +41723,7 @@ Methods (count = 28):
       [146] ificmplt -26 (target=120)
       [149] aload_0 v0
       [150] iconst_2
-      [151] invokevirtual #153
+      [151] invokevirtual #157
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.showDialog (I)V]
       [154] iconst_1
       [155] ireturn
@@ -41732,57 +41744,57 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 78, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] invokespecial #149
+      [1] invokespecial #153
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i ()V]
       [4] aload_1 v1
       [5] aload_0 v0
-      [6] getfield #81
+      [6] getfield #82
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.m Landroid/preference/RingtonePreference;]
       [9] ifacmpne +35 (target=44)
       [12] aload_0 v0
-      [13] getfield #72
+      [13] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [16] aload_2 v2
-      [17] checkcast #63
+      [17] checkcast #64
         + Class [java/lang/String]
-      [20] invokevirtual #170
+      [20] invokevirtual #174
         + Methodref [com/dexnamic/alwayscharged/d.b (Ljava/lang/String;)V]
       [23] aload_0 v0
-      [24] getfield #81
+      [24] getfield #82
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.m Landroid/preference/RingtonePreference;]
       [27] aload_0 v0
-      [28] getfield #72
+      [28] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [31] aload_0 v0
-      [32] invokevirtual #168
+      [32] invokevirtual #172
         + Methodref [com/dexnamic/alwayscharged/d.b (Landroid/content/Context;)Ljava/lang/String;]
-      [35] invokevirtual #124
+      [35] invokevirtual #128
         + Methodref [android/preference/RingtonePreference.setSummary (Ljava/lang/CharSequence;)V]
       [38] aload_0 v0
-      [39] invokespecial #136
+      [39] invokespecial #140
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e ()V]
       [42] iconst_1
       [43] ireturn
       [44] aload_1 v1
       [45] aload_0 v0
-      [46] getfield #82
+      [46] getfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [49] ifacmpne +27 (target=76)
       [52] aload_0 v0
-      [53] getfield #72
+      [53] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [56] aload_2 v2
-      [57] checkcast #63
+      [57] checkcast #64
         + Class [java/lang/String]
-      [60] invokevirtual #165
+      [60] invokevirtual #169
         + Methodref [com/dexnamic/alwayscharged/d.a (Ljava/lang/String;)V]
       [63] aload_0 v0
-      [64] getfield #82
+      [64] getfield #83
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.n Landroid/preference/EditTextPreference;]
       [67] aload_2 v2
-      [68] checkcast #63
+      [68] checkcast #64
         + Class [java/lang/String]
-      [71] invokevirtual #108
+      [71] invokevirtual #111
         + Methodref [android/preference/EditTextPreference.setSummary (Ljava/lang/CharSequence;)V]
       [74] iconst_1
       [75] ireturn
@@ -41799,38 +41811,38 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 48, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] getfield #72
+      [1] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [4] invokevirtual #175
+      [4] invokevirtual #179
         + Methodref [com/dexnamic/alwayscharged/d.f ()Ljava/lang/String;]
       [7] astore_1 v1
       [8] aload_1 v1
-      [9] invokevirtual #195
+      [9] invokevirtual #199
         + Methodref [java/lang/String.length ()I]
       [12] ifle +35 (target=47)
       [15] aload_0 v0
-      [16] ldc #13
+      [16] ldc #14
         + String [audio]
-      [18] invokevirtual #147
+      [18] invokevirtual #151
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [21] checkcast #29
+      [21] checkcast #30
         + Class [android/media/AudioManager]
       [24] astore_2 v2
       [25] aload_2 v2
       [26] iconst_4
-      [27] invokevirtual #99
+      [27] invokevirtual #100
         + Methodref [android/media/AudioManager.getStreamVolume (I)I]
       [30] ifne +17 (target=47)
       [33] aload_0 v0
       [34] aload_0 v0
       [35] ldc #4
-        + Integer [2131165219]
-      [37] invokevirtual #146
+        + Integer [2131165215]
+      [37] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [40] iconst_1
-      [41] invokestatic #130
+      [41] invokestatic #134
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [44] invokevirtual #131
+      [44] invokevirtual #135
         + Methodref [android/widget/Toast.show ()V]
       [47] return
       Code attribute exceptions (count = 0):
@@ -41843,7 +41855,7 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokevirtual #139
+      [1] invokevirtual #143
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.finish ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -41854,19 +41866,19 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 23, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] getfield #71
+      [1] getfield #72
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
       [4] iflt +14 (target=18)
       [7] aload_0 v0
-      [8] getfield #73
+      [8] getfield #74
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
       [11] aload_0 v0
-      [12] getfield #72
+      [12] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [15] invokevirtual #182
+      [15] invokevirtual #186
         + Methodref [com/dexnamic/alwayscharged/j.c (Lcom/dexnamic/alwayscharged/d;)V]
       [18] aload_0 v0
-      [19] invokevirtual #139
+      [19] invokevirtual #143
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.finish ()V]
       [22] return
       Code attribute exceptions (count = 0):
@@ -41879,29 +41891,29 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 38, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] getfield #71
+      [1] getfield #72
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.c I]
       [4] iflt +18 (target=22)
       [7] aload_0 v0
-      [8] getfield #73
+      [8] getfield #74
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
       [11] aload_0 v0
-      [12] getfield #72
+      [12] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [15] invokevirtual #181
+      [15] invokevirtual #185
         + Methodref [com/dexnamic/alwayscharged/j.b (Lcom/dexnamic/alwayscharged/d;)I]
       [18] pop
       [19] goto +14 (target=33)
       [22] aload_0 v0
-      [23] getfield #73
+      [23] getfield #74
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.e Lcom/dexnamic/alwayscharged/j;]
       [26] aload_0 v0
-      [27] getfield #72
+      [27] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [30] invokevirtual #180
+      [30] invokevirtual #184
         + Methodref [com/dexnamic/alwayscharged/j.a (Lcom/dexnamic/alwayscharged/d;)V]
       [33] aload_0 v0
-      [34] invokevirtual #139
+      [34] invokevirtual #143
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.finish ()V]
       [37] return
       Code attribute exceptions (count = 0):
@@ -41916,42 +41928,42 @@ Methods (count = 28):
     + Code attribute instructions (code length = 65, locals = 2, stack = 2):
       [0] aload_1 v1
       [1] aload_0 v0
-      [2] getfield #78
+      [2] getfield #79
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.j Landroid/widget/Button;]
       [5] ifacmpne +10 (target=15)
       [8] aload_0 v0
-      [9] invokespecial #137
+      [9] invokespecial #141
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f ()V]
       [12] goto +52 (target=64)
       [15] aload_1 v1
       [16] aload_0 v0
-      [17] getfield #79
+      [17] getfield #80
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.k Landroid/widget/Button;]
       [20] ifacmpne +10 (target=30)
       [23] aload_0 v0
-      [24] invokespecial #140
+      [24] invokespecial #144
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g ()V]
       [27] goto +37 (target=64)
       [30] aload_1 v1
       [31] aload_0 v0
-      [32] getfield #80
+      [32] getfield #81
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.l Landroid/widget/Button;]
       [35] ifacmpne +10 (target=45)
       [38] aload_0 v0
-      [39] invokespecial #148
+      [39] invokespecial #152
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h ()V]
       [42] goto +22 (target=64)
       [45] aload_0 v0
-      [46] getfield #70
+      [46] getfield #71
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.b Landroid/widget/TextView;]
       [49] ifnull +15 (target=64)
       [52] aload_1 v1
       [53] aload_0 v0
-      [54] getfield #70
+      [54] getfield #71
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.b Landroid/widget/TextView;]
       [57] ifacmpne +7 (target=64)
       [60] aload_0 v0
-      [61] invokespecial #148
+      [61] invokespecial #152
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h ()V]
       [64] return
       Code attribute exceptions (count = 0):
@@ -41966,7 +41978,7 @@ Methods (count = 28):
       = public boolean onKeyDown(int,android.view.KeyEvent)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 30, locals = 3, stack = 3):
-      [0] getstatic #68
+      [0] getstatic #69
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [3] iconst_5
       [4] ificmpge +19 (target=23)
@@ -41974,16 +41986,16 @@ Methods (count = 28):
       [8] iconst_4
       [9] ificmpne +14 (target=23)
       [12] aload_2 v2
-      [13] invokevirtual #125
+      [13] invokevirtual #129
         + Methodref [android/view/KeyEvent.getRepeatCount ()I]
       [16] ifne +7 (target=23)
       [19] aload_0 v0
-      [20] invokevirtual #150
+      [20] invokevirtual #154
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.onBackPressed ()V]
       [23] aload_0 v0
       [24] iload_1 v1
       [25] aload_2 v2
-      [26] invokespecial #115
+      [26] invokespecial #118
         + Methodref [android/preference/PreferenceActivity.onKeyDown (ILandroid/view/KeyEvent;)Z]
       [29] ireturn
       Code attribute exceptions (count = 0):
@@ -41996,7 +42008,7 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #148
+      [1] invokespecial #152
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -42007,34 +42019,34 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 42, locals = 4, stack = 3):
       [0] aload_0 v0
-      [1] getfield #72
+      [1] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [4] iload_2 v2
-      [5] invokestatic #194
+      [5] invokestatic #198
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
-      [8] invokevirtual #164
+      [8] invokevirtual #168
         + Methodref [com/dexnamic/alwayscharged/d.a (Ljava/lang/Integer;)V]
       [11] aload_0 v0
-      [12] getfield #72
+      [12] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [15] iload_3 v3
-      [16] invokestatic #194
+      [16] invokestatic #198
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
-      [19] invokevirtual #169
+      [19] invokevirtual #173
         + Methodref [com/dexnamic/alwayscharged/d.b (Ljava/lang/Integer;)V]
       [22] aload_0 v0
-      [23] getfield #75
+      [23] getfield #76
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.g Landroid/preference/Preference;]
       [26] aload_0 v0
-      [27] getfield #72
+      [27] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [30] aload_0 v0
-      [31] invokevirtual #161
+      [31] invokevirtual #165
         + Methodref [com/dexnamic/alwayscharged/d.a (Landroid/content/Context;)Ljava/lang/CharSequence;]
-      [34] invokevirtual #111
+      [34] invokevirtual #114
         + Methodref [android/preference/Preference.setSummary (Ljava/lang/CharSequence;)V]
       [37] aload_0 v0
-      [38] invokespecial #149
+      [38] invokespecial #153
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.i ()V]
       [41] return
       Code attribute exceptions (count = 0):
@@ -42050,125 +42062,125 @@ Methods (count = 28):
         1: offset = 58, target = 59
         2: offset = 121, target = 122
         default: offset = 188, target = 189
-      [28] new #24
+      [28] new #25
         + Class [android/app/TimePickerDialog]
       [31] dup
       [32] aload_0 v0
       [33] aload_0 v0
       [34] aload_0 v0
-      [35] getfield #72
+      [35] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [38] invokevirtual #171
+      [38] invokevirtual #175
         + Methodref [com/dexnamic/alwayscharged/d.c ()Ljava/lang/Integer;]
-      [41] invokevirtual #192
+      [41] invokevirtual #196
         + Methodref [java/lang/Integer.intValue ()I]
       [44] aload_0 v0
-      [45] getfield #72
+      [45] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [48] invokevirtual #173
+      [48] invokevirtual #177
         + Methodref [com/dexnamic/alwayscharged/d.d ()Ljava/lang/Integer;]
-      [51] invokevirtual #192
+      [51] invokevirtual #196
         + Methodref [java/lang/Integer.intValue ()I]
       [54] iconst_0
-      [55] invokespecial #97
+      [55] invokespecial #98
         + Methodref [android/app/TimePickerDialog.<init> (Landroid/content/Context;Landroid/app/TimePickerDialog$OnTimeSetListener;IIZ)V]
       [58] areturn
-      [59] new #23
+      [59] new #24
         + Class [android/app/AlertDialog$Builder]
       [62] dup
       [63] aload_0 v0
-      [64] invokespecial #89
+      [64] invokespecial #90
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [67] astore_2 v2
       [68] aload_2 v2
       [69] aload_0 v0
       [70] ldc #7
-        + Integer [2131165251]
-      [72] invokevirtual #146
+        + Integer [2131165244]
+      [72] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
-      [75] invokevirtual #92
+      [75] invokevirtual #93
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [78] iconst_0
-      [79] invokevirtual #91
+      [79] invokevirtual #92
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [82] aload_0 v0
       [83] ldc #6
-        + Integer [2131165232]
-      [85] invokevirtual #146
+        + Integer [2131165226]
+      [85] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
-      [88] new #55
+      [88] new #56
         + Class [com/dexnamic/alwayscharged/k]
       [91] dup
       [92] aload_0 v0
-      [93] invokespecial #184
+      [93] invokespecial #188
         + Methodref [com/dexnamic/alwayscharged/k.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;)V]
-      [96] invokevirtual #96
+      [96] invokevirtual #97
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [99] aload_0 v0
       [100] ldc #5
-        + Integer [2131165230]
-      [102] invokevirtual #146
+        + Integer [2131165224]
+      [102] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
-      [105] new #56
+      [105] new #57
         + Class [com/dexnamic/alwayscharged/l]
       [108] dup
       [109] aload_0 v0
-      [110] invokespecial #185
+      [110] invokespecial #189
         + Methodref [com/dexnamic/alwayscharged/l.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;)V]
-      [113] invokevirtual #94
+      [113] invokevirtual #95
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [116] pop
       [117] aload_2 v2
-      [118] invokevirtual #90
+      [118] invokevirtual #91
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [121] areturn
-      [122] new #23
+      [122] new #24
         + Class [android/app/AlertDialog$Builder]
       [125] dup
       [126] aload_0 v0
-      [127] invokespecial #89
+      [127] invokespecial #90
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [130] astore_3 v3
       [131] aload_3 v3
       [132] ldc #3
         + Integer [2131034120]
       [134] aload_0 v0
-      [135] getfield #69
+      [135] getfield #70
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.a [Z]
-      [138] new #57
+      [138] new #58
         + Class [com/dexnamic/alwayscharged/m]
       [141] dup
       [142] aload_0 v0
-      [143] invokespecial #186
+      [143] invokespecial #190
         + Methodref [com/dexnamic/alwayscharged/m.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;)V]
-      [146] invokevirtual #93
+      [146] invokevirtual #94
         + Methodref [android/app/AlertDialog$Builder.setMultiChoiceItems (I[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Landroid/app/AlertDialog$Builder;]
       [149] ldc #6
-        + Integer [2131165232]
-      [151] new #58
+        + Integer [2131165226]
+      [151] new #59
         + Class [com/dexnamic/alwayscharged/n]
       [154] dup
       [155] aload_0 v0
-      [156] invokespecial #187
+      [156] invokespecial #191
         + Methodref [com/dexnamic/alwayscharged/n.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;)V]
-      [159] invokevirtual #95
+      [159] invokevirtual #96
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [162] aload_0 v0
       [163] ldc #5
-        + Integer [2131165230]
-      [165] invokevirtual #146
+        + Integer [2131165224]
+      [165] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
-      [168] new #59
+      [168] new #60
         + Class [com/dexnamic/alwayscharged/o]
       [171] dup
       [172] aload_0 v0
-      [173] invokespecial #188
+      [173] invokespecial #192
         + Methodref [com/dexnamic/alwayscharged/o.<init> (Lcom/dexnamic/alwayscharged/EditAlarmPreferenceActivity;)V]
-      [176] invokevirtual #94
+      [176] invokevirtual #95
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [179] pop
       [180] aload_3 v3
-      [181] invokevirtual #90
+      [181] invokevirtual #91
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [184] astore v4
       [186] aload v4
@@ -42188,22 +42200,22 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 26, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] getfield #72
+      [1] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [4] iconst_1
-      [5] invokevirtual #166
+      [5] invokevirtual #170
         + Methodref [com/dexnamic/alwayscharged/d.a (Z)V]
       [8] aload_0 v0
-      [9] getfield #74
+      [9] getfield #75
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.f Landroid/preference/CheckBoxPreference;]
       [12] aload_0 v0
-      [13] getfield #72
+      [13] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
-      [16] invokevirtual #177
+      [16] invokevirtual #181
         + Methodref [com/dexnamic/alwayscharged/d.i ()Ljava/lang/Boolean;]
-      [19] invokevirtual #190
+      [19] invokevirtual #194
         + Methodref [java/lang/Boolean.booleanValue ()Z]
-      [22] invokevirtual #104
+      [22] invokevirtual #107
         + Methodref [android/preference/CheckBoxPreference.setChecked (Z)V]
       [25] return
       Code attribute exceptions (count = 0):
@@ -42214,7 +42226,7 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #84
+      [1] getfield #85
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.p Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -42225,7 +42237,7 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #72
+      [1] getfield #73
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.d Lcom/dexnamic/alwayscharged/d;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -42236,7 +42248,7 @@ Methods (count = 28):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #76
+      [1] getfield #77
         + Fieldref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.h Landroid/preference/Preference;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -42999,7 +43011,7 @@ Interfaces (count = 2):
   + Class [android/view/View$OnClickListener]
   + Class [com/dexnamic/alwayscharged/y]
 
-Constant Pool (count = 570):
+Constant Pool (count = 551):
   + Integer [2130903041]
   + Integer [2130903042]
   + Integer [2130903044]
@@ -43007,15 +43019,15 @@ Constant Pool (count = 570):
   + Integer [2131165184]
   + Integer [2131165185]
   + Integer [2131165186]
-  + Integer [2131165210]
+  + Integer [2131165206]
+  + Integer [2131165217]
+  + Integer [2131165218]
   + Integer [2131165221]
-  + Integer [2131165222]
-  + Integer [2131165225]
-  + Integer [2131165230]
-  + Integer [2131165232]
-  + Integer [2131165249]
-  + Integer [2131165250]
-  + Integer [2131165254]
+  + Integer [2131165224]
+  + Integer [2131165226]
+  + Integer [2131165242]
+  + Integer [2131165243]
+  + Integer [2131165247]
   + Integer [2131230720]
   + Integer [2131230722]
   + Integer [2131296267]
@@ -43025,9 +43037,6 @@ Constant Pool (count = 570):
   + Integer [2131296277]
   + Integer [2131296278]
   + Integer [2131296279]
-  + String [ ]
-  + String [(]
-  + String [)]
   + String [android.intent.action.SEND]
   + String [android.intent.action.VIEW]
   + String [android.intent.extra.EMAIL]
@@ -43039,7 +43048,7 @@ Constant Pool (count = 570):
   + String [key_version_code]
   + String [layout_inflater]
   + String [market://details?id=com.dexnamic.alwayscharged]
-  + String [text/html]
+  + String [plain/text]
   + Class [android/app/AlertDialog$Builder]
   + Class [android/app/ListActivity]
   + Class [android/content/Intent]
@@ -43084,7 +43093,6 @@ Constant Pool (count = 570):
   + Class [java/lang/Boolean]
   + Class [java/lang/Exception]
   + Class [java/lang/String]
-  + Class [java/lang/StringBuilder]
   + Fieldref [android/content/pm/PackageInfo.versionCode I]
   + Fieldref [android/os/Build$VERSION.SDK_INT I]
   + Fieldref [android/widget/AdapterView$AdapterContextMenuInfo.id J]
@@ -43195,10 +43203,6 @@ Constant Pool (count = 570):
   + Methodref [com/dexnamic/alwayscharged/w.notifyDataSetChanged ()V]
   + Methodref [java/lang/Boolean.booleanValue ()Z]
   + Methodref [java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;]
-  + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-  + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-  + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-  + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
   + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
   + InterfaceMethodref [android/content/SharedPreferences.getBoolean (Ljava/lang/String;Z)Z]
   + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
@@ -43235,7 +43239,6 @@ Constant Pool (count = 570):
   + NameAndType [a Lcom/dexnamic/alwayscharged/j;]
   + NameAndType [a Ljava/lang/String;]
   + NameAndType [a Z]
-  + NameAndType [append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + NameAndType [b ()Landroid/database/Cursor;]
   + NameAndType [b ()V]
   + NameAndType [b (I)V]
@@ -43330,12 +43333,8 @@ Constant Pool (count = 570):
   + NameAndType [startActivity (Landroid/content/Intent;)V]
   + NameAndType [startManagingCursor (Landroid/database/Cursor;)V]
   + NameAndType [startService (Landroid/content/Intent;)Landroid/content/ComponentName;]
-  + NameAndType [toString ()Ljava/lang/String;]
-  + NameAndType [valueOf (Ljava/lang/Object;)Ljava/lang/String;]
   + NameAndType [valueOf (Z)Ljava/lang/Boolean;]
   + NameAndType [versionCode I]
-  + Utf8 [ ]
-  + Utf8 [(]
   + Utf8 [()I]
   + Utf8 [()Landroid/app/AlertDialog$Builder;]
   + Utf8 [()Landroid/app/AlertDialog;]
@@ -43392,11 +43391,9 @@ Constant Pool (count = 570):
   + Utf8 [(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
   + Utf8 [(Ljava/lang/CharSequence;)Landroid/view/ContextMenu;]
   + Utf8 [(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
-  + Utf8 [(Ljava/lang/Object;)Ljava/lang/String;]
   + Utf8 [(Ljava/lang/String;)Landroid/content/Intent;]
   + Utf8 [(Ljava/lang/String;)Landroid/net/Uri;]
   + Utf8 [(Ljava/lang/String;)Ljava/lang/Object;]
-  + Utf8 [(Ljava/lang/String;)Ljava/lang/StringBuilder;]
   + Utf8 [(Ljava/lang/String;)V]
   + Utf8 [(Ljava/lang/String;I)I]
   + Utf8 [(Ljava/lang/String;I)Landroid/content/Intent;]
@@ -43410,7 +43407,6 @@ Constant Pool (count = 570):
   + Utf8 [(Z)Landroid/app/AlertDialog$Builder;]
   + Utf8 [(Z)Ljava/lang/Boolean;]
   + Utf8 [(Z)V]
-  + Utf8 [)]
   + Utf8 [<init>]
   + Utf8 [Code]
   + Utf8 [I]
@@ -43458,7 +43454,6 @@ Constant Pool (count = 570):
   + Utf8 [android/widget/AdapterView$AdapterContextMenuInfo]
   + Utf8 [android/widget/Button]
   + Utf8 [android/widget/Toast]
-  + Utf8 [append]
   + Utf8 [b]
   + Utf8 [booleanValue]
   + Utf8 [c]
@@ -43518,7 +43513,6 @@ Constant Pool (count = 570):
   + Utf8 [java/lang/Boolean]
   + Utf8 [java/lang/Exception]
   + Utf8 [java/lang/String]
-  + Utf8 [java/lang/StringBuilder]
   + Utf8 [k]
   + Utf8 [key_show_intro_dialog]
   + Utf8 [key_version_code]
@@ -43539,6 +43533,7 @@ Constant Pool (count = 570):
   + Utf8 [onResume]
   + Utf8 [onStart]
   + Utf8 [parse]
+  + Utf8 [plain/text]
   + Utf8 [putExtra]
   + Utf8 [putInt]
   + Utf8 [registerForContextMenu]
@@ -43565,8 +43560,6 @@ Constant Pool (count = 570):
   + Utf8 [startActivity]
   + Utf8 [startManagingCursor]
   + Utf8 [startService]
-  + Utf8 [text/html]
-  + Utf8 [toString]
   + Utf8 [valueOf]
   + Utf8 [versionCode]
 
@@ -43615,7 +43608,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #113
+      [1] invokespecial #109
         + Methodref [android/app/ListActivity.<init> ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -43627,145 +43620,145 @@ Methods (count = 26):
     + Code attribute instructions (code length = 204, locals = 3, stack = 4):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokespecial #115
+      [2] invokespecial #111
         + Methodref [android/app/ListActivity.onCreate (Landroid/os/Bundle;)V]
       [5] aload_0 v0
       [6] ldc #2
         + Integer [2130903042]
-      [8] invokevirtual #162
+      [8] invokevirtual #158
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.setContentView (I)V]
       [11] aload_0 v0
       [12] aload_0 v0
       [13] ldc #20
         + Integer [2131296268]
-      [15] invokevirtual #150
+      [15] invokevirtual #146
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.findViewById (I)Landroid/view/View;]
-      [18] checkcast #63
+      [18] checkcast #60
         + Class [android/widget/Button]
-      [21] putfield #91
+      [21] putfield #87
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.b Landroid/widget/Button;]
       [24] aload_0 v0
       [25] aload_0 v0
       [26] ldc #19
         + Integer [2131296267]
-      [28] invokevirtual #150
+      [28] invokevirtual #146
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.findViewById (I)Landroid/view/View;]
-      [31] checkcast #63
+      [31] checkcast #60
         + Class [android/widget/Button]
-      [34] putfield #96
+      [34] putfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
-      [37] getstatic #87
+      [37] getstatic #83
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [40] bipush 11
       [42] ificmplt +37 (target=79)
       [45] aload_0 v0
-      [46] getfield #91
+      [46] getfield #87
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.b Landroid/widget/Button;]
-      [49] invokevirtual #138
+      [49] invokevirtual #134
         + Methodref [android/widget/Button.getParent ()Landroid/view/ViewParent;]
-      [52] checkcast #61
+      [52] checkcast #58
         + Class [android/view/ViewManager]
       [55] astore_2 v2
       [56] aload_2 v2
       [57] aload_0 v0
-      [58] getfield #91
+      [58] getfield #87
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.b Landroid/widget/Button;]
-      [61] invokeinterface #215
+      [61] invokeinterface #207
         + InterfaceMethodref [android/view/ViewManager.removeView (Landroid/view/View;)V]
       [66] aload_2 v2
       [67] aload_0 v0
-      [68] getfield #96
+      [68] getfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
-      [71] invokeinterface #215
+      [71] invokeinterface #207
         + InterfaceMethodref [android/view/ViewManager.removeView (Landroid/view/View;)V]
       [76] goto +19 (target=95)
       [79] aload_0 v0
-      [80] getfield #91
+      [80] getfield #87
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.b Landroid/widget/Button;]
       [83] aload_0 v0
-      [84] invokevirtual #139
+      [84] invokevirtual #135
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [87] aload_0 v0
-      [88] getfield #96
+      [88] getfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
       [91] aload_0 v0
-      [92] invokevirtual #139
+      [92] invokevirtual #135
         + Methodref [android/widget/Button.setOnClickListener (Landroid/view/View$OnClickListener;)V]
       [95] aload_0 v0
-      [96] new #73
+      [96] new #70
         + Class [com/dexnamic/alwayscharged/j]
       [99] dup
       [100] aload_0 v0
-      [101] invokespecial #179
+      [101] invokespecial #175
         + Methodref [com/dexnamic/alwayscharged/j.<init> (Landroid/content/Context;)V]
-      [104] putfield #90
+      [104] putfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [107] aload_0 v0
-      [108] invokespecial #142
+      [108] invokespecial #138
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.a ()V]
       [111] aload_0 v0
       [112] aload_0 v0
-      [113] invokestatic #134
+      [113] invokestatic #130
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
-      [116] putfield #94
+      [116] putfield #90
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.e Landroid/content/SharedPreferences;]
       [119] aload_0 v0
       [120] aload_0 v0
-      [121] getfield #94
+      [121] getfield #90
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.e Landroid/content/SharedPreferences;]
-      [124] invokeinterface #200
+      [124] invokeinterface #192
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
-      [129] putfield #95
+      [129] putfield #91
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.f Landroid/content/SharedPreferences$Editor;]
       [132] aload_0 v0
       [133] aload_0 v0
-      [134] invokevirtual #152
+      [134] invokevirtual #148
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getListView ()Landroid/widget/ListView;]
-      [137] invokevirtual #161
+      [137] invokevirtual #157
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.registerForContextMenu (Landroid/view/View;)V]
       [140] aload_0 v0
       [141] iconst_4
-      [142] invokevirtual #164
+      [142] invokevirtual #160
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.setVolumeControlStream (I)V]
       [145] aload_0 v0
-      [146] new #69
+      [146] new #66
         + Class [com/dexnamic/alwayscharged/billing/BillingService]
       [149] dup
-      [150] invokespecial #169
+      [150] invokespecial #165
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.<init> ()V]
-      [153] putfield #101
+      [153] putfield #97
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.l Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [156] aload_0 v0
-      [157] getfield #101
+      [157] getfield #97
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.l Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [160] aload_0 v0
-      [161] invokevirtual #170
+      [161] invokevirtual #166
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.a (Landroid/content/Context;)V]
       [164] aload_1 v1
       [165] ifnonnull +11 (target=176)
       [168] aload_0 v0
       [169] iconst_1
-      [170] putfield #98
+      [170] putfield #94
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.i Z]
       [173] goto +8 (target=181)
       [176] aload_0 v0
       [177] iconst_0
-      [178] putfield #98
+      [178] putfield #94
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.i Z]
       [181] aload_0 v0
       [182] aload_0 v0
-      [183] invokestatic #173
+      [183] invokestatic #169
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Landroid/content/Context;)Ljava/lang/Boolean;]
-      [186] putfield #97
+      [186] putfield #93
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.h Ljava/lang/Boolean;]
       [189] aload_0 v0
-      [190] getfield #97
+      [190] getfield #93
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.h Ljava/lang/Boolean;]
-      [193] invokevirtual #194
+      [193] invokevirtual #190
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [196] ifeq +7 (target=203)
       [199] aload_0 v0
-      [200] invokespecial #144
+      [200] invokespecial #140
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.b ()V]
       [203] return
       Code attribute exceptions (count = 0):
@@ -43783,38 +43776,38 @@ Methods (count = 26):
     + Code attribute instructions (code length = 47, locals = 1, stack = 7):
       [0] aload_0 v0
       [1] aload_0 v0
-      [2] getfield #90
+      [2] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
-      [5] invokevirtual #181
+      [5] invokevirtual #177
         + Methodref [com/dexnamic/alwayscharged/j.b ()Landroid/database/Cursor;]
-      [8] putfield #92
+      [8] putfield #88
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.c Landroid/database/Cursor;]
       [11] aload_0 v0
       [12] aload_0 v0
-      [13] getfield #92
+      [13] getfield #88
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.c Landroid/database/Cursor;]
-      [16] invokevirtual #167
+      [16] invokevirtual #163
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startManagingCursor (Landroid/database/Cursor;)V]
       [19] aload_0 v0
-      [20] new #80
+      [20] new #77
         + Class [com/dexnamic/alwayscharged/w]
       [23] dup
       [24] aload_0 v0
       [25] ldc #1
         + Integer [2130903041]
       [27] aload_0 v0
-      [28] getfield #92
+      [28] getfield #88
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.c Landroid/database/Cursor;]
       [31] aload_0 v0
-      [32] invokespecial #191
+      [32] invokespecial #187
         + Methodref [com/dexnamic/alwayscharged/w.<init> (Landroid/content/Context;ILandroid/database/Cursor;Lcom/dexnamic/alwayscharged/y;)V]
-      [35] putfield #93
+      [35] putfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
       [38] aload_0 v0
       [39] aload_0 v0
-      [40] getfield #93
+      [40] getfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
-      [43] invokevirtual #163
+      [43] invokevirtual #159
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.setListAdapter (Landroid/widget/ListAdapter;)V]
       [46] return
       Code attribute exceptions (count = 0):
@@ -43825,117 +43818,117 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 168, locals = 3, stack = 5):
       [0] aload_0 v0
-      [1] invokespecial #121
+      [1] invokespecial #117
         + Methodref [android/app/ListActivity.onStart ()V]
       [4] aload_0 v0
-      [5] invokevirtual #154
+      [5] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getPackageManager ()Landroid/content/pm/PackageManager;]
       [8] astore_1 v1
       [9] aload_1 v1
       [10] aload_0 v0
-      [11] invokevirtual #155
+      [11] invokevirtual #151
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getPackageName ()Ljava/lang/String;]
       [14] iconst_0
-      [15] invokevirtual #131
+      [15] invokevirtual #127
         + Methodref [android/content/pm/PackageManager.getPackageInfo (Ljava/lang/String;I)Landroid/content/pm/PackageInfo;]
       [18] astore_2 v2
       [19] aload_0 v0
-      [20] getfield #98
+      [20] getfield #94
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.i Z]
       [23] ifeq +57 (target=80)
       [26] aload_2 v2
-      [27] getfield #86
+      [27] getfield #82
         + Fieldref [android/content/pm/PackageInfo.versionCode I]
       [30] aload_0 v0
-      [31] getfield #94
+      [31] getfield #90
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.e Landroid/content/SharedPreferences;]
-      [34] ldc #37
+      [34] ldc #34
         + String [key_version_code]
       [36] iconst_0
-      [37] invokeinterface #202
+      [37] invokeinterface #194
         + InterfaceMethodref [android/content/SharedPreferences.getInt (Ljava/lang/String;I)I]
       [42] ificmple +38 (target=80)
       [45] aload_0 v0
-      [46] getfield #95
+      [46] getfield #91
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.f Landroid/content/SharedPreferences$Editor;]
-      [49] ldc #37
+      [49] ldc #34
         + String [key_version_code]
       [51] aload_2 v2
-      [52] getfield #86
+      [52] getfield #82
         + Fieldref [android/content/pm/PackageInfo.versionCode I]
-      [55] invokeinterface #204
+      [55] invokeinterface #196
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [60] pop
       [61] aload_0 v0
-      [62] getfield #95
+      [62] getfield #91
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.f Landroid/content/SharedPreferences$Editor;]
-      [65] invokeinterface #203
+      [65] invokeinterface #195
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [70] pop
       [71] aload_0 v0
       [72] iconst_3
-      [73] invokevirtual #165
+      [73] invokevirtual #161
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.showDialog (I)V]
       [76] goto +4 (target=80)
       [79] astore_1 v1
       [80] aload_0 v0
-      [81] getstatic #102
+      [81] getstatic #98
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [84] iconst_0
-      [85] invokevirtual #156
+      [85] invokevirtual #152
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [88] astore_1 v1
       [89] aload_1 v1
-      [90] getstatic #103
+      [90] getstatic #99
         + Fieldref [com/dexnamic/alwayscharged/billing/f.b Ljava/lang/String;]
       [93] iconst_0
-      [94] invokeinterface #201
+      [94] invokeinterface #193
         + InterfaceMethodref [android/content/SharedPreferences.getBoolean (Ljava/lang/String;Z)Z]
       [99] ifne +7 (target=106)
       [102] aload_0 v0
-      [103] invokespecial #146
+      [103] invokespecial #142
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.c ()V]
       [106] aload_0 v0
-      [107] getfield #98
+      [107] getfield #94
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.i Z]
       [110] ifeq +23 (target=133)
       [113] aload_0 v0
-      [114] getfield #94
+      [114] getfield #90
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.e Landroid/content/SharedPreferences;]
-      [117] ldc #36
+      [117] ldc #33
         + String [key_show_intro_dialog]
       [119] iconst_1
-      [120] invokeinterface #201
+      [120] invokeinterface #193
         + InterfaceMethodref [android/content/SharedPreferences.getBoolean (Ljava/lang/String;Z)Z]
       [125] ifeq +8 (target=133)
       [128] aload_0 v0
       [129] iconst_1
-      [130] invokevirtual #165
+      [130] invokevirtual #161
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.showDialog (I)V]
       [133] aload_0 v0
-      [134] new #52
+      [134] new #49
         + Class [android/os/Handler]
       [137] dup
-      [138] invokespecial #133
+      [138] invokespecial #129
         + Methodref [android/os/Handler.<init> ()V]
-      [141] putfield #99
+      [141] putfield #95
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.j Landroid/os/Handler;]
       [144] aload_0 v0
-      [145] new #79
+      [145] new #76
         + Class [com/dexnamic/alwayscharged/v]
       [148] dup
       [149] aload_0 v0
       [150] aload_0 v0
-      [151] getfield #99
+      [151] getfield #95
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.j Landroid/os/Handler;]
-      [154] invokespecial #190
+      [154] invokespecial #186
         + Methodref [com/dexnamic/alwayscharged/v.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;Landroid/os/Handler;)V]
-      [157] putfield #100
+      [157] putfield #96
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.k Lcom/dexnamic/alwayscharged/v;]
       [160] aload_0 v0
-      [161] getfield #100
+      [161] getfield #96
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.k Lcom/dexnamic/alwayscharged/v;]
-      [164] invokestatic #174
+      [164] invokestatic #170
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Lcom/dexnamic/alwayscharged/billing/i;)V]
       [167] return
       Code attribute exceptions (count = 1):
@@ -43954,12 +43947,12 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 12, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #119
+      [1] invokespecial #115
         + Methodref [android/app/ListActivity.onPause ()V]
       [4] aload_0 v0
-      [5] getfield #100
+      [5] getfield #96
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.k Lcom/dexnamic/alwayscharged/v;]
-      [8] invokestatic #175
+      [8] invokestatic #171
         + Methodref [com/dexnamic/alwayscharged/billing/k.b (Lcom/dexnamic/alwayscharged/billing/i;)V]
       [11] return
       Code attribute exceptions (count = 0):
@@ -43970,7 +43963,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #120
+      [1] invokespecial #116
         + Methodref [android/app/ListActivity.onResume ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -43982,30 +43975,30 @@ Methods (count = 26):
     + Code attribute instructions (code length = 44, locals = 2, stack = 2):
       [0] aload_0 v0
       [1] iconst_1
-      [2] invokestatic #195
+      [2] invokestatic #191
         + Methodref [java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;]
-      [5] putfield #97
+      [5] putfield #93
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.h Ljava/lang/Boolean;]
-      [8] getstatic #87
+      [8] getstatic #83
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [11] bipush 11
       [13] ificmplt +7 (target=20)
       [16] aload_0 v0
-      [17] invokevirtual #160
+      [17] invokevirtual #156
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.invalidateOptionsMenu ()V]
       [20] aload_0 v0
-      [21] getfield #96
+      [21] getfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
-      [24] invokevirtual #138
+      [24] invokevirtual #134
         + Methodref [android/widget/Button.getParent ()Landroid/view/ViewParent;]
-      [27] checkcast #60
+      [27] checkcast #57
         + Class [android/view/ViewGroup]
       [30] astore_1 v1
       [31] aload_1 v1
       [32] aload_0 v0
-      [33] getfield #96
+      [33] getfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
-      [36] invokevirtual #137
+      [36] invokevirtual #133
         + Methodref [android/view/ViewGroup.removeView (Landroid/view/View;)V]
       [39] goto +4 (target=43)
       [42] astore_1 v1
@@ -44023,36 +44016,36 @@ Methods (count = 26):
       = private void c()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 41, locals = 2, stack = 3):
-      [0] getstatic #89
+      [0] getstatic #85
         + Fieldref [com/dexnamic/alwayscharged/AlwaysCharged.a Z]
       [3] ifne +37 (target=40)
-      [6] new #43
+      [6] new #40
         + Class [android/content/Intent]
       [9] dup
-      [10] ldc #33
+      [10] ldc #30
         + String [com.example.subscriptions.RESTORE_TRANSACTIONS]
-      [12] invokespecial #123
+      [12] invokespecial #119
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
       [15] astore_1 v1
       [16] aload_1 v1
       [17] aload_0 v0
-      [18] ldc #69
+      [18] ldc #66
         + Class [com/dexnamic/alwayscharged/billing/BillingService]
-      [20] invokevirtual #128
+      [20] invokevirtual #124
         + Methodref [android/content/Intent.setClass (Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;]
       [23] pop
       [24] aload_0 v0
       [25] aload_1 v1
-      [26] invokevirtual #168
+      [26] invokevirtual #164
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startService (Landroid/content/Intent;)Landroid/content/ComponentName;]
       [29] pop
       [30] aload_0 v0
       [31] ldc #14
-        + Integer [2131165249]
+        + Integer [2131165242]
       [33] iconst_1
-      [34] invokestatic #140
+      [34] invokestatic #136
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;II)Landroid/widget/Toast;]
-      [37] invokevirtual #141
+      [37] invokevirtual #137
         + Methodref [android/widget/Toast.show ()V]
       [40] return
       Code attribute exceptions (count = 0):
@@ -44065,21 +44058,21 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 26, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #117
+      [1] invokespecial #113
         + Methodref [android/app/ListActivity.onDestroy ()V]
       [4] aload_0 v0
-      [5] getfield #101
+      [5] getfield #97
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.l Lcom/dexnamic/alwayscharged/billing/BillingService;]
-      [8] invokevirtual #172
+      [8] invokevirtual #168
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.b ()V]
       [11] aload_0 v0
-      [12] getfield #90
+      [12] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [15] ifnull +10 (target=25)
       [18] aload_0 v0
-      [19] getfield #90
+      [19] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
-      [22] invokevirtual #184
+      [22] invokevirtual #180
         + Methodref [com/dexnamic/alwayscharged/j.close ()V]
       [25] return
       Code attribute exceptions (count = 0):
@@ -44092,64 +44085,64 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 100, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] invokevirtual #153
+      [1] invokevirtual #149
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getMenuInflater ()Landroid/view/MenuInflater;]
       [4] astore_2 v2
       [5] aload_2 v2
       [6] ldc #18
         + Integer [2131230722]
       [8] aload_1 v1
-      [9] invokevirtual #136
+      [9] invokevirtual #132
         + Methodref [android/view/MenuInflater.inflate (ILandroid/view/Menu;)V]
       [12] aload_0 v0
-      [13] getfield #97
+      [13] getfield #93
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.h Ljava/lang/Boolean;]
-      [16] invokevirtual #194
+      [16] invokevirtual #190
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [19] ifeq +11 (target=30)
       [22] aload_1 v1
       [23] ldc #19
         + Integer [2131296267]
-      [25] invokeinterface #210
+      [25] invokeinterface #202
         + InterfaceMethodref [android/view/Menu.removeItem (I)V]
-      [30] getstatic #87
+      [30] getstatic #83
         + Fieldref [android/os/Build$VERSION.SDK_INT I]
       [33] bipush 11
       [35] ificmpge +63 (target=98)
       [38] aload_1 v1
       [39] ldc #20
         + Integer [2131296268]
-      [41] invokeinterface #209
+      [41] invokeinterface #201
         + InterfaceMethodref [android/view/Menu.findItem (I)Landroid/view/MenuItem;]
       [46] aconst_null
-      [47] invokeinterface #213
+      [47] invokeinterface #205
         + InterfaceMethodref [android/view/MenuItem.setIcon (Landroid/graphics/drawable/Drawable;)Landroid/view/MenuItem;]
       [52] pop
       [53] aload_1 v1
       [54] ldc #23
         + Integer [2131296277]
-      [56] invokeinterface #209
+      [56] invokeinterface #201
         + InterfaceMethodref [android/view/Menu.findItem (I)Landroid/view/MenuItem;]
       [61] aconst_null
-      [62] invokeinterface #213
+      [62] invokeinterface #205
         + InterfaceMethodref [android/view/MenuItem.setIcon (Landroid/graphics/drawable/Drawable;)Landroid/view/MenuItem;]
       [67] pop
       [68] aload_1 v1
       [69] ldc #24
         + Integer [2131296278]
-      [71] invokeinterface #209
+      [71] invokeinterface #201
         + InterfaceMethodref [android/view/Menu.findItem (I)Landroid/view/MenuItem;]
       [76] aconst_null
-      [77] invokeinterface #213
+      [77] invokeinterface #205
         + InterfaceMethodref [android/view/MenuItem.setIcon (Landroid/graphics/drawable/Drawable;)Landroid/view/MenuItem;]
       [82] pop
       [83] aload_1 v1
       [84] ldc #25
         + Integer [2131296279]
-      [86] invokeinterface #209
+      [86] invokeinterface #201
         + InterfaceMethodref [android/view/Menu.findItem (I)Landroid/view/MenuItem;]
       [91] aconst_null
-      [92] invokeinterface #213
+      [92] invokeinterface #205
         + InterfaceMethodref [android/view/MenuItem.setIcon (Landroid/graphics/drawable/Drawable;)Landroid/view/MenuItem;]
       [97] pop
       [98] iconst_1
@@ -44165,7 +44158,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 162, locals = 4, stack = 5):
       [0] aload_2 v2
-      [1] invokeinterface #211
+      [1] invokeinterface #203
         + InterfaceMethodref [android/view/MenuItem.getItemId ()I]
       [6] tableswitch (15 offsets, default=149) (target=155)
         2131296267: offset = 74, target = 80
@@ -44185,71 +44178,71 @@ Methods (count = 26):
         2131296281: offset = 142, target = 148
         default: offset = 149, target = 155
       [80] aload_0 v0
-      [81] invokespecial #151
+      [81] invokespecial #147
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.g ()V]
       [84] iconst_1
       [85] ireturn
       [86] aload_0 v0
-      [87] invokespecial #159
+      [87] invokespecial #155
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.h ()V]
       [90] iconst_1
       [91] ireturn
       [92] aload_0 v0
-      [93] invokespecial #149
+      [93] invokespecial #145
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.f ()V]
       [96] iconst_1
       [97] ireturn
-      [98] new #43
+      [98] new #40
         + Class [android/content/Intent]
       [101] dup
-      [102] ldc #30
+      [102] ldc #27
         + String [android.intent.action.VIEW]
-      [104] invokespecial #123
+      [104] invokespecial #119
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
       [107] astore_3 v3
       [108] aload_3 v3
-      [109] ldc #39
+      [109] ldc #36
         + String [market://details?id=com.dexnamic.alwayscharged]
-      [111] invokestatic #132
+      [111] invokestatic #128
         + Methodref [android/net/Uri.parse (Ljava/lang/String;)Landroid/net/Uri;]
-      [114] invokevirtual #129
+      [114] invokevirtual #125
         + Methodref [android/content/Intent.setData (Landroid/net/Uri;)Landroid/content/Intent;]
       [117] pop
       [118] aload_0 v0
       [119] aload_3 v3
-      [120] invokevirtual #166
+      [120] invokevirtual #162
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startActivity (Landroid/content/Intent;)V]
       [123] iconst_1
       [124] ireturn
       [125] aload_0 v0
       [126] iconst_3
-      [127] invokevirtual #165
+      [127] invokevirtual #161
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.showDialog (I)V]
       [130] iconst_1
       [131] ireturn
       [132] aload_0 v0
-      [133] new #43
+      [133] new #40
         + Class [android/content/Intent]
       [136] dup
       [137] aload_0 v0
-      [138] ldc #65
+      [138] ldc #62
         + Class [com/dexnamic/alwayscharged/AdvancedPreferences]
-      [140] invokespecial #122
+      [140] invokespecial #118
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [143] invokevirtual #166
+      [143] invokevirtual #162
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startActivity (Landroid/content/Intent;)V]
       [146] iconst_1
       [147] ireturn
       [148] aload_0 v0
       [149] iconst_2
-      [150] invokevirtual #165
+      [150] invokevirtual #161
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.showDialog (I)V]
       [153] iconst_1
       [154] ireturn
       [155] aload_0 v0
       [156] iload_1 v1
       [157] aload_2 v2
-      [158] invokespecial #118
+      [158] invokespecial #114
         + Methodref [android/app/ListActivity.onMenuItemSelected (ILandroid/view/MenuItem;)Z]
       [161] ireturn
       Code attribute exceptions (count = 0):
@@ -44276,54 +44269,54 @@ Methods (count = 26):
         4: offset = 86, target = 87
         default: offset = 93, target = 94
       [32] aload_0 v0
-      [33] invokespecial #147
+      [33] invokespecial #143
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.d ()Landroid/app/AlertDialog$Builder;]
       [36] astore_2 v2
       [37] aload_2 v2
       [38] aload_0 v0
       [39] ldc #10
-        + Integer [2131165222]
-      [41] invokevirtual #157
+        + Integer [2131165218]
+      [41] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [44] new #74
+      [44] new #71
         + Class [com/dexnamic/alwayscharged/q]
       [47] dup
       [48] aload_0 v0
-      [49] invokespecial #185
+      [49] invokespecial #181
         + Methodref [com/dexnamic/alwayscharged/q.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;)V]
-      [52] invokevirtual #109
+      [52] invokevirtual #105
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [55] pop
       [56] aload_2 v2
-      [57] invokevirtual #106
+      [57] invokevirtual #102
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [60] astore_3 v3
       [61] aload_3 v3
       [62] areturn
       [63] aload_0 v0
-      [64] invokespecial #147
+      [64] invokespecial #143
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.d ()Landroid/app/AlertDialog$Builder;]
       [67] astore_2 v2
       [68] aload_2 v2
-      [69] invokevirtual #106
+      [69] invokevirtual #102
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [72] astore_3 v3
       [73] aload_3 v3
       [74] areturn
       [75] aload_0 v0
-      [76] invokespecial #148
+      [76] invokespecial #144
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.e ()Landroid/app/AlertDialog$Builder;]
       [79] astore_2 v2
       [80] aload_2 v2
-      [81] invokevirtual #106
+      [81] invokevirtual #102
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [84] astore_3 v3
       [85] aload_3 v3
       [86] areturn
       [87] aload_0 v0
       [88] ldc #15
-        + Integer [2131165250]
-      [90] invokevirtual #143
+        + Integer [2131165243]
+      [90] invokevirtual #139
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.a (I)Landroid/app/AlertDialog;]
       [93] areturn
       [94] aconst_null
@@ -44341,52 +44334,52 @@ Methods (count = 26):
       = android.app.AlertDialog a(int)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 62, locals = 3, stack = 5):
-      [0] new #41
+      [0] new #38
         + Class [android/app/AlertDialog$Builder]
       [3] dup
       [4] aload_0 v0
-      [5] invokespecial #105
+      [5] invokespecial #101
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [8] astore_2 v2
       [9] aload_2 v2
       [10] aload_0 v0
       [11] iload_1 v1
-      [12] invokevirtual #157
+      [12] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [15] invokevirtual #108
+      [15] invokevirtual #104
         + Methodref [android/app/AlertDialog$Builder.setMessage (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [18] iconst_0
-      [19] invokevirtual #107
+      [19] invokevirtual #103
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [22] aload_0 v0
       [23] ldc #13
-        + Integer [2131165232]
-      [25] invokevirtual #157
+        + Integer [2131165226]
+      [25] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [28] new #75
+      [28] new #72
         + Class [com/dexnamic/alwayscharged/r]
       [31] dup
       [32] aload_0 v0
-      [33] invokespecial #186
+      [33] invokespecial #182
         + Methodref [com/dexnamic/alwayscharged/r.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;)V]
-      [36] invokevirtual #110
+      [36] invokevirtual #106
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [39] aload_0 v0
       [40] ldc #12
-        + Integer [2131165230]
-      [42] invokevirtual #157
+        + Integer [2131165224]
+      [42] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [45] new #76
+      [45] new #73
         + Class [com/dexnamic/alwayscharged/s]
       [48] dup
       [49] aload_0 v0
-      [50] invokespecial #187
+      [50] invokespecial #183
         + Methodref [com/dexnamic/alwayscharged/s.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;)V]
-      [53] invokevirtual #109
+      [53] invokevirtual #105
         + Methodref [android/app/AlertDialog$Builder.setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [56] pop
       [57] aload_2 v2
-      [58] invokevirtual #106
+      [58] invokevirtual #102
         + Methodref [android/app/AlertDialog$Builder.create ()Landroid/app/AlertDialog;]
       [61] areturn
       Code attribute exceptions (count = 0):
@@ -44397,11 +44390,11 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 73, locals = 4, stack = 5):
       [0] aload_0 v0
-      [1] ldc #38
+      [1] ldc #35
         + String [layout_inflater]
-      [3] invokevirtual #158
+      [3] invokevirtual #154
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [6] checkcast #55
+      [6] checkcast #52
         + Class [android/view/LayoutInflater]
       [9] astore_1 v1
       [10] aload_1 v1
@@ -44410,47 +44403,47 @@ Methods (count = 26):
       [13] aload_0 v0
       [14] ldc #22
         + Integer [2131296271]
-      [16] invokevirtual #150
+      [16] invokevirtual #146
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.findViewById (I)Landroid/view/View;]
-      [19] checkcast #60
+      [19] checkcast #57
         + Class [android/view/ViewGroup]
-      [22] invokevirtual #135
+      [22] invokevirtual #131
         + Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;)Landroid/view/View;]
       [25] astore_2 v2
-      [26] new #41
+      [26] new #38
         + Class [android/app/AlertDialog$Builder]
       [29] dup
       [30] aload_0 v0
-      [31] invokespecial #105
+      [31] invokespecial #101
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [34] astore_3 v3
       [35] aload_3 v3
       [36] aload_2 v2
-      [37] invokevirtual #112
+      [37] invokevirtual #108
         + Methodref [android/app/AlertDialog$Builder.setView (Landroid/view/View;)Landroid/app/AlertDialog$Builder;]
       [40] pop
       [41] aload_3 v3
       [42] aload_0 v0
       [43] ldc #5
         + Integer [2131165184]
-      [45] invokevirtual #157
+      [45] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [48] invokevirtual #111
+      [48] invokevirtual #107
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [51] pop
       [52] aload_3 v3
       [53] aload_0 v0
       [54] ldc #9
-        + Integer [2131165221]
-      [56] invokevirtual #157
+        + Integer [2131165217]
+      [56] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [59] new #77
+      [59] new #74
         + Class [com/dexnamic/alwayscharged/t]
       [62] dup
       [63] aload_0 v0
-      [64] invokespecial #188
+      [64] invokespecial #184
         + Methodref [com/dexnamic/alwayscharged/t.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;)V]
-      [67] invokevirtual #110
+      [67] invokevirtual #106
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [70] pop
       [71] aload_3 v3
@@ -44463,11 +44456,11 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 73, locals = 4, stack = 5):
       [0] aload_0 v0
-      [1] ldc #38
+      [1] ldc #35
         + String [layout_inflater]
-      [3] invokevirtual #158
+      [3] invokevirtual #154
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [6] checkcast #55
+      [6] checkcast #52
         + Class [android/view/LayoutInflater]
       [9] astore_1 v1
       [10] aload_1 v1
@@ -44476,47 +44469,47 @@ Methods (count = 26):
       [13] aload_0 v0
       [14] ldc #21
         + Integer [2131296269]
-      [16] invokevirtual #150
+      [16] invokevirtual #146
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.findViewById (I)Landroid/view/View;]
-      [19] checkcast #60
+      [19] checkcast #57
         + Class [android/view/ViewGroup]
-      [22] invokevirtual #135
+      [22] invokevirtual #131
         + Methodref [android/view/LayoutInflater.inflate (ILandroid/view/ViewGroup;)Landroid/view/View;]
       [25] astore_2 v2
-      [26] new #41
+      [26] new #38
         + Class [android/app/AlertDialog$Builder]
       [29] dup
       [30] aload_0 v0
-      [31] invokespecial #105
+      [31] invokespecial #101
         + Methodref [android/app/AlertDialog$Builder.<init> (Landroid/content/Context;)V]
       [34] astore_3 v3
       [35] aload_3 v3
       [36] aload_2 v2
-      [37] invokevirtual #112
+      [37] invokevirtual #108
         + Methodref [android/app/AlertDialog$Builder.setView (Landroid/view/View;)Landroid/app/AlertDialog$Builder;]
       [40] pop
       [41] aload_3 v3
       [42] aload_0 v0
       [43] ldc #11
-        + Integer [2131165225]
-      [45] invokevirtual #157
+        + Integer [2131165221]
+      [45] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [48] invokevirtual #111
+      [48] invokevirtual #107
         + Methodref [android/app/AlertDialog$Builder.setTitle (Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;]
       [51] pop
       [52] aload_3 v3
       [53] aload_0 v0
       [54] ldc #9
-        + Integer [2131165221]
-      [56] invokevirtual #157
+        + Integer [2131165217]
+      [56] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [59] new #78
+      [59] new #75
         + Class [com/dexnamic/alwayscharged/u]
       [62] dup
       [63] aload_0 v0
-      [64] invokespecial #189
+      [64] invokespecial #185
         + Methodref [com/dexnamic/alwayscharged/u.<init> (Lcom/dexnamic/alwayscharged/ListAlarmsActivity;)V]
-      [67] invokevirtual #110
+      [67] invokevirtual #106
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [70] pop
       [71] aload_3 v3
@@ -44527,95 +44520,61 @@ Methods (count = 26):
     Access flags: 0x2
       = private void f()
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 110, locals = 5, stack = 6):
-      [0] new #43
+    + Code attribute instructions (code length = 65, locals = 2, stack = 7):
+      [0] new #40
         + Class [android/content/Intent]
       [3] dup
-      [4] ldc #29
+      [4] ldc #26
         + String [android.intent.action.SEND]
-      [6] invokespecial #123
+      [6] invokespecial #119
         + Methodref [android/content/Intent.<init> (Ljava/lang/String;)V]
       [9] astore_1 v1
       [10] aload_1 v1
-      [11] ldc #40
-        + String [text/html]
-      [13] invokevirtual #130
+      [11] ldc #37
+        + String [plain/text]
+      [13] invokevirtual #126
         + Methodref [android/content/Intent.setType (Ljava/lang/String;)Landroid/content/Intent;]
       [16] pop
-      [17] aload_0 v0
-      [18] ldc #16
-        + Integer [2131165254]
-      [20] invokevirtual #157
-        + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [23] astore_2 v2
-      [24] aload_1 v1
-      [25] ldc #31
+      [17] aload_1 v1
+      [18] ldc #28
         + String [android.intent.extra.EMAIL]
-      [27] iconst_1
-      [28] anewarray #84
+      [20] iconst_1
+      [21] anewarray #81
         + Class [java/lang/String]
-      [31] dup
-      [32] iconst_0
-      [33] aload_2 v2
-      [34] aastore
-      [35] invokevirtual #127
+      [24] dup
+      [25] iconst_0
+      [26] aload_0 v0
+      [27] ldc #16
+        + Integer [2131165247]
+      [29] invokevirtual #153
+        + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
+      [32] aastore
+      [33] invokevirtual #123
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;]
-      [38] pop
-      [39] aload_0 v0
-      [40] ldc #8
-        + Integer [2131165210]
-      [42] invokevirtual #157
-        + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [45] astore_3 v3
-      [46] aload_0 v0
-      [47] ldc #5
-        + Integer [2131165184]
-      [49] invokevirtual #157
-        + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [52] astore v4
-      [54] aload_1 v1
-      [55] ldc #32
+      [36] pop
+      [37] aload_1 v1
+      [38] ldc #29
         + String [android.intent.extra.SUBJECT]
-      [57] new #85
-        + Class [java/lang/StringBuilder]
-      [60] dup
-      [61] aload_3 v3
-      [62] invokestatic #196
-        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [65] invokespecial #197
-        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [68] ldc #26
-        + String [ ]
-      [70] invokevirtual #198
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [73] ldc #27
-        + String [(]
-      [75] invokevirtual #198
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [78] aload v4
-      [80] invokevirtual #198
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [83] ldc #28
-        + String [)]
-      [85] invokevirtual #198
-        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [88] invokevirtual #199
-        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [91] invokevirtual #126
-        + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
-      [94] pop
-      [95] aload_0 v0
-      [96] aload_1 v1
-      [97] aload_0 v0
-      [98] ldc #8
-        + Integer [2131165210]
-      [100] invokevirtual #157
+      [40] aload_0 v0
+      [41] ldc #5
+        + Integer [2131165184]
+      [43] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
-      [103] invokestatic #124
+      [46] invokevirtual #122
+        + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;]
+      [49] pop
+      [50] aload_0 v0
+      [51] aload_1 v1
+      [52] aload_0 v0
+      [53] ldc #8
+        + Integer [2131165206]
+      [55] invokevirtual #153
+        + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
+      [58] invokestatic #120
         + Methodref [android/content/Intent.createChooser (Landroid/content/Intent;Ljava/lang/CharSequence;)Landroid/content/Intent;]
-      [106] invokevirtual #166
+      [61] invokevirtual #162
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startActivity (Landroid/content/Intent;)V]
-      [109] return
+      [64] return
       Code attribute exceptions (count = 0):
       Code attribute attributes (attribute count = 0):
   + Method:       a(IZ)V
@@ -44624,21 +44583,21 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 24, locals = 4, stack = 2):
       [0] aload_0 v0
-      [1] getfield #90
+      [1] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [4] iload_1 v1
-      [5] invokevirtual #180
+      [5] invokevirtual #176
         + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
       [8] astore_3 v3
       [9] aload_3 v3
       [10] iload_2 v2
-      [11] invokevirtual #177
+      [11] invokevirtual #173
         + Methodref [com/dexnamic/alwayscharged/d.a (Z)V]
       [14] aload_0 v0
-      [15] getfield #90
+      [15] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [18] aload_3 v3
-      [19] invokevirtual #183
+      [19] invokevirtual #179
         + Methodref [com/dexnamic/alwayscharged/j.b (Lcom/dexnamic/alwayscharged/d;)I]
       [22] pop
       [23] return
@@ -44649,25 +44608,25 @@ Methods (count = 26):
       = public void b(int)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 25, locals = 3, stack = 4):
-      [0] new #43
+      [0] new #40
         + Class [android/content/Intent]
       [3] dup
       [4] aload_0 v0
-      [5] ldc #67
+      [5] ldc #64
         + Class [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity]
-      [7] invokespecial #122
+      [7] invokespecial #118
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
       [10] astore_2 v2
       [11] aload_2 v2
-      [12] ldc #34
+      [12] ldc #31
         + String [id]
       [14] iload_1 v1
-      [15] invokevirtual #125
+      [15] invokevirtual #121
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;I)Landroid/content/Intent;]
       [18] pop
       [19] aload_0 v0
       [20] aload_2 v2
-      [21] invokevirtual #166
+      [21] invokevirtual #162
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.startActivity (Landroid/content/Intent;)V]
       [24] return
       Code attribute exceptions (count = 0):
@@ -44679,20 +44638,20 @@ Methods (count = 26):
     + Code attribute instructions (code length = 28, locals = 2, stack = 2):
       [0] aload_1 v1
       [1] aload_0 v0
-      [2] getfield #91
+      [2] getfield #87
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.b Landroid/widget/Button;]
       [5] ifacmpne +10 (target=15)
       [8] aload_0 v0
-      [9] invokespecial #159
+      [9] invokespecial #155
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.h ()V]
       [12] goto +15 (target=27)
       [15] aload_1 v1
       [16] aload_0 v0
-      [17] getfield #96
+      [17] getfield #92
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.g Landroid/widget/Button;]
       [20] ifacmpne +7 (target=27)
       [23] aload_0 v0
-      [24] invokespecial #151
+      [24] invokespecial #147
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.g ()V]
       [27] return
       Code attribute exceptions (count = 0):
@@ -44706,14 +44665,14 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 15, locals = 1, stack = 4):
       [0] aload_0 v0
-      [1] getfield #101
+      [1] getfield #97
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.l Lcom/dexnamic/alwayscharged/billing/BillingService;]
-      [4] getstatic #104
+      [4] getstatic #100
         + Fieldref [com/dexnamic/alwayscharged/billing/f.c Ljava/lang/String;]
-      [7] ldc #35
+      [7] ldc #32
         + String [inapp]
       [9] aconst_null
-      [10] invokevirtual #171
+      [10] invokevirtual #167
         + Methodref [com/dexnamic/alwayscharged/billing/BillingService.a (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z]
       [13] pop
       [14] return
@@ -44725,25 +44684,25 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 36, locals = 1, stack = 2):
       [0] aload_0 v0
-      [1] invokestatic #173
+      [1] invokestatic #169
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Landroid/content/Context;)Ljava/lang/Boolean;]
-      [4] invokevirtual #194
+      [4] invokevirtual #190
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [7] ifne +23 (target=30)
       [10] aload_0 v0
-      [11] getfield #92
+      [11] getfield #88
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.c Landroid/database/Cursor;]
-      [14] invokeinterface #205
+      [14] invokeinterface #197
         + InterfaceMethodref [android/database/Cursor.getCount ()I]
       [19] ifle +11 (target=30)
       [22] aload_0 v0
       [23] iconst_4
-      [24] invokevirtual #165
+      [24] invokevirtual #161
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.showDialog (I)V]
       [27] goto +8 (target=35)
       [30] aload_0 v0
       [31] iconst_m1
-      [32] invokevirtual #145
+      [32] invokevirtual #141
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.b (I)V]
       [35] return
       Code attribute exceptions (count = 0):
@@ -44760,63 +44719,63 @@ Methods (count = 26):
       [1] aload_1 v1
       [2] aload_2 v2
       [3] aload_3 v3
-      [4] invokespecial #116
+      [4] invokespecial #112
         + Methodref [android/app/ListActivity.onCreateContextMenu (Landroid/view/ContextMenu;Landroid/view/View;Landroid/view/ContextMenu$ContextMenuInfo;)V]
       [7] aload_0 v0
-      [8] invokevirtual #153
+      [8] invokevirtual #149
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getMenuInflater ()Landroid/view/MenuInflater;]
       [11] astore v4
       [13] aload v4
       [15] ldc #17
         + Integer [2131230720]
       [17] aload_1 v1
-      [18] invokevirtual #136
+      [18] invokevirtual #132
         + Methodref [android/view/MenuInflater.inflate (ILandroid/view/Menu;)V]
       [21] aload_3 v3
-      [22] checkcast #62
+      [22] checkcast #59
         + Class [android/widget/AdapterView$AdapterContextMenuInfo]
-      [25] getfield #88
+      [25] getfield #84
         + Fieldref [android/widget/AdapterView$AdapterContextMenuInfo.id J]
       [28] l2i
       [29] istore v5
       [31] aload_0 v0
-      [32] getfield #90
+      [32] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [35] iload v5
-      [37] invokevirtual #180
+      [37] invokevirtual #176
         + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
       [40] astore v6
       [42] aload v6
-      [44] invokevirtual #178
+      [44] invokevirtual #174
         + Methodref [com/dexnamic/alwayscharged/d.i ()Ljava/lang/Boolean;]
-      [47] invokevirtual #194
+      [47] invokevirtual #190
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [50] ifeq +21 (target=71)
       [53] aload_1 v1
       [54] iconst_2
-      [55] invokeinterface #207
+      [55] invokeinterface #199
         + InterfaceMethodref [android/view/ContextMenu.getItem (I)Landroid/view/MenuItem;]
       [60] ldc #7
         + Integer [2131165186]
-      [62] invokeinterface #214
+      [62] invokeinterface #206
         + InterfaceMethodref [android/view/MenuItem.setTitle (I)Landroid/view/MenuItem;]
       [67] pop
       [68] goto +18 (target=86)
       [71] aload_1 v1
       [72] iconst_2
-      [73] invokeinterface #207
+      [73] invokeinterface #199
         + InterfaceMethodref [android/view/ContextMenu.getItem (I)Landroid/view/MenuItem;]
       [78] ldc #6
         + Integer [2131165185]
-      [80] invokeinterface #214
+      [80] invokeinterface #206
         + InterfaceMethodref [android/view/MenuItem.setTitle (I)Landroid/view/MenuItem;]
       [85] pop
       [86] aload_1 v1
       [87] aload v6
       [89] aload_0 v0
-      [90] invokevirtual #176
+      [90] invokevirtual #172
         + Methodref [com/dexnamic/alwayscharged/d.a (Landroid/content/Context;)Ljava/lang/CharSequence;]
-      [93] invokeinterface #208
+      [93] invokeinterface #200
         + InterfaceMethodref [android/view/ContextMenu.setHeaderTitle (Ljava/lang/CharSequence;)Landroid/view/ContextMenu;]
       [98] pop
       [99] return
@@ -44831,13 +44790,13 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 158, locals = 4, stack = 3):
       [0] aload_1 v1
-      [1] invokeinterface #212
+      [1] invokeinterface #204
         + InterfaceMethodref [android/view/MenuItem.getMenuInfo ()Landroid/view/ContextMenu$ContextMenuInfo;]
-      [6] checkcast #62
+      [6] checkcast #59
         + Class [android/widget/AdapterView$AdapterContextMenuInfo]
       [9] astore_2 v2
       [10] aload_1 v1
-      [11] invokeinterface #211
+      [11] invokeinterface #203
         + InterfaceMethodref [android/view/MenuItem.getItemId ()I]
       [16] tableswitch (3 offsets, default=136) (target=152)
         2131296273: offset = 28, target = 44
@@ -44846,84 +44805,84 @@ Methods (count = 26):
         default: offset = 136, target = 152
       [44] aload_0 v0
       [45] aload_2 v2
-      [46] getfield #88
+      [46] getfield #84
         + Fieldref [android/widget/AdapterView$AdapterContextMenuInfo.id J]
       [49] l2i
-      [50] invokevirtual #145
+      [50] invokevirtual #141
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.b (I)V]
       [53] iconst_1
       [54] ireturn
       [55] aload_0 v0
-      [56] getfield #90
+      [56] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [59] aload_2 v2
-      [60] getfield #88
+      [60] getfield #84
         + Fieldref [android/widget/AdapterView$AdapterContextMenuInfo.id J]
       [63] l2i
-      [64] invokevirtual #182
+      [64] invokevirtual #178
         + Methodref [com/dexnamic/alwayscharged/j.b (I)V]
       [67] aload_0 v0
-      [68] getfield #93
+      [68] getfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
-      [71] invokevirtual #192
+      [71] invokevirtual #188
         + Methodref [com/dexnamic/alwayscharged/w.getCursor ()Landroid/database/Cursor;]
-      [74] invokeinterface #206
+      [74] invokeinterface #198
         + InterfaceMethodref [android/database/Cursor.requery ()Z]
       [79] pop
       [80] aload_0 v0
-      [81] getfield #93
+      [81] getfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
-      [84] invokevirtual #193
+      [84] invokevirtual #189
         + Methodref [com/dexnamic/alwayscharged/w.notifyDataSetChanged ()V]
       [87] iconst_1
       [88] ireturn
       [89] aload_0 v0
-      [90] getfield #90
+      [90] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [93] aload_2 v2
-      [94] getfield #88
+      [94] getfield #84
         + Fieldref [android/widget/AdapterView$AdapterContextMenuInfo.id J]
       [97] l2i
-      [98] invokevirtual #180
+      [98] invokevirtual #176
         + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
       [101] astore_3 v3
       [102] aload_3 v3
       [103] aload_3 v3
-      [104] invokevirtual #178
+      [104] invokevirtual #174
         + Methodref [com/dexnamic/alwayscharged/d.i ()Ljava/lang/Boolean;]
-      [107] invokevirtual #194
+      [107] invokevirtual #190
         + Methodref [java/lang/Boolean.booleanValue ()Z]
       [110] ifeq +7 (target=117)
       [113] iconst_0
       [114] goto +4 (target=118)
       [117] iconst_1
-      [118] invokevirtual #177
+      [118] invokevirtual #173
         + Methodref [com/dexnamic/alwayscharged/d.a (Z)V]
       [121] aload_0 v0
-      [122] getfield #90
+      [122] getfield #86
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.a Lcom/dexnamic/alwayscharged/j;]
       [125] aload_3 v3
-      [126] invokevirtual #183
+      [126] invokevirtual #179
         + Methodref [com/dexnamic/alwayscharged/j.b (Lcom/dexnamic/alwayscharged/d;)I]
       [129] pop
       [130] aload_0 v0
-      [131] getfield #93
+      [131] getfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
-      [134] invokevirtual #192
+      [134] invokevirtual #188
         + Methodref [com/dexnamic/alwayscharged/w.getCursor ()Landroid/database/Cursor;]
-      [137] invokeinterface #206
+      [137] invokeinterface #198
         + InterfaceMethodref [android/database/Cursor.requery ()Z]
       [142] pop
       [143] aload_0 v0
-      [144] getfield #93
+      [144] getfield #89
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.d Lcom/dexnamic/alwayscharged/w;]
-      [147] invokevirtual #193
+      [147] invokevirtual #189
         + Methodref [com/dexnamic/alwayscharged/w.notifyDataSetChanged ()V]
       [150] iconst_1
       [151] ireturn
       [152] aload_0 v0
       [153] aload_1 v1
-      [154] invokespecial #114
+      [154] invokespecial #110
         + Methodref [android/app/ListActivity.onContextItemSelected (Landroid/view/MenuItem;)Z]
       [157] ireturn
       Code attribute exceptions (count = 0):
@@ -44941,7 +44900,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #144
+      [1] invokespecial #140
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.b ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -44952,7 +44911,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #95
+      [1] getfield #91
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.f Landroid/content/SharedPreferences$Editor;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -44963,7 +44922,7 @@ Methods (count = 26):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] getfield #101
+      [1] getfield #97
         + Fieldref [com/dexnamic/alwayscharged/ListAlarmsActivity.l Lcom/dexnamic/alwayscharged/billing/BillingService;]
       [4] areturn
       Code attribute exceptions (count = 0):
@@ -46447,7 +46406,7 @@ Constant Pool (count = 348):
   + Integer [2131165194]
   + Integer [2131165195]
   + Integer [2131165197]
-  + Integer [2131165255]
+  + Integer [2131165248]
   + String []
   + String [ ]
   + String [)]
@@ -46873,7 +46832,7 @@ Methods (count = 15):
         + String [key_snooze]
       [106] aload_0 v0
       [107] ldc #10
-        + Integer [2131165255]
+        + Integer [2131165248]
       [109] invokevirtual #74
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [112] invokeinterface #122
@@ -47461,7 +47420,7 @@ Methods (count = 15):
         + String [key_snooze]
       [45] aload_0 v0
       [46] ldc #10
-        + Integer [2131165255]
+        + Integer [2131165248]
       [48] invokevirtual #74
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [51] invokeinterface #122

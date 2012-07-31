@@ -131,6 +131,7 @@ com.dexnamic.alwayscharged.R$string: int advanced_upgrade_dialog
 com.dexnamic.alwayscharged.R$string: int alarm_detail
 com.dexnamic.alwayscharged.R$string: int alarm_duration
 com.dexnamic.alwayscharged.R$string: int alarm_message
+com.dexnamic.alwayscharged.R$string: int alarm_tone
 com.dexnamic.alwayscharged.R$string: int app_name
 com.dexnamic.alwayscharged.R$string: int cancel
 com.dexnamic.alwayscharged.R$string: int cancel_battery

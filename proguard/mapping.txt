@@ -957,6 +957,7 @@ com.dexnamic.alwayscharged.EditAlarmPreferenceActivity -> com.dexnamic.alwayscha
     void onStart() -> onStart
     void onResume() -> onResume
     void onPause() -> onPause
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
     void onDestroy() -> onDestroy
     void upgradeToPro() -> c
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
