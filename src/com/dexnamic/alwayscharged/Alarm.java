@@ -156,13 +156,13 @@ public class Alarm implements Serializable, Cloneable {
 
 	public static String repeatToString(Context context, int repeat) {
 		StringBuffer repeatString = new StringBuffer();
-		if ((repeat & 127) == 127) {
+		if (repeat == 127) {
 			return context.getString(R.string.everyday);
 		}
-		if ((repeat & 31) == 31) {
+		if (repeat == 31) {
 			return context.getString(R.string.weekdays);
 		}
-		if ((repeat & 96) == 96) {
+		if (repeat == 96) {
 			return context.getString(R.string.weekends);
 		}
 		if ((repeat & 1) == 1)
