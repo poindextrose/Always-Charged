@@ -189,7 +189,7 @@ public class Scheduler {
 
 				String text = context.getString(reason_resource_id);
 				// Set the icon, scrolling text and timestamp
-				Notification notification = new Notification(R.drawable.ic_stat_notify, text,
+				Notification notification = new Notification(R.drawable.alarm_notification, text,
 						System.currentTimeMillis());
 				// The PendingIntent to launch our activity if the user selects
 				// this

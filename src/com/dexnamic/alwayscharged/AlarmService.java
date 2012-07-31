@@ -142,7 +142,7 @@ public class AlarmService extends Service implements SensorEventListener {
 			String text = context.getString(R.string.skipped_alarm_battery) + " " + mBatteryPct
 					+ " " + context.getString(R.string.percent);
 			// Set the icon, scrolling text and timestamp
-			Notification notification = new Notification(R.drawable.ic_stat_notify, text,
+			Notification notification = new Notification(R.drawable.alarm_notification, text,
 					System.currentTimeMillis());
 			// The PendingIntent to launch our activity if the user selects
 			// this
