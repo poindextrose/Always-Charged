@@ -22,7 +22,6 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class AlarmActivity extends Activity {
 
@@ -249,9 +248,6 @@ public class AlarmActivity extends Activity {
 							Scheduler.resetRepeatCount(AlarmActivity.this, mSettings);
 							Scheduler.snoozeAlarm(AlarmActivity.this, 0,
 									R.string.notify_snooze, mAlarm);
-							Toast.makeText(AlarmActivity.this,
-									getString(R.string.notification_toast), Toast.LENGTH_LONG)
-									.show();
 							alarmFinished();
 						}
 					});
