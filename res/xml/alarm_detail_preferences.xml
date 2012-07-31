@@ -13,21 +13,11 @@
     
     <Preference
         android:key="key_repeat"
-        android:title="@string/repeat" />
-    
-    <!--
-    <com.dexnamic.android.preference.ListPreferenceMultiSelect
-        android:dialogTitle="Repeat"
-        android:entries="@array/pref_days_of_week"
-        android:entryValues="@array/pref_days_of_week_values"
-        android:key="key_repeat_dialog"
-        android:title="@string/repeat" />
-    -->
-
+        android:title="@string/repeat" />
     <RingtonePreference
         android:key="key_ringtone"
         android:summary=""
-        android:title="@string/ringtone" />
+        android:title="@string/alarm_tone" />
 
     <CheckBoxPreference
         android:key="key_vibrate"

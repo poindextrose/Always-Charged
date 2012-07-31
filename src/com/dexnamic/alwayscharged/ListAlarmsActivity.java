@@ -351,15 +351,13 @@ public class ListAlarmsActivity extends ListActivity implements
 	}
 
 	private void sendFeedbackEmail() {
-		Intent i = new Intent(Intent.ACTION_SEND);
-		i.setType("text/html");
-		String contactEmail = getString(R.string.contact_email);
-		i.putExtra(Intent.EXTRA_EMAIL, new String[] { contactEmail });
-		String feedback = getString(R.string.feedback);
-		String appName = getString(R.string.app_name);
-		i.putExtra(Intent.EXTRA_SUBJECT, feedback + " " + "(" + appName + ")");
-
-		startActivity(Intent.createChooser(i, getString(R.string.feedback)));
+		Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(Intent.EXTRA_EMAIL,
+				new String[] { getString(R.string.contact_email) });
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+		startActivity(Intent.createChooser(emailIntent,
+				getString(R.string.feedback)));
 	}
 
 	@Override

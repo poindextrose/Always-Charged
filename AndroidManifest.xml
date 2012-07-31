@@ -48,12 +48,6 @@
             android:icon="@drawable/navigation_accept"
             android:label="@string/done" >
         </activity>
-        <!--
-        <activity
-            android:name=".ListAlarmsActivity"
-            android:label="@string/set_alarm" >
-        </activity>
-        -->
 
         <receiver android:name=".AlarmReceiver" />
         <receiver android:name=".PowerReceiver" >
