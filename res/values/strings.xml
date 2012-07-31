@@ -33,12 +33,7 @@
     <string name="notify_retry">Auto-snooze (retry).  Click to cancel.</string>
     <string name="notify_snooze">Alarm snoozed.  Click to cancel.</string>
     <string name="checkVolume">Caution, your alarm volume is muted!</string>
-    <string name="first_time_text">If your device is not plugged in, not in use, and not moving at bedtime,
-        this app will remind you to plug in before you fall asleep and wake to a low or dead battery.\n\n
-        
-        It works best if you schedule the alarm for your normal bedtime.  If you want to schedule an alarm that
-        repeats for more than one day, set different bedtimes, or customize other actions, then you should
-        upgrade to the professional version in the app.</string>
+    <string name="first_time_text">If your device is not plugged in, not in use, and not moving at bedtime, this app will remind you to plug in before you fall asleep and wake to a low or dead battery.\n\nIt works best if you schedule the alarm for your normal bedtime.  If you want to schedule an alarm that repeats for more than one day, set different bedtimes, or customize other actions, then you should upgrade to the professional version in the app.</string>
     <string name="close">Close</string>
     <string name="dontshowagain">Don\'t show again</string>
     <string name="done">Done</string>
@@ -50,13 +45,13 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="ok">OK</string>
-    <string name="mon">Monday</string>
-    <string name="tue">Tuesday</string>
-    <string name="wed">Wednesday</string>
-    <string name="thu">Thursday</string>
-    <string name="fri">Friday</string>
-    <string name="sat">Saturday</string>
-    <string name="sun">Sunday</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
     <string name="never">Never repeats</string>
     <string name="everyday">Everyday</string>
     <string name="weekdays">Weekdays</string>
