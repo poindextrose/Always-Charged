@@ -137,6 +137,17 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		ResponseHandler.register(mUpgradePurchaseObserver);
 
 		mCheckedItems = new boolean[7];
+		
+		database = new DatabaseHelper(this);
+
+		if (mId >= 0) {
+			if(savedInstanceState != null) {
+				mAlarm = (Alarm) savedInstanceState.getSerializable("alarm");
+			} else {
+				mAlarm = database.getAlarm(mId);
+			}
+		} else
+			mAlarm = new Alarm();
 
 		setupActionBar_API11();
 		setupActionBar_API14();
@@ -170,14 +181,6 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 	@Override
 	protected void onStart() {
 		super.onStart();
-
-		database = new DatabaseHelper(this);
-
-		if (mId >= 0)
-			mAlarm = database.getAlarm(mId);
-		else
-			mAlarm = new Alarm();
-		// mAlarmOriginal = (Alarm) mAlarm.clone();
 	}
 
 	@Override
@@ -194,6 +197,13 @@ public class EditAlarmPreferenceActivity extends PreferenceActivity implements
 		ResponseHandler.unregister(mUpgradePurchaseObserver);
 		if (database != null)
 			database.close();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		outState.putSerializable("alarm", mAlarm);
 	}
 
 	@Override
