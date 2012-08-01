@@ -8,13 +8,13 @@
 	<ListPreference android:key="key_alarm_duration"
 		android:title="@string/alarm_duration" android:summary=""
 		android:entries="@array/entries_duration" android:entryValues="@array/entryvalues_duration"
-		android:dialogTitle="@string/dialog_title_duration"
+		android:dialogTitle="@string/alarm_duration"
 		android:defaultValue="@string/default_alarm_duration"
 		android:enabled="false" />
 	<ListPreference android:key="key_motion_tolerance"
 		android:title="@string/motion_tolerance" android:summary=""
 		android:entries="@array/entries_motion_tolerance" android:entryValues="@array/entryvalues_motion_tolerance"
-		android:dialogTitle="@string/dialog_title_motion_tolerance"
+		android:dialogTitle="@string/motion_tolerance"
 		android:defaultValue="@string/default_motion_tolerance"
 		android:enabled="false" />
 	<ListPreference android:key="@string/key_skip_battery"
