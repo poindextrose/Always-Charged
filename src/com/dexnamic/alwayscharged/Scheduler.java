@@ -188,6 +188,7 @@ public class Scheduler {
 						.getSystemService(Context.NOTIFICATION_SERVICE);
 
 				String text = context.getString(reason_resource_id);
+				text += " " + context.getString(R.string.click_to_cancel); 
 				// Set the icon, scrolling text and timestamp
 				Notification notification = new Notification(R.drawable.alarm_notification, text,
 						System.currentTimeMillis());
