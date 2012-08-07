@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -123,6 +124,10 @@ public class ResponseHandler {
 
 		setPurchaseState(context, purchaseState);
 		if (purchaseState == PurchaseState.REFUNDED) {
+			Log.i("purchaseResponse()", "Purchase Refunded 0");
+			// clear preferences if purchase refunded
+			Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+			editor.clear().commit();
 			// clear database if purchase refunded
 			new Thread(new Runnable() {
 				@Override
