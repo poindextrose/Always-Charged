@@ -731,7 +731,7 @@ com.dexnamic.alwayscharged.billing.PurchaseObserver:
     public abstract void onBillingSupported(boolean,java.lang.String)
 com.dexnamic.alwayscharged.billing.ResponseHandler:
     private static final java.lang.String TAG
-    72:75:public static void checkBillingSupportedResponse(boolean,java.lang.String)
+    73:76:public static void checkBillingSupportedResponse(boolean,java.lang.String)
 com.dexnamic.alwayscharged.billing.Security:
     private static final java.lang.String TAG
     private static final java.lang.String KEY_FACTORY_ALGORITHM

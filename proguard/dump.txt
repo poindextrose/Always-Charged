@@ -32049,10 +32049,10 @@ Constant Pool (count = 344):
   + Integer [2131165196]
   + Integer [2131165204]
   + Integer [2131165205]
-  + Integer [2131165224]
-  + Integer [2131165226]
-  + Integer [2131165245]
-  + Integer [2131165251]
+  + Integer [2131165225]
+  + Integer [2131165227]
+  + Integer [2131165246]
+  + Integer [2131165256]
   + String [ ]
   + String [***]
   + String [android.app.backup.BackupManager]
@@ -32739,7 +32739,7 @@ Methods (count = 20):
         default: offset = 26, target = 27
       [20] aload_0 v0
       [21] ldc #10
-        + Integer [2131165245]
+        + Integer [2131165246]
       [23] invokevirtual #84
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.a (I)Landroid/app/AlertDialog;]
       [26] areturn
@@ -32774,7 +32774,7 @@ Methods (count = 20):
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [22] aload_0 v0
       [23] ldc #9
-        + Integer [2131165226]
+        + Integer [2131165227]
       [25] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [28] new #34
@@ -32787,7 +32787,7 @@ Methods (count = 20):
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [39] aload_0 v0
       [40] ldc #8
-        + Integer [2131165224]
+        + Integer [2131165225]
       [42] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [45] new #35
@@ -33217,7 +33217,7 @@ Methods (count = 20):
         + Methodref [android/preference/ListPreference.setOnPreferenceChangeListener (Landroid/preference/Preference$OnPreferenceChangeListener;)V]
       [175] aload_0 v0
       [176] ldc #11
-        + Integer [2131165251]
+        + Integer [2131165256]
       [178] invokevirtual #95
         + Methodref [com/dexnamic/alwayscharged/AdvancedPreferences.getString (I)Ljava/lang/String;]
       [181] astore_3 v3
@@ -33650,8 +33650,7 @@ Interfaces (count = 2):
 
 Constant Pool (count = 235):
   + Integer [2131165200]
-  + Integer [2131165220]
-  + Integer [2131165227]
+  + Integer [2131165221]
   + Integer [2131165228]
   + Integer [2131165229]
   + Integer [2131165230]
@@ -33662,6 +33661,7 @@ Constant Pool (count = 235):
   + Integer [2131165235]
   + Integer [2131165236]
   + Integer [2131165237]
+  + Integer [2131165238]
   + String []
   + String [ am]
   + String [ pm]
@@ -34464,7 +34464,7 @@ Methods (count = 27):
       [11] ificmpne +10 (target=21)
       [14] aload_0 v0
       [15] ldc #11
-        + Integer [2131165235]
+        + Integer [2131165236]
       [17] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [20] areturn
@@ -34473,7 +34473,7 @@ Methods (count = 27):
       [24] ificmpne +10 (target=34)
       [27] aload_0 v0
       [28] ldc #12
-        + Integer [2131165236]
+        + Integer [2131165237]
       [30] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [33] areturn
@@ -34482,7 +34482,7 @@ Methods (count = 27):
       [37] ificmpne +10 (target=47)
       [40] aload_0 v0
       [41] ldc #13
-        + Integer [2131165237]
+        + Integer [2131165238]
       [43] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [46] areturn
@@ -34497,7 +34497,7 @@ Methods (count = 27):
       [58] dup
       [59] aload_0 v0
       [60] ldc #3
-        + Integer [2131165227]
+        + Integer [2131165228]
       [62] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [65] invokestatic #84
@@ -34526,7 +34526,7 @@ Methods (count = 27):
       [96] dup
       [97] aload_0 v0
       [98] ldc #4
-        + Integer [2131165228]
+        + Integer [2131165229]
       [100] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [103] invokestatic #84
@@ -34555,7 +34555,7 @@ Methods (count = 27):
       [134] dup
       [135] aload_0 v0
       [136] ldc #5
-        + Integer [2131165229]
+        + Integer [2131165230]
       [138] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [141] invokestatic #84
@@ -34584,7 +34584,7 @@ Methods (count = 27):
       [172] dup
       [173] aload_0 v0
       [174] ldc #6
-        + Integer [2131165230]
+        + Integer [2131165231]
       [176] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [179] invokestatic #84
@@ -34613,7 +34613,7 @@ Methods (count = 27):
       [210] dup
       [211] aload_0 v0
       [212] ldc #7
-        + Integer [2131165231]
+        + Integer [2131165232]
       [214] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [217] invokestatic #84
@@ -34642,7 +34642,7 @@ Methods (count = 27):
       [248] dup
       [249] aload_0 v0
       [250] ldc #8
-        + Integer [2131165232]
+        + Integer [2131165233]
       [252] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [255] invokestatic #84
@@ -34671,7 +34671,7 @@ Methods (count = 27):
       [287] dup
       [288] aload_0 v0
       [289] ldc #9
-        + Integer [2131165233]
+        + Integer [2131165234]
       [291] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [294] invokestatic #84
@@ -34694,7 +34694,7 @@ Methods (count = 27):
       [319] aload_2 v2
       [320] aload_0 v0
       [321] ldc #10
-        + Integer [2131165234]
+        + Integer [2131165235]
       [323] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [326] invokevirtual #86
@@ -34858,7 +34858,7 @@ Methods (count = 27):
       [21] astore_3 v3
       [22] aload_1 v1
       [23] ldc #2
-        + Integer [2131165220]
+        + Integer [2131165221]
       [25] invokevirtual #51
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [28] astore_2 v2
@@ -36864,16 +36864,16 @@ Constant Pool (count = 554):
   + Integer [134217728]
   + Integer [268435456]
   + Integer [268435462]
-  + Integer [2130837509]
+  + Integer [2130837505]
   + Integer [2131165184]
   + Integer [2131165209]
   + Integer [2131165210]
   + Integer [2131165211]
   + Integer [2131165212]
-  + Integer [2131165239]
   + Integer [2131165240]
-  + Integer [2131165251]
-  + Integer [2131165252]
+  + Integer [2131165241]
+  + Integer [2131165256]
+  + Integer [2131165257]
   + Float [9.80665]
   + Float [30.0]
   + Float [180.0]
@@ -37821,12 +37821,12 @@ Methods (count = 23):
       [5] aload_2 v2
       [6] aload_1 v1
       [7] ldc #12
-        + Integer [2131165251]
+        + Integer [2131165256]
       [9] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [12] aload_1 v1
       [13] ldc #13
-        + Integer [2131165252]
+        + Integer [2131165257]
       [15] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [18] invokeinterface #212
@@ -37924,7 +37924,7 @@ Methods (count = 23):
       [152] dup
       [153] aload_1 v1
       [154] ldc #10
-        + Integer [2131165239]
+        + Integer [2131165240]
       [156] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [159] invokestatic #201
@@ -37946,7 +37946,7 @@ Methods (count = 23):
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [182] aload_1 v1
       [183] ldc #11
-        + Integer [2131165240]
+        + Integer [2131165241]
       [185] invokevirtual #143
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [188] invokevirtual #206
@@ -37958,7 +37958,7 @@ Methods (count = 23):
         + Class [android/app/Notification]
       [199] dup
       [200] ldc #4
-        + Integer [2130837509]
+        + Integer [2130837505]
       [202] aload v6
       [204] invokestatic #208
         + Methodref [java/lang/System.currentTimeMillis ()J]
@@ -39339,7 +39339,7 @@ _____________________________________________________________________
 Interfaces (count = 0):
 
 Constant Pool (count = 242):
-  + Integer [2131165246]
+  + Integer [2131165247]
   + String [1]
   + String [CREATE TABLE alarms(_id INTEGER PRIMARY KEY,enabled INTEGER,label TEXT,hour INTEGER,minute INTEGER,repeats INTEGER,ringtone TEXT,vibrate INTEGER)]
   + String [DROP TABLE IF EXISTS alarms]
@@ -39685,7 +39685,7 @@ Methods (count = 12):
       [95] getfield #34
         + Fieldref [com/dexnamic/alwayscharged/j.b Landroid/content/Context;]
       [98] ldc #1
-        + Integer [2131165246]
+        + Integer [2131165247]
       [100] invokevirtual #39
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [103] invokevirtual #52
@@ -40265,10 +40265,10 @@ Constant Pool (count = 569):
   + Integer [2130903040]
   + Integer [2130968577]
   + Integer [2131034120]
-  + Integer [2131165215]
-  + Integer [2131165224]
-  + Integer [2131165226]
-  + Integer [2131165244]
+  + Integer [2131165216]
+  + Integer [2131165225]
+  + Integer [2131165227]
+  + Integer [2131165245]
   + Integer [2131230721]
   + Integer [2131296257]
   + Integer [2131296258]
@@ -41836,7 +41836,7 @@ Methods (count = 29):
       [33] aload_0 v0
       [34] aload_0 v0
       [35] ldc #4
-        + Integer [2131165215]
+        + Integer [2131165216]
       [37] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [40] iconst_1
@@ -42095,7 +42095,7 @@ Methods (count = 29):
       [68] aload_2 v2
       [69] aload_0 v0
       [70] ldc #7
-        + Integer [2131165244]
+        + Integer [2131165245]
       [72] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [75] invokevirtual #93
@@ -42105,7 +42105,7 @@ Methods (count = 29):
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [82] aload_0 v0
       [83] ldc #6
-        + Integer [2131165226]
+        + Integer [2131165227]
       [85] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [88] new #56
@@ -42118,7 +42118,7 @@ Methods (count = 29):
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [99] aload_0 v0
       [100] ldc #5
-        + Integer [2131165224]
+        + Integer [2131165225]
       [102] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [105] new #57
@@ -42156,7 +42156,7 @@ Methods (count = 29):
       [146] invokevirtual #94
         + Methodref [android/app/AlertDialog$Builder.setMultiChoiceItems (I[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Landroid/app/AlertDialog$Builder;]
       [149] ldc #6
-        + Integer [2131165226]
+        + Integer [2131165227]
       [151] new #59
         + Class [com/dexnamic/alwayscharged/n]
       [154] dup
@@ -42167,7 +42167,7 @@ Methods (count = 29):
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [162] aload_0 v0
       [163] ldc #5
-        + Integer [2131165224]
+        + Integer [2131165225]
       [165] invokevirtual #150
         + Methodref [com/dexnamic/alwayscharged/EditAlarmPreferenceActivity.getString (I)Ljava/lang/String;]
       [168] new #60
@@ -43020,14 +43020,14 @@ Constant Pool (count = 551):
   + Integer [2131165185]
   + Integer [2131165186]
   + Integer [2131165206]
-  + Integer [2131165217]
   + Integer [2131165218]
-  + Integer [2131165221]
-  + Integer [2131165224]
-  + Integer [2131165226]
-  + Integer [2131165242]
+  + Integer [2131165219]
+  + Integer [2131165222]
+  + Integer [2131165225]
+  + Integer [2131165227]
   + Integer [2131165243]
-  + Integer [2131165247]
+  + Integer [2131165244]
+  + Integer [2131165252]
   + Integer [2131230720]
   + Integer [2131230722]
   + Integer [2131296267]
@@ -44041,7 +44041,7 @@ Methods (count = 26):
       [29] pop
       [30] aload_0 v0
       [31] ldc #14
-        + Integer [2131165242]
+        + Integer [2131165243]
       [33] iconst_1
       [34] invokestatic #136
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;II)Landroid/widget/Toast;]
@@ -44275,7 +44275,7 @@ Methods (count = 26):
       [37] aload_2 v2
       [38] aload_0 v0
       [39] ldc #10
-        + Integer [2131165218]
+        + Integer [2131165219]
       [41] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [44] new #71
@@ -44315,7 +44315,7 @@ Methods (count = 26):
       [86] areturn
       [87] aload_0 v0
       [88] ldc #15
-        + Integer [2131165243]
+        + Integer [2131165244]
       [90] invokevirtual #139
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.a (I)Landroid/app/AlertDialog;]
       [93] areturn
@@ -44353,7 +44353,7 @@ Methods (count = 26):
         + Methodref [android/app/AlertDialog$Builder.setCancelable (Z)Landroid/app/AlertDialog$Builder;]
       [22] aload_0 v0
       [23] ldc #13
-        + Integer [2131165226]
+        + Integer [2131165227]
       [25] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [28] new #72
@@ -44366,7 +44366,7 @@ Methods (count = 26):
         + Methodref [android/app/AlertDialog$Builder.setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;]
       [39] aload_0 v0
       [40] ldc #12
-        + Integer [2131165224]
+        + Integer [2131165225]
       [42] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [45] new #73
@@ -44434,7 +44434,7 @@ Methods (count = 26):
       [52] aload_3 v3
       [53] aload_0 v0
       [54] ldc #9
-        + Integer [2131165217]
+        + Integer [2131165218]
       [56] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [59] new #74
@@ -44491,7 +44491,7 @@ Methods (count = 26):
       [41] aload_3 v3
       [42] aload_0 v0
       [43] ldc #11
-        + Integer [2131165221]
+        + Integer [2131165222]
       [45] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [48] invokevirtual #107
@@ -44500,7 +44500,7 @@ Methods (count = 26):
       [52] aload_3 v3
       [53] aload_0 v0
       [54] ldc #9
-        + Integer [2131165217]
+        + Integer [2131165218]
       [56] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [59] new #75
@@ -44545,7 +44545,7 @@ Methods (count = 26):
       [25] iconst_0
       [26] aload_0 v0
       [27] ldc #16
-        + Integer [2131165247]
+        + Integer [2131165252]
       [29] invokevirtual #153
         + Methodref [com/dexnamic/alwayscharged/ListAlarmsActivity.getString (I)Ljava/lang/String;]
       [32] aastore
@@ -46396,17 +46396,18 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 348):
+Constant Pool (count = 349):
   + Integer [134217728]
   + Integer [604800000]
-  + Integer [2130837509]
+  + Integer [2130837505]
   + Integer [2131165184]
   + Integer [2131165192]
   + Integer [2131165193]
   + Integer [2131165194]
   + Integer [2131165195]
   + Integer [2131165197]
-  + Integer [2131165248]
+  + Integer [2131165215]
+  + Integer [2131165253]
   + String []
   + String [ ]
   + String [)]
@@ -46755,104 +46756,104 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 463, locals = 16, stack = 7):
       [0] aload_1 v1
-      [1] invokevirtual #91
+      [1] invokevirtual #92
         + Methodref [com/dexnamic/alwayscharged/d.e ()Ljava/lang/Integer;]
-      [4] invokevirtual #105
+      [4] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [7] istore_3 v3
       [8] aload_1 v1
-      [9] invokevirtual #89
+      [9] invokevirtual #90
         + Methodref [com/dexnamic/alwayscharged/d.c ()Ljava/lang/Integer;]
-      [12] invokevirtual #105
+      [12] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [15] istore v4
       [17] aload_1 v1
-      [18] invokevirtual #90
+      [18] invokevirtual #91
         + Methodref [com/dexnamic/alwayscharged/d.d ()Ljava/lang/Integer;]
-      [21] invokevirtual #105
+      [21] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [24] istore v5
       [26] aload_1 v1
-      [27] invokevirtual #92
+      [27] invokevirtual #93
         + Methodref [com/dexnamic/alwayscharged/d.h ()Ljava/lang/Integer;]
-      [30] invokevirtual #105
+      [30] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [33] istore v6
-      [35] ldc #18
+      [35] ldc #19
         + String [AlarmScheduler]
-      [37] new #57
+      [37] new #58
         + Class [java/lang/StringBuilder]
       [40] dup
-      [41] ldc #32
+      [41] ldc #33
         + String [setDailyAlarm(]
-      [43] invokespecial #109
+      [43] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [46] iload_3 v3
-      [47] invokevirtual #110
+      [47] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [50] ldc #15
+      [50] ldc #16
         + String [, ]
-      [52] invokevirtual #112
+      [52] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [55] iload v4
-      [57] invokevirtual #110
+      [57] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [60] ldc #15
+      [60] ldc #16
         + String [, ]
-      [62] invokevirtual #112
+      [62] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [65] iload v5
-      [67] invokevirtual #110
+      [67] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [70] ldc #15
+      [70] ldc #16
         + String [, ]
-      [72] invokevirtual #112
+      [72] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [75] iload v6
-      [77] invokevirtual #110
+      [77] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [80] ldc #13
+      [80] ldc #14
         + String [)]
-      [82] invokevirtual #112
+      [82] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [85] invokevirtual #113
+      [85] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [88] invokestatic #85
+      [88] invokestatic #86
         + Methodref [android/util/Log.i (Ljava/lang/String;Ljava/lang/String;)I]
       [91] pop
       [92] aload_0 v0
-      [93] invokestatic #84
+      [93] invokestatic #85
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
       [96] astore v7
       [98] aload v7
-      [100] ldc #29
+      [100] ldc #30
         + String [key_snooze]
       [102] aload v7
-      [104] ldc #29
+      [104] ldc #30
         + String [key_snooze]
       [106] aload_0 v0
-      [107] ldc #10
-        + Integer [2131165248]
-      [109] invokevirtual #74
+      [107] ldc #11
+        + Integer [2131165253]
+      [109] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [112] invokeinterface #122
+      [112] invokeinterface #123
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [117] invokeinterface #122
+      [117] invokeinterface #123
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
-      [122] invokestatic #106
+      [122] invokestatic #107
         + Methodref [java/lang/Integer.parseInt (Ljava/lang/String;)I]
       [125] istore v8
-      [127] invokestatic #118
+      [127] invokestatic #119
         + Methodref [java/util/Calendar.getInstance ()Ljava/util/Calendar;]
       [130] astore v9
       [132] aconst_null
       [133] astore v10
       [135] aload_0 v0
-      [136] ldc #21
+      [136] ldc #22
         + String [alarm]
-      [138] invokevirtual #75
+      [138] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [141] checkcast #35
+      [141] checkcast #36
         + Class [android/app/AlarmManager]
       [144] astore v11
       [146] ldc #2
@@ -46861,40 +46862,40 @@ Methods (count = 15):
       [150] iload_3 v3
       [151] ifle +182 (target=333)
       [154] iconst_0
-      [155] invokestatic #107
+      [155] invokestatic #108
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [158] astore v13
       [160] goto +160 (target=320)
       [163] iload_3 v3
       [164] iconst_1
       [165] aload v13
-      [167] invokevirtual #105
+      [167] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [170] ishl
       [171] iand
       [172] ifle +136 (target=308)
-      [175] invokestatic #118
+      [175] invokestatic #119
         + Methodref [java/util/Calendar.getInstance ()Ljava/util/Calendar;]
       [178] astore v14
       [180] aload v14
       [182] bipush 11
       [184] iload v4
-      [186] invokevirtual #120
+      [186] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [189] aload v14
       [191] bipush 12
       [193] iload v5
-      [195] invokevirtual #120
+      [195] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [198] aload v14
       [200] bipush 13
       [202] iconst_0
-      [203] invokevirtual #120
+      [203] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [206] aload v14
       [208] bipush 7
       [210] aload v13
-      [212] invokevirtual #105
+      [212] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [215] iconst_1
       [216] iadd
@@ -46902,137 +46903,137 @@ Methods (count = 15):
       [219] irem
       [220] iconst_1
       [221] iadd
-      [222] invokevirtual #120
+      [222] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [225] goto +10 (target=235)
       [228] aload v14
       [230] iconst_3
       [231] iconst_1
-      [232] invokevirtual #115
+      [232] invokevirtual #116
         + Methodref [java/util/Calendar.add (II)V]
       [235] aload v14
       [237] aload v9
-      [239] invokevirtual #116
+      [239] invokevirtual #117
         + Methodref [java/util/Calendar.before (Ljava/lang/Object;)Z]
       [242] ifne -14 (target=228)
       [245] aload v10
       [247] ifnull +13 (target=260)
       [250] aload v14
       [252] aload v10
-      [254] invokevirtual #116
+      [254] invokevirtual #117
         + Methodref [java/util/Calendar.before (Ljava/lang/Object;)Z]
       [257] ifeq +13 (target=270)
       [260] aload v14
-      [262] invokevirtual #117
+      [262] invokevirtual #118
         + Methodref [java/util/Calendar.clone ()Ljava/lang/Object;]
-      [265] checkcast #59
+      [265] checkcast #60
         + Class [java/util/Calendar]
       [268] astore v10
       [270] aload v14
       [272] bipush 12
       [274] iload v8
       [276] ineg
-      [277] invokevirtual #115
+      [277] invokevirtual #116
         + Methodref [java/util/Calendar.add (II)V]
       [280] aload_0 v0
       [281] aload_1 v1
       [282] aload v13
-      [284] invokevirtual #105
+      [284] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
-      [287] invokestatic #104
+      [287] invokestatic #105
         + Methodref [com/dexnamic/alwayscharged/z.b (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;I)Landroid/app/PendingIntent;]
       [290] astore v15
       [292] aload v11
       [294] iconst_0
       [295] aload v14
-      [297] invokevirtual #119
+      [297] invokevirtual #120
         + Methodref [java/util/Calendar.getTimeInMillis ()J]
       [300] iload v12
       [302] i2l
       [303] aload v15
-      [305] invokevirtual #68
+      [305] invokevirtual #69
         + Methodref [android/app/AlarmManager.setRepeating (IJJLandroid/app/PendingIntent;)V]
       [308] aload v13
-      [310] invokevirtual #105
+      [310] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [313] iconst_1
       [314] iadd
-      [315] invokestatic #107
+      [315] invokestatic #108
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [318] astore v13
       [320] aload v13
-      [322] invokevirtual #105
+      [322] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [325] bipush 7
       [327] ificmplt -164 (target=163)
       [330] goto +96 (target=426)
-      [333] invokestatic #118
+      [333] invokestatic #119
         + Methodref [java/util/Calendar.getInstance ()Ljava/util/Calendar;]
       [336] astore v13
       [338] aload v13
       [340] bipush 11
       [342] iload v4
-      [344] invokevirtual #120
+      [344] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [347] aload v13
       [349] bipush 12
       [351] iload v5
-      [353] invokevirtual #120
+      [353] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [356] aload v13
       [358] bipush 13
       [360] iconst_0
-      [361] invokevirtual #120
+      [361] invokevirtual #121
         + Methodref [java/util/Calendar.set (II)V]
       [364] goto +11 (target=375)
       [367] aload v13
       [369] bipush 7
       [371] iconst_1
-      [372] invokevirtual #115
+      [372] invokevirtual #116
         + Methodref [java/util/Calendar.add (II)V]
       [375] aload v13
       [377] aload v9
-      [379] invokevirtual #116
+      [379] invokevirtual #117
         + Methodref [java/util/Calendar.before (Ljava/lang/Object;)Z]
       [382] ifne -15 (target=367)
       [385] aload v13
       [387] bipush 12
       [389] iload v8
       [391] ineg
-      [392] invokevirtual #115
+      [392] invokevirtual #116
         + Methodref [java/util/Calendar.add (II)V]
       [395] aload_0 v0
       [396] aload_1 v1
       [397] iconst_m1
-      [398] invokestatic #104
+      [398] invokestatic #105
         + Methodref [com/dexnamic/alwayscharged/z.b (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;I)Landroid/app/PendingIntent;]
       [401] astore v14
       [403] aload v11
       [405] iconst_0
       [406] aload v13
-      [408] invokevirtual #119
+      [408] invokevirtual #120
         + Methodref [java/util/Calendar.getTimeInMillis ()J]
       [411] aload v14
-      [413] invokevirtual #67
+      [413] invokevirtual #68
         + Methodref [android/app/AlarmManager.set (IJLandroid/app/PendingIntent;)V]
       [416] aload v13
-      [418] invokevirtual #117
+      [418] invokevirtual #118
         + Methodref [java/util/Calendar.clone ()Ljava/lang/Object;]
-      [421] checkcast #59
+      [421] checkcast #60
         + Class [java/util/Calendar]
       [424] astore v10
       [426] iconst_1
       [427] aload v10
-      [429] invokevirtual #119
+      [429] invokevirtual #120
         + Methodref [java/util/Calendar.getTimeInMillis ()J]
       [432] aload v9
-      [434] invokevirtual #119
+      [434] invokevirtual #120
         + Methodref [java/util/Calendar.getTimeInMillis ()J]
       [437] lsub
-      [438] ldc2_w #62
+      [438] ldc2_w #63
         + Long [1000]
       [441] ldiv
-      [442] ldc2_w #60
+      [442] ldc2_w #61
         + Long [60]
       [445] ldiv
       [446] l2i
@@ -47042,7 +47043,7 @@ Methods (count = 15):
       [451] ifeq +9 (target=460)
       [454] aload_0 v0
       [455] iload v13
-      [457] invokestatic #99
+      [457] invokestatic #100
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;I)V]
       [460] iload v13
       [462] ireturn
@@ -47066,7 +47067,7 @@ Methods (count = 15):
       = private static void a(android.content.Context,int)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 248, locals = 4, stack = 3):
-      [0] ldc #11
+      [0] ldc #12
         + String []
       [2] astore_2 v2
       [3] iload_1 v1
@@ -47079,171 +47080,171 @@ Methods (count = 15):
       [12] istore_1 v1
       [13] iload_3 v3
       [14] ifle +83 (target=97)
-      [17] new #57
+      [17] new #58
         + Class [java/lang/StringBuilder]
       [20] dup
       [21] aload_2 v2
-      [22] invokestatic #108
+      [22] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [25] invokespecial #109
+      [25] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [28] iload_3 v3
-      [29] invokevirtual #110
+      [29] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [32] ldc #12
+      [32] ldc #13
         + String [ ]
-      [34] invokevirtual #112
+      [34] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [37] invokevirtual #113
+      [37] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [40] astore_2 v2
       [41] iload_3 v3
       [42] iconst_1
       [43] ificmpne +30 (target=73)
-      [46] new #57
+      [46] new #58
         + Class [java/lang/StringBuilder]
       [49] dup
       [50] aload_2 v2
-      [51] invokestatic #108
+      [51] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [54] invokespecial #109
+      [54] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [57] aload_0 v0
       [58] ldc #5
         + Integer [2131165192]
-      [60] invokevirtual #74
+      [60] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [63] invokevirtual #112
+      [63] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [66] invokevirtual #113
+      [66] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [69] astore_2 v2
       [70] goto +27 (target=97)
-      [73] new #57
+      [73] new #58
         + Class [java/lang/StringBuilder]
       [76] dup
       [77] aload_2 v2
-      [78] invokestatic #108
+      [78] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [81] invokespecial #109
+      [81] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [84] aload_0 v0
       [85] ldc #6
         + Integer [2131165193]
-      [87] invokevirtual #74
+      [87] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [90] invokevirtual #112
+      [90] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [93] invokevirtual #113
+      [93] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [96] astore_2 v2
       [97] iload_3 v3
       [98] ifle +27 (target=125)
       [101] iload_1 v1
       [102] ifle +23 (target=125)
-      [105] new #57
+      [105] new #58
         + Class [java/lang/StringBuilder]
       [108] dup
       [109] aload_2 v2
-      [110] invokestatic #108
+      [110] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [113] invokespecial #109
+      [113] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [116] ldc #15
+      [116] ldc #16
         + String [, ]
-      [118] invokevirtual #112
+      [118] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [121] invokevirtual #113
+      [121] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [124] astore_2 v2
       [125] iload_1 v1
       [126] ifle +83 (target=209)
-      [129] new #57
+      [129] new #58
         + Class [java/lang/StringBuilder]
       [132] dup
       [133] aload_2 v2
-      [134] invokestatic #108
+      [134] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [137] invokespecial #109
+      [137] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [140] iload_1 v1
-      [141] invokevirtual #110
+      [141] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [144] ldc #12
+      [144] ldc #13
         + String [ ]
-      [146] invokevirtual #112
+      [146] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [149] invokevirtual #113
+      [149] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [152] astore_2 v2
       [153] iload_1 v1
       [154] iconst_1
       [155] ificmpne +30 (target=185)
-      [158] new #57
+      [158] new #58
         + Class [java/lang/StringBuilder]
       [161] dup
       [162] aload_2 v2
-      [163] invokestatic #108
+      [163] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [166] invokespecial #109
+      [166] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [169] aload_0 v0
       [170] ldc #7
         + Integer [2131165194]
-      [172] invokevirtual #74
+      [172] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [175] invokevirtual #112
+      [175] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [178] invokevirtual #113
+      [178] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [181] astore_2 v2
       [182] goto +27 (target=209)
-      [185] new #57
+      [185] new #58
         + Class [java/lang/StringBuilder]
       [188] dup
       [189] aload_2 v2
-      [190] invokestatic #108
+      [190] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [193] invokespecial #109
+      [193] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [196] aload_0 v0
       [197] ldc #8
         + Integer [2131165195]
-      [199] invokevirtual #74
+      [199] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [202] invokevirtual #112
+      [202] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [205] invokevirtual #113
+      [205] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [208] astore_2 v2
-      [209] new #57
+      [209] new #58
         + Class [java/lang/StringBuilder]
       [212] dup
       [213] aload_2 v2
-      [214] invokestatic #108
+      [214] invokestatic #109
         + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
-      [217] invokespecial #109
+      [217] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
-      [220] ldc #12
+      [220] ldc #13
         + String [ ]
-      [222] invokevirtual #112
+      [222] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [225] aload_0 v0
       [226] ldc #9
         + Integer [2131165197]
-      [228] invokevirtual #74
+      [228] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [231] invokevirtual #112
+      [231] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [234] invokevirtual #113
+      [234] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
       [237] astore_2 v2
       [238] aload_0 v0
       [239] aload_2 v2
       [240] iconst_0
-      [241] invokestatic #87
+      [241] invokestatic #88
         + Methodref [android/widget/Toast.makeText (Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;]
-      [244] invokevirtual #88
+      [244] invokevirtual #89
         + Methodref [android/widget/Toast.show ()V]
       [247] return
       Code attribute exceptions (count = 0):
@@ -47262,49 +47263,49 @@ Methods (count = 15):
       [0] aload_0 v0
       [1] aload_1 v1
       [2] iload_2 v2
-      [3] invokestatic #104
+      [3] invokestatic #105
         + Methodref [com/dexnamic/alwayscharged/z.b (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;I)Landroid/app/PendingIntent;]
       [6] astore_3 v3
       [7] aload_0 v0
-      [8] ldc #21
+      [8] ldc #22
         + String [alarm]
-      [10] invokevirtual #75
+      [10] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [13] checkcast #35
+      [13] checkcast #36
         + Class [android/app/AlarmManager]
       [16] astore v4
       [18] aload v4
       [20] aload_3 v3
-      [21] invokevirtual #66
+      [21] invokevirtual #67
         + Methodref [android/app/AlarmManager.cancel (Landroid/app/PendingIntent;)V]
-      [24] ldc #18
+      [24] ldc #19
         + String [AlarmScheduler]
-      [26] new #57
+      [26] new #58
         + Class [java/lang/StringBuilder]
       [29] dup
-      [30] ldc #23
+      [30] ldc #24
         + String [cancelAlarm() alarm=]
-      [32] invokespecial #109
+      [32] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [35] aload_1 v1
-      [36] invokevirtual #93
+      [36] invokevirtual #94
         + Methodref [com/dexnamic/alwayscharged/d.toString ()Ljava/lang/String;]
-      [39] invokevirtual #112
+      [39] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [42] ldc #16
+      [42] ldc #17
         + String [, day=]
-      [44] invokevirtual #112
+      [44] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [47] iload_2 v2
-      [48] invokevirtual #110
+      [48] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [51] invokevirtual #113
+      [51] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [54] invokestatic #86
+      [54] invokestatic #87
         + Methodref [android/util/Log.v (Ljava/lang/String;Ljava/lang/String;)I]
       [57] pop
       [58] aload_0 v0
-      [59] invokestatic #103
+      [59] invokestatic #104
         + Methodref [com/dexnamic/alwayscharged/z.b (Landroid/content/Context;)V]
       [62] return
       Code attribute exceptions (count = 0):
@@ -47314,47 +47315,47 @@ Methods (count = 15):
       = static void a(android.content.Context)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 52, locals = 4, stack = 4):
-      [0] new #40
+      [0] new #41
         + Class [android/content/Intent]
       [3] dup
       [4] aload_0 v0
-      [5] ldc #49
+      [5] ldc #50
         + Class [com/dexnamic/alwayscharged/AlarmReceiver]
-      [7] invokespecial #76
+      [7] invokespecial #77
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
       [10] astore_1 v1
       [11] aload_1 v1
-      [12] ldc #33
+      [12] ldc #34
         + String [snooze]
-      [14] invokevirtual #79
+      [14] invokevirtual #80
         + Methodref [android/content/Intent.setAction (Ljava/lang/String;)Landroid/content/Intent;]
       [17] pop
       [18] aload_0 v0
       [19] aconst_null
-      [20] invokestatic #100
+      [20] invokestatic #101
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;)Landroid/app/PendingIntent;]
       [23] astore_2 v2
       [24] aload_0 v0
-      [25] ldc #21
+      [25] ldc #22
         + String [alarm]
-      [27] invokevirtual #75
+      [27] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [30] checkcast #35
+      [30] checkcast #36
         + Class [android/app/AlarmManager]
       [33] astore_3 v3
       [34] aload_3 v3
       [35] aload_2 v2
-      [36] invokevirtual #66
+      [36] invokevirtual #67
         + Methodref [android/app/AlarmManager.cancel (Landroid/app/PendingIntent;)V]
-      [39] ldc #18
+      [39] ldc #19
         + String [AlarmScheduler]
-      [41] ldc #24
+      [41] ldc #25
         + String [cancelSnooze()]
-      [43] invokestatic #86
+      [43] invokestatic #87
         + Methodref [android/util/Log.v (Ljava/lang/String;Ljava/lang/String;)I]
       [46] pop
       [47] aload_0 v0
-      [48] invokestatic #103
+      [48] invokestatic #104
         + Methodref [com/dexnamic/alwayscharged/z.b (Landroid/content/Context;)V]
       [51] return
       Code attribute exceptions (count = 0):
@@ -47365,16 +47366,16 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 16, locals = 2, stack = 2):
       [0] aload_0 v0
-      [1] ldc #30
+      [1] ldc #31
         + String [notification]
-      [3] invokevirtual #75
+      [3] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [6] checkcast #37
+      [6] checkcast #38
         + Class [android/app/NotificationManager]
       [9] astore_1 v1
       [10] aload_1 v1
       [11] iconst_1
-      [12] invokevirtual #71
+      [12] invokevirtual #72
         + Methodref [android/app/NotificationManager.cancel (I)V]
       [15] return
       Code attribute exceptions (count = 0):
@@ -47383,58 +47384,58 @@ Methods (count = 15):
     Access flags: 0x8
       = static void a(android.content.Context,int,int,com.dexnamic.alwayscharged.d)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 236, locals = 16, stack = 6):
-      [0] ldc #19
+    + Code attribute instructions (code length = 267, locals = 16, stack = 6):
+      [0] ldc #20
         + String [Scheduler]
-      [2] new #57
+      [2] new #58
         + Class [java/lang/StringBuilder]
       [5] dup
-      [6] ldc #34
+      [6] ldc #35
         + String [snoozeAlarm(), min=]
-      [8] invokespecial #109
+      [8] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [11] iload_1 v1
-      [12] invokevirtual #110
+      [12] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [15] ldc #17
+      [15] ldc #18
         + String [, reason=]
-      [17] invokevirtual #112
+      [17] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [20] aload_0 v0
       [21] iload_2 v2
-      [22] invokevirtual #74
+      [22] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [25] invokevirtual #112
+      [25] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
-      [28] invokevirtual #113
+      [28] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [31] invokestatic #86
+      [31] invokestatic #87
         + Methodref [android/util/Log.v (Ljava/lang/String;Ljava/lang/String;)I]
       [34] pop
       [35] aload_0 v0
-      [36] invokestatic #84
+      [36] invokestatic #85
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
       [39] astore v4
       [41] aload v4
-      [43] ldc #29
+      [43] ldc #30
         + String [key_snooze]
       [45] aload_0 v0
-      [46] ldc #10
-        + Integer [2131165248]
-      [48] invokevirtual #74
+      [46] ldc #11
+        + Integer [2131165253]
+      [48] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [51] invokeinterface #122
+      [51] invokeinterface #123
         + InterfaceMethodref [android/content/SharedPreferences.getString (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;]
       [56] astore v5
       [58] aload v5
-      [60] invokestatic #106
+      [60] invokestatic #107
         + Methodref [java/lang/Integer.parseInt (Ljava/lang/String;)I]
       [63] istore v6
       [65] iload_1 v1
       [66] ifle +6 (target=72)
       [69] iload_1 v1
       [70] istore v6
-      [72] invokestatic #114
+      [72] invokestatic #115
         + Methodref [java/lang/System.currentTimeMillis ()J]
       [75] iload v6
       [77] bipush 60
@@ -47446,165 +47447,187 @@ Methods (count = 15):
       [86] lstore v7
       [88] aload_0 v0
       [89] aload_3 v3
-      [90] invokestatic #100
+      [90] invokestatic #101
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;)Landroid/app/PendingIntent;]
       [93] astore v9
       [95] aload_0 v0
-      [96] ldc #21
+      [96] ldc #22
         + String [alarm]
-      [98] invokevirtual #75
+      [98] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [101] checkcast #35
+      [101] checkcast #36
         + Class [android/app/AlarmManager]
       [104] astore v10
       [106] aload v10
       [108] iconst_0
       [109] lload v7
       [111] aload v9
-      [113] invokevirtual #67
+      [113] invokevirtual #68
         + Methodref [android/app/AlarmManager.set (IJLandroid/app/PendingIntent;)V]
       [116] aload_0 v0
-      [117] ldc #30
+      [117] ldc #31
         + String [notification]
-      [119] invokevirtual #75
+      [119] invokevirtual #76
         + Methodref [android/content/Context.getSystemService (Ljava/lang/String;)Ljava/lang/Object;]
-      [122] checkcast #37
+      [122] checkcast #38
         + Class [android/app/NotificationManager]
       [125] astore v11
       [127] aload_0 v0
       [128] iload_2 v2
-      [129] invokevirtual #74
+      [129] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
       [132] astore v12
-      [134] new #36
-        + Class [android/app/Notification]
+      [134] new #58
+        + Class [java/lang/StringBuilder]
       [137] dup
-      [138] ldc #3
-        + Integer [2130837509]
-      [140] aload v12
-      [142] invokestatic #114
-        + Methodref [java/lang/System.currentTimeMillis ()J]
-      [145] invokespecial #69
-        + Methodref [android/app/Notification.<init> (ILjava/lang/CharSequence;J)V]
-      [148] astore v13
-      [150] new #40
-        + Class [android/content/Intent]
-      [153] dup
-      [154] aload_0 v0
-      [155] ldc #49
-        + Class [com/dexnamic/alwayscharged/AlarmReceiver]
-      [157] invokespecial #76
-        + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
-      [160] astore v14
-      [162] aload v14
-      [164] ldc #31
-        + String [notify]
-      [166] invokevirtual #79
-        + Methodref [android/content/Intent.setAction (Ljava/lang/String;)Landroid/content/Intent;]
-      [169] pop
-      [170] aload v14
-      [172] ldc #21
-        + String [alarm]
-      [174] aload_3 v3
-      [175] invokevirtual #78
-        + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;]
-      [178] pop
-      [179] aload_0 v0
-      [180] iconst_0
-      [181] aload v14
-      [183] ldc #1
-        + Integer [134217728]
-      [185] invokestatic #73
-        + Methodref [android/app/PendingIntent.getBroadcast (Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;]
-      [188] astore v15
-      [190] aload v13
-      [192] aload_0 v0
-      [193] aload_0 v0
-      [194] ldc #4
-        + Integer [2131165184]
-      [196] invokevirtual #74
+      [138] aload v12
+      [140] invokestatic #109
+        + Methodref [java/lang/String.valueOf (Ljava/lang/Object;)Ljava/lang/String;]
+      [143] invokespecial #110
+        + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
+      [146] ldc #13
+        + String [ ]
+      [148] invokevirtual #113
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [151] aload_0 v0
+      [152] ldc #10
+        + Integer [2131165215]
+      [154] invokevirtual #75
         + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
-      [199] aload v12
-      [201] aload v15
-      [203] invokevirtual #70
+      [157] invokevirtual #113
+        + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
+      [160] invokevirtual #114
+        + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
+      [163] astore v12
+      [165] new #37
+        + Class [android/app/Notification]
+      [168] dup
+      [169] ldc #3
+        + Integer [2130837505]
+      [171] aload v12
+      [173] invokestatic #115
+        + Methodref [java/lang/System.currentTimeMillis ()J]
+      [176] invokespecial #70
+        + Methodref [android/app/Notification.<init> (ILjava/lang/CharSequence;J)V]
+      [179] astore v13
+      [181] new #41
+        + Class [android/content/Intent]
+      [184] dup
+      [185] aload_0 v0
+      [186] ldc #50
+        + Class [com/dexnamic/alwayscharged/AlarmReceiver]
+      [188] invokespecial #77
+        + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
+      [191] astore v14
+      [193] aload v14
+      [195] ldc #32
+        + String [notify]
+      [197] invokevirtual #80
+        + Methodref [android/content/Intent.setAction (Ljava/lang/String;)Landroid/content/Intent;]
+      [200] pop
+      [201] aload v14
+      [203] ldc #22
+        + String [alarm]
+      [205] aload_3 v3
+      [206] invokevirtual #79
+        + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;]
+      [209] pop
+      [210] aload_0 v0
+      [211] iconst_0
+      [212] aload v14
+      [214] ldc #1
+        + Integer [134217728]
+      [216] invokestatic #74
+        + Methodref [android/app/PendingIntent.getBroadcast (Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;]
+      [219] astore v15
+      [221] aload v13
+      [223] aload_0 v0
+      [224] aload_0 v0
+      [225] ldc #4
+        + Integer [2131165184]
+      [227] invokevirtual #75
+        + Methodref [android/content/Context.getString (I)Ljava/lang/String;]
+      [230] aload v12
+      [232] aload v15
+      [234] invokevirtual #71
         + Methodref [android/app/Notification.setLatestEventInfo (Landroid/content/Context;Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/app/PendingIntent;)V]
-      [206] aload v13
-      [208] aload v13
-      [210] getfield #64
+      [237] aload v13
+      [239] aload v13
+      [241] getfield #65
         + Fieldref [android/app/Notification.flags I]
-      [213] bipush 16
-      [215] ior
-      [216] bipush 32
-      [218] ior
-      [219] putfield #64
+      [244] bipush 16
+      [246] ior
+      [247] bipush 32
+      [249] ior
+      [250] putfield #65
         + Fieldref [android/app/Notification.flags I]
-      [222] aload v11
-      [224] iconst_1
-      [225] aload v13
-      [227] invokevirtual #72
+      [253] aload v11
+      [255] iconst_1
+      [256] aload v13
+      [258] invokevirtual #73
         + Methodref [android/app/NotificationManager.notify (ILandroid/app/Notification;)V]
-      [230] goto +5 (target=235)
-      [233] astore v11
-      [235] return
+      [261] goto +5 (target=266)
+      [264] astore v11
+      [266] return
       Code attribute exceptions (count = 1):
-      - ExceptionInfo (116 -> 230: 233):
+      - ExceptionInfo (116 -> 261: 264):
       + Class [java/lang/Exception]
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 3):
         - [72] Var: ...[a:android/content/SharedPreferences][a:java/lang/String][i], Stack: (empty)
-        - [233] Var: [a:android/content/Context][i][i][a:com/dexnamic/alwayscharged/d][a:android/content/SharedPreferences][a:java/lang/String][i][l][a:android/app/PendingIntent][a:android/app/AlarmManager], Stack: [a:java/lang/Exception]
-        - [235] Var: ..., Stack: (empty)
+        - [264] Var: [a:android/content/Context][i][i][a:com/dexnamic/alwayscharged/d][a:android/content/SharedPreferences][a:java/lang/String][i][l][a:android/app/PendingIntent][a:android/app/AlarmManager], Stack: [a:java/lang/Exception]
+        - [266] Var: ..., Stack: (empty)
   + Method:       b(Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;I)Landroid/app/PendingIntent;
     Access flags: 0x8
       = static android.app.PendingIntent b(android.content.Context,com.dexnamic.alwayscharged.d,int)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 69, locals = 4, stack = 4):
-      [0] new #40
+      [0] new #41
         + Class [android/content/Intent]
       [3] dup
       [4] aload_0 v0
-      [5] ldc #49
+      [5] ldc #50
         + Class [com/dexnamic/alwayscharged/AlarmReceiver]
-      [7] invokespecial #76
+      [7] invokespecial #77
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
       [10] astore_3 v3
       [11] aload_3 v3
-      [12] new #57
+      [12] new #58
         + Class [java/lang/StringBuilder]
       [15] dup
-      [16] ldc #22
+      [16] ldc #23
         + String [alarm,]
-      [18] invokespecial #109
+      [18] invokespecial #110
         + Methodref [java/lang/StringBuilder.<init> (Ljava/lang/String;)V]
       [21] aload_1 v1
-      [22] invokevirtual #92
+      [22] invokevirtual #93
         + Methodref [com/dexnamic/alwayscharged/d.h ()Ljava/lang/Integer;]
-      [25] invokevirtual #111
+      [25] invokevirtual #112
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;]
-      [28] ldc #14
+      [28] ldc #15
         + String [,]
-      [30] invokevirtual #112
+      [30] invokevirtual #113
         + Methodref [java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;]
       [33] iload_2 v2
-      [34] invokevirtual #110
+      [34] invokevirtual #111
         + Methodref [java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;]
-      [37] invokevirtual #113
+      [37] invokevirtual #114
         + Methodref [java/lang/StringBuilder.toString ()Ljava/lang/String;]
-      [40] invokevirtual #79
+      [40] invokevirtual #80
         + Methodref [android/content/Intent.setAction (Ljava/lang/String;)Landroid/content/Intent;]
       [43] pop
       [44] aload_3 v3
-      [45] ldc #21
+      [45] ldc #22
         + String [alarm]
       [47] aload_1 v1
-      [48] invokevirtual #78
+      [48] invokevirtual #79
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;]
       [51] pop
       [52] aload_3 v3
-      [53] ldc #26
+      [53] ldc #27
         + String [day]
       [55] iload_2 v2
-      [56] invokevirtual #77
+      [56] invokevirtual #78
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;I)Landroid/content/Intent;]
       [59] pop
       [60] aload_0 v0
@@ -47612,7 +47635,7 @@ Methods (count = 15):
       [62] aload_3 v3
       [63] ldc #1
         + Integer [134217728]
-      [65] invokestatic #73
+      [65] invokestatic #74
         + Methodref [android/app/PendingIntent.getBroadcast (Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;]
       [68] areturn
       Code attribute exceptions (count = 0):
@@ -47622,28 +47645,28 @@ Methods (count = 15):
       = static android.app.PendingIntent a(android.content.Context,com.dexnamic.alwayscharged.d)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 39, locals = 3, stack = 4):
-      [0] new #40
+      [0] new #41
         + Class [android/content/Intent]
       [3] dup
       [4] aload_0 v0
-      [5] ldc #49
+      [5] ldc #50
         + Class [com/dexnamic/alwayscharged/AlarmReceiver]
-      [7] invokespecial #76
+      [7] invokespecial #77
         + Methodref [android/content/Intent.<init> (Landroid/content/Context;Ljava/lang/Class;)V]
       [10] astore_2 v2
       [11] aload_2 v2
-      [12] ldc #33
+      [12] ldc #34
         + String [snooze]
-      [14] invokevirtual #79
+      [14] invokevirtual #80
         + Methodref [android/content/Intent.setAction (Ljava/lang/String;)Landroid/content/Intent;]
       [17] pop
       [18] aload_1 v1
       [19] ifnull +11 (target=30)
       [22] aload_2 v2
-      [23] ldc #21
+      [23] ldc #22
         + String [alarm]
       [25] aload_1 v1
-      [26] invokevirtual #78
+      [26] invokevirtual #79
         + Methodref [android/content/Intent.putExtra (Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;]
       [29] pop
       [30] aload_0 v0
@@ -47651,7 +47674,7 @@ Methods (count = 15):
       [32] aload_2 v2
       [33] ldc #1
         + Integer [134217728]
-      [35] invokestatic #73
+      [35] invokestatic #74
         + Methodref [android/app/PendingIntent.getBroadcast (Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;]
       [38] areturn
       Code attribute exceptions (count = 0):
@@ -47664,22 +47687,22 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 30, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] invokestatic #84
+      [1] invokestatic #85
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
       [4] astore_1 v1
       [5] aload_1 v1
-      [6] invokeinterface #121
+      [6] invokeinterface #122
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [11] astore_2 v2
       [12] aload_2 v2
-      [13] ldc #27
+      [13] ldc #28
         + String [key_power_snooze]
       [15] iconst_1
-      [16] invokeinterface #124
+      [16] invokeinterface #125
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
       [21] pop
       [22] aload_2 v2
-      [23] invokeinterface #123
+      [23] invokeinterface #124
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [28] pop
       [29] return
@@ -47691,22 +47714,22 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 30, locals = 3, stack = 3):
       [0] aload_0 v0
-      [1] invokestatic #84
+      [1] invokestatic #85
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
       [4] astore_1 v1
       [5] aload_1 v1
-      [6] invokeinterface #121
+      [6] invokeinterface #122
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [11] astore_2 v2
       [12] aload_2 v2
-      [13] ldc #27
+      [13] ldc #28
         + String [key_power_snooze]
       [15] iconst_0
-      [16] invokeinterface #124
+      [16] invokeinterface #125
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
       [21] pop
       [22] aload_2 v2
-      [23] invokeinterface #123
+      [23] invokeinterface #124
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [28] pop
       [29] return
@@ -47719,20 +47742,20 @@ Methods (count = 15):
     + Code attribute instructions (code length = 24, locals = 1, stack = 3):
       [0] aload_0 v0
       [1] iconst_1
-      [2] ldc #25
+      [2] ldc #26
         + String [com.dexnamic]
-      [4] invokevirtual #80
+      [4] invokevirtual #81
         + Methodref [android/os/PowerManager.newWakeLock (ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;]
-      [7] putstatic #65
+      [7] putstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
-      [10] getstatic #65
+      [10] getstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
       [13] iconst_0
-      [14] invokevirtual #83
+      [14] invokevirtual #84
         + Methodref [android/os/PowerManager$WakeLock.setReferenceCounted (Z)V]
-      [17] getstatic #65
+      [17] getstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
-      [20] invokevirtual #81
+      [20] invokevirtual #82
         + Methodref [android/os/PowerManager$WakeLock.acquire ()V]
       [23] return
       Code attribute exceptions (count = 0):
@@ -47742,17 +47765,17 @@ Methods (count = 15):
       = static void a()
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 21, locals = 1, stack = 1):
-      [0] getstatic #65
+      [0] getstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
       [3] ifnull +17 (target=20)
-      [6] getstatic #65
+      [6] getstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
-      [9] invokevirtual #82
+      [9] invokevirtual #83
         + Methodref [android/os/PowerManager$WakeLock.release ()V]
       [12] goto +4 (target=16)
       [15] astore_0 v0
       [16] aconst_null
-      [17] putstatic #65
+      [17] putstatic #66
         + Fieldref [com/dexnamic/alwayscharged/z.a Landroid/os/PowerManager$WakeLock;]
       [20] return
       Code attribute exceptions (count = 1):
@@ -47771,22 +47794,22 @@ Methods (count = 15):
       [0] aload_1 v1
       [1] ifnonnull +8 (target=9)
       [4] aload_0 v0
-      [5] invokestatic #84
+      [5] invokestatic #85
         + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
       [8] astore_1 v1
       [9] aload_1 v1
-      [10] invokeinterface #121
+      [10] invokeinterface #122
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [15] astore_2 v2
       [16] aload_2 v2
-      [17] ldc #28
+      [17] ldc #29
         + String [key_repeat_count]
       [19] iconst_0
-      [20] invokeinterface #125
+      [20] invokeinterface #126
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putInt (Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;]
       [25] pop
       [26] aload_2 v2
-      [27] invokeinterface #123
+      [27] invokeinterface #124
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [32] pop
       [33] return
@@ -47800,27 +47823,27 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 37, locals = 3, stack = 3):
       [0] iconst_m1
-      [1] invokestatic #107
+      [1] invokestatic #108
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [4] astore_2 v2
       [5] goto +22 (target=27)
       [8] aload_0 v0
       [9] aload_1 v1
       [10] aload_2 v2
-      [11] invokevirtual #105
+      [11] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
-      [14] invokestatic #101
+      [14] invokestatic #102
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;I)V]
       [17] aload_2 v2
-      [18] invokevirtual #105
+      [18] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [21] iconst_1
       [22] iadd
-      [23] invokestatic #107
+      [23] invokestatic #108
         + Methodref [java/lang/Integer.valueOf (I)Ljava/lang/Integer;]
       [26] astore_2 v2
       [27] aload_2 v2
-      [28] invokevirtual #105
+      [28] invokevirtual #106
         + Methodref [java/lang/Integer.intValue ()I]
       [31] bipush 7
       [33] ificmplt -25 (target=8)
@@ -47836,54 +47859,54 @@ Methods (count = 15):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 81, locals = 5, stack = 3):
       [0] aload_0 v0
-      [1] invokestatic #98
+      [1] invokestatic #99
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;)V]
-      [4] new #51
+      [4] new #52
         + Class [com/dexnamic/alwayscharged/j]
       [7] dup
       [8] aload_0 v0
-      [9] invokespecial #94
+      [9] invokespecial #95
         + Methodref [com/dexnamic/alwayscharged/j.<init> (Landroid/content/Context;)V]
       [12] astore_1 v1
       [13] aload_1 v1
-      [14] invokevirtual #96
+      [14] invokevirtual #97
         + Methodref [com/dexnamic/alwayscharged/j.c ()Landroid/database/Cursor;]
       [17] astore_2 v2
       [18] aload_2 v2
       [19] ifnull +51 (target=70)
       [22] aload_2 v2
-      [23] invokeinterface #129
+      [23] invokeinterface #130
         + InterfaceMethodref [android/database/Cursor.moveToFirst ()Z]
       [28] ifeq +42 (target=70)
       [31] aload_2 v2
       [32] aload_2 v2
-      [33] ldc #20
+      [33] ldc #21
         + String [_id]
-      [35] invokeinterface #127
+      [35] invokeinterface #128
         + InterfaceMethodref [android/database/Cursor.getColumnIndex (Ljava/lang/String;)I]
-      [40] invokeinterface #128
+      [40] invokeinterface #129
         + InterfaceMethodref [android/database/Cursor.getInt (I)I]
       [45] istore_3 v3
       [46] aload_1 v1
       [47] iload_3 v3
-      [48] invokevirtual #95
+      [48] invokevirtual #96
         + Methodref [com/dexnamic/alwayscharged/j.a (I)Lcom/dexnamic/alwayscharged/d;]
       [51] astore v4
       [53] aload_0 v0
       [54] aload v4
       [56] iconst_0
-      [57] invokestatic #102
+      [57] invokestatic #103
         + Methodref [com/dexnamic/alwayscharged/z.a (Landroid/content/Context;Lcom/dexnamic/alwayscharged/d;Z)I]
       [60] pop
       [61] aload_2 v2
-      [62] invokeinterface #130
+      [62] invokeinterface #131
         + InterfaceMethodref [android/database/Cursor.moveToNext ()Z]
       [67] ifne -36 (target=31)
       [70] aload_2 v2
-      [71] invokeinterface #126
+      [71] invokeinterface #127
         + InterfaceMethodref [android/database/Cursor.close ()V]
       [76] aload_1 v1
-      [77] invokevirtual #97
+      [77] invokevirtual #98
         + Methodref [com/dexnamic/alwayscharged/j.close ()V]
       [80] return
       Code attribute exceptions (count = 0):
@@ -51833,13 +51856,16 @@ _____________________________________________________________________
 
 Interfaces (count = 0):
 
-Constant Pool (count = 171):
+Constant Pool (count = 187):
+  + String [Purchase Refunded 0]
   + String [ResponseHandler]
   + String [UI is not running]
   + String [android_id]
+  + String [purchaseResponse()]
   + Class [android/content/Context]
   + Class [android/content/SharedPreferences]
   + Class [android/content/SharedPreferences$Editor]
+  + Class [android/preference/PreferenceManager]
   + Class [android/provider/Settings$Secure]
   + Class [android/util/Log]
   + Class [com/dexnamic/alwayscharged/AlwaysCharged]
@@ -51868,7 +51894,9 @@ Constant Pool (count = 171):
   + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
   + Methodref [android/content/Context.getContentResolver ()Landroid/content/ContentResolver;]
   + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
+  + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
   + Methodref [android/provider/Settings$Secure.getString (Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;]
+  + Methodref [android/util/Log.i (Ljava/lang/String;Ljava/lang/String;)I]
   + Methodref [android/util/Log.v (Ljava/lang/String;Ljava/lang/String;)I]
   + Methodref [com/dexnamic/alwayscharged/billing/i.a (Landroid/app/PendingIntent;Landroid/content/Intent;)V]
   + Methodref [com/dexnamic/alwayscharged/billing/i.a (Lcom/dexnamic/alwayscharged/billing/d;Lcom/dexnamic/alwayscharged/billing/h;)V]
@@ -51888,6 +51916,7 @@ Constant Pool (count = 171):
   + Methodref [java/lang/Thread.start ()V]
   + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
   + InterfaceMethodref [android/content/SharedPreferences.getLong (Ljava/lang/String;J)J]
+  + InterfaceMethodref [android/content/SharedPreferences$Editor.clear ()Landroid/content/SharedPreferences$Editor;]
   + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
   + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
   + InterfaceMethodref [android/content/SharedPreferences$Editor.putLong (Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;]
@@ -51909,12 +51938,15 @@ Constant Pool (count = 171):
   + NameAndType [b Ljava/lang/String;]
   + NameAndType [c Lcom/dexnamic/alwayscharged/billing/g;]
   + NameAndType [c Ljava/lang/Long;]
+  + NameAndType [clear ()Landroid/content/SharedPreferences$Editor;]
   + NameAndType [commit ()Z]
   + NameAndType [edit ()Landroid/content/SharedPreferences$Editor;]
   + NameAndType [getContentResolver ()Landroid/content/ContentResolver;]
+  + NameAndType [getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
   + NameAndType [getLong (Ljava/lang/String;J)J]
   + NameAndType [getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
   + NameAndType [getString (Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;]
+  + NameAndType [i (Ljava/lang/String;Ljava/lang/String;)I]
   + NameAndType [length ()I]
   + NameAndType [longValue ()J]
   + NameAndType [parseLong (Ljava/lang/String;I)J]
@@ -51936,6 +51968,7 @@ Constant Pool (count = 171):
   + Utf8 [(Landroid/app/PendingIntent;Landroid/content/Intent;)V]
   + Utf8 [(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;]
   + Utf8 [(Landroid/content/Context;)J]
+  + Utf8 [(Landroid/content/Context;)Landroid/content/SharedPreferences;]
   + Utf8 [(Landroid/content/Context;)Ljava/lang/Boolean;]
   + Utf8 [(Landroid/content/Context;)V]
   + Utf8 [(Landroid/content/Context;Lcom/dexnamic/alwayscharged/billing/d;Lcom/dexnamic/alwayscharged/billing/h;)V]
@@ -51961,6 +51994,7 @@ Constant Pool (count = 171):
   + Utf8 [Lcom/dexnamic/alwayscharged/billing/i;]
   + Utf8 [Ljava/lang/Long;]
   + Utf8 [Ljava/lang/String;]
+  + Utf8 [Purchase Refunded 0]
   + Utf8 [ResponseHandler]
   + Utf8 [StackMapTable]
   + Utf8 [UI is not running]
@@ -51969,11 +52003,13 @@ Constant Pool (count = 171):
   + Utf8 [android/content/Context]
   + Utf8 [android/content/SharedPreferences]
   + Utf8 [android/content/SharedPreferences$Editor]
+  + Utf8 [android/preference/PreferenceManager]
   + Utf8 [android/provider/Settings$Secure]
   + Utf8 [android/util/Log]
   + Utf8 [android_id]
   + Utf8 [b]
   + Utf8 [c]
+  + Utf8 [clear]
   + Utf8 [com/dexnamic/alwayscharged/AlwaysCharged]
   + Utf8 [com/dexnamic/alwayscharged/billing/f]
   + Utf8 [com/dexnamic/alwayscharged/billing/g]
@@ -51984,9 +52020,11 @@ Constant Pool (count = 171):
   + Utf8 [commit]
   + Utf8 [edit]
   + Utf8 [getContentResolver]
+  + Utf8 [getDefaultSharedPreferences]
   + Utf8 [getLong]
   + Utf8 [getSharedPreferences]
   + Utf8 [getString]
+  + Utf8 [i]
   + Utf8 [java/lang/Boolean]
   + Utf8 [java/lang/Class]
   + Utf8 [java/lang/Long]
@@ -51997,6 +52035,7 @@ Constant Pool (count = 171):
   + Utf8 [length]
   + Utf8 [longValue]
   + Utf8 [parseLong]
+  + Utf8 [purchaseResponse()]
   + Utf8 [putBoolean]
   + Utf8 [putLong]
   + Utf8 [start]
@@ -52016,7 +52055,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] invokespecial #49
+      [1] invokespecial #54
         + Methodref [java/lang/Object.<init> ()V]
       [4] return
       Code attribute exceptions (count = 0):
@@ -52027,7 +52066,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aload_0 v0
-      [1] putstatic #33
+      [1] putstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [4] return
       Code attribute exceptions (count = 0):
@@ -52038,7 +52077,7 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 5, locals = 1, stack = 1):
       [0] aconst_null
-      [1] putstatic #33
+      [1] putstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [4] return
       Code attribute exceptions (count = 0):
@@ -52048,22 +52087,22 @@ Methods (count = 10):
       = public static void a(android.app.PendingIntent,android.content.Intent)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 24, locals = 2, stack = 3):
-      [0] getstatic #33
+      [0] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [3] ifnonnull +12 (target=15)
-      [6] ldc #1
+      [6] ldc #2
         + String [ResponseHandler]
-      [8] ldc #2
+      [8] ldc #3
         + String [UI is not running]
-      [10] invokestatic #37
+      [10] invokestatic #42
         + Methodref [android/util/Log.v (Ljava/lang/String;Ljava/lang/String;)I]
       [13] pop
       [14] return
-      [15] getstatic #33
+      [15] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [18] aload_0 v0
       [19] aload_1 v1
-      [20] invokevirtual #38
+      [20] invokevirtual #43
         + Methodref [com/dexnamic/alwayscharged/billing/i.a (Landroid/app/PendingIntent;Landroid/content/Intent;)V]
       [23] return
       Code attribute exceptions (count = 0):
@@ -52074,121 +52113,140 @@ Methods (count = 10):
     Access flags: 0x9
       = public static void a(android.content.Context,com.dexnamic.alwayscharged.billing.g,java.lang.String,java.lang.String,long,java.lang.String)
     Class member attributes (count = 1):
-    + Code attribute instructions (code length = 66, locals = 8, stack = 7):
+    + Code attribute instructions (code length = 98, locals = 8, stack = 7):
       [0] aload_0 v0
       [1] aload_1 v1
-      [2] invokestatic #42
+      [2] invokestatic #47
         + Methodref [com/dexnamic/alwayscharged/billing/k.a (Landroid/content/Context;Lcom/dexnamic/alwayscharged/billing/g;)V]
       [5] aload_1 v1
-      [6] getstatic #31
+      [6] getstatic #34
         + Fieldref [com/dexnamic/alwayscharged/billing/g.c Lcom/dexnamic/alwayscharged/billing/g;]
-      [9] ifacmpne +21 (target=30)
-      [12] new #21
-        + Class [java/lang/Thread]
-      [15] dup
-      [16] new #15
-        + Class [com/dexnamic/alwayscharged/billing/l]
-      [19] dup
+      [9] ifacmpne +53 (target=62)
+      [12] ldc #5
+        + String [purchaseResponse()]
+      [14] ldc #1
+        + String [Purchase Refunded 0]
+      [16] invokestatic #41
+        + Methodref [android/util/Log.i (Ljava/lang/String;Ljava/lang/String;)I]
+      [19] pop
       [20] aload_0 v0
-      [21] invokespecial #44
+      [21] invokestatic #39
+        + Methodref [android/preference/PreferenceManager.getDefaultSharedPreferences (Landroid/content/Context;)Landroid/content/SharedPreferences;]
+      [24] invokeinterface #59
+        + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
+      [29] astore v7
+      [31] aload v7
+      [33] invokeinterface #61
+        + InterfaceMethodref [android/content/SharedPreferences$Editor.clear ()Landroid/content/SharedPreferences$Editor;]
+      [38] invokeinterface #62
+        + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
+      [43] pop
+      [44] new #24
+        + Class [java/lang/Thread]
+      [47] dup
+      [48] new #18
+        + Class [com/dexnamic/alwayscharged/billing/l]
+      [51] dup
+      [52] aload_0 v0
+      [53] invokespecial #49
         + Methodref [com/dexnamic/alwayscharged/billing/l.<init> (Landroid/content/Context;)V]
-      [24] invokespecial #52
+      [56] invokespecial #57
         + Methodref [java/lang/Thread.<init> (Ljava/lang/Runnable;)V]
-      [27] invokevirtual #53
+      [59] invokevirtual #58
         + Methodref [java/lang/Thread.start ()V]
-      [30] ldc #14
+      [62] ldc #17
         + Class [com/dexnamic/alwayscharged/billing/k]
-      [32] dup
-      [33] astore v7
-      [35] monitorenter
-      [36] getstatic #33
+      [64] dup
+      [65] astore v7
+      [67] monitorenter
+      [68] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
-      [39] ifnull +16 (target=55)
-      [42] getstatic #33
+      [71] ifnull +16 (target=87)
+      [74] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
-      [45] aload_1 v1
-      [46] aload_2 v2
-      [47] iconst_1
-      [48] lload v4
-      [50] aload v6
-      [52] invokevirtual #41
+      [77] aload_1 v1
+      [78] aload_2 v2
+      [79] iconst_1
+      [80] lload v4
+      [82] aload v6
+      [84] invokevirtual #46
         + Methodref [com/dexnamic/alwayscharged/billing/i.b (Lcom/dexnamic/alwayscharged/billing/g;Ljava/lang/String;IJLjava/lang/String;)V]
-      [55] aload v7
-      [57] monitorexit
-      [58] goto +7 (target=65)
-      [61] aload v7
-      [63] monitorexit
-      [64] athrow
-      [65] return
+      [87] aload v7
+      [89] monitorexit
+      [90] goto +7 (target=97)
+      [93] aload v7
+      [95] monitorexit
+      [96] athrow
+      [97] return
       Code attribute exceptions (count = 2):
-      - ExceptionInfo (36 -> 58: 61):
-      - ExceptionInfo (61 -> 64: 61):
+      - ExceptionInfo (68 -> 90: 93):
+      - ExceptionInfo (93 -> 96: 93):
       Code attribute attributes (attribute count = 1):
       + Stack map table attribute (count = 4):
-        - [30] Var: ..., Stack: (empty)
-        - [55] Var: ...[a:java/lang/Class], Stack: (empty)
-        - [61] Var: ..., Stack: [a:java/lang/Throwable]
-        - [65] Var: -1, Stack: (empty)
+        - [62] Var: ..., Stack: (empty)
+        - [87] Var: ...[a:java/lang/Class], Stack: (empty)
+        - [93] Var: ..., Stack: [a:java/lang/Throwable]
+        - [97] Var: -1, Stack: (empty)
   + Method:       a(Landroid/content/Context;Lcom/dexnamic/alwayscharged/billing/g;)V
     Access flags: 0x9
       = public static void a(android.content.Context,com.dexnamic.alwayscharged.billing.g)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 92, locals = 6, stack = 4):
       [0] aload_0 v0
-      [1] getstatic #28
+      [1] getstatic #31
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [4] iconst_0
-      [5] invokevirtual #35
+      [5] invokevirtual #38
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [8] astore_2 v2
       [9] aload_2 v2
-      [10] invokeinterface #54
+      [10] invokeinterface #59
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [15] astore_3 v3
       [16] aload_0 v0
-      [17] invokestatic #43
+      [17] invokestatic #48
         + Methodref [com/dexnamic/alwayscharged/billing/k.b (Landroid/content/Context;)J]
-      [20] invokestatic #48
+      [20] invokestatic #53
         + Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
       [23] astore v4
       [25] aload_1 v1
-      [26] getstatic #30
+      [26] getstatic #33
         + Fieldref [com/dexnamic/alwayscharged/billing/g.a Lcom/dexnamic/alwayscharged/billing/g;]
       [29] ifacmpne +23 (target=52)
       [32] aload v4
-      [34] invokevirtual #46
+      [34] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
-      [37] getstatic #26
+      [37] getstatic #29
         + Fieldref [com/dexnamic/alwayscharged/AlwaysCharged.b Ljava/lang/Long;]
-      [40] invokevirtual #46
+      [40] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
       [43] lxor
-      [44] invokestatic #48
+      [44] invokestatic #53
         + Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
       [47] astore v5
       [49] goto +20 (target=69)
       [52] aload v4
-      [54] invokevirtual #46
+      [54] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
-      [57] getstatic #27
+      [57] getstatic #30
         + Fieldref [com/dexnamic/alwayscharged/AlwaysCharged.c Ljava/lang/Long;]
-      [60] invokevirtual #46
+      [60] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
       [63] lxor
-      [64] invokestatic #48
+      [64] invokestatic #53
         + Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
       [67] astore v5
       [69] aload_3 v3
-      [70] getstatic #28
+      [70] getstatic #31
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [73] aload v5
-      [75] invokevirtual #46
+      [75] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
-      [78] invokeinterface #58
+      [78] invokeinterface #64
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putLong (Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;]
       [83] pop
       [84] aload_3 v3
-      [85] invokeinterface #56
+      [85] invokeinterface #62
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [90] pop
       [91] return
@@ -52203,38 +52261,38 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 50, locals = 6, stack = 4):
       [0] aload_0 v0
-      [1] getstatic #28
+      [1] getstatic #31
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [4] iconst_0
-      [5] invokevirtual #35
+      [5] invokevirtual #38
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [8] astore_1 v1
       [9] aload_1 v1
-      [10] getstatic #28
+      [10] getstatic #31
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [13] lconst_0
-      [14] invokeinterface #55
+      [14] invokeinterface #60
         + InterfaceMethodref [android/content/SharedPreferences.getLong (Ljava/lang/String;J)J]
       [19] lstore_2 v2
       [20] aload_0 v0
-      [21] invokestatic #43
+      [21] invokestatic #48
         + Methodref [com/dexnamic/alwayscharged/billing/k.b (Landroid/content/Context;)J]
       [24] lstore v4
       [26] lload_2 v2
       [27] lload v4
       [29] lxor
-      [30] getstatic #26
+      [30] getstatic #29
         + Fieldref [com/dexnamic/alwayscharged/AlwaysCharged.b Ljava/lang/Long;]
-      [33] invokevirtual #46
+      [33] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
       [36] lcmp
       [37] ifne +8 (target=45)
       [40] iconst_1
-      [41] invokestatic #45
+      [41] invokestatic #50
         + Methodref [java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;]
       [44] areturn
       [45] iconst_0
-      [46] invokestatic #45
+      [46] invokestatic #50
         + Methodref [java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;]
       [49] areturn
       Code attribute exceptions (count = 0):
@@ -52247,15 +52305,15 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 64, locals = 4, stack = 4):
       [0] aload_0 v0
-      [1] invokevirtual #34
+      [1] invokevirtual #37
         + Methodref [android/content/Context.getContentResolver ()Landroid/content/ContentResolver;]
-      [4] ldc #3
+      [4] ldc #4
         + String [android_id]
-      [6] invokestatic #36
+      [6] invokestatic #40
         + Methodref [android/provider/Settings$Secure.getString (Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;]
       [9] astore_1 v1
       [10] aload_1 v1
-      [11] invokevirtual #50
+      [11] invokevirtual #55
         + Methodref [java/lang/String.length ()I]
       [14] istore_2 v2
       [15] iload_2 v2
@@ -52268,28 +52326,28 @@ Methods (count = 10):
       [26] iload_2 v2
       [27] iconst_1
       [28] isub
-      [29] invokevirtual #51
+      [29] invokevirtual #56
         + Methodref [java/lang/String.substring (II)Ljava/lang/String;]
       [32] bipush 16
-      [34] invokestatic #47
+      [34] invokestatic #52
         + Methodref [java/lang/Long.parseLong (Ljava/lang/String;I)J]
-      [37] invokestatic #48
+      [37] invokestatic #53
         + Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
       [40] astore_3 v3
-      [41] getstatic #25
+      [41] getstatic #28
         + Fieldref [com/dexnamic/alwayscharged/AlwaysCharged.a Z]
       [44] ifeq +15 (target=59)
       [47] aload_3 v3
-      [48] invokevirtual #46
+      [48] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
-      [51] ldc2_w #23
+      [51] ldc2_w #26
         + Long [123]
       [54] lsub
-      [55] invokestatic #48
+      [55] invokestatic #53
         + Methodref [java/lang/Long.valueOf (J)Ljava/lang/Long;]
       [58] astore_3 v3
       [59] aload_3 v3
-      [60] invokevirtual #46
+      [60] invokevirtual #51
         + Methodref [java/lang/Long.longValue ()J]
       [63] lreturn
       Code attribute exceptions (count = 0):
@@ -52302,14 +52360,14 @@ Methods (count = 10):
       = public static void a(android.content.Context,com.dexnamic.alwayscharged.billing.d,com.dexnamic.alwayscharged.billing.h)
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 15, locals = 3, stack = 3):
-      [0] getstatic #33
+      [0] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [3] ifnull +11 (target=14)
-      [6] getstatic #33
+      [6] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [9] aload_1 v1
       [10] aload_2 v2
-      [11] invokevirtual #39
+      [11] invokevirtual #44
         + Methodref [com/dexnamic/alwayscharged/billing/i.a (Lcom/dexnamic/alwayscharged/billing/d;Lcom/dexnamic/alwayscharged/billing/h;)V]
       [14] return
       Code attribute exceptions (count = 0):
@@ -52322,39 +52380,39 @@ Methods (count = 10):
     Class member attributes (count = 1):
     + Code attribute instructions (code length = 59, locals = 5, stack = 3):
       [0] aload_2 v2
-      [1] getstatic #32
+      [1] getstatic #35
         + Fieldref [com/dexnamic/alwayscharged/billing/h.a Lcom/dexnamic/alwayscharged/billing/h;]
       [4] ifacmpne +40 (target=44)
       [7] aload_0 v0
-      [8] getstatic #28
+      [8] getstatic #31
         + Fieldref [com/dexnamic/alwayscharged/billing/f.a Ljava/lang/String;]
       [11] iconst_0
-      [12] invokevirtual #35
+      [12] invokevirtual #38
         + Methodref [android/content/Context.getSharedPreferences (Ljava/lang/String;I)Landroid/content/SharedPreferences;]
       [15] astore_3 v3
       [16] aload_3 v3
-      [17] invokeinterface #54
+      [17] invokeinterface #59
         + InterfaceMethodref [android/content/SharedPreferences.edit ()Landroid/content/SharedPreferences$Editor;]
       [22] astore v4
       [24] aload v4
-      [26] getstatic #29
+      [26] getstatic #32
         + Fieldref [com/dexnamic/alwayscharged/billing/f.b Ljava/lang/String;]
       [29] iconst_1
-      [30] invokeinterface #57
+      [30] invokeinterface #63
         + InterfaceMethodref [android/content/SharedPreferences$Editor.putBoolean (Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;]
       [35] pop
       [36] aload v4
-      [38] invokeinterface #56
+      [38] invokeinterface #62
         + InterfaceMethodref [android/content/SharedPreferences$Editor.commit ()Z]
       [43] pop
-      [44] getstatic #33
+      [44] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [47] ifnull +11 (target=58)
-      [50] getstatic #33
+      [50] getstatic #36
         + Fieldref [com/dexnamic/alwayscharged/billing/k.a Lcom/dexnamic/alwayscharged/billing/i;]
       [53] aload_1 v1
       [54] aload_2 v2
-      [55] invokevirtual #40
+      [55] invokevirtual #45
         + Methodref [com/dexnamic/alwayscharged/billing/i.a (Lcom/dexnamic/alwayscharged/billing/e;Lcom/dexnamic/alwayscharged/billing/h;)V]
       [58] return
       Code attribute exceptions (count = 0):

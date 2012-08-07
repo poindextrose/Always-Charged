@@ -78,13 +78,13 @@ com.dexnamic.alwayscharged.R$color: int android_blue
 com.dexnamic.alwayscharged.R$color: int black
 com.dexnamic.alwayscharged.R$color: int white
 com.dexnamic.alwayscharged.R$drawable: int add_alarm
-com.dexnamic.alwayscharged.R$drawable: int battery
+com.dexnamic.alwayscharged.R$drawable: int alarm_notification
 com.dexnamic.alwayscharged.R$drawable: int email
 com.dexnamic.alwayscharged.R$drawable: int ic_action_delete
 com.dexnamic.alwayscharged.R$drawable: int ic_action_star
-com.dexnamic.alwayscharged.R$drawable: int ic_stat_notify
 com.dexnamic.alwayscharged.R$drawable: int layout_selector
 com.dexnamic.alwayscharged.R$drawable: int navigation_accept
+com.dexnamic.alwayscharged.R$drawable: int outlet_icon
 com.dexnamic.alwayscharged.R$drawable: int settings
 com.dexnamic.alwayscharged.R$id: int about
 com.dexnamic.alwayscharged.R$id: int add_alarm
@@ -140,6 +140,7 @@ com.dexnamic.alwayscharged.R$string: int changelog
 com.dexnamic.alwayscharged.R$string: int changelog_title
 com.dexnamic.alwayscharged.R$string: int checkVolume
 com.dexnamic.alwayscharged.R$string: int check_purchase
+com.dexnamic.alwayscharged.R$string: int click_to_cancel
 com.dexnamic.alwayscharged.R$string: int close
 com.dexnamic.alwayscharged.R$string: int contact_email
 com.dexnamic.alwayscharged.R$string: int default_alarm_duration
@@ -154,6 +155,7 @@ com.dexnamic.alwayscharged.R$string: int dialog_title_duration
 com.dexnamic.alwayscharged.R$string: int dialog_title_motion_tolerance
 com.dexnamic.alwayscharged.R$string: int dialog_title_snooze
 com.dexnamic.alwayscharged.R$string: int disable_alarm
+com.dexnamic.alwayscharged.R$string: int disable_motion
 com.dexnamic.alwayscharged.R$string: int disabled
 com.dexnamic.alwayscharged.R$string: int done
 com.dexnamic.alwayscharged.R$string: int dontshowagain
@@ -164,10 +166,13 @@ com.dexnamic.alwayscharged.R$string: int feedback
 com.dexnamic.alwayscharged.R$string: int first_label
 com.dexnamic.alwayscharged.R$string: int first_time_text
 com.dexnamic.alwayscharged.R$string: int fri
+com.dexnamic.alwayscharged.R$string: int high
 com.dexnamic.alwayscharged.R$string: int hour
 com.dexnamic.alwayscharged.R$string: int hours
 com.dexnamic.alwayscharged.R$string: int key_skip_battery
 com.dexnamic.alwayscharged.R$string: int label
+com.dexnamic.alwayscharged.R$string: int low
+com.dexnamic.alwayscharged.R$string: int medium
 com.dexnamic.alwayscharged.R$string: int minute
 com.dexnamic.alwayscharged.R$string: int minutes
 com.dexnamic.alwayscharged.R$string: int mon
