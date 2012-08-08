@@ -2,12 +2,12 @@
 <resources>
 
     <string-array name="entries_snooze">
-        <item>1 minute</item>
-        <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item>20 minutes</item>
-        <item>30 minutes</item>  
-        <item>60 minutes</item>
+        <item>1 minuto</item>
+        <item>5 minutos</item>
+        <item>10 minutos</item>
+        <item>20 minutos</item>
+        <item>30 minutos</item>  
+        <item>60 minutos</item>
     </string-array>
     <string-array name="entryvalues_snooze">
         <item>1</item>
@@ -19,9 +19,9 @@
     </string-array>
     
     <string-array name="entries_duration">
-        <item>10 seconds</item>
-        <item>30 seconds</item>  
-        <item>60 seconds</item>
+        <item>10 segundo</item>
+        <item>30 segundo</item>  
+        <item>60 segundo</item>
     </string-array>
     <string-array name="entryvalues_duration">
         <item>10</item>
@@ -30,10 +30,10 @@
     </string-array>
     
     <string-array name="entries_motion_tolerance">
-        <item>High</item>
-        <item>Medium</item>  
-        <item>Low</item>
-        <item>Disable Motion Detection</item>
+        <item>Extremo</item>
+        <item>Médio</item>  
+        <item>Inferior</item>
+        <item>Desativar detecção de movimento</item>
     </string-array>
     <string-array name="entryvalues_motion_tolerance">
         <item>2</item>
@@ -43,12 +43,12 @@
     </string-array>
     
     <string-array name="cancel_battery_entries">
-        <item>No</item>
-        <item>90 percent</item>
-        <item>80 percent</item>
-        <item>70 percent</item>
-        <item>60 percent</item>
-        <item>50 percent</item>
+        <item>Mão</item>
+        <item>90 por cento</item>
+        <item>80 por cento</item>
+        <item>70 por cento</item>
+        <item>60 por cento</item>
+        <item>50 por cento</item>
     </string-array>
     <string-array name="cancel_battery_entryValues">
         <item>0</item>
@@ -60,13 +60,13 @@
     </string-array>
         
 	<string-array name="pref_days_of_week">
-		<item>Monday</item>
-		<item>Tuesday</item>
-		<item>Wednesday</item>
-		<item>Thursday</item>
-		<item>Friday</item>
-		<item>Saturday</item>
-		<item>Sunday</item>
+		<item>Segunda-feira</item>
+		<item>Terça-feira</item>
+		<item>Quarta-feira</item>
+		<item>Quinta-feira</item>
+		<item>Sexta-feira</item>
+		<item>Sábado</item>
+		<item>Domingo</item>
 	</string-array>
 	<string-array name="pref_days_of_week_values">
 		<item>0</item>
