@@ -1,0 +1,78 @@
+<resources>
+
+    <string name="app_name">"Immer Plug-in"</string>
+    <string name="enable_alarm">"Aktivieren"</string>
+    <string name="disable_alarm">"Deaktivieren"</string>
+    <string name="time">"Zeit"</string>
+    <string name="repeat">"Wiederholen"</string>
+    <string name="alarm_tone">"Alarmton"</string>
+    <string name="vibrate">"Vibration"</string>
+    <string name="label">"Beschriftung"</string>
+    <string name="hour">"Stunde"</string>
+    <string name="hours">"Stunden"</string>
+    <string name="minute">"Minute"</string>
+    <string name="minutes">"Minuten"</string>
+    <string name="seconds">"Sekunden"</string>
+    <string name="until_alarm">"bis zum Alarm"</string>
+    <string name="about">"Über"</string>
+    <string name="silent">"Lautlos"</string>
+    <string name="unknown">"Unbekannt"</string>
+    <string name="advanced_settings">"Einstellungen"</string>
+    <string name="alarm_duration">"Alarmdauer"</string>
+    <string name="motion_tolerance">"Bewegungsempfindlichkeit"</string>
+    <string name="disabled">"Deaktiviert"</string>
+    <string name="degrees">"Grad"</string>
+    <string name="feedback">"E-Mail-Entwickler"</string>
+    <string name="alarm_message">"Es ist Zeit, steckerfertig!"</string>
+    <string name="snooze">"Snooze-Funktion"</string>
+    <string name="notify_init">"Plug in Erinnerung. Klicken Sie, um abzubrechen."</string>
+    <string name="notify_motion">"Auto-Snooze-(Bewegung)."</string>
+    <string name="notify_screen">"Auto-Snooze-(Bildschirm auf)."</string>
+    <string name="notify_phone">"Auto-Snooze (Telefonanruf)."</string>
+    <string name="notify_retry">"Auto-Snooze (Wiederholung)."</string>
+    <string name="notify_snooze">"Klicken Sie zum Abbrechen"</string>
+    <string name="click_to_cancel">"Klicken Sie, um abzubrechen."</string>
+    <string name="checkVolume">"Vorsicht ist Ihr Alarm stumm geschaltet!"</string>
+    <string name="first_time_text">"Wenn Ihr Gerät nicht angeschlossen ist, nicht in Gebrauch ist, und bewegt sich nicht vor dem Schlafengehen, Diese App wird Sie daran erinnern, um in stecken bevor Sie einschlafen und aufwachen, um einen niedrigen oder leeren Batterie. \n\nEs funktioniert am besten, wenn Sie planen, die Alarm für Ihren normalen Schlafenszeit. Wenn Sie einen Alarm aus, der sich wiederholt für mehr als einen Tag, stellen Sie unterschiedliche Schlafenszeiten, oder fertigen Sie andere Aktionen planen möchten, dann sollten Sie auf die Profi-Version in den App aktualisieren."</string>
+    <string name="close">"Beenden"</string>
+    <string name="dontshowagain">"Nicht mehr anzeigen"</string>
+    <string name="done">"Erledigt"</string>
+    <string name="default_ringtone">"Standard"</string>
+    <string name="changelog_title">"Default"</string>
+    <string name="add_alarm">"Alarm hinzufügen"</string>
+    <string name="add">"Summe"</string>
+
+    <!-- EditAlarmPreferenceActivity -->
+    <string name="cancel">"Löschen/Abbrechen"</string>
+    <string name="delete">"Löschen"</string>
+    <string name="ok">"OK"</string>
+    <string name="mon">"Mo."</string>
+    <string name="tue">"Di."</string>
+    <string name="wed">"Mi."</string>
+    <string name="thu">"Do."</string>
+    <string name="fri">"Fr."</string>
+    <string name="sat">"Sa."</string>
+    <string name="sun">"So."</string>
+    <string name="never">"Nie wiederholt"</string>
+    <string name="everyday">"Täglich"</string>
+    <string name="weekdays">"Werktage"</string>
+    <string name="weekends">"Wochenenden"</string>
+    <string name="cancel_battery">"Direkt Alarm aus, wenn Akku ist"</string>
+    <string name="skipped_alarm_battery">"Alarm überlesen. Batterie"</string>
+    <string name="percent">"Prozent"</string>
+
+    <!-- Billing -->
+    <string name="upgrade">"Verbessern"</string>
+    <string name="check_purchase">"Überprüfen auf vorherige Einkäufe."</string>
+    <string name="add_upgrade_dialog">"Das Hinzufügen weiterer Alarme erfordert ein Upgrade auf die Professional-Version."</string>
+    <string name="change_repeat_dialog">"Ändern des Repeat Option erfordert ein Upgrade auf die Professional-Version."</string>
+    <string name="advanced_upgrade_dialog">"Ändern erweiterter Einstellungen erfordert ein Upgrade auf die Professional-Version."</string>
+    <string name="first_label">"Schlafenszeit"</string>
+    
+    <!-- extras from arrays.xml that need translation -->
+    <string name="high">"Hoch"</string>
+    <string name="medium">"Mittel"</string>
+    <string name="low">"Niedrig"</string>
+    <string name="disable_motion">"Deaktivieren Motion-Detection-"</string>
+
+</resources>
