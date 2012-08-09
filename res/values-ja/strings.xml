@@ -1,0 +1,78 @@
+<resources>
+
+    <string name="app_name">"常にプラグインで"</string>
+    <string name="enable_alarm">"有効にする"</string>
+    <string name="disable_alarm">"無効"</string>
+    <string name="time">時間</string>
+    <string name="repeat">"繰り返し"</string>
+    <string name="alarm_tone">"アラーム音"</string>
+    <string name="vibrate">"バイブレーション"</string>
+    <string name="label">"ラベル"</string>
+    <string name="hour">"時間"</string>
+    <string name="hours">"時間"</string>
+    <string name="minute">"分"</string>
+    <string name="minutes">"分"</string>
+    <string name="seconds">"秒"</string>
+    <string name="until_alarm">"アラームまで"</string>
+    <string name="about">"約"</string>
+    <string name="silent">"サイレント"</string>
+    <string name="unknown">"未知の"</string>
+    <string name="advanced_settings">"設定"</string>
+    <string name="alarm_duration">"アラーム時間"</string>
+    <string name="motion_tolerance">"モーション感度"</string>
+    <string name="disabled">"無効"</string>
+    <string name="degrees">"度数"</string>
+    <string name="feedback">"メール開発者"</string>
+    <string name="alarm_message">"にプラグインするための時間！"</string>
+    <string name="snooze">"スヌーズ"</string>
+    <string name="notify_init">"リマインダのプラグイン。キャンセルをクリックします。"</string>
+    <string name="notify_motion">"自動スヌーズ（動き）。"</string>
+    <string name="notify_screen">"自動スヌーズ（画面）。"</string>
+    <string name="notify_phone">"自動スヌーズ（電話）。"</string>
+    <string name="notify_retry">"自動スヌーズ（再試行）。"</string>
+    <string name="notify_snooze">"アラームがスヌーズ。"</string>
+    <string name="click_to_cancel">"キャンセルをクリックします。"</string>
+    <string name="checkVolume">"注意は、あなたのアラーム音量はミュートされます！"</string>
+    <string name="first_time_text">"お使いのデバイスが使用されていない、差し込まれておらず、就寝時に移動されていない場合は、このアプリはあなたが眠りに落ちる前に、プラグイン、低またはバッテリ切れに目覚めあなたを思い出されますので、スケジュールした場合に\n\nそれが最高の作品通常の就寝時のアラーム。あなたが1日以上繰り返されて、別の就寝時間を設定してアラームをスケジュールするか、または他のアクションをカスタマイズしたい場合、あなたはアプリのプロバージョンにアップグレードする必要があります。"</string>
+    <string name="close">"閉じる"</string>
+    <string name="dontshowagain">"再び表示されません"</string>
+    <string name="done">"行われ"</string>
+    <string name="default_ringtone">"デフォルト"</string>
+    <string name="changelog_title">"変更履歴"</string>
+    <string name="add_alarm">"アラームを追加します。"</string>
+    <string name="add">"加える"</string>
+
+    <!-- EditAlarmPreferenceActivity -->
+    <string name="cancel">"取消し"</string>
+    <string name="delete">"削除する"</string>
+    <string name="ok">良し</string>
+    <string name="mon">"月曜"</string>
+    <string name="tue">"火曜"</string>
+    <string name="wed">"水曜"</string>
+    <string name="thu">"木曜"</string>
+    <string name="fri">"金曜"</string>
+    <string name="sat">"土曜"</string>
+    <string name="sun">"日曜"</string>
+    <string name="never">"決して繰り返さ"</string>
+    <string name="everyday">"毎日"</string>
+    <string name="weekdays">"平日"</string>
+    <string name="weekends">"週末"</string>
+    <string name="cancel_battery">"バッテリーレベルが1.5の場合にアラームをスキップ"</string>
+    <string name="skipped_alarm_battery">"アラームがスキップされます。バッテリー"</string>
+    <string name="percent">"割合"</string>
+
+    <!-- Billing -->
+    <string name="upgrade">"アップグレード"</string>
+    <string name="check_purchase">"以前の購入を確認しています。"</string>
+    <string name="add_upgrade_dialog">"追加のアラームを追加すると、プロフェッショナル版にアップグレードする必要があります。"</string>
+    <string name="change_repeat_dialog">"繰り返しオプションを変更すると、プロフェッショナル版にアップグレードする必要があります。"</string>
+    <string name="advanced_upgrade_dialog">"高度な設定を変更すると、プロフェッショナル版にアップグレードする必要があります。"</string>
+    <string name="first_label">"就寝時"</string>
+    
+    <!-- extras from arrays.xml that need translation -->
+    <string name="high">"高い"</string>
+    <string name="medium">"中速"</string>
+    <string name="low">"低"</string>
+    <string name="disable_motion">"モーション検知を無効にします。"</string>
+
+</resources>
